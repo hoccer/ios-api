@@ -42,7 +42,7 @@
 #pragma mark HoccerRegister Delegate Methods 
 - (void)hoccer: (HoccerRegister *)request didRegisterWithInfo: (NSDictionary *)info {
 	NSLog(@"url: %@", [info objectForKey:@"uri"]);
-	
+	uri = [[info objectForKey:@"uri"] copy];
 }
 
 #pragma mark -
@@ -55,7 +55,8 @@
 #pragma mark LocationController Delegate Methods
 
 - (void) locationControllerDidUpdateLocation: (LocationController *)controller {
-	NSLog(@"send location: %@", controller.location);
+	NSLog(@"environment: %@", [controller.location JSONRepresentation]);
+	// NSLog(@"send environment to : %@/environment", uri);
 }
 
 - (void)disconnect {

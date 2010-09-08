@@ -16,7 +16,7 @@
 - (id) init {
 	self = [super init];
 	if (self != nil) {
-		NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:9292/clients"];
+		NSURL *url = [NSURL URLWithString:@"http://192.168.2.139:9292/clients"];
 		
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 		[request setHTTPMethod:@"POST"];

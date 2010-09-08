@@ -7,6 +7,14 @@
 //
 
 #import "HocLocation.h"
+#import "NSObject+SBJSON.h"
+
+@interface HocLocation ()
+
+- (NSString *)locationAsJSONString: (CLLocation *)aLocation;
+
+@end
+
 
 
 @implementation HocLocation
@@ -30,6 +38,31 @@
 	self.bssids = nil;
 	
 	[super dealloc];
+}
+
+- (NSString *)JSONRepresentation {
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	
+	NSString *locationJSON = [self locationAsJSONString: self.location];
+	if (locationJSON) {
+		[dict setObject:locationJSON forKey: @"gps"];
+	}
+	
+	
+	if (self.bssids) {
+		[dict setObject:self.bssids forKey:@"bssids"];
+	}
+	
+	return [dict JSONRepresentation];
+}
+
+- (NSString *)locationAsJSONString: (CLLocation *)aLocation {
+	return [[NSDictionary dictionaryWithObjectsAndKeys:
+			[[NSNumber numberWithDouble: aLocation.coordinate.latitude] stringValue], @"latitude",
+			[[NSNumber numberWithDouble: aLocation.coordinate.longitude] stringValue], @"longitude",
+			// aLocation.timestamp, @"timestamp",
+			[[NSNumber numberWithDouble: aLocation.horizontalAccuracy] stringValue], @"accuracy", nil] JSONRepresentation];
+	
 }
 
 

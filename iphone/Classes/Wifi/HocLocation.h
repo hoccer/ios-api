@@ -22,5 +22,6 @@
 @property (assign) NSInteger hoccability;
 
 - (id) initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids;
+- (NSString *)JSONRepresentation;
 
 @end
