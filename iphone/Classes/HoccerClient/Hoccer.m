@@ -32,9 +32,14 @@
 }
 
 - (void)send: (NSData *)data withMode: (NSString *)mode {
+	[httpClient postURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
+				payload:[@"{hallo: \"Welt\"}" dataUsingEncoding:NSUTF8StringEncoding]
+				success:@selector(httpClientDidSendData:)];	
 }
 
 - (void)receiveWithMode: (NSString *)mode {
+	[httpClient getURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
+				success:@selector(httpClientDidReceiveData:)];	
 }
 
 - (void)peek {
@@ -74,10 +79,19 @@
 
 - (void)httpClientDidUpdateEnvirinment: (NSData *)receivedData {
 	NSLog(@"updated location");
+	[self receiveWithMode:@"distribute"];
 }
 
+- (void)httpClientDidSendData: (NSData *)receivedData {
+	NSLog(@"send");
+}
 
+- (void)httpClientDidReceiveData: (NSData *)receivedData {
+	NSString *string = [[[NSString alloc] initWithData: receivedData
+											  encoding:NSUTF8StringEncoding] autorelease];
 
+	NSLog(@"received something: %@", string);
+}
 
 - (void)dealloc {
     [super dealloc];

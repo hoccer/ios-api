@@ -69,10 +69,12 @@
 	return self;	
 }
 
-- (void)getURI: (NSString *)uri success: (SEL)success {}
+- (void)getURI: (NSString *)uri success: (SEL)success {
+	[self requestMathod:@"GET" URI: uri payload:nil success:success];
+}
 
 - (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	return [self requestMathod:@"PUT" URI: uri payload:payload success:success];
+	[self requestMathod:@"PUT" URI: uri payload:payload success:success];
 }
 
 - (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {

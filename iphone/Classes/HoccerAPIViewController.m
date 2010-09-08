@@ -62,6 +62,7 @@
 
 
 - (void)dealloc {
+	[hoccer release];
     [super dealloc];
 }
 
