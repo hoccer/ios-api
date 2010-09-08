@@ -8,8 +8,8 @@
 
 #import "Hoccer.h"
 #import "LocationController.h"
-#import "HoccerRegister.h"
-
+#import "HttpClient.h"
+#import "NSString+SBJSON.h"
 
 @implementation Hoccer
 @synthesize delegate;
@@ -20,9 +20,10 @@
 		environmentController = [[LocationController alloc] init];
 		environmentController.delegate = self;
 		
+		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
+		httpClient.target = self;
 		
-		HoccerRegister *registerClient = [[HoccerRegister alloc] init];
-		registerClient.delegate = self;
+		[httpClient postURI:@"/clients" payload:nil success:@selector(httpClientDidReceiveInfo:)];
 		
 		// get id (from prefs or create new on server
 	}
@@ -40,9 +41,15 @@
 
 #pragma mark -
 #pragma mark HoccerRegister Delegate Methods 
-- (void)hoccer: (HoccerRegister *)request didRegisterWithInfo: (NSDictionary *)info {
-	NSLog(@"url: %@", [info objectForKey:@"uri"]);
+- (void)httpClientDidReceiveInfo: (NSData *)receivedData {
+	
+	NSString *string = [[[NSString alloc] initWithData: receivedData
+											  encoding:NSUTF8StringEncoding] autorelease];
+	
+	NSDictionary *info = [string JSONValue];
 	uri = [[info objectForKey:@"uri"] copy];
+	
+	NSLog(@"uri: %@", uri);
 }
 
 #pragma mark -
@@ -54,10 +61,17 @@
 #pragma mark -
 #pragma mark LocationController Delegate Methods
 
-- (void) locationControllerDidUpdateLocation: (LocationController *)controller {
-	NSLog(@"environment: %@", [controller.location JSONRepresentation]);
+- (void)locationControllerDidUpdateLocation: (LocationController *)controller {
+//	NSLog(@"environment: %@", [controller.location JSONRepresentation]);
+//	if (uri != nil) {
+//		[[HoccerRequest alloc] initWithURL:uri
+//								   payload:[controller.location.environment]
+//								   success:@selector(environmentUpdated:)];
+//	}
 	// NSLog(@"send environment to : %@/environment", uri);
 }
+
+
 
 - (void)disconnect {
 	

@@ -10,10 +10,11 @@
 #import "HoccerDelegate.h"
 #import "LocationControllerDelegate.h"
 
-#import "HoccerRegister.h"
+@class HttpClient;
 
-@interface Hoccer : NSObject <LocationControllerDelegate, HoccerRegisterDelegate> {
+@interface Hoccer : NSObject <LocationControllerDelegate> {
 	LocationController *environmentController;
+	HttpClient *httpClient;
 	NSString *uri;
 	
 	id <HoccerDelegate> delegate;

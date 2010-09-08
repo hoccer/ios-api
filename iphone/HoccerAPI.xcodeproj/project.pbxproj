@@ -11,12 +11,12 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		22483D311237CA21006DBFBD /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
 		22A5C98F12379123003DF9EC /* Hoccer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* Hoccer.m */; };
 		22A5C9AF12379655003DF9EC /* HocLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HocLocation.m */; };
 		22A5C9B012379655003DF9EC /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
 		22A5C9B51237969F003DF9EC /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
-		22A5C9DB1237A0A6003DF9EC /* HoccerRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9DA1237A0A6003DF9EC /* HoccerRegister.m */; };
 		22A5CA1E1237ADE8003DF9EC /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA131237ADE8003DF9EC /* NSObject+SBJSON.m */; };
 		22A5CA1F1237ADE8003DF9EC /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA151237ADE8003DF9EC /* NSString+SBJSON.m */; };
 		22A5CA201237ADE8003DF9EC /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA171237ADE8003DF9EC /* SBJSON.m */; };
@@ -35,6 +35,8 @@
 		1D3623250D0F684500981E51 /* HoccerAPIAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerAPIAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* HoccerAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoccerAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		22483D2F1237CA21006DBFBD /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpClient.h; path = HoccerClient/Subrequests/HttpClient.h; sourceTree = "<group>"; };
+		22483D301237CA21006DBFBD /* HttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpClient.m; path = HoccerClient/Subrequests/HttpClient.m; sourceTree = "<group>"; };
 		22A5C98D12379123003DF9EC /* Hoccer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoccer.h; path = HoccerClient/Hoccer.h; sourceTree = "<group>"; };
 		22A5C98E12379123003DF9EC /* Hoccer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Hoccer.m; path = HoccerClient/Hoccer.m; sourceTree = "<group>"; };
 		22A5C99012379143003DF9EC /* HoccerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoccerDelegate.h; sourceTree = "<group>"; };
@@ -47,8 +49,6 @@
 		22A5C9B31237969F003DF9EC /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
 		22A5C9B41237969F003DF9EC /* LocationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationControllerDelegate.h; sourceTree = "<group>"; };
 		22A5C9BE12379B36003DF9EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		22A5C9D91237A0A6003DF9EC /* HoccerRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoccerRegister.h; path = HoccerClient/Subrequests/HoccerRegister.h; sourceTree = "<group>"; };
-		22A5C9DA1237A0A6003DF9EC /* HoccerRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HoccerRegister.m; path = HoccerClient/Subrequests/HoccerRegister.m; sourceTree = "<group>"; };
 		22A5CA111237ADE8003DF9EC /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		22A5CA121237ADE8003DF9EC /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		22A5CA131237ADE8003DF9EC /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 		22A5C9D81237A003003DF9EC /* Subrequests */ = {
 			isa = PBXGroup;
 			children = (
-				22A5C9D91237A0A6003DF9EC /* HoccerRegister.h */,
-				22A5C9DA1237A0A6003DF9EC /* HoccerRegister.m */,
+				22483D2F1237CA21006DBFBD /* HttpClient.h */,
+				22483D301237CA21006DBFBD /* HttpClient.m */,
 			);
 			name = Subrequests;
 			sourceTree = "<group>";
@@ -285,13 +285,13 @@
 				22A5C9AF12379655003DF9EC /* HocLocation.m in Sources */,
 				22A5C9B012379655003DF9EC /* WifiScanner.m in Sources */,
 				22A5C9B51237969F003DF9EC /* LocationController.m in Sources */,
-				22A5C9DB1237A0A6003DF9EC /* HoccerRegister.m in Sources */,
 				22A5CA1E1237ADE8003DF9EC /* NSObject+SBJSON.m in Sources */,
 				22A5CA1F1237ADE8003DF9EC /* NSString+SBJSON.m in Sources */,
 				22A5CA201237ADE8003DF9EC /* SBJSON.m in Sources */,
 				22A5CA211237ADE8003DF9EC /* SBJsonBase.m in Sources */,
 				22A5CA221237ADE8003DF9EC /* SBJsonParser.m in Sources */,
 				22A5CA231237ADE8003DF9EC /* SBJsonWriter.m in Sources */,
+				22483D311237CA21006DBFBD /* HttpClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
