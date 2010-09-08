@@ -47,6 +47,13 @@
 
 @end
 
+
+@interface HttpClient ()
+
+- (void)requestMathod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
+
+@end
+
 @implementation HttpClient
 
 @synthesize target;
@@ -63,22 +70,27 @@
 }
 
 - (void)getURI: (NSString *)uri success: (SEL)success {}
+
 - (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	return [self requestMathod:@"PUT" URI: uri payload:payload success:success];
 }
 
 - (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	return [self requestMathod:@"POST" URI: uri payload:payload success:success];
+};
+
+- (void)requestMathod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
-	[request setHTTPMethod:@"POST"];
+	[request setHTTPMethod:method];
+	[request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 	[request setHTTPBody:payload];
 	
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
 	[connections setObject:[ConnectionContainer containerWithSuccessSelector:success] forKey:[connection description]];
-};
-
-
+}
 
 
 #pragma mark -

@@ -8,6 +8,7 @@
 
 #import "Hoccer.h"
 #import "LocationController.h"
+#import "HocLocation.h"
 #import "HttpClient.h"
 #import "NSString+SBJSON.h"
 
@@ -39,8 +40,27 @@
 - (void)peek {
 }
 
+- (void)disconnect {
+	
+}
+
+
 #pragma mark -
-#pragma mark HoccerRegister Delegate Methods 
+#pragma mark LocationController Delegate Methods
+
+- (void)locationControllerDidUpdateLocation: (LocationController *)controller {
+	NSLog(@"environment: %@", [controller.location JSONRepresentation]);
+	if (uri == nil) {
+		return;
+	}
+	
+	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
+			   payload:[[controller.location JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
+			   success:@selector(httpClientDidUpdateEnvirinment:)];
+}
+
+#pragma mark -
+#pragma mark HttpClient Response Methods 
 - (void)httpClientDidReceiveInfo: (NSData *)receivedData {
 	
 	NSString *string = [[[NSString alloc] initWithData: receivedData
@@ -52,30 +72,11 @@
 	NSLog(@"uri: %@", uri);
 }
 
-#pragma mark -
-#pragma mark didReceiveInfo
-
-
-
-
-#pragma mark -
-#pragma mark LocationController Delegate Methods
-
-- (void)locationControllerDidUpdateLocation: (LocationController *)controller {
-//	NSLog(@"environment: %@", [controller.location JSONRepresentation]);
-//	if (uri != nil) {
-//		[[HoccerRequest alloc] initWithURL:uri
-//								   payload:[controller.location.environment]
-//								   success:@selector(environmentUpdated:)];
-//	}
-	// NSLog(@"send environment to : %@/environment", uri);
+- (void)httpClientDidUpdateEnvirinment: (NSData *)receivedData {
+	NSLog(@"updated location");
 }
 
 
-
-- (void)disconnect {
-	
-}
 
 
 - (void)dealloc {
