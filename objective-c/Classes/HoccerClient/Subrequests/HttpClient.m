@@ -119,8 +119,6 @@
 	[connections removeObjectForKey:[aConnection description]];
 }
 
-
-
 - (void)dealloc {
     [super dealloc];
 }
