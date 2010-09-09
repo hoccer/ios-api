@@ -82,16 +82,19 @@
 };
 
 - (void)requestMathod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	NSLog(@"conenction: %@ %@", method, uri);
+	
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
 	[request setHTTPMethod:method];
-	[request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 	[request setHTTPBody:payload];
 	
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
 	[connections setObject:[ConnectionContainer containerWithSuccessSelector:success] forKey:[connection description]];
+	
+	NSLog(@"connections: %@", connections);
 }
 
 

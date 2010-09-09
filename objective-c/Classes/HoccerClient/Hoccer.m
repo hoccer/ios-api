@@ -12,8 +12,19 @@
 #import "HttpClient.h"
 #import "NSString+SBJSON.h"
 
+
+@interface Hoccer ()
+
+- (void)updateEnvironment;
+
+@end
+
+
+
+
 @implementation Hoccer
 @synthesize delegate;
+@synthesize isRegistered;
 
 - (id) init {
 	self = [super init];
@@ -54,14 +65,7 @@
 #pragma mark LocationController Delegate Methods
 
 - (void)locationControllerDidUpdateLocation: (LocationController *)controller {
-	NSLog(@"environment: %@", [controller.location JSONRepresentation]);
-	if (uri == nil) {
-		return;
-	}
-	
-	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
-			   payload:[[controller.location JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
-			   success:@selector(httpClientDidUpdateEnvirinment:)];
+	[self updateEnvironment];
 }
 
 #pragma mark -
@@ -74,12 +78,18 @@
 	NSDictionary *info = [string JSONValue];
 	uri = [[info objectForKey:@"uri"] copy];
 	
-	NSLog(@"uri: %@", uri);
-}
+	[self updateEnvironment];
+};
 
 - (void)httpClientDidUpdateEnvirinment: (NSData *)receivedData {
-	NSLog(@"updated location");
-	[self receiveWithMode:@"distribute"];
+	if (isRegistered) {
+		return;
+	}
+	
+	isRegistered = YES;
+	if ([delegate respondsToSelector:@selector(hoccerDidRegister:)]) {
+		[delegate hoccerDidRegister:self];
+	}
 }
 
 - (void)httpClientDidSendData: (NSData *)receivedData {
@@ -87,13 +97,27 @@
 }
 
 - (void)httpClientDidReceiveData: (NSData *)receivedData {
-	NSString *string = [[[NSString alloc] initWithData: receivedData
-											  encoding:NSUTF8StringEncoding] autorelease];
+	if ([delegate respondsToSelector:@selector(hoccer:didReceiveData:)]) {
+		[delegate hoccer: self didReceiveData: receivedData];
+	}
 
-	NSLog(@"received something: %@", string);
 }
 
+#pragma mark -
+#pragma mark Private Methods
+- (void)updateEnvironment {	
+	if (uri == nil) {
+		return;
+	}
+	
+	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
+			   payload:[[environmentController.location JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
+			   success:@selector(httpClientDidUpdateEnvirinment:)];
+}
+
+
 - (void)dealloc {
+	[httpClient release];
     [super dealloc];
 }
 

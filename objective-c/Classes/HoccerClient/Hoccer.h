@@ -13,14 +13,18 @@
 @class HttpClient;
 
 @interface Hoccer : NSObject <LocationControllerDelegate> {
+	@private
 	LocationController *environmentController;
 	HttpClient *httpClient;
+
 	NSString *uri;
+	BOOL isRegistered;
 	
 	id <HoccerDelegate> delegate;
 }
 
 @property (assign) id <HoccerDelegate> delegate;
+@property (assign) BOOL isRegistered;
 
 - (void)send: (NSData *)data withMode: (NSString *)mode;
 - (void)receiveWithMode: (NSString *)mode;

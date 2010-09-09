@@ -11,6 +11,25 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		220C636B1238D7DD0014AECB /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C636A1238D7DD0014AECB /* GHUnitIOS.framework */; };
+		220C63AC1238DA130014AECB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		220C63AD1238DA180014AECB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C636A1238D7DD0014AECB /* GHUnitIOS.framework */; };
+		220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */; };
+		220C63C01238DBA60014AECB /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B41238DAE60014AECB /* HoccerTests.m */; };
+		220C63C31238DC2B0014AECB /* Hoccer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* Hoccer.m */; };
+		220C63C41238DC3B0014AECB /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
+		220C63C51238DC440014AECB /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
+		220C63C61238DC4F0014AECB /* HocLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HocLocation.m */; };
+		220C63C71238DC4F0014AECB /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
+		220C63C81238DC5F0014AECB /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA131237ADE8003DF9EC /* NSObject+SBJSON.m */; };
+		220C63C91238DC5F0014AECB /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA151237ADE8003DF9EC /* NSString+SBJSON.m */; };
+		220C63CA1238DC5F0014AECB /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA171237ADE8003DF9EC /* SBJSON.m */; };
+		220C63CB1238DC5F0014AECB /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA191237ADE8003DF9EC /* SBJsonBase.m */; };
+		220C63CC1238DC5F0014AECB /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA1B1237ADE8003DF9EC /* SBJsonParser.m */; };
+		220C63CD1238DC5F0014AECB /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA1D1237ADE8003DF9EC /* SBJsonWriter.m */; };
+		220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22483D311237CA21006DBFBD /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
 		22A5C98F12379123003DF9EC /* Hoccer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* Hoccer.m */; };
 		22A5C9AF12379655003DF9EC /* HocLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HocLocation.m */; };
@@ -35,6 +54,11 @@
 		1D3623250D0F684500981E51 /* HoccerAPIAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerAPIAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* HoccerAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoccerAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		220C636A1238D7DD0014AECB /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = "<group>"; };
+		220C63A51238D9DB0014AECB /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		220C63A71238D9DB0014AECB /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
+		220C63B41238DAE60014AECB /* HoccerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerTests.m; sourceTree = "<group>"; };
 		22483D2F1237CA21006DBFBD /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpClient.h; path = HoccerClient/Subrequests/HttpClient.h; sourceTree = "<group>"; };
 		22483D301237CA21006DBFBD /* HttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpClient.m; path = HoccerClient/Subrequests/HttpClient.m; sourceTree = "<group>"; };
 		22A5C98D12379123003DF9EC /* Hoccer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoccer.h; path = HoccerClient/Hoccer.h; sourceTree = "<group>"; };
@@ -81,6 +105,19 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */,
+				220C636B1238D7DD0014AECB /* GHUnitIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220C63A31238D9DB0014AECB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220C63AC1238DA130014AECB /* CoreGraphics.framework in Frameworks */,
+				220C63AD1238DA180014AECB /* Foundation.framework in Frameworks */,
+				220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */,
+				220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */,
+				220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,8 +140,18 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* HoccerAPI.app */,
+				220C63A51238D9DB0014AECB /* Tests.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		220C63B01238DA3E0014AECB /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
+				220C63B41238DAE60014AECB /* HoccerTests.m */,
+			);
+			name = Tests;
 			sourceTree = "<group>";
 		};
 		22A5C98C123790E5003DF9EC /* HoccerClient */ = {
@@ -175,11 +222,13 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				220C63B01238DA3E0014AECB /* Tests */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				220C63A71238D9DB0014AECB /* Tests-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -210,6 +259,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				22A5C9BE12379B36003DF9EC /* CoreLocation.framework */,
+				220C636A1238D7DD0014AECB /* GHUnitIOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -232,6 +282,23 @@
 			name = HoccerAPI;
 			productName = HoccerAPI;
 			productReference = 1D6058910D05DD3D006BFB54 /* HoccerAPI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		220C63A41238D9DB0014AECB /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 220C63AA1238D9DB0014AECB /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				220C63A11238D9DB0014AECB /* Resources */,
+				220C63A21238D9DB0014AECB /* Sources */,
+				220C63A31238D9DB0014AECB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 220C63A51238D9DB0014AECB /* Tests.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -257,6 +324,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* HoccerAPI */,
+				220C63A41238D9DB0014AECB /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -268,6 +336,13 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220C63A11238D9DB0014AECB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +370,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		220C63A21238D9DB0014AECB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */,
+				220C63C01238DBA60014AECB /* HoccerTests.m in Sources */,
+				220C63C31238DC2B0014AECB /* Hoccer.m in Sources */,
+				220C63C41238DC3B0014AECB /* HttpClient.m in Sources */,
+				220C63C51238DC440014AECB /* LocationController.m in Sources */,
+				220C63C61238DC4F0014AECB /* HocLocation.m in Sources */,
+				220C63C71238DC4F0014AECB /* WifiScanner.m in Sources */,
+				220C63C81238DC5F0014AECB /* NSObject+SBJSON.m in Sources */,
+				220C63C91238DC5F0014AECB /* NSString+SBJSON.m in Sources */,
+				220C63CA1238DC5F0014AECB /* SBJSON.m in Sources */,
+				220C63CB1238DC5F0014AECB /* SBJsonBase.m in Sources */,
+				220C63CC1238DC5F0014AECB /* SBJsonParser.m in Sources */,
+				220C63CD1238DC5F0014AECB /* SBJsonWriter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -303,6 +398,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -317,11 +416,76 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
 				INFOPLIST_FILE = "HoccerAPI-Info.plist";
 				PRODUCT_NAME = HoccerAPI;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		220C63A81238D9DB0014AECB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Debug;
+		};
+		220C63A91238D9DB0014AECB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				SDKROOT = iphoneos4.1;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -360,6 +524,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		220C63AA1238D9DB0014AECB /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				220C63A81238D9DB0014AECB /* Debug */,
+				220C63A91238D9DB0014AECB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

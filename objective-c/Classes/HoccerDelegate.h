@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 @class Hoccer;
 
-@protocol HoccerDelegate
+@protocol HoccerDelegate <NSObject>
 
-- (void)hoccerDidBecomeReady: (Hoccer *)hoccer;
-
+- (void)hoccerDidRegister: (Hoccer *)hoccer;
 - (void)hoccerDidSendData: (Hoccer *)hoccer;
-- (void)hoccerDidReceiveData: (Hoccer *)hoccer;
+- (void)hoccer: (Hoccer *)hoccer didReceiveData: (NSData *)data;
+- (void)hoccer: (Hoccer *)hoccer didFailWithError: (NSError *)error;
 
 @end
