@@ -12,11 +12,12 @@
 {
 	SEL successAction;
 	NSMutableData *receivedData;
+	NSURLResponse *response;
 }
 
 @property (assign) SEL successAction;
 @property (readonly) NSMutableData *receivedData;
-
+@property (retain) NSURLResponse *response;
 
 @end
 
@@ -24,6 +25,7 @@
 
 @synthesize successAction;
 @synthesize receivedData;
+@synthesize response;
  
 + (ConnectionContainer *)containerWithSuccessSelector: (SEL)selector {
 	ConnectionContainer *c = [[ConnectionContainer alloc] init];
@@ -41,6 +43,7 @@
 }
 
 - (void) dealloc {
+	[response release];
 	[receivedData release];  
 	[super dealloc];
 }
@@ -50,7 +53,7 @@
 
 @interface HttpClient ()
 
-- (void)requestMathod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
+- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 
 @end
 
@@ -70,18 +73,18 @@
 }
 
 - (void)getURI: (NSString *)uri success: (SEL)success {
-	[self requestMathod:@"GET" URI: uri payload:nil success:success];
+	[self requestMethod:@"GET" URI: uri payload:nil success:success];
 }
 
 - (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	[self requestMathod:@"PUT" URI: uri payload:payload success:success];
+	[self requestMethod:@"PUT" URI: uri payload:payload success:success];
 }
 
 - (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	return [self requestMathod:@"POST" URI: uri payload:payload success:success];
+	return [self requestMethod:@"POST" URI: uri payload:payload success:success];
 };
 
-- (void)requestMathod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
 	NSLog(@"conenction: %@ %@", method, uri);
 	
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
@@ -101,22 +104,28 @@
 #pragma mark -
 #pragma mark NSURLConnection Delegate Methods
 - (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)data {
-	[[[connections objectForKey:[aConnection description]] receivedData] appendData:data];
+	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	[container.receivedData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
+// 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+
 	NSLog(@"error: %@", error);
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);
+	NSLog(@"response: %d",[(NSHTTPURLResponse *)response statusCode]);
+	
+	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	container.response = response;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 
 	if ([target respondsToSelector:container.successAction]) {
-		[target performSelector:container.successAction withObject:container.receivedData];
+		[target performSelector:container.successAction withObject:container.receivedData withObject:container.response];
 	}
 
 	[connections removeObjectForKey:[aConnection description]];

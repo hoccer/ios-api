@@ -10,6 +10,14 @@
 #import "HoccerDelegate.h"
 #import "LocationControllerDelegate.h"
 
+#define HoccerError @"HoccerError"
+
+enum HoccerErrors {
+	HoccerNobodyFound = 1
+};
+
+
+
 @class HttpClient;
 
 @interface Hoccer : NSObject <LocationControllerDelegate> {

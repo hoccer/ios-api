@@ -74,9 +74,42 @@
 	[hoccer release];
 }
 
-- (void)testHoccerClientRegisters {
+//- (void)testHoccerClientRegisters {
+//	[self runForInterval:1];
+//	GHAssertEquals(mockedDelegate.didRegisterCalls, 1, @"should have registered");
+//}
+
+- (void)testLonleySend {
 	[self runForInterval:1];
-	GHAssertEquals(1, mockedDelegate.didRegisterCalls, @"should have registered");
+	[hoccer send:[@"{\"Hallo\": \"Peter\"}" dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
+	[self runForInterval:5];
+	
+	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");	
 }
+
+//- (void)testLonleyReceive {
+//	[self runForInterval:1];
+//	[hoccer receiveWithMode:@"distribute"];
+//	[self runForInterval:2];
+//	
+//	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");
+//}
+//
+//- (void)testSendAndReceive {
+//	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
+//	Hoccer *hoccer2 = [[Hoccer alloc] init];
+//	hoccer2.delegate = mockedDelegate2;
+//	
+//	[self runForInterval:1];
+//	
+//	[hoccer receiveWithMode:@"distribute"];
+//	[hoccer2 send:[@"{\"Hallo\": \"API3\"}" dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
+//	
+//	[self runForInterval:4];
+//	
+//	GHAssertEquals(1, mockedDelegate2.didSendDataCalls, @"should have send data");
+//	GHAssertEquals(1, mockedDelegate2.didReceiveDataCalls, @"should have send data");
+//}
+
 
 @end

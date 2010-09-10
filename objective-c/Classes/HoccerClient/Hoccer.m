@@ -44,13 +44,13 @@
 
 - (void)send: (NSData *)data withMode: (NSString *)mode {
 	[httpClient postURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
-				payload:[@"{hallo: \"Welt\"}" dataUsingEncoding:NSUTF8StringEncoding]
-				success:@selector(httpClientDidSendData:)];	
+				payload: data
+				success:@selector(httpClientDidSendData:response:)];	
 }
 
 - (void)receiveWithMode: (NSString *)mode {
 	[httpClient getURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
-				success:@selector(httpClientDidReceiveData:)];	
+			   success:@selector(httpClientDidReceiveData:response:)];	
 }
 
 - (void)peek {
@@ -92,11 +92,35 @@
 	}
 }
 
-- (void)httpClientDidSendData: (NSData *)receivedData {
+- (void)httpClientDidSendData: (NSData *)receivedData response: (NSHTTPURLResponse *)response  {
+	if ([response statusCode] == 204 ) {
+		if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
+			NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+								  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
+			
+ 			NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNobodyFound userInfo:info];
+			[delegate hoccer:self didFailWithError:error];
+		}
+		
+		return;
+	}
+	
 	NSLog(@"send");
 }
 
-- (void)httpClientDidReceiveData: (NSData *)receivedData {
+- (void)httpClientDidReceiveData: (NSData *)receivedData response: (NSHTTPURLResponse *)response  {
+	if ([response statusCode] == 204 ) {
+		if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
+			NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+								  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
+			
+ 			NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNobodyFound userInfo:info];
+			[delegate hoccer:self didFailWithError:error];
+		}
+		
+		return;
+	}
+	
 	if ([delegate respondsToSelector:@selector(hoccer:didReceiveData:)]) {
 		[delegate hoccer: self didReceiveData: receivedData];
 	}
@@ -118,6 +142,7 @@
 
 - (void)dealloc {
 	[httpClient release];
+	[environmentController release];
     [super dealloc];
 }
 
