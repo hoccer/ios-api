@@ -9,15 +9,13 @@
 #import "MockedLocationController.h"
 #import "HocLocation.h"
 
-@implementation MockedLocationController
+static CLLocationDegrees lastLatitude = 5, lastLongitue = 5; 
 
+@implementation MockedLocationController
 
 - (id) init {
 	self = [super init];
-	if (self != nil) {
-		lastLatitude = 5;
-		lastLongitue = 5;
-	}
+	if (self != nil) {	}
 	return self;
 }
 
@@ -36,7 +34,8 @@
 }
 
 - (void)next {
-	lastLatitude += 1; lastLongitue += 1;
+	lastLatitude = (int)(lastLatitude + 1) % 180; 
+	lastLongitue = (int)(lastLongitue + 1) % 180;
 }
 
 

@@ -120,7 +120,7 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"response: %d",[(NSHTTPURLResponse *)response statusCode]);
+	NSLog(@"responseCode: %d", [(NSHTTPURLResponse*)response statusCode]);
 	
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	container.response = response;
@@ -128,8 +128,10 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-
-	NSLog(@"container: %@", container);
+	
+	
+	NSLog(@"received: %@", [[[NSString alloc] initWithData:container.receivedData
+												  encoding:NSUTF8StringEncoding] autorelease]);
 	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.receivedData withObject:container.response];

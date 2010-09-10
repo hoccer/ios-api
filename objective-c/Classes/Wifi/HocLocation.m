@@ -11,8 +11,7 @@
 
 @interface HocLocation ()
 
-- (NSString *)locationAsJSONString: (CLLocation *)aLocation;
-
+- (NSString *)locationAsDict: (CLLocation *)aLocation;
 @end
 
 
@@ -43,9 +42,9 @@
 - (NSString *)JSONRepresentation {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	NSString *locationJSON = [self locationAsJSONString: self.location];
-	if (locationJSON) {
-		[dict setObject:locationJSON forKey: @"gps"];
+	NSDictionary *locationDict = [self locationAsDict: self.location];
+	if (locationDict) {
+		[dict setObject:locationDict forKey: @"gps"];
 	}
 	
 	
@@ -56,12 +55,12 @@
 	return [dict JSONRepresentation];
 }
 
-- (NSString *)locationAsJSONString: (CLLocation *)aLocation {
-	return [[NSDictionary dictionaryWithObjectsAndKeys:
-			[[NSNumber numberWithDouble: aLocation.coordinate.latitude] stringValue], @"latitude",
-			[[NSNumber numberWithDouble: aLocation.coordinate.longitude] stringValue], @"longitude",
+- (NSString *)locationAsDict: (CLLocation *)aLocation {
+	return [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSNumber numberWithDouble: aLocation.coordinate.latitude], @"latitude",
+			[NSNumber numberWithDouble: aLocation.coordinate.longitude], @"longitude",
 			// aLocation.timestamp, @"timestamp",
-			[[NSNumber numberWithDouble: aLocation.horizontalAccuracy] stringValue], @"accuracy", nil] JSONRepresentation];
+			[NSNumber numberWithDouble: aLocation.horizontalAccuracy], @"accuracy", nil];
 	
 }
 

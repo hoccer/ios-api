@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface MockedLocationController : CLLocationManager {
-	CLLocationDegrees lastLatitude, lastLongitue;
+	
 }
 
 - (void)next;

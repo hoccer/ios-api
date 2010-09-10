@@ -108,7 +108,9 @@
 		return;
 	}
 	
-	NSLog(@"send");
+	if ([delegate respondsToSelector:@selector(hoccerDidSendData:)]) {
+		[delegate hoccerDidSendData:self];
+	}
 }
 
 - (void)httpClientDidReceiveData: (NSData *)receivedData response: (NSHTTPURLResponse *)response  {
