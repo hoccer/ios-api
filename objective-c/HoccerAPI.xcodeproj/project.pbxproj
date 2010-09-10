@@ -42,6 +42,7 @@
 		22A5CA211237ADE8003DF9EC /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA191237ADE8003DF9EC /* SBJsonBase.m */; };
 		22A5CA221237ADE8003DF9EC /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA1B1237ADE8003DF9EC /* SBJsonParser.m */; };
 		22A5CA231237ADE8003DF9EC /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5CA1D1237ADE8003DF9EC /* SBJsonWriter.m */; };
+		22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEB9D2123A34BE00276368 /* MockedLocationController.m */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
@@ -86,6 +87,8 @@
 		22A5CA1B1237ADE8003DF9EC /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		22A5CA1C1237ADE8003DF9EC /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		22A5CA1D1237ADE8003DF9EC /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		22EEB9D1123A34BE00276368 /* MockedLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockedLocationController.h; path = Tests/MockedLocationController.h; sourceTree = "<group>"; };
+		22EEB9D2123A34BE00276368 /* MockedLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockedLocationController.m; path = Tests/MockedLocationController.m; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoccerAPIViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
+				22EEB9D1123A34BE00276368 /* MockedLocationController.h */,
+				22EEB9D2123A34BE00276368 /* MockedLocationController.m */,
 				220C63B41238DAE60014AECB /* HoccerTests.m */,
 			);
 			name = Tests;
@@ -387,6 +392,7 @@
 				220C63CB1238DC5F0014AECB /* SBJsonBase.m in Sources */,
 				220C63CC1238DC5F0014AECB /* SBJsonParser.m in Sources */,
 				220C63CD1238DC5F0014AECB /* SBJsonWriter.m in Sources */,
+				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

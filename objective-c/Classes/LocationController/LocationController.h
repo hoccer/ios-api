@@ -18,12 +18,13 @@
 @class HocLocation;
 
 @interface LocationController : NSObject <CLLocationManagerDelegate, WifiScannerDelegate> {
+	@private 
+
 	CLLocationManager *locationManager;
 	NSDate *lastLocationUpdate;
 	NSInteger hoccability;
 	id <LocationControllerDelegate> delegate;
 
-	@private 
 	CLLocation *currentLocation;
 	NSInteger oldHoccability;
 	NSArray *bssids;

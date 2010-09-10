@@ -19,11 +19,9 @@
 
 @end
 
-
-
-
 @implementation Hoccer
 @synthesize delegate;
+@synthesize environmentController;
 @synthesize isRegistered;
 
 - (id) init {
@@ -31,8 +29,8 @@
 	if (self != nil) {
 		environmentController = [[LocationController alloc] init];
 		environmentController.delegate = self;
-		
-		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
+
+		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.111:9292"];
 		httpClient.target = self;
 		
 		[httpClient postURI:@"/clients" payload:nil success:@selector(httpClientDidReceiveInfo:)];
@@ -53,11 +51,16 @@
 			   success:@selector(httpClientDidReceiveData:response:)];	
 }
 
-- (void)peek {
-}
-
 - (void)disconnect {
 	
+}
+
+
+#pragma mark -
+#pragma mark Error Handling 
+
+- (void)httpClient: (HttpClient *)client didFailWithError: (NSError *)error {
+	NSLog(@"in Hoccer: %@", error);
 }
 
 
@@ -130,10 +133,12 @@
 #pragma mark -
 #pragma mark Private Methods
 - (void)updateEnvironment {	
+	
 	if (uri == nil) {
 		return;
 	}
 	
+	NSLog(@"updateEnvironment: %@", [environmentController.location JSONRepresentation]);
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environmentController.location JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpClientDidUpdateEnvirinment:)];

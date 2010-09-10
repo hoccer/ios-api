@@ -31,13 +31,12 @@ enum HoccerErrors {
 	id <HoccerDelegate> delegate;
 }
 
+@property (retain) LocationController* environmentController;
 @property (assign) id <HoccerDelegate> delegate;
 @property (assign) BOOL isRegistered;
 
 - (void)send: (NSData *)data withMode: (NSString *)mode;
 - (void)receiveWithMode: (NSString *)mode;
-
-- (void)peek;
 
 - (void)disconnect;
 

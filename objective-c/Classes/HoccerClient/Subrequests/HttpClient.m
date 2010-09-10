@@ -85,7 +85,7 @@
 };
 
 - (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	NSLog(@"conenction: %@ %@", method, uri);
+	NSLog(@"%@ %@", method, uri);
 	
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -109,9 +109,9 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-// 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-
-	NSLog(@"error: %@", error);
+	if ([target respondsToSelector:@selector(httpClient:didFailWithError:)]) {
+		[target performSelector:@selector(httpClient:didFailWithError:) withObject: self withObject:error];
+	}
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
