@@ -36,8 +36,37 @@
 	[super viewDidLoad];
 	
 	hoccer = [[Hoccer alloc] init];
+	hoccer.delegate = self;
 }
 
+- (IBAction)send: (id)sender {
+	NSData *data = [@"{\"inline\": \"Hallo\"}" dataUsingEncoding:NSUTF8StringEncoding];
+	
+	[hoccer send:data withMode:@"distribute"];
+}
+
+- (IBAction)receive: (id)sender {
+	[hoccer receiveWithMode:@"distribute"];
+}
+
+#pragma mark -
+#pragma mark Hoccer Delegate Methods
+
+- (void)hoccerDidRegister: (Hoccer *)hoccer; {
+	NSLog(@"registered");
+}
+
+- (void)hoccerDidSendData: (Hoccer *)hoccer; {
+	NSLog(@"send something");
+}
+
+- (void)hoccer: (Hoccer *)hoccer didReceiveData: (NSData *)data {
+	NSLog(@"hoccer did receive: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+}
+
+- (void)hoccer: (Hoccer *)hoccer didFailWithError: (NSError *)error; {
+	NSLog(@"error %@", error);
+}
 
 
 /*

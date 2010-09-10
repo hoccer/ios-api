@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HoccerDelegate.h"
 @class Hoccer;
 
-@interface HoccerAPIViewController : UIViewController {
+@interface HoccerAPIViewController : UIViewController <HoccerDelegate> {
 	Hoccer *hoccer;
 }
 
-
+- (IBAction)send: (id)sender;
+- (IBAction)receive: (id)sender;
 
 @end
 
