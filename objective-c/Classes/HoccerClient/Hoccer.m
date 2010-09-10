@@ -146,6 +146,8 @@
 
 
 - (void)dealloc {
+	NSLog(@"hoccer release");
+	[httpClient cancelAllRequest];
 	[httpClient release];
 	[environmentController release];
     [super dealloc];

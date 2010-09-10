@@ -11,6 +11,7 @@
 @interface ConnectionContainer : NSObject 
 {
 	SEL successAction;
+	NSURLConnection *connection;
 	NSMutableData *receivedData;
 	NSURLResponse *response;
 }
@@ -18,6 +19,9 @@
 @property (assign) SEL successAction;
 @property (readonly) NSMutableData *receivedData;
 @property (retain) NSURLResponse *response;
+@property (retain) NSURLConnection *connection;
+
++ (ConnectionContainer *)containerWithConnection: (NSURLConnection *)aConnection successSelector: (SEL)selector;
 
 @end
 
@@ -26,10 +30,12 @@
 @synthesize successAction;
 @synthesize receivedData;
 @synthesize response;
+@synthesize connection;
  
-+ (ConnectionContainer *)containerWithSuccessSelector: (SEL)selector {
++ (ConnectionContainer *)containerWithConnection: (NSURLConnection *)aConnection successSelector: (SEL)selector {
 	ConnectionContainer *c = [[ConnectionContainer alloc] init];
 	c.successAction = selector;
+	c.connection = [aConnection retain];
 	
 	return [c autorelease];
 }
@@ -43,6 +49,7 @@
 }
 
 - (void) dealloc {
+	[connection release];
 	[response release];
 	[receivedData release];  
 	[super dealloc];
@@ -95,9 +102,7 @@
 	
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
-	[connections setObject:[ConnectionContainer containerWithSuccessSelector:success] forKey:[connection description]];
-	
-	NSLog(@"connections: %@", connections);
+	[connections setObject:[ConnectionContainer containerWithConnection: connection successSelector:success] forKey:[connection description]];
 }
 
 
@@ -109,7 +114,7 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-	if ([target respondsToSelector:@selector(httpClient:didFailWithError:)]) {
+	if (!canceled && [target respondsToSelector:@selector(httpClient:didFailWithError:)]) {
 		[target performSelector:@selector(httpClient:didFailWithError:) withObject: self withObject:error];
 	}
 }
@@ -124,11 +129,20 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 
-	if ([target respondsToSelector:container.successAction]) {
+	NSLog(@"container: %@", container);
+	
+	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.receivedData withObject:container.response];
 	}
 
 	[connections removeObjectForKey:[aConnection description]];
+}
+
+- (void)cancelAllRequest {
+	for (ConnectionContainer *container in [connections allValues]) {
+		[container.connection cancel];
+	}
+	canceled = YES;
 }
 
 - (void)dealloc {

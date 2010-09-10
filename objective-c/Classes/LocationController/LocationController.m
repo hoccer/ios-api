@@ -14,7 +14,10 @@
 #define hoccerMessageErrorDomain @"HoccerErrorDomain"
 
 @interface LocationController ()
+@property (retain) NSDate *lastLocationUpdate;
+@property (retain) NSArray *bssids;
 @property (retain) CLLocation *currentLocation;
+
 - (void)updateHoccability;
 - (NSDictionary *)userInfoForImpreciseLocation;
 - (NSDictionary *)userInfoForBadLocation;

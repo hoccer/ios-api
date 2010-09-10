@@ -19,22 +19,20 @@
 
 @interface LocationController : NSObject <CLLocationManagerDelegate, WifiScannerDelegate> {
 	@private 
-
 	CLLocationManager *locationManager;
-	NSDate *lastLocationUpdate;
-	NSInteger hoccability;
-	id <LocationControllerDelegate> delegate;
+
+	NSInteger oldHoccability, hoccability;
 
 	CLLocation *currentLocation;
-	NSInteger oldHoccability;
+	NSDate *lastLocationUpdate;
 	NSArray *bssids;
+		
+	id <LocationControllerDelegate> delegate;
 }
 
-@property (retain) NSDate *lastLocationUpdate;
-@property (readonly) HocLocation *location;
 @property (assign) NSInteger hoccability;
+@property (readonly) HocLocation *location;
 @property (assign) id <LocationControllerDelegate> delegate;
-@property (retain) NSArray *bssids;
 
 - (BOOL)hasLocation;
 - (BOOL)hasBSSID;

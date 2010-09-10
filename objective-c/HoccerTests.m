@@ -83,6 +83,7 @@
 
 
 - (void)tearDown {
+	NSLog(@"tear down");
 	[mockedDelegate release];
 	[hoccer release];
 }
@@ -95,17 +96,17 @@
 - (void)testLonleySend {
 	[self runForInterval:1];
 	[hoccer send:[@"{\"Hallo\": \"Peter\"}" dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
-	[self runForInterval:2];
-	[(MockedLocationController *)hoccer.environmentController next];
+	[self runForInterval:8];
+	// [(MockedLocationController *)hoccer.environmentController next];
 	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");	
 }
 
 - (void)testLonleyReceive {
 	[self runForInterval:1];
 	[hoccer receiveWithMode:@"distribute"];
-	[self runForInterval:2];
+	[self runForInterval:8];
 	
-	[(MockedLocationController *)hoccer.environmentController next];
+	// [(MockedLocationController *)hoccer.environmentController next];
 	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");
 }
 
@@ -121,7 +122,7 @@
 	
 	[self runForInterval:4];
 	
-	[(MockedLocationController *)hoccer.environmentController next];
+	// [(MockedLocationController *)hoccer.environmentController next];
 	GHAssertEquals(1, mockedDelegate2.didSendDataCalls, @"should have send data");
 	GHAssertEquals(1, mockedDelegate2.didReceiveDataCalls, @"should have send data");
 }
