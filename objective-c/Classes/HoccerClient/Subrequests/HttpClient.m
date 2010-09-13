@@ -151,6 +151,9 @@
 }
 
 - (void)dealloc {
+	[connections release];
+	[baseURL release];
+	
     [super dealloc];
 }
 
