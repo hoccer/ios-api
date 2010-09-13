@@ -16,7 +16,7 @@
 @interface Hoccer ()
 
 - (void)updateEnvironment;
-- (void)error;
+- (void)didFailWithError: (NSError *)error;
 
 @end
 
@@ -34,33 +34,37 @@
 		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.111:9292"];
 		httpClient.target = self;
 		
-		[httpClient postURI:@"/clients" payload:nil success:@selector(httpClientDidReceiveInfo:)];
+		[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
 		
-		// get id (from prefs or create new on server
+		// TODO: get id from prefs or create new on server
 	}
 	return self;
 }
 
 - (void)send: (NSData *)data withMode: (NSString *)mode {
 	if (!isRegistered) {
-		[self error];
+		[self didFailWithError:nil];
 	}
 	
 	[httpClient postURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
-				payload: data
-				success:@selector(httpClientDidSendData:response:)];	
+				payload:data
+				success:@selector(httpConnection:didReceiveData:)];	
 }
 
 - (void)receiveWithMode: (NSString *)mode {
 	if (!isRegistered) {
-		[self error];
+		[self didFailWithError:nil];
 	}
 	
 	[httpClient getURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
-			   success:@selector(httpClientDidReceiveData:response:)];	
+			   success:@selector(httpConnection:didSendData:)];	
 }
 
 - (void)disconnect {
+	if (!isRegistered) {
+		[self didFailWithError:nil];
+	}
+	
 	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
 				  success:@selector(httpClientDidDelete:)];
 }
@@ -69,12 +73,15 @@
 #pragma mark -
 #pragma mark Error Handling 
 
-- (void)httpClient: (HttpClient *)client didFailWithError: (NSError *)error {
-	
-	
-	NSLog(@"in Hoccer: %@", error);
+- (void)httpConneciton:(HttpConnection *)connection didFailWithError: (NSError *)error {
+	[self didFailWithError:error];
 }
 
+- (void)didFailWithError: (NSError *)error {
+	if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
+		[delegate hoccer:self didFailWithError:error];
+	}
+}
 
 #pragma mark -
 #pragma mark LocationController Delegate Methods
@@ -85,7 +92,7 @@
 
 #pragma mark -
 #pragma mark HttpClient Response Methods 
-- (void)httpClientDidReceiveInfo: (NSData *)receivedData {
+- (void)httpConnection: (HttpConnection *)aConncetion didReceiveInfo: (NSData *)receivedData {
 	
 	NSString *string = [[[NSString alloc] initWithData: receivedData
 											  encoding:NSUTF8StringEncoding] autorelease];
@@ -96,7 +103,7 @@
 	[self updateEnvironment];
 };
 
-- (void)httpClientDidUpdateEnvirinment: (NSData *)receivedData {
+- (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {
 	if (isRegistered) {
 		return;
 	}
@@ -107,65 +114,99 @@
 	}
 }
 
-- (void)httpClientDidSendData: (NSData *)receivedData response: (NSHTTPURLResponse *)response  {
-	if ([response statusCode] == 204 ) {
-		if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
-			NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-								  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
-			
- 			NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNobodyFound userInfo:info];
-			[delegate hoccer:self didFailWithError:error];
-		}
+- (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
+	if ([connection.response statusCode] == 204 ) {
+		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+							  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
+		
+		NSError *error = [NSError errorWithDomain:HoccerError code:NobodyFound userInfo:info];
+		[self didFailWithError:error];
 		
 		return;
 	}
 	
 	if ([delegate respondsToSelector:@selector(hoccerDidSendData:)]) {
-		[delegate hoccerDidSendData:self];
+		[delegate hoccerDidSendData: self];
 	}
+}
+
+- (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
+
+	if ([connection.response statusCode] == 204 ) {
+		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
+							  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
+		
+		NSError *error = [NSError errorWithDomain:HoccerError code:NobodyFound userInfo:info];
+		[self didFailWithError:error];
+		
+		return;
+	}
+
+	if ([delegate respondsToSelector:@selector(hoccer:didReceiveData:)]) {
+		[delegate hoccer: self didReceiveData: data];
+	}
+
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
 	NSLog(@"deleted resource");
 }
 
-- (void)httpClientDidReceiveData: (NSData *)receivedData response: (NSHTTPURLResponse *)response  {
-	if ([response statusCode] == 204 ) {
-		if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
-			NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-								  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
-			
- 			NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNobodyFound userInfo:info];
-			[delegate hoccer:self didFailWithError:error];
-		}
-		
-		return;
-	}
-
-	NSLog(@"did receive data!");
-	if ([delegate respondsToSelector:@selector(hoccer:didReceiveData:)]) {
-		[delegate hoccer: self didReceiveData: receivedData];
-	}
-
-}
-
-- (void)error {
-	if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
-		[delegate hoccer:self didFailWithError:nil];
-	}
-}
-
 #pragma mark -
 #pragma mark Private Methods
+
+//- (NSError *)createAppropriateError {
+//	if ([gesture isEqual:@"Throw"]) {
+//		return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageNoCatcher userInfo:[self userInfoForNoCatcher]];
+//	}
+//	
+//	if ([gesture isEqual:@"Catch"]) {
+//		return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageNoThrower userInfo:[self userInfoForNoThrower]];
+//	}
+//	
+//	return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageNoSecondSweeper userInfo:[self userInfoForNoSecondSweeper]];
+//}
+//
+//- (NSError *)createAppropriateCollisionError {
+//	return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageCollision userInfo:[self userInfoForInterception]];
+//}
+
+
+- (NSDictionary *)userInfoForNoReceiver {
+	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+	[userInfo setObject:NSLocalizedString(@"No receiver found", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@".", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	
+	return [userInfo autorelease];
+}
+
+- (NSDictionary *)userInfoForNoSender {
+	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+	[userInfo setObject:NSLocalizedString(@"No sender found!", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@".", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	
+	return [userInfo autorelease];	
+}
+
+- (NSDictionary *)userInfoForInterception {
+	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+	[userInfo setObject:NSLocalizedString(@"Transfere has been intercepted", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@".", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	
+	return [userInfo autorelease];
+}
+
+
+
+
 - (void)updateEnvironment {	
 	if (uri == nil) {
 		return;
 	}
 	
-	NSLog(@"updateEnvironment: %@", [environmentController.location JSONRepresentation]);
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environmentController.location JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
-			   success:@selector(httpClientDidUpdateEnvirinment:)];
+			   success:@selector(httpConnection:didUpdateEnvironment:)];
 }
 
 

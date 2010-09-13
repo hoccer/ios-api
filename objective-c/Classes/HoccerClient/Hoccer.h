@@ -13,7 +13,7 @@
 #define HoccerError @"HoccerError"
 
 enum HoccerErrors {
-	HoccerNobodyFound = 1
+	NobodyFound = 1
 };
 
 
@@ -37,7 +37,6 @@ enum HoccerErrors {
 
 - (void)send: (NSData *)data withMode: (NSString *)mode;
 - (void)receiveWithMode: (NSString *)mode;
-
 - (void)disconnect;
 
 @end

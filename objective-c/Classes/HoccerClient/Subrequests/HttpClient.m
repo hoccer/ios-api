@@ -11,15 +11,20 @@
 @interface ConnectionContainer : NSObject 
 {
 	SEL successAction;
-	NSURLConnection *connection;
 	NSMutableData *receivedData;
+	
+	NSURLConnection *connection;
 	NSURLResponse *response;
+	NSURLRequest *request;
+	
+	HttpConnection *httpConnection;
 }
 
 @property (assign) SEL successAction;
 @property (readonly) NSMutableData *receivedData;
-@property (retain) NSURLResponse *response;
 @property (retain) NSURLConnection *connection;
+@property (retain) NSURLResponse *response;
+@property (retain) HttpConnection *httpConnection;
 
 + (ConnectionContainer *)containerWithConnection: (NSURLConnection *)aConnection successSelector: (SEL)selector;
 
@@ -31,6 +36,7 @@
 @synthesize receivedData;
 @synthesize response;
 @synthesize connection;
+@synthesize httpConnection;
  
 + (ConnectionContainer *)containerWithConnection: (NSURLConnection *)aConnection successSelector: (SEL)selector {
 	ConnectionContainer *c = [[ConnectionContainer alloc] init];
@@ -44,7 +50,7 @@
 	self = [super init];
 	if (self != nil) {
 		receivedData = [[NSMutableData alloc] init];
-	}
+	} 
 	return self;
 }
 
@@ -52,6 +58,8 @@
 	[connection release];
 	[response release];
 	[receivedData release];  
+	[httpConnection release];
+	
 	[super dealloc];
 }
 
@@ -61,6 +69,7 @@
 @interface HttpClient ()
 
 - (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
+- (BOOL)hasHttpError: (NSHTTPURLResponse *)response;
 
 @end
 
@@ -72,7 +81,6 @@
 	self = [super init];
 	if (self != nil) {
 		baseURL = [url copy];
-		
 		connections = [[NSMutableDictionary alloc] init];	
 	}
 	
@@ -103,10 +111,17 @@
 	
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
-	
+
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
-	[connections setObject:[ConnectionContainer containerWithConnection: connection successSelector:success] forKey:[connection description]];
+	HttpConnection *httpConnection = [[HttpConnection alloc] init];
+	httpConnection.uri = uri;
+	httpConnection.request = request;
+	
+	ConnectionContainer *container = [ConnectionContainer containerWithConnection: connection successSelector:success];
+	container.httpConnection = httpConnection;
+	
+	[connections setObject: container forKey:[connection description]];
 }
 
 
@@ -118,26 +133,27 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
+	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	
 	if (!canceled && [target respondsToSelector:@selector(httpClient:didFailWithError:)]) {
-		[target performSelector:@selector(httpClient:didFailWithError:) withObject: self withObject:error];
+		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
 	}
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"responseCode: %d", [(NSHTTPURLResponse*)response statusCode]);
-	
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	container.response = response;
+	container.httpConnection.response = response;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 
-	NSString *received = [[[NSString alloc] initWithData:container.receivedData encoding:NSUTF8StringEncoding] autorelease];
-	NSLog(@"received data: %@", received);
-
+	if ([self hasHttpError: (NSHTTPURLResponse *)container.response]) {
+		return;
+	}
+	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
-		[target performSelector:container.successAction withObject:container.receivedData withObject:container.response];
+		[target performSelector:container.successAction withObject:container.httpConnection withObject:container.receivedData];
 	}
 
 	[connections removeObjectForKey:[aConnection description]];
@@ -147,7 +163,27 @@
 	for (ConnectionContainer *container in [connections allValues]) {
 		[container.connection cancel];
 	}
+	
 	canceled = YES;
+}
+
+#pragma mark -
+#pragma mark HTTP Error Handling 
+- (BOOL)hasHttpError: (NSHTTPURLResponse *)response {
+	if ([response statusCode] >= 400) {
+		NSDictionary *info = [NSDictionary dictionary];
+		NSError *httpError = [NSError errorWithDomain: HttpErrorDomain 
+												 code: [response statusCode] 
+											 userInfo: info];
+
+		if ([target respondsToSelector:@selector(hoccer:didFailWithError:)]) {
+			[target performSelector:@selector(httpClient:didFailWithError:) withObject: self withObject:httpError];
+		}
+		
+		return YES;
+	}
+	
+	return NO;
 }
 
 - (void)dealloc {
@@ -157,5 +193,13 @@
     [super dealloc];
 }
 
+@end
+
+
+@implementation HttpConnection
+
+@synthesize uri;
+@synthesize request, response;
 
 @end
+

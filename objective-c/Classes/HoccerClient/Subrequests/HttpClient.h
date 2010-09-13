@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#define HttpErrorDomain @"htmlErrorDomain"
+
+#define HttpClientRequestUri @"HttpClientRequestUri"
+
 
 
 @interface HttpClient : NSObject {
@@ -29,3 +33,18 @@
 - (void)cancelAllRequest;
 
 @end
+
+
+@interface HttpConnection : NSObject {
+	NSString *uri;
+	
+	NSURLRequest *request;
+	NSHTTPURLResponse *response;
+}
+
+@property (copy) NSString *uri;
+@property (retain, nonatomic) NSURLRequest *request;
+@property (retain, nonatomic) NSHTTPURLResponse *response;
+
+@end
+

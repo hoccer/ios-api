@@ -142,8 +142,8 @@
 	[self runForInterval:1];
 	[(MockedLocationController *)hoccer.environmentController next];
 	
-	GHAssertEquals(1, mockedDelegate2.didSendDataCalls, @"should have send some data");
-	GHAssertEquals(1, mockedDelegate.didReceiveDataCalls, @"should have received some data");
+	GHAssertEquals(1, mockedDelegate.didSendDataCalls, @"should have send some data");
+	GHAssertEquals(1, mockedDelegate2.didReceiveDataCalls, @"should have received some data");
 	
 	NSString *expected = [NSString stringWithFormat:@"[%@]", payload];
 	GHAssertEqualStrings(expected, received, @"should have received payload");
