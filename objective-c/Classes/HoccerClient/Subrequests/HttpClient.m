@@ -132,7 +132,10 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	
+
+	NSString *received = [[[NSString alloc] initWithData:container.receivedData encoding:NSUTF8StringEncoding] autorelease];
+	NSLog(@"received data: %@", received);
+
 	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.receivedData withObject:container.response];
 	}

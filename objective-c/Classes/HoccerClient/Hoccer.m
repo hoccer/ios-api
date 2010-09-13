@@ -16,6 +16,7 @@
 @interface Hoccer ()
 
 - (void)updateEnvironment;
+- (void)error;
 
 @end
 
@@ -30,7 +31,7 @@
 		environmentController = [[LocationController alloc] init];
 		environmentController.delegate = self;
 
-		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
+		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.111:9292"];
 		httpClient.target = self;
 		
 		[httpClient postURI:@"/clients" payload:nil success:@selector(httpClientDidReceiveInfo:)];
@@ -41,12 +42,20 @@
 }
 
 - (void)send: (NSData *)data withMode: (NSString *)mode {
+	if (!isRegistered) {
+		[self error];
+	}
+	
 	[httpClient postURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
 				payload: data
 				success:@selector(httpClientDidSendData:response:)];	
 }
 
 - (void)receiveWithMode: (NSString *)mode {
+	if (!isRegistered) {
+		[self error];
+	}
+	
 	[httpClient getURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
 			   success:@selector(httpClientDidReceiveData:response:)];	
 }
@@ -61,6 +70,8 @@
 #pragma mark Error Handling 
 
 - (void)httpClient: (HttpClient *)client didFailWithError: (NSError *)error {
+	
+	
 	NSLog(@"in Hoccer: %@", error);
 }
 
@@ -118,7 +129,6 @@
 	NSLog(@"deleted resource");
 }
 
-
 - (void)httpClientDidReceiveData: (NSData *)receivedData response: (NSHTTPURLResponse *)response  {
 	if ([response statusCode] == 204 ) {
 		if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
@@ -139,10 +149,15 @@
 
 }
 
+- (void)error {
+	if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
+		[delegate hoccer:self didFailWithError:nil];
+	}
+}
+
 #pragma mark -
 #pragma mark Private Methods
 - (void)updateEnvironment {	
-	
 	if (uri == nil) {
 		return;
 	}
@@ -155,7 +170,6 @@
 
 
 - (void)dealloc {
-	NSLog(@"hoccer release");
 	[httpClient cancelAllRequest];
 	[httpClient release];
 	[environmentController release];

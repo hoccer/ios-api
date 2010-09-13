@@ -11,7 +11,7 @@
 
 @interface HocLocation ()
 
-- (NSString *)locationAsDict: (CLLocation *)aLocation;
+- (NSDictionary *)locationAsDict: (CLLocation *)aLocation;
 @end
 
 
@@ -55,7 +55,7 @@
 	return [dict JSONRepresentation];
 }
 
-- (NSString *)locationAsDict: (CLLocation *)aLocation {
+- (NSDictionary *)locationAsDict: (CLLocation *)aLocation {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
 			[NSNumber numberWithDouble: aLocation.coordinate.latitude], @"latitude",
 			[NSNumber numberWithDouble: aLocation.coordinate.longitude], @"longitude",
