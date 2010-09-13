@@ -88,8 +88,12 @@
 }
 
 - (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	return [self requestMethod:@"POST" URI: uri payload:payload success:success];
-};
+	[self requestMethod:@"POST" URI: uri payload:payload success:success];
+}
+
+- (void)deleteURI: (NSString *)uri success: (SEL)success {
+	[self requestMethod:@"DELETE" URI:uri payload:nil success:success];
+}
 
 - (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
 	NSLog(@"%@ %@", method, uri);
@@ -128,10 +132,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	
-	
-	NSLog(@"received: %@", [[[NSString alloc] initWithData:container.receivedData
-												  encoding:NSUTF8StringEncoding] autorelease]);
 	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.receivedData withObject:container.response];

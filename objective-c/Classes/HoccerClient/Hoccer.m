@@ -30,7 +30,7 @@
 		environmentController = [[LocationController alloc] init];
 		environmentController.delegate = self;
 
-		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.111:9292"];
+		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
 		httpClient.target = self;
 		
 		[httpClient postURI:@"/clients" payload:nil success:@selector(httpClientDidReceiveInfo:)];
@@ -52,7 +52,8 @@
 }
 
 - (void)disconnect {
-	
+	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
+				  success:@selector(httpClientDidDelete:)];
 }
 
 
@@ -113,6 +114,11 @@
 	}
 }
 
+- (void)httpClientDidDelete: (NSData *)receivedData {
+	NSLog(@"deleted resource");
+}
+
+
 - (void)httpClientDidReceiveData: (NSData *)receivedData response: (NSHTTPURLResponse *)response  {
 	if ([response statusCode] == 204 ) {
 		if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
@@ -125,7 +131,8 @@
 		
 		return;
 	}
-	
+
+	NSLog(@"did receive data!");
 	if ([delegate respondsToSelector:@selector(hoccer:didReceiveData:)]) {
 		[delegate hoccer: self didReceiveData: receivedData];
 	}

@@ -151,9 +151,8 @@
 		220C63B01238DA3E0014AECB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				22FDCC61123E1473001FA03C /* MockedObjects */,
 				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
-				22EEB9D1123A34BE00276368 /* MockedLocationController.h */,
-				22EEB9D2123A34BE00276368 /* MockedLocationController.m */,
 				220C63B41238DAE60014AECB /* HoccerTests.m */,
 			);
 			name = Tests;
@@ -222,6 +221,15 @@
 				22A5CA1D1237ADE8003DF9EC /* SBJsonWriter.m */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		22FDCC61123E1473001FA03C /* MockedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				22EEB9D1123A34BE00276368 /* MockedLocationController.h */,
+				22EEB9D2123A34BE00276368 /* MockedLocationController.m */,
+			);
+			name = MockedObjects;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {

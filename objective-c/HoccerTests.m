@@ -22,6 +22,7 @@
 @property (assign) NSInteger didSendDataCalls;
 @property (assign) NSInteger didReceiveDataCalls;
 @property (assign) NSInteger didFailWithErrorCalls;
+@property (readonly) NSData *data;
 
 @end
 
@@ -29,6 +30,7 @@
 
 @synthesize didRegisterCalls, didSendDataCalls, 
 			didReceiveDataCalls, didFailWithErrorCalls;
+@synthesize data = _data;
 
 - (void)hoccerDidRegister: (Hoccer *)hoccer {
 	didRegisterCalls += 1;
@@ -91,6 +93,9 @@
 
 - (void)testHoccerClientRegisters {
 	[self runForInterval:1];
+	[hoccer disconnect];
+	[self runForInterval:1];
+
 	GHAssertEquals(mockedDelegate.didRegisterCalls, 1, @"should have registered");
 }
 
@@ -98,6 +103,9 @@
 	[self runForInterval:1];
 	[hoccer send:[@"{\"Hallo\": \"Peter\"}" dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
 	[self runForInterval:2];
+	[hoccer disconnect];
+	[self runForInterval:1];
+	
 	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");	
 }
 
@@ -105,6 +113,8 @@
 	[self runForInterval:1];
 	[hoccer receiveWithMode:@"distribute"];
 	[self runForInterval:2];
+	[hoccer disconnect];
+	[self runForInterval:1];
 	
 	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");
 }
@@ -118,15 +128,22 @@
 	hoccer2.delegate = mockedDelegate2;
 	
 	[self runForInterval:1];
-	
-	[hoccer receiveWithMode:@"distribute"];
+
 	[hoccer2 send:[@"{\"Hallo\": \"API3\"}" dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
+	[hoccer receiveWithMode:@"distribute"];
 	
-	[self runForInterval:5];
-	
+	[self runForInterval:8];
+
+	NSString *received = [[[NSString alloc] initWithData:mockedDelegate.data encoding:NSUTF8StringEncoding] autorelease];
+	NSLog(@"received data: %@", received);
+
+	[hoccer disconnect];
+	[hoccer2 disconnect];
+	[self runForInterval:1];
 	[(MockedLocationController *)hoccer.environmentController next];
 	GHAssertEquals(1, mockedDelegate2.didSendDataCalls, @"should have send some data");
 	GHAssertEquals(1, mockedDelegate.didReceiveDataCalls, @"should have received some data");
+	
 }
 
 
