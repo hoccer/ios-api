@@ -128,22 +128,26 @@
 	hoccer2.delegate = mockedDelegate2;
 	
 	[self runForInterval:1];
-
-	[hoccer2 send:[@"{\"Hallo\": \"API3\"}" dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
+	
+	NSString *payload = @"{\"Hallo\":\"API3\"}";
+	[hoccer2 send:[payload dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
 	[hoccer receiveWithMode:@"distribute"];
 	
 	[self runForInterval:8];
 
 	NSString *received = [[[NSString alloc] initWithData:mockedDelegate.data encoding:NSUTF8StringEncoding] autorelease];
 	NSLog(@"received data: %@", received);
-
+	
 	[hoccer disconnect];
 	[hoccer2 disconnect];
 	[self runForInterval:1];
 	[(MockedLocationController *)hoccer.environmentController next];
+	
 	GHAssertEquals(1, mockedDelegate2.didSendDataCalls, @"should have send some data");
 	GHAssertEquals(1, mockedDelegate.didReceiveDataCalls, @"should have received some data");
 	
+	NSString *expected = [NSString stringWithFormat:@"[%@]", payload];
+	GHAssertEqualStrings(expected, received, @"should have received payload");
 }
 
 
