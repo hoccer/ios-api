@@ -6,8 +6,8 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <YAJLIOS/YAJLIOS.h>
 #import "HocLocation.h"
-#import "NSObject+SBJSON.h"
 
 @interface HocLocation ()
 
@@ -47,12 +47,11 @@
 		[dict setObject:locationDict forKey: @"gps"];
 	}
 	
-	
 	if (self.bssids) {
 		[dict setObject:self.bssids forKey:@"bssids"];
 	}
 	
-	return [dict JSONRepresentation];
+	return [dict yajl_JSONString];
 }
 
 - (NSDictionary *)locationAsDict: (CLLocation *)aLocation {
@@ -61,7 +60,6 @@
 			[NSNumber numberWithDouble: aLocation.coordinate.longitude], @"longitude",
 			// aLocation.timestamp, @"timestamp",
 			[NSNumber numberWithDouble: aLocation.horizontalAccuracy], @"accuracy", nil];
-	
 }
 
 

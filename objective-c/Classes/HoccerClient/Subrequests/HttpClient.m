@@ -177,7 +177,7 @@
 											 userInfo: info];
 
 		if ([target respondsToSelector:@selector(hoccer:didFailWithError:)]) {
-			[target performSelector:@selector(httpClient:didFailWithError:) withObject: self withObject:httpError];
+			[target performSelector:@selector(hoccer:didFailWithError:) withObject: self withObject:httpError];
 		}
 		
 		return YES;

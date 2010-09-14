@@ -6,11 +6,12 @@
 //  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
+#import <YAJLIOS/YAJLIOS.h>
 #import "Hoccer.h"
 #import "LocationController.h"
 #import "HocLocation.h"
 #import "HttpClient.h"
-#import "NSString+SBJSON.h"
+
 
 #define HOCCER_CLIENT_URI @"hoccerClientUri" 
 
@@ -108,7 +109,7 @@
 	NSString *string = [[[NSString alloc] initWithData: receivedData
 											  encoding:NSUTF8StringEncoding] autorelease];
 	
-	NSDictionary *info = [string JSONValue];
+	NSDictionary *info = [string yajl_JSON];
 	uri = [[info objectForKey:@"uri"] copy];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:uri forKey:HOCCER_CLIENT_URI];
