@@ -37,6 +37,7 @@
 }
 
 - (void)hoccerDidSendData: (Hoccer *)hoccer {
+	NSLog(@"did send data, hoccer delegate");
 	didSendDataCalls += 1;
 }
 
@@ -120,8 +121,7 @@
 }
 
 - (void)testSendAndReceive {
-//	[self runForInterval:1];
-
+	
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
 	Hoccer *hoccer2 = [[Hoccer alloc] init];
 	[hoccer2 setTestEnvironment];
@@ -141,9 +141,9 @@
 	[hoccer2 disconnect];
 	[self runForInterval:1];
 	[(MockedLocationController *)hoccer.environmentController next];
-	
-	GHAssertEquals(1, mockedDelegate.didSendDataCalls, @"should have send some data");
-	GHAssertEquals(1, mockedDelegate2.didReceiveDataCalls, @"should have received some data");
+
+	GHAssertEquals(mockedDelegate2.didSendDataCalls, 1, @"should have send some data");
+	GHAssertEquals(mockedDelegate.didReceiveDataCalls, 1, @"should have received some data");
 	
 	NSString *expected = [NSString stringWithFormat:@"[%@]", payload];
 	GHAssertEqualStrings(expected, received, @"should have received payload");

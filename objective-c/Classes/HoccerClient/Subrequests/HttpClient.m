@@ -142,7 +142,7 @@
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	container.httpConnection.response = response;
+	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {

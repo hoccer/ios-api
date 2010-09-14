@@ -31,7 +31,7 @@
 		environmentController = [[LocationController alloc] init];
 		environmentController.delegate = self;
 
-		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.111:9292"];
+		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
 		httpClient.target = self;
 		
 		[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
@@ -48,7 +48,7 @@
 	
 	[httpClient postURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
 				payload:data
-				success:@selector(httpConnection:didReceiveData:)];	
+				success:@selector(httpConnection:didSendData:)];	
 }
 
 - (void)receiveWithMode: (NSString *)mode {
@@ -57,7 +57,7 @@
 	}
 	
 	[httpClient getURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
-			   success:@selector(httpConnection:didSendData:)];	
+			   success:@selector(httpConnection:didReceiveData:)];	
 }
 
 - (void)disconnect {
@@ -115,7 +115,9 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
+	
 	if ([connection.response statusCode] == 204 ) {
+		NSLog(@"not found");
 		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
 							  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
 		
@@ -125,7 +127,9 @@
 		return;
 	}
 	
+	NSLog(@"delegate: %@", delegate);
 	if ([delegate respondsToSelector:@selector(hoccerDidSendData:)]) {
+		NSLog(@"blub");
 		[delegate hoccerDidSendData: self];
 	}
 }
