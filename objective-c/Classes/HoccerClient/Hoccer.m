@@ -12,11 +12,16 @@
 #import "HttpClient.h"
 #import "NSString+SBJSON.h"
 
+#define HOCCER_CLIENT_URI @"hoccerClientUri" 
+
 
 @interface Hoccer ()
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
+
+- (NSDictionary *)userInfoForNoReceiver;
+- (NSDictionary *)userInfoForNoSender;
 
 @end
 
@@ -33,11 +38,15 @@
 
 		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
 		httpClient.target = self;
-		
-		[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
-		
-		// TODO: get id from prefs or create new on server
+
+		uri = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_URI];
+		if (!uri) {
+			[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
+		} else {
+			[self updateEnvironment];
+		}
 	}
+	
 	return self;
 }
 
@@ -46,7 +55,8 @@
 		[self didFailWithError:nil];
 	}
 	
-	[httpClient postURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
+	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
+	[httpClient postURI:[uri stringByAppendingPathComponent: actionString] 
 				payload:data
 				success:@selector(httpConnection:didSendData:)];	
 }
@@ -56,7 +66,8 @@
 		[self didFailWithError:nil];
 	}
 	
-	[httpClient getURI:[uri stringByAppendingPathComponent:@"/action/distribute"] 
+	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
+	[httpClient getURI:[uri stringByAppendingPathComponent: actionString] 
 			   success:@selector(httpConnection:didReceiveData:)];	
 }
 
@@ -100,6 +111,8 @@
 	NSDictionary *info = [string JSONValue];
 	uri = [[info objectForKey:@"uri"] copy];
 	
+	[[NSUserDefaults standardUserDefaults] setObject:uri forKey:HOCCER_CLIENT_URI];
+	
 	[self updateEnvironment];
 };
 
@@ -117,19 +130,12 @@
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
 	
 	if ([connection.response statusCode] == 204 ) {
-		NSLog(@"not found");
-		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-							  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
-		
-		NSError *error = [NSError errorWithDomain:HoccerError code:NobodyFound userInfo:info];
+		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoReceiverError userInfo:[self userInfoForNoReceiver]];
 		[self didFailWithError:error];
-		
 		return;
 	}
 	
-	NSLog(@"delegate: %@", delegate);
 	if ([delegate respondsToSelector:@selector(hoccerDidSendData:)]) {
-		NSLog(@"blub");
 		[delegate hoccerDidSendData: self];
 	}
 }
@@ -137,12 +143,8 @@
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
 
 	if ([connection.response statusCode] == 204 ) {
-		NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-							  NSLocalizedString(@"No content found", nil), NSLocalizedDescriptionKey, nil];
-		
-		NSError *error = [NSError errorWithDomain:HoccerError code:NobodyFound userInfo:info];
+		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
 		[self didFailWithError:error];
-		
 		return;
 	}
 
@@ -159,49 +161,22 @@
 #pragma mark -
 #pragma mark Private Methods
 
-//- (NSError *)createAppropriateError {
-//	if ([gesture isEqual:@"Throw"]) {
-//		return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageNoCatcher userInfo:[self userInfoForNoCatcher]];
-//	}
-//	
-//	if ([gesture isEqual:@"Catch"]) {
-//		return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageNoThrower userInfo:[self userInfoForNoThrower]];
-//	}
-//	
-//	return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageNoSecondSweeper userInfo:[self userInfoForNoSecondSweeper]];
-//}
-//
-//- (NSError *)createAppropriateCollisionError {
-//	return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerMessageCollision userInfo:[self userInfoForInterception]];
-//}
-
-
 - (NSDictionary *)userInfoForNoReceiver {
+
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:NSLocalizedString(@"No receiver found", nil) forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:NSLocalizedString(@".", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
-	
+	[userInfo setObject:NSLocalizedString(@"Could not establish connection", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@"", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+		
 	return [userInfo autorelease];
 }
 
 - (NSDictionary *)userInfoForNoSender {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:NSLocalizedString(@"No sender found!", nil) forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:NSLocalizedString(@".", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[userInfo setObject:NSLocalizedString(@"Could not establish connection", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@"", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
 	return [userInfo autorelease];	
 }
-
-- (NSDictionary *)userInfoForInterception {
-	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:NSLocalizedString(@"Transfere has been intercepted", nil) forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:NSLocalizedString(@".", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
-	
-	return [userInfo autorelease];
-}
-
-
-
 
 - (void)updateEnvironment {	
 	if (uri == nil) {

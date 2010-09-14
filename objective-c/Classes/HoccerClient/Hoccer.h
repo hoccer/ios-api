@@ -13,7 +13,8 @@
 #define HoccerError @"HoccerError"
 
 enum HoccerErrors {
-	NobodyFound = 1
+	HoccerNoReceiverError = 1,
+	HoccerNoSenderError
 };
 
 
