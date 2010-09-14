@@ -31,6 +31,10 @@
 		22A5C9B51237969F003DF9EC /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22C02E5D123FAB500035A73D /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
+		22C02E98123FB1640035A73D /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
+		22C02E99123FB1640035A73D /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
+		22C02ECB123FBF310035A73D /* HoccerGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HoccerGeoStorage.m */; };
+		22C02ECC123FBF310035A73D /* HoccerGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HoccerGeoStorage.m */; };
 		22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEB9D2123A34BE00276368 /* MockedLocationController.m */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
@@ -64,6 +68,10 @@
 		22A5C9B41237969F003DF9EC /* LocationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationControllerDelegate.h; sourceTree = "<group>"; };
 		22A5C9BE12379B36003DF9EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		22C02E5C123FAB500035A73D /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YAJLIOS.framework; sourceTree = "<group>"; };
+		22C02E96123FB1640035A73D /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpConnection.h; path = HoccerClient/Subrequests/HttpConnection.h; sourceTree = "<group>"; };
+		22C02E97123FB1640035A73D /* HttpConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpConnection.m; path = HoccerClient/Subrequests/HttpConnection.m; sourceTree = "<group>"; };
+		22C02EC9123FBF310035A73D /* HoccerGeoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HoccerGeoStorage.h; path = HoccerClient/HoccerGeoStorage.h; sourceTree = "<group>"; };
+		22C02ECA123FBF310035A73D /* HoccerGeoStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HoccerGeoStorage.m; path = HoccerClient/HoccerGeoStorage.m; sourceTree = "<group>"; };
 		22EEB9D1123A34BE00276368 /* MockedLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockedLocationController.h; path = Tests/MockedLocationController.h; sourceTree = "<group>"; };
 		22EEB9D2123A34BE00276368 /* MockedLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockedLocationController.m; path = Tests/MockedLocationController.m; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +152,8 @@
 				22A5C98D12379123003DF9EC /* Hoccer.h */,
 				22A5C98E12379123003DF9EC /* Hoccer.m */,
 				22A5C99012379143003DF9EC /* HoccerDelegate.h */,
+				22C02EC9123FBF310035A73D /* HoccerGeoStorage.h */,
+				22C02ECA123FBF310035A73D /* HoccerGeoStorage.m */,
 			);
 			name = HoccerClient;
 			sourceTree = "<group>";
@@ -177,6 +187,8 @@
 			children = (
 				22483D2F1237CA21006DBFBD /* HttpClient.h */,
 				22483D301237CA21006DBFBD /* HttpClient.m */,
+				22C02E96123FB1640035A73D /* HttpConnection.h */,
+				22C02E97123FB1640035A73D /* HttpConnection.m */,
 			);
 			name = HttpClient;
 			sourceTree = "<group>";
@@ -333,6 +345,8 @@
 				22A5C9B012379655003DF9EC /* WifiScanner.m in Sources */,
 				22A5C9B51237969F003DF9EC /* LocationController.m in Sources */,
 				22483D311237CA21006DBFBD /* HttpClient.m in Sources */,
+				22C02E98123FB1640035A73D /* HttpConnection.m in Sources */,
+				22C02ECB123FBF310035A73D /* HoccerGeoStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +362,8 @@
 				220C63C61238DC4F0014AECB /* HocLocation.m in Sources */,
 				220C63C71238DC4F0014AECB /* WifiScanner.m in Sources */,
 				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
+				22C02E99123FB1640035A73D /* HttpConnection.m in Sources */,
+				22C02ECC123FBF310035A73D /* HoccerGeoStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

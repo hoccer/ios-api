@@ -22,5 +22,6 @@
 
 - (id) initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids;
 - (NSString *)JSONRepresentation;
+- (NSDictionary *)dict;
 
 @end

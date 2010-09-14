@@ -12,10 +12,7 @@
 {
 	SEL successAction;
 	NSMutableData *receivedData;
-	
 	NSURLConnection *connection;
-	NSURLResponse *response;
-	NSURLRequest *request;
 	
 	HttpConnection *httpConnection;
 }
@@ -194,12 +191,3 @@
 }
 
 @end
-
-
-@implementation HttpConnection
-
-@synthesize uri;
-@synthesize request, response;
-
-@end
-

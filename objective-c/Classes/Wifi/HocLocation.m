@@ -40,6 +40,11 @@
 }
 
 - (NSString *)JSONRepresentation {
+	
+	return [[self dict] yajl_JSONString];
+}
+
+- (NSDictionary *)dict {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
 	NSDictionary *locationDict = [self locationAsDict: self.location];
@@ -51,8 +56,9 @@
 		[dict setObject:self.bssids forKey:@"bssids"];
 	}
 	
-	return [dict yajl_JSONString];
+	return dict;
 }
+
 
 - (NSDictionary *)locationAsDict: (CLLocation *)aLocation {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
