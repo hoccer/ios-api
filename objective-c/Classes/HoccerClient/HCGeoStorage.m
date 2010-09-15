@@ -42,12 +42,6 @@
 				success:@selector(httpConnection:didFindData:)];
 }
 
-- (void)lookup: (NSString *)itemId {
-	
-}
-
-
-
 #pragma mark -
 #pragma mark Callback Methods
 

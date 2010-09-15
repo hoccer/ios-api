@@ -18,23 +18,9 @@
 		220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C636A1238D7DD0014AECB /* GHUnitIOS.framework */; };
 		220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */; };
 		220C63C01238DBA60014AECB /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B41238DAE60014AECB /* HoccerTests.m */; };
-		220C63C31238DC2B0014AECB /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
-		220C63C41238DC3B0014AECB /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
-		220C63C51238DC440014AECB /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
-		220C63C61238DC4F0014AECB /* HocLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HocLocation.m */; };
-		220C63C71238DC4F0014AECB /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
 		220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
-		22483D311237CA21006DBFBD /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
-		22A5C98F12379123003DF9EC /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
-		22A5C9AF12379655003DF9EC /* HocLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HocLocation.m */; };
-		22A5C9B012379655003DF9EC /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
-		22A5C9B51237969F003DF9EC /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22C02E5D123FAB500035A73D /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
-		22C02E98123FB1640035A73D /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
-		22C02E99123FB1640035A73D /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
-		22C02ECB123FBF310035A73D /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
-		22C02ECC123FBF310035A73D /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
 		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
 		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
 		22E903091240CC3000993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
@@ -48,6 +34,14 @@
 		22E904041240CC8800993693 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
+		22E904701240D13800993693 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
+		22E904711240D13800993693 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
+		22E904721240D13800993693 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
+		22E904731240D13800993693 /* HocLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HocLocation.m */; };
+		22E904741240D13800993693 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
+		22E904751240D13800993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
+		22E904761240D13800993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
+		22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E903001240CB9A00993693 /* libHoccerLib.a */; };
 		22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEB9D2123A34BE00276368 /* MockedLocationController.m */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
@@ -124,6 +118,7 @@
 				220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */,
 				220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */,
 				22C02E5D123FAB500035A73D /* YAJLIOS.framework in Frameworks */,
+				22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,13 +396,13 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* HoccerAPIAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */,
-				22A5C98F12379123003DF9EC /* HCClient.m in Sources */,
-				22A5C9AF12379655003DF9EC /* HocLocation.m in Sources */,
-				22A5C9B012379655003DF9EC /* WifiScanner.m in Sources */,
-				22A5C9B51237969F003DF9EC /* LocationController.m in Sources */,
-				22483D311237CA21006DBFBD /* HttpClient.m in Sources */,
-				22C02E98123FB1640035A73D /* HttpConnection.m in Sources */,
-				22C02ECB123FBF310035A73D /* HCGeoStorage.m in Sources */,
+				22E904701240D13800993693 /* HttpClient.m in Sources */,
+				22E904711240D13800993693 /* HttpConnection.m in Sources */,
+				22E904721240D13800993693 /* WifiScanner.m in Sources */,
+				22E904731240D13800993693 /* HocLocation.m in Sources */,
+				22E904741240D13800993693 /* LocationController.m in Sources */,
+				22E904751240D13800993693 /* HCClient.m in Sources */,
+				22E904761240D13800993693 /* HCGeoStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,14 +412,7 @@
 			files = (
 				220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */,
 				220C63C01238DBA60014AECB /* HoccerTests.m in Sources */,
-				220C63C31238DC2B0014AECB /* HCClient.m in Sources */,
-				220C63C41238DC3B0014AECB /* HttpClient.m in Sources */,
-				220C63C51238DC440014AECB /* LocationController.m in Sources */,
-				220C63C61238DC4F0014AECB /* HocLocation.m in Sources */,
-				220C63C71238DC4F0014AECB /* WifiScanner.m in Sources */,
 				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
-				22C02E99123FB1640035A73D /* HttpConnection.m in Sources */,
-				22C02ECC123FBF310035A73D /* HCGeoStorage.m in Sources */,
 				22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
