@@ -15,7 +15,7 @@
 #define kHoccerImpreciseLocation 1
 #define kHoccerBadLocation 2
 
-@class HocLocation;
+@class HCLocation;
 
 @interface LocationController : NSObject <CLLocationManagerDelegate, WifiScannerDelegate> {
 	@private 
@@ -31,7 +31,7 @@
 }
 
 @property (assign) NSInteger hoccability;
-@property (readonly) HocLocation *location;
+@property (readonly) HCLocation *location;
 @property (assign) id <LocationControllerDelegate> delegate;
 
 - (BOOL)hasLocation;

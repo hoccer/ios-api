@@ -9,7 +9,7 @@
 #import <YAJLIOS/YAJLIOS.h>
 #import "HCClient.h"
 #import "LocationController.h"
-#import "HocLocation.h"
+#import "HCLocation.h"
 #import "HttpClient.h"
 
 

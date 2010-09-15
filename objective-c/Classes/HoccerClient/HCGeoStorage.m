@@ -8,7 +8,7 @@
 
 #import <YAJLIOS/YAJLIOS.h>
 #import "HCGeoStorage.h"
-#import "HocLocation.h"
+#import "HCLocation.h"
 
 #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.111:9292"
 

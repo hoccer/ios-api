@@ -9,7 +9,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LocationController.h"
 #import "WifiScanner.h"
-#import "HocLocation.h"
+#import "HCLocation.h"
 
 #define hoccerMessageErrorDomain @"HoccerErrorDomain"
 
@@ -80,8 +80,8 @@
 	[self updateHoccability];
 }
 
-- (HocLocation *)location {
-	HocLocation *location = [[HocLocation alloc] 
+- (HCLocation *)location {
+	HCLocation *location = [[HCLocation alloc] 
 			 initWithLocation: currentLocation bssids:[WifiScanner sharedScanner].bssids];
 	location.hoccability = hoccability;
 	
