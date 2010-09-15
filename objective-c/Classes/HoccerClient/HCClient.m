@@ -85,7 +85,7 @@
 #pragma mark -
 #pragma mark Error Handling 
 
-- (void)httpConneciton:(HttpConnection *)connection didFailWithError: (NSError *)error {
+- (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
 	[self didFailWithError:error];
 }
 

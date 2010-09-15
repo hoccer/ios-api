@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "HttpConnection.h"
 
-#define HttpErrorDomain @"htmlErrorDomain"
+#define HttpErrorDomain @"HttpErrorDomain"
 #define HttpClientRequestUri @"HttpClientRequestUri"
 
 @interface HttpClient : NSObject {

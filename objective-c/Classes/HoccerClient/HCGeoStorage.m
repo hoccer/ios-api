@@ -10,7 +10,7 @@
 #import "HCGeoStorage.h"
 #import "HCLocation.h"
 
-#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.111:9292"
+#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.139:9292"
 
 @implementation HCGeoStorage
 @synthesize delegate;
@@ -20,6 +20,7 @@
 	if (self != nil) {
 		environmentController = [[LocationController alloc] init];
 		httpClient = [[HttpClient alloc] initWithURLString:HOCCER_GEOSTORAGE_URI];
+		httpClient.target = self;
 	}
 	return self;
 }
@@ -60,6 +61,10 @@
 	if ([delegate respondsToSelector:@selector(geostorage:didFindItems:)]) {
 		[delegate geostorage:self didFindItems:[data yajl_JSON]];
 	}
+}
+
+- (void)httpConnection: (HttpConnection *)connection didFailWithError: (NSError *)error {
+	NSLog(@"error: %@", error);
 }
 
 

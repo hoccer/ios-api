@@ -20,7 +20,6 @@
 @property (assign) SEL successAction;
 @property (readonly) NSMutableData *receivedData;
 @property (retain) NSURLConnection *connection;
-@property (retain) NSURLResponse *response;
 @property (retain) HttpConnection *httpConnection;
 
 + (ConnectionContainer *)containerWithConnection: (NSURLConnection *)aConnection successSelector: (SEL)selector;
@@ -31,7 +30,6 @@
 
 @synthesize successAction;
 @synthesize receivedData;
-@synthesize response;
 @synthesize connection;
 @synthesize httpConnection;
  
@@ -53,7 +51,6 @@
 
 - (void) dealloc {
 	[connection release];
-	[response release];
 	[receivedData release];  
 	[httpConnection release];
 	
@@ -131,8 +128,7 @@
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	
-	if (!canceled && [target respondsToSelector:@selector(httpClient:didFailWithError:)]) {
+	if (!canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
 	}
 }
@@ -144,8 +140,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-
-	if ([self hasHttpError: (NSHTTPURLResponse *)container.response]) {
+	if ([self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response]) {
 		return;
 	}
 	
@@ -173,8 +168,8 @@
 												 code: [response statusCode] 
 											 userInfo: info];
 
-		if ([target respondsToSelector:@selector(hoccer:didFailWithError:)]) {
-			[target performSelector:@selector(hoccer:didFailWithError:) withObject: self withObject:httpError];
+		if ([target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
+			[target performSelector:@selector(httpConnection:didFailWithError:) withObject: self withObject:httpError];
 		}
 		
 		return YES;
