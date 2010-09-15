@@ -19,7 +19,7 @@ static CLLocationDegrees lastLatitude = 5, lastLongitue = 5;
 	return self;
 }
 
-- (HCLocation *)location {
+- (HCLocation *)environment {
 	NSArray *array = [NSArray array];
 	
 	CLLocationCoordinate2D coordinate;

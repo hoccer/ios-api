@@ -13,6 +13,7 @@
 #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.111:9292"
 
 @implementation HCGeoStorage
+@synthesize delegate;
 
 - (id) init {
 	self = [super init];
@@ -23,10 +24,13 @@
 	return self;
 }
 
+- (CLLocation *) location {
+	return environmentController.environment.location;
+}
 
 - (void)store: (NSDictionary *)data {
 	NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:
-							 [environmentController.location dict], @"environment",
+							 [environmentController.environment dict], @"environment",
 							 data, @"params", nil];
 
 	NSString *payloadJSON = [payload yajl_JSONString];
@@ -36,7 +40,8 @@
 }
 
 - (void)searchNearby {
-	NSString *jsonEnvironment = [environmentController.location JSONRepresentation];
+	NSString *jsonEnvironment = [environmentController.environment JSONRepresentation];
+	
 	[httpClient postURI:@"/search" 
 				payload:[jsonEnvironment dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didFindData:)];
@@ -51,6 +56,12 @@
 
 - (void)httpConnection: (HttpConnection *)connection didFindData: (NSData *)data {
 	NSLog(@"found: %@", [data yajl_JSON]);
-} 
+	
+	if ([delegate respondsToSelector:@selector(geostorage:didFindItems:)]) {
+		[delegate geostorage:self didFindItems:[data yajl_JSON]];
+	}
+}
+
+
 
 @end

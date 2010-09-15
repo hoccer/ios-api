@@ -80,7 +80,7 @@
 	[self updateHoccability];
 }
 
-- (HCLocation *)location {
+- (HCLocation *)environment {
 	HCLocation *location = [[HCLocation alloc] 
 			 initWithLocation: currentLocation bssids:[WifiScanner sharedScanner].bssids];
 	location.hoccability = hoccability;
@@ -93,7 +93,7 @@
 }
 
 - (BOOL)hasBadLocation {
-	return (![self hasLocation] || self.location.location.horizontalAccuracy > 200);
+	return (![self hasLocation] || self.environment.location.horizontalAccuracy > 200);
 }
 
 - (BOOL)hasBSSID {

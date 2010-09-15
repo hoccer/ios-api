@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 @class HCGeoStorage;
 
-@protocol HCGeoStorageDelegate
+@protocol HCGeoStorageDelegate <NSObject>
 
+@optional
 - (void)geostorageDidStore: (HCGeoStorage *)geoStorage;
 - (void)geostorage: (HCGeoStorage *)geoStorage didFindItems: (NSArray *)items;
 - (void)geostorage: (HCGeoStorage *)geoStorage didFailWithError: (NSError *)error;
-
 
 @end

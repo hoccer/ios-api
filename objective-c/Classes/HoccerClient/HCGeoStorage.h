@@ -7,13 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 #import "HttpClient.h"
 #import "LocationController.h"
+#import "HCGeoStorageDelegate.h"
+
 
 @interface HCGeoStorage : NSObject {
 	LocationController *environmentController;
 	HttpClient *httpClient;
+	
+	id <HCGeoStorageDelegate> delegate;
 }
+
+@property (assign) id <HCGeoStorageDelegate> delegate;
+@property (readonly) CLLocation *location;
 
 - (void)store: (NSDictionary *)data;
 - (void)searchNearby;

@@ -185,7 +185,7 @@
 	}
 	
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
-			   payload:[[environmentController.location JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
+			   payload:[[environmentController.environment JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
 }
 

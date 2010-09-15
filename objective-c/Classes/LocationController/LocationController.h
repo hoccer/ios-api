@@ -31,7 +31,7 @@
 }
 
 @property (assign) NSInteger hoccability;
-@property (readonly) HCLocation *location;
+@property (readonly) HCLocation *environment;
 @property (assign) id <LocationControllerDelegate> delegate;
 
 - (BOOL)hasLocation;
