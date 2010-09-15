@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HoccerDelegate.h"
+#import "HCClientDelegate.h"
 @class HCClient;
 
-@interface HoccerAPIViewController : UIViewController <HoccerDelegate> {
+@interface HoccerAPIViewController : UIViewController <HCClientDelegate> {
 	HCClient *hoccer;
 }
 

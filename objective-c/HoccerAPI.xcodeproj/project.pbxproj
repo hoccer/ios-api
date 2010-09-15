@@ -35,6 +35,19 @@
 		22C02E99123FB1640035A73D /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
 		22C02ECB123FBF310035A73D /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
 		22C02ECC123FBF310035A73D /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
+		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
+		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
+		22E903091240CC3000993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
+		22E9030C1240CC4400993693 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
+		22E9030D1240CC4400993693 /* HocLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HocLocation.m */; };
+		22E9030E1240CC4400993693 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
+		22E9030F1240CC4D00993693 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
+		22E903101240CC4D00993693 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
+		22E9031E1240CC6B00993693 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
+		22E904031240CC8800993693 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		22E904041240CC8800993693 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEB9D2123A34BE00276368 /* MockedLocationController.m */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
@@ -73,6 +86,9 @@
 		22C02EC9123FBF310035A73D /* HCGeoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorage.h; path = HoccerClient/HCGeoStorage.h; sourceTree = "<group>"; };
 		22C02ECA123FBF310035A73D /* HCGeoStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCGeoStorage.m; path = HoccerClient/HCGeoStorage.m; sourceTree = "<group>"; };
 		22C02ED9123FC9210035A73D /* HCGeoStorageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorageDelegate.h; path = HoccerClient/HCGeoStorageDelegate.h; sourceTree = "<group>"; };
+		22E902AF1240C61A00993693 /* HCGeoStorageTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorageTests.h; path = Tests/HCGeoStorageTests.h; sourceTree = "<group>"; };
+		22E902B01240C61A00993693 /* HCGeoStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCGeoStorageTests.m; path = Tests/HCGeoStorageTests.m; sourceTree = "<group>"; };
+		22E903001240CB9A00993693 /* libHoccerLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHoccerLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EEB9D1123A34BE00276368 /* MockedLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockedLocationController.h; path = Tests/MockedLocationController.h; sourceTree = "<group>"; };
 		22EEB9D2123A34BE00276368 /* MockedLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockedLocationController.m; path = Tests/MockedLocationController.m; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -111,6 +127,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22E902FE1240CB9A00993693 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E9031E1240CC6B00993693 /* YAJLIOS.framework in Frameworks */,
+				22E904031240CC8800993693 /* UIKit.framework in Frameworks */,
+				22E904041240CC8800993693 /* Foundation.framework in Frameworks */,
+				22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */,
+				22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -131,6 +159,7 @@
 			children = (
 				1D6058910D05DD3D006BFB54 /* HoccerAPI.app */,
 				220C63A51238D9DB0014AECB /* Tests.app */,
+				22E903001240CB9A00993693 /* libHoccerLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +170,8 @@
 				22FDCC61123E1473001FA03C /* MockedObjects */,
 				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
 				220C63B41238DAE60014AECB /* HoccerTests.m */,
+				22E902AF1240C61A00993693 /* HCGeoStorageTests.h */,
+				22E902B01240C61A00993693 /* HCGeoStorageTests.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -252,6 +283,16 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		22E902FC1240CB9A00993693 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* HoccerAPI */ = {
 			isa = PBXNativeTarget;
@@ -287,6 +328,23 @@
 			productReference = 220C63A51238D9DB0014AECB /* Tests.app */;
 			productType = "com.apple.product-type.application";
 		};
+		22E902FF1240CB9A00993693 /* HoccerLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22E903071240CBC400993693 /* Build configuration list for PBXNativeTarget "HoccerLib" */;
+			buildPhases = (
+				22E902FC1240CB9A00993693 /* Headers */,
+				22E902FD1240CB9A00993693 /* Sources */,
+				22E902FE1240CB9A00993693 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HoccerLib;
+			productName = HoccerLib;
+			productReference = 22E903001240CB9A00993693 /* libHoccerLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -311,6 +369,7 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* HoccerAPI */,
 				220C63A41238D9DB0014AECB /* Tests */,
+				22E902FF1240CB9A00993693 /* HoccerLib */,
 			);
 		};
 /* End PBXProject section */
@@ -366,6 +425,21 @@
 				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
 				22C02E99123FB1640035A73D /* HttpConnection.m in Sources */,
 				22C02ECC123FBF310035A73D /* HCGeoStorage.m in Sources */,
+				22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E902FD1240CB9A00993693 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E903081240CC3000993693 /* HCClient.m in Sources */,
+				22E903091240CC3000993693 /* HCGeoStorage.m in Sources */,
+				22E9030C1240CC4400993693 /* WifiScanner.m in Sources */,
+				22E9030D1240CC4400993693 /* HocLocation.m in Sources */,
+				22E9030E1240CC4400993693 /* LocationController.m in Sources */,
+				22E9030F1240CC4D00993693 /* HttpClient.m in Sources */,
+				22E903101240CC4D00993693 /* HttpConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +542,51 @@
 			};
 			name = Release;
 		};
+		22E903011240CB9B00993693 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = HoccerLib;
+			};
+			name = Debug;
+		};
+		22E903021240CB9B00993693 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = HoccerLib;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -514,6 +633,15 @@
 			buildConfigurations = (
 				220C63A81238D9DB0014AECB /* Debug */,
 				220C63A91238D9DB0014AECB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22E903071240CBC400993693 /* Build configuration list for PBXNativeTarget "HoccerLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E903011240CB9B00993693 /* Debug */,
+				22E903021240CB9B00993693 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

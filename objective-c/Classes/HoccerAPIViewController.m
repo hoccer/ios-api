@@ -52,19 +52,19 @@
 #pragma mark -
 #pragma mark Hoccer Delegate Methods
 
-- (void)hoccerDidRegister: (HCClient *)hoccer; {
+- (void)clientDidRegister: (HCClient *)hoccer; {
 	NSLog(@"registered");
 }
 
-- (void)hoccerDidSendData: (HCClient *)hoccer; {
+- (void)clientDidSendData: (HCClient *)hoccer; {
 	NSLog(@"send something");
 }
 
-- (void)hoccer: (HCClient *)hoccer didReceiveData: (NSData *)data {
+- (void)client: (HCClient *)hoccer didReceiveData: (NSData *)data {
 	NSLog(@"hoccer did receive: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 }
 
-- (void)hoccer: (HCClient *)hoccer didFailWithError: (NSError *)error; {
+- (void)client: (HCClient *)hoccer didFailWithError: (NSError *)error; {
 	NSLog(@"error %@", error);
 }
 

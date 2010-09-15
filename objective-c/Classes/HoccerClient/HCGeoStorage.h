@@ -15,7 +15,7 @@
 	HttpClient *httpClient;
 }
 
-- (void)store: (NSData *)data;
-- (void)search;
+- (void)store: (NSDictionary *)data;
+- (void)searchNearby;
 
 @end

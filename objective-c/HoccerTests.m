@@ -75,7 +75,7 @@
 @end
 
 
-@interface HoccerTests : GHAsyncTestCase {
+@interface HCClientTests : GHAsyncTestCase {
 	HCClient *hoccer;	
 	MockedDelegate *mockedDelegate;
 }
@@ -85,7 +85,7 @@
 @end
 
 
-@implementation HoccerTests
+@implementation HCClientTests
 
 - (void)setUp {
 	[self cleanupUserDefaults];

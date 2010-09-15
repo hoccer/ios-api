@@ -24,10 +24,10 @@
 }
 
 
-- (void)store: (NSData *)data {
+- (void)store: (NSDictionary *)data {
 	NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:
 							 [environmentController.location dict], @"environment",
-							 data, @"data", nil];
+							 data, @"params", nil];
 
 	NSString *payloadJSON = [payload yajl_JSONString];
 	[httpClient postURI:@"/store" 
@@ -35,7 +35,7 @@
 				success:@selector(httpConnection:didSendData:)];
 }
 
-- (void)search {
+- (void)searchNearby {
 	NSString *jsonEnvironment = [environmentController.location JSONRepresentation];
 	[httpClient postURI:@"/search" 
 				payload:[jsonEnvironment dataUsingEncoding:NSUTF8StringEncoding] 
@@ -51,7 +51,7 @@
 #pragma mark -
 #pragma mark Callback Methods
 
-- (void)httpConnection: (HttpConnection *) connection didStoreData: (NSData *)data {
+- (void)httpConnection: (HttpConnection *)connection didStoreData: (NSData *)data {
 	NSLog(@"stored: %@", [data yajl_JSON]);
 }
 
