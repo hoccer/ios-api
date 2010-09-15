@@ -7,12 +7,12 @@
 //
 
 #import <YAJLIOS/YAJLIOS.h>
-#import "HoccerGeoStorage.h"
+#import "HCGeoStorage.h"
 #import "HocLocation.h"
 
 #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.111:9292"
 
-@implementation HoccerGeoStorage
+@implementation HCGeoStorage
 
 - (id) init {
 	self = [super init];

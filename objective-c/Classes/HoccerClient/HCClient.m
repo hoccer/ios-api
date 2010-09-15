@@ -7,7 +7,7 @@
 //
 
 #import <YAJLIOS/YAJLIOS.h>
-#import "Hoccer.h"
+#import "HCClient.h"
 #import "LocationController.h"
 #import "HocLocation.h"
 #import "HttpClient.h"
@@ -16,7 +16,7 @@
 #define HOCCER_CLIENT_URI @"hoccerClientUri" 
 
 
-@interface Hoccer ()
+@interface HCClient ()
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation Hoccer
+@implementation HCClient
 @synthesize delegate;
 @synthesize environmentController;
 @synthesize isRegistered;
@@ -90,8 +90,8 @@
 }
 
 - (void)didFailWithError: (NSError *)error {
-	if ([delegate respondsToSelector:@selector(hoccer:didFailWithError:)]) {
-		[delegate hoccer:self didFailWithError:error];
+	if ([delegate respondsToSelector:@selector(client:didFailWithError:)]) {
+		[delegate client:self didFailWithError:error];
 	}
 }
 
@@ -123,8 +123,8 @@
 	}
 	
 	isRegistered = YES;
-	if ([delegate respondsToSelector:@selector(hoccerDidRegister:)]) {
-		[delegate hoccerDidRegister:self];
+	if ([delegate respondsToSelector:@selector(clientDidRegister:)]) {
+		[delegate clientDidRegister:self];
 	}
 }
 
@@ -136,8 +136,8 @@
 		return;
 	}
 	
-	if ([delegate respondsToSelector:@selector(hoccerDidSendData:)]) {
-		[delegate hoccerDidSendData: self];
+	if ([delegate respondsToSelector:@selector(clientDidSendData:)]) {
+		[delegate clientDidSendData: self];
 	}
 }
 
@@ -149,8 +149,8 @@
 		return;
 	}
 
-	if ([delegate respondsToSelector:@selector(hoccer:didReceiveData:)]) {
-		[delegate hoccer: self didReceiveData: data];
+	if ([delegate respondsToSelector:@selector(client:didReceiveData:)]) {
+		[delegate client: self didReceiveData: data];
 	}
 
 }

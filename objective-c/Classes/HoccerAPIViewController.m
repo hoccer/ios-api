@@ -7,7 +7,7 @@
 //
 
 #import "HoccerAPIViewController.h"
-#import "Hoccer.h"
+#import "HCClient.h"
 
 @implementation HoccerAPIViewController
 
@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	hoccer = [[Hoccer alloc] init];
+	hoccer = [[HCClient alloc] init];
 	hoccer.delegate = self;
 }
 
@@ -52,19 +52,19 @@
 #pragma mark -
 #pragma mark Hoccer Delegate Methods
 
-- (void)hoccerDidRegister: (Hoccer *)hoccer; {
+- (void)hoccerDidRegister: (HCClient *)hoccer; {
 	NSLog(@"registered");
 }
 
-- (void)hoccerDidSendData: (Hoccer *)hoccer; {
+- (void)hoccerDidSendData: (HCClient *)hoccer; {
 	NSLog(@"send something");
 }
 
-- (void)hoccer: (Hoccer *)hoccer didReceiveData: (NSData *)data {
+- (void)hoccer: (HCClient *)hoccer didReceiveData: (NSData *)data {
 	NSLog(@"hoccer did receive: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 }
 
-- (void)hoccer: (Hoccer *)hoccer didFailWithError: (NSError *)error; {
+- (void)hoccer: (HCClient *)hoccer didFailWithError: (NSError *)error; {
 	NSLog(@"error %@", error);
 }
 

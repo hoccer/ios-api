@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "HoccerDelegate.h"
-@class Hoccer;
+@class HCClient;
 
 @interface HoccerAPIViewController : UIViewController <HoccerDelegate> {
-	Hoccer *hoccer;
+	HCClient *hoccer;
 }
 
 - (IBAction)send: (id)sender;

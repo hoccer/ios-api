@@ -7,13 +7,13 @@
 //
 
 #import <GHUnitIOS/GHUnitIOS.h>
-#import "Hoccer.h"
-#import "HoccerDelegate.h"
+#import "HCClient.h"
+#import "HCClientDelegate.h"
 #import "MockedLocationController.h"
 
 #define HOCCER_CLIENT_URI @"hoccerClientUri" 
 
-@interface MockedDelegate : NSObject <HoccerDelegate>
+@interface MockedDelegate : NSObject <HCClientDelegate>
 {
 	NSInteger didRegisterCalls, didSendDataCalls, 
 			  didReceiveDataCalls, didFailWithErrorCalls;
@@ -35,20 +35,20 @@
 			didReceiveDataCalls, didFailWithErrorCalls;
 @synthesize data = _data, error = _error;
 
-- (void)hoccerDidRegister: (Hoccer *)hoccer {
+- (void)clientDidRegister: (HCClient *)hoccer {
 	didRegisterCalls += 1;
 }
 
-- (void)hoccerDidSendData: (Hoccer *)hoccer {
+- (void)clientDidSendData: (HCClient *)hoccer {
 	didSendDataCalls += 1;
 }
 
-- (void)hoccer: (Hoccer *)hoccer didReceiveData: (NSData *)data {
+- (void)client: (HCClient *)hoccer didReceiveData: (NSData *)data {
 	didReceiveDataCalls += 1;
 	_data = [data retain];
 }
 
-- (void)hoccer: (Hoccer *)hoccer didFailWithError: (NSError *)error {
+- (void)client: (HCClient *)hoccer didFailWithError: (NSError *)error {
 	didFailWithErrorCalls += 1;
 	_error = [error retain];
 }
@@ -62,11 +62,11 @@
 
 @end
 
-@interface Hoccer (TestEnvironment)
+@interface HCClient (TestEnvironment)
 - (void)setTestEnvironment;
 @end
 
-@implementation Hoccer (TestEnvironment) 
+@implementation HCClient (TestEnvironment) 
 - (void)setTestEnvironment {
 	[environmentController release];
 	
@@ -76,7 +76,7 @@
 
 
 @interface HoccerTests : GHAsyncTestCase {
-	Hoccer *hoccer;	
+	HCClient *hoccer;	
 	MockedDelegate *mockedDelegate;
 }
 
@@ -91,7 +91,7 @@
 	[self cleanupUserDefaults];
 	
 	mockedDelegate = [[MockedDelegate alloc] init]; 
-	hoccer = [[Hoccer alloc] init];
+	hoccer = [[HCClient alloc] init];
 	[hoccer setTestEnvironment];
 	hoccer.delegate = mockedDelegate;
 }
@@ -135,7 +135,7 @@
 
 - (void)testSendAndReceive {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	Hoccer *hoccer2 = [[Hoccer alloc] init];
+	HCClient *hoccer2 = [[HCClient alloc] init];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
@@ -169,7 +169,7 @@
 
 - (void)testPassAndDistributeDoNotPair {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	Hoccer *hoccer2 = [[Hoccer alloc] init];
+	HCClient *hoccer2 = [[HCClient alloc] init];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	

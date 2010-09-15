@@ -10,7 +10,7 @@
 #import "HttpClient.h"
 #import "LocationController.h"
 
-@interface HoccerGeoStorage : NSObject {
+@interface HCGeoStorage : NSObject {
 	LocationController *environmentController;
 	HttpClient *httpClient;
 }
