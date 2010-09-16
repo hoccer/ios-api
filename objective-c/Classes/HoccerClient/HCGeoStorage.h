@@ -25,5 +25,10 @@
 
 - (void)store: (NSDictionary *)data;
 - (void)searchNearby;
+- (void)searchInArea: (MKCoordinateRegion)region;
+
+// - (void)storeAtLocation: (CLLocationCoordinate2D)location
+// - (void)searchNearbyFor: (HCQuery *)query;
+// - (void)searchFor: (HCQuery *)query inRegion: (MKCoordinateRegion)region;
 
 @end

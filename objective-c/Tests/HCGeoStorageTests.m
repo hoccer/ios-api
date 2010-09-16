@@ -7,13 +7,14 @@
 //
 
 #import "HCGeoStorageTests.h"
+#import <GHUnitIOS/GHUnitIOS.h>
 
 
-@interface HCGeoStorageTests : NSObject {
+@interface HCGeoStorageTests : GHAsyncTestCase {
 	
 }
-@end
 
+@end
 
 @implementation HCGeoStorageTests
 

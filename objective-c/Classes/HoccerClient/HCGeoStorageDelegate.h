@@ -12,7 +12,7 @@
 @protocol HCGeoStorageDelegate <NSObject>
 
 @optional
-- (void)geostorageDidStore: (HCGeoStorage *)geoStorage;
+- (void)geostorageDidFinishStoring: (HCGeoStorage *)geoStorage;
 - (void)geostorage: (HCGeoStorage *)geoStorage didFindItems: (NSArray *)items;
 - (void)geostorage: (HCGeoStorage *)geoStorage didFailWithError: (NSError *)error;
 
