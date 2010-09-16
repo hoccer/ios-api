@@ -23,7 +23,6 @@
 
 	NSInteger oldHoccability, hoccability;
 
-	CLLocation *currentLocation;
 	NSDate *lastLocationUpdate;
 	NSArray *bssids;
 		

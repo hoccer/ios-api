@@ -16,7 +16,6 @@
 @interface HCEnvironmentManager ()
 @property (retain) NSDate *lastLocationUpdate;
 @property (retain) NSArray *bssids;
-@property (retain) CLLocation *currentLocation;
 
 - (void)updateHoccability;
 - (NSDictionary *)userInfoForImpreciseLocation;
@@ -33,7 +32,6 @@
 @synthesize lastLocationUpdate;
 @synthesize hoccability;
 @synthesize delegate;
-@synthesize currentLocation;
 @synthesize bssids;
 
 - (id) init {
@@ -68,7 +66,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
 		   fromLocation:(CLLocation *)oldLocation {
-	self.currentLocation = newLocation;
+// 	self.currentLocation = newLocation;
 	[self updateHoccability];
 	
 	self.lastLocationUpdate = [NSDate date];
@@ -82,14 +80,14 @@
 
 - (HCEnvironment *)environment {
 	HCEnvironment *location = [[HCEnvironment alloc] 
-			 initWithLocation: currentLocation bssids:[WifiScanner sharedScanner].bssids];
+			 initWithLocation: locationManager.location bssids:[WifiScanner sharedScanner].bssids];
 	location.hoccability = hoccability;
 	
 	return [location autorelease];
 }
 
 - (BOOL)hasLocation {
-	return (currentLocation.horizontalAccuracy != 0.0);
+	return (locationManager.location.horizontalAccuracy != 0.0);
 }
 
 - (BOOL)hasBadLocation {
@@ -104,9 +102,9 @@
 	self.hoccability = 0;
 	
 	if ([self hasLocation]) {
-		if (currentLocation.horizontalAccuracy < 200) {
+		if (locationManager.location.horizontalAccuracy < 200) {
 			self.hoccability = 2;
-		} else if (currentLocation.horizontalAccuracy < 5000) {
+		} else if (locationManager.location.horizontalAccuracy < 5000) {
 			self.hoccability = 1;
 		}
 		
