@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-#import "LocationController.h"
+#import "HCEnvironmentManager.h"
 
-@interface MockedLocationController : LocationController {
+@interface MockedLocationController : HCEnvironmentManager {
 	
 }
 

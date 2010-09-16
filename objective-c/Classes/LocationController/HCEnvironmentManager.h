@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "WifiScannerDelegate.h"
-#import "LocationControllerDelegate.h"
+#import "HCEnvironmentManagerDelegate.h"
 
 #define kHoccerPerfectLocation 0
 #define kHoccerImpreciseLocation 1
 #define kHoccerBadLocation 2
 
-@class HCLocation;
+@class HCEnvironment;
 
-@interface LocationController : NSObject <CLLocationManagerDelegate, WifiScannerDelegate> {
+@interface HCEnvironmentManager : NSObject <CLLocationManagerDelegate, WifiScannerDelegate> {
 	@private 
 	CLLocationManager *locationManager;
 
@@ -27,12 +27,12 @@
 	NSDate *lastLocationUpdate;
 	NSArray *bssids;
 		
-	id <LocationControllerDelegate> delegate;
+	id <HCEnvironmentManagerDelegate> delegate;
 }
 
 @property (assign) NSInteger hoccability;
-@property (readonly) HCLocation *environment;
-@property (assign) id <LocationControllerDelegate> delegate;
+@property (readonly) HCEnvironment *environment;
+@property (assign) id <HCEnvironmentManagerDelegate> delegate;
 
 - (BOOL)hasLocation;
 - (BOOL)hasBSSID;

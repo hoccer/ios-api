@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface HCLocation : NSObject {
+@interface HCEnvironment : NSObject {
 	NSArray *bssids;
 	CLLocation *location;
 	

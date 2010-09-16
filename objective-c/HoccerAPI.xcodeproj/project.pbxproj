@@ -25,8 +25,8 @@
 		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
 		22E903091240CC3000993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
 		22E9030C1240CC4400993693 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
-		22E9030D1240CC4400993693 /* HCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HCLocation.m */; };
-		22E9030E1240CC4400993693 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
+		22E9030D1240CC4400993693 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HCEnvironment.m */; };
+		22E9030E1240CC4400993693 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* HCEnvironmentManager.m */; };
 		22E9030F1240CC4D00993693 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
 		22E903101240CC4D00993693 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
 		22E9031E1240CC6B00993693 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
@@ -37,8 +37,8 @@
 		22E904701240D13800993693 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22483D301237CA21006DBFBD /* HttpClient.m */; };
 		22E904711240D13800993693 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02E97123FB1640035A73D /* HttpConnection.m */; };
 		22E904721240D13800993693 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AD12379655003DF9EC /* WifiScanner.m */; };
-		22E904731240D13800993693 /* HCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HCLocation.m */; };
-		22E904741240D13800993693 /* LocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* LocationController.m */; };
+		22E904731240D13800993693 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9AB12379655003DF9EC /* HCEnvironment.m */; };
+		22E904741240D13800993693 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C9B31237969F003DF9EC /* HCEnvironmentManager.m */; };
 		22E904751240D13800993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
 		22E904761240D13800993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
 		22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E903001240CB9A00993693 /* libHoccerLib.a */; };
@@ -65,14 +65,14 @@
 		22A5C98D12379123003DF9EC /* HCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClient.h; path = HoccerClient/HCClient.h; sourceTree = "<group>"; };
 		22A5C98E12379123003DF9EC /* HCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCClient.m; path = HoccerClient/HCClient.m; sourceTree = "<group>"; };
 		22A5C99012379143003DF9EC /* HCClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCClientDelegate.h; sourceTree = "<group>"; };
-		22A5C9AA12379654003DF9EC /* HCLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCLocation.h; path = ../Wifi/HCLocation.h; sourceTree = "<group>"; };
-		22A5C9AB12379655003DF9EC /* HCLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCLocation.m; path = ../Wifi/HCLocation.m; sourceTree = "<group>"; };
+		22A5C9AA12379654003DF9EC /* HCEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCEnvironment.h; path = ../Wifi/HCEnvironment.h; sourceTree = "<group>"; };
+		22A5C9AB12379655003DF9EC /* HCEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCEnvironment.m; path = ../Wifi/HCEnvironment.m; sourceTree = "<group>"; };
 		22A5C9AC12379655003DF9EC /* WifiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScanner.h; sourceTree = "<group>"; };
 		22A5C9AD12379655003DF9EC /* WifiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiScanner.m; sourceTree = "<group>"; };
 		22A5C9AE12379655003DF9EC /* WifiScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScannerDelegate.h; sourceTree = "<group>"; };
-		22A5C9B21237969F003DF9EC /* LocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationController.h; sourceTree = "<group>"; };
-		22A5C9B31237969F003DF9EC /* LocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationController.m; sourceTree = "<group>"; };
-		22A5C9B41237969F003DF9EC /* LocationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationControllerDelegate.h; sourceTree = "<group>"; };
+		22A5C9B21237969F003DF9EC /* HCEnvironmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManager.h; sourceTree = "<group>"; };
+		22A5C9B31237969F003DF9EC /* HCEnvironmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCEnvironmentManager.m; sourceTree = "<group>"; };
+		22A5C9B41237969F003DF9EC /* HCEnvironmentManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManagerDelegate.h; sourceTree = "<group>"; };
 		22A5C9BE12379B36003DF9EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		22C02E5C123FAB500035A73D /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YAJLIOS.framework; sourceTree = "<group>"; };
 		22C02E96123FB1640035A73D /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpConnection.h; path = HoccerClient/Subrequests/HttpConnection.h; sourceTree = "<group>"; };
@@ -201,11 +201,11 @@
 			isa = PBXGroup;
 			children = (
 				22A5C9A912379654003DF9EC /* Wifi */,
-				22A5C9AA12379654003DF9EC /* HCLocation.h */,
-				22A5C9AB12379655003DF9EC /* HCLocation.m */,
-				22A5C9B21237969F003DF9EC /* LocationController.h */,
-				22A5C9B31237969F003DF9EC /* LocationController.m */,
-				22A5C9B41237969F003DF9EC /* LocationControllerDelegate.h */,
+				22A5C9AA12379654003DF9EC /* HCEnvironment.h */,
+				22A5C9AB12379655003DF9EC /* HCEnvironment.m */,
+				22A5C9B21237969F003DF9EC /* HCEnvironmentManager.h */,
+				22A5C9B31237969F003DF9EC /* HCEnvironmentManager.m */,
+				22A5C9B41237969F003DF9EC /* HCEnvironmentManagerDelegate.h */,
 			);
 			path = LocationController;
 			sourceTree = "<group>";
@@ -399,8 +399,8 @@
 				22E904701240D13800993693 /* HttpClient.m in Sources */,
 				22E904711240D13800993693 /* HttpConnection.m in Sources */,
 				22E904721240D13800993693 /* WifiScanner.m in Sources */,
-				22E904731240D13800993693 /* HCLocation.m in Sources */,
-				22E904741240D13800993693 /* LocationController.m in Sources */,
+				22E904731240D13800993693 /* HCEnvironment.m in Sources */,
+				22E904741240D13800993693 /* HCEnvironmentManager.m in Sources */,
 				22E904751240D13800993693 /* HCClient.m in Sources */,
 				22E904761240D13800993693 /* HCGeoStorage.m in Sources */,
 			);
@@ -424,8 +424,8 @@
 				22E903081240CC3000993693 /* HCClient.m in Sources */,
 				22E903091240CC3000993693 /* HCGeoStorage.m in Sources */,
 				22E9030C1240CC4400993693 /* WifiScanner.m in Sources */,
-				22E9030D1240CC4400993693 /* HCLocation.m in Sources */,
-				22E9030E1240CC4400993693 /* LocationController.m in Sources */,
+				22E9030D1240CC4400993693 /* HCEnvironment.m in Sources */,
+				22E9030E1240CC4400993693 /* HCEnvironmentManager.m in Sources */,
 				22E9030F1240CC4D00993693 /* HttpClient.m in Sources */,
 				22E903101240CC4D00993693 /* HttpConnection.m in Sources */,
 			);

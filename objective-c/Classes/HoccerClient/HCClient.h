@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HCClientDelegate.h"
-#import "LocationControllerDelegate.h"
+#import "HCEnvironmentManagerDelegate.h"
 
 #define HoccerError @"HoccerError"
 
@@ -21,9 +21,9 @@ enum HoccerErrors {
 
 @class HttpClient;
 
-@interface HCClient : NSObject <LocationControllerDelegate> {
+@interface HCClient : NSObject <HCEnvironmentManagerDelegate> {
 	@private
-	LocationController *environmentController;
+	HCEnvironmentManager *environmentController;
 	HttpClient *httpClient;
 
 	NSString *uri;
@@ -32,7 +32,7 @@ enum HoccerErrors {
 	id <HCClientDelegate> delegate;
 }
 
-@property (retain) LocationController* environmentController;
+@property (retain) HCEnvironmentManager* environmentController;
 @property (assign) id <HCClientDelegate> delegate;
 @property (assign) BOOL isRegistered;
 

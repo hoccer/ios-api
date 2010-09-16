@@ -4,14 +4,14 @@
 //
 //  Created by Robert Palmer on 14.04.10.
 //  Copyright 2010 Art+Com AG. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
-@class LocationController;
+@class HCEnvironmentManager;
 
 
-@protocol LocationControllerDelegate <NSObject>
+@protocol HCEnvironmentManagerDelegate <NSObject>
 
-- (void) locationControllerDidUpdateLocation: (LocationController *)controller; 
+- (void) environmentManagerDidUpdateEnvironment: (HCEnvironmentManager *)manager; 
 
 @end

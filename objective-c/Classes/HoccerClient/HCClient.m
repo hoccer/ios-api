@@ -8,8 +8,8 @@
 
 #import <YAJLIOS/YAJLIOS.h>
 #import "HCClient.h"
-#import "LocationController.h"
-#import "HCLocation.h"
+#import "HCEnvironmentManager.h"
+#import "HCEnvironment.h"
 #import "HttpClient.h"
 
 
@@ -34,7 +34,7 @@
 - (id) init {
 	self = [super init];
 	if (self != nil) {
-		environmentController = [[LocationController alloc] init];
+		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
 
 		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
@@ -98,7 +98,7 @@
 #pragma mark -
 #pragma mark LocationController Delegate Methods
 
-- (void)locationControllerDidUpdateLocation: (LocationController *)controller {
+- (void)environmentManagerDidUpdateEnvironment: (HCEnvironmentManager *)controller {
 	[self updateEnvironment];
 }
 

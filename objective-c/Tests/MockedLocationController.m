@@ -7,7 +7,7 @@
 //
 
 #import "MockedLocationController.h"
-#import "HCLocation.h"
+#import "HCEnvironment.h"
 
 static CLLocationDegrees lastLatitude = 5, lastLongitue = 5; 
 
@@ -19,7 +19,7 @@ static CLLocationDegrees lastLatitude = 5, lastLongitue = 5;
 	return self;
 }
 
-- (HCLocation *)environment {
+- (HCEnvironment *)environment {
 	NSArray *array = [NSArray array];
 	
 	CLLocationCoordinate2D coordinate;
@@ -29,7 +29,7 @@ static CLLocationDegrees lastLatitude = 5, lastLongitue = 5;
 	CLLocation *currentLocation = [[CLLocation alloc] initWithCoordinate:coordinate altitude:10 
 													  horizontalAccuracy:100 verticalAccuracy:20 timestamp:[NSDate date]];
 	
-	HCLocation *location = [[HCLocation alloc] initWithLocation:currentLocation bssids:array];
+	HCEnvironment *location = [[HCEnvironment alloc] initWithLocation:currentLocation bssids:array];
 	return location;
 }
 

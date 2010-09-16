@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "HttpClient.h"
-#import "LocationController.h"
+#import "HCEnvironmentManager.h"
 #import "HCGeoStorageDelegate.h"
 
 
 @interface HCGeoStorage : NSObject {
-	LocationController *environmentController;
+	HCEnvironmentManager *environmentController;
 	HttpClient *httpClient;
 	
 	id <HCGeoStorageDelegate> delegate;

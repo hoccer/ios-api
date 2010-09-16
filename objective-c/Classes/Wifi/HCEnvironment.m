@@ -7,13 +7,13 @@
 //
 
 #import <YAJLIOS/YAJLIOS.h>
-#import "HCLocation.h"
+#import "HCEnvironment.h"
 
-@interface HCLocation ()
+@interface HCEnvironment ()
 - (NSDictionary *)locationAsDict: (CLLocation *)aLocation;
 @end
 
-@implementation HCLocation
+@implementation HCEnvironment
 
 @synthesize location;
 @synthesize bssids;

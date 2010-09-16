@@ -9,7 +9,7 @@
 #import <YAJLIOS/YAJLIOS.h>
 #import <MapKit/MapKit.h>
 #import "HCGeoStorage.h"
-#import "HCLocation.h"
+#import "HCEnvironment.h"
 
 #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.131:9292"
 
@@ -25,7 +25,7 @@
 - (id) init {
 	self = [super init];
 	if (self != nil) {
-		environmentController = [[LocationController alloc] init];
+		environmentController = [[HCEnvironmentManager alloc] init];
 		httpClient = [[HttpClient alloc] initWithURLString:HOCCER_GEOSTORAGE_URI];
 		httpClient.target = self;
 	}
@@ -46,6 +46,8 @@
 				payload:[payloadJSON dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didSendData:)];
 }
+
+
 
 - (void)searchNearby {
 	NSString *jsonEnvironment = [environmentController.environment JSONRepresentation];

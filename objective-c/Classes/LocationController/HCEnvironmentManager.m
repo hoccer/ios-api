@@ -7,13 +7,13 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import "LocationController.h"
+#import "HCEnvironmentManager.h"
 #import "WifiScanner.h"
-#import "HCLocation.h"
+#import "HCEnvironment.h"
 
 #define hoccerMessageErrorDomain @"HoccerErrorDomain"
 
-@interface LocationController ()
+@interface HCEnvironmentManager ()
 @property (retain) NSDate *lastLocationUpdate;
 @property (retain) NSArray *bssids;
 @property (retain) CLLocation *currentLocation;
@@ -28,7 +28,7 @@
 
 
 
-@implementation LocationController
+@implementation HCEnvironmentManager
 
 @synthesize lastLocationUpdate;
 @synthesize hoccability;
@@ -80,8 +80,8 @@
 	[self updateHoccability];
 }
 
-- (HCLocation *)environment {
-	HCLocation *location = [[HCLocation alloc] 
+- (HCEnvironment *)environment {
+	HCEnvironment *location = [[HCEnvironment alloc] 
 			 initWithLocation: currentLocation bssids:[WifiScanner sharedScanner].bssids];
 	location.hoccability = hoccability;
 	
@@ -117,8 +117,8 @@
 	}
 	
 	if (hoccability != oldHoccability) {
-		if ([delegate respondsToSelector:@selector(locationControllerDidUpdateLocation:)]) {
-			[delegate locationControllerDidUpdateLocation: self];
+		if ([delegate respondsToSelector:@selector(environmentControllerDidUpdateLocation:)]) {
+			[delegate environmentManagerDidUpdateEnvironment: self];
 			oldHoccability = hoccability;
 		} 
 	}
