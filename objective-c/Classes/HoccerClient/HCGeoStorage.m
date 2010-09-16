@@ -11,11 +11,12 @@
 #import "HCGeoStorage.h"
 #import "HCEnvironment.h"
 
-#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.131:9292"
+#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.139:9292"
 
 @interface HCGeoStorage ()
 
 - (NSArray *)arrayFromCLLocationCoordinate: (CLLocationCoordinate2D)coordinate;
+- (void)storeDictionary:(NSDictionary *)dictionary withEnvironment:(HCEnvironment *)environment;
 
 @end
 
@@ -32,22 +33,31 @@
 	return self;
 }
 
-- (CLLocation *) location {
+- (CLLocation *)location {
 	return environmentController.environment.location;
 }
 
-- (void)store: (NSDictionary *)data {
-	NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:
-							 [environmentController.environment dict], @"environment",
-							 data, @"params", nil];
+- (void)store: (NSDictionary *)dictionary {
+	[self storeDictionary:dictionary withEnvironment:environmentController.environment];
+}
 
+- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location {
+	HCEnvironment *environment = [[HCEnvironment alloc] initWithCoordinate: location];
+	
+	[self storeDictionary:dictionary withEnvironment: environment];
+}
+
+- (void)storeDictionary:(NSDictionary *)dictionary withEnvironment:(HCEnvironment *)environment {
+	NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:
+							 [environment dict], @"environment",
+							 dictionary, @"params", nil];
+	
 	NSString *payloadJSON = [payload yajl_JSONString];
 	[httpClient postURI:@"/store" 
 				payload:[payloadJSON dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didSendData:)];
+	
 }
-
-
 
 - (void)searchNearby {
 	NSString *jsonEnvironment = [environmentController.environment JSONRepresentation];
@@ -57,7 +67,7 @@
 				success:@selector(httpConnection:didFindData:)];
 }
 
-- (void)searchInArea: (MKCoordinateRegion)region {
+- (void)searchInRegion: (MKCoordinateRegion)region {
 	CLLocationCoordinate2D lowerLeft, upperRight;
 	lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta / 2;
 	lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta / 2;
@@ -76,6 +86,11 @@
 				success:@selector(httpConnection:didFindData:)];
 }
 
+- (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius {
+	
+}
+
+
 #pragma mark -
 #pragma mark Callback Methods
 
@@ -92,7 +107,9 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didFailWithError: (NSError *)error {
-	NSLog(@"error: %@", error);
+	if ([delegate respondsToSelector:@selector(geostorage:didFailWithError:)]) {
+		[delegate geostorage:self didFailWithError:error];
+	}
 }
 
 								  

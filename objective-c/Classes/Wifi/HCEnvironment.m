@@ -28,6 +28,12 @@
 	return self;
 }
 
+- (id)initWithCoordinate: (CLLocationCoordinate2D)coordinate {
+	CLLocation *newlocation = [[[CLLocation alloc] initWithCoordinate:coordinate altitude:0 
+												 horizontalAccuracy:5 verticalAccuracy:5 timestamp:[NSDate date]] autorelease];
+	
+	return [self initWithLocation:newlocation bssids:nil];
+}
 
 - (void) dealloc {
 	self.location = nil;

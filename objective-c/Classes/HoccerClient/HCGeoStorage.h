@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 #import "HttpClient.h"
 #import "HCEnvironmentManager.h"
 #import "HCGeoStorageDelegate.h"
@@ -23,11 +24,13 @@
 @property (assign) id <HCGeoStorageDelegate> delegate;
 @property (readonly) CLLocation *location;
 
-- (void)store: (NSDictionary *)data;
-- (void)searchNearby;
-- (void)searchInArea: (MKCoordinateRegion)region;
+- (void)store: (NSDictionary *)dictionary;
+- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location;
 
-// - (void)storeAtLocation: (CLLocationCoordinate2D)location
+- (void)searchNearby;
+- (void)searchInRegion: (MKCoordinateRegion)region;
+// - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius;
+
 // - (void)searchNearbyFor: (HCQuery *)query;
 // - (void)searchFor: (HCQuery *)query inRegion: (MKCoordinateRegion)region;
 
