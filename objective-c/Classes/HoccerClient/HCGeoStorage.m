@@ -59,11 +59,11 @@
 
 - (void)searchInArea: (MKCoordinateRegion)region {
 	CLLocationCoordinate2D lowerLeft, upperRight;
-	lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta;
-	lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta;
+	lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta / 2;
+	lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta / 2;
 	
-	upperRight.latitude = region.center.latitude + region.span.latitudeDelta;
-	upperRight.longitude = region.center.longitude + region.span.longitudeDelta;
+	upperRight.latitude = region.center.latitude + region.span.latitudeDelta / 2;
+	upperRight.longitude = region.center.longitude + region.span.longitudeDelta / 2;
 
 	NSArray *boundingBox = [NSArray arrayWithObjects:
 							[self arrayFromCLLocationCoordinate:lowerLeft],
@@ -80,7 +80,6 @@
 #pragma mark Callback Methods
 
 - (void)httpConnection: (HttpConnection *)connection didStoreData: (NSData *)data {
-	NSLog(@"stored: %@", [data yajl_JSON]);
 	if ([delegate respondsToSelector:@selector(geostorageDidFinishStoring:)]) {
 		[delegate geostorageDidFinishStoring: self];
 	}
