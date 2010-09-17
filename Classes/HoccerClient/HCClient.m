@@ -12,8 +12,8 @@
 #import "HCEnvironment.h"
 #import "HttpClient.h"
 
-
-#define HOCCER_CLIENT_URI @"hoccerClientUri" 
+#define HOCCER_CLIENT_URI @"http://beta.hoccer.com/v3"
+#define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 
 @interface HCClient ()
@@ -37,10 +37,10 @@
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
 
-		httpClient = [[HttpClient alloc] initWithURLString:@"http://192.168.2.139:9292"];
+		httpClient = [[HttpClient alloc] initWithURLString:HOCCER_CLIENT_URI];
 		httpClient.target = self;
 
-		uri = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_URI];
+		uri = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
 		if (!uri) {
 			[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
 		} else {
@@ -112,7 +112,7 @@
 	NSDictionary *info = [string yajl_JSON];
 	uri = [[info objectForKey:@"uri"] copy];
 	
-	[[NSUserDefaults standardUserDefaults] setObject:uri forKey:HOCCER_CLIENT_URI];
+	[[NSUserDefaults standardUserDefaults] setObject:uri forKey:HOCCER_CLIENT_ID_KEY];
 	
 	[self updateEnvironment];
 };
