@@ -11,13 +11,10 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		220C636B1238D7DD0014AECB /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C636A1238D7DD0014AECB /* GHUnitIOS.framework */; };
 		220C63AC1238DA130014AECB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		220C63AD1238DA180014AECB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C636A1238D7DD0014AECB /* GHUnitIOS.framework */; };
 		220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */; };
-		220C63C01238DBA60014AECB /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B41238DAE60014AECB /* HoccerTests.m */; };
 		220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		220E4B5B124352F60059A287 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
 		220E4B5C124352F60059A287 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
@@ -26,12 +23,16 @@
 		220E4B5F124352F60059A287 /* HttpConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B59124352F60059A287 /* HttpConnection.h */; };
 		220E4B60124352F60059A287 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
 		220E4B621243530B0059A287 /* HCClientDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B611243530B0059A287 /* HCClientDelegate.h */; };
+		220E4B6C1243546F0059A287 /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B6B1243546F0059A287 /* HoccerTests.m */; };
+		220E4B6D1243546F0059A287 /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B6B1243546F0059A287 /* HoccerTests.m */; };
+		220E4B7A1243547F0059A287 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B781243547F0059A287 /* GHUnitIOS.framework */; };
+		220E4B7B1243547F0059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
+		220E4B7C1243547F0059A287 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B781243547F0059A287 /* GHUnitIOS.framework */; };
+		220E4B7D1243547F0059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
-		22C02E5D123FAB500035A73D /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
 		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
 		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
 		22E903091240CC3000993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
-		22E9031E1240CC6B00993693 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
 		22E904031240CC8800993693 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		22E904041240CC8800993693 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -52,20 +53,20 @@
 		1D3623250D0F684500981E51 /* HoccerAPIAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerAPIAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* HoccerAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoccerAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		220C636A1238D7DD0014AECB /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = "<group>"; };
 		220C63A51238D9DB0014AECB /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		220C63A71238D9DB0014AECB /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
-		220C63B41238DAE60014AECB /* HoccerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerTests.m; sourceTree = "<group>"; };
 		220E4B57124352F60059A287 /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClient.h; sourceTree = "<group>"; };
 		220E4B58124352F60059A287 /* HttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClient.m; sourceTree = "<group>"; };
 		220E4B59124352F60059A287 /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnection.h; sourceTree = "<group>"; };
 		220E4B5A124352F60059A287 /* HttpConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnection.m; sourceTree = "<group>"; };
 		220E4B611243530B0059A287 /* HCClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClientDelegate.h; path = HoccerClient/HCClientDelegate.h; sourceTree = "<group>"; };
+		220E4B6B1243546F0059A287 /* HoccerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HoccerTests.m; path = Tests/HoccerTests.m; sourceTree = "<group>"; };
+		220E4B781243547F0059A287 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = lib/GHUnitIOS.framework; sourceTree = "<group>"; };
+		220E4B791243547F0059A287 /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLIOS.framework; path = lib/YAJLIOS.framework; sourceTree = "<group>"; };
 		22A5C98D12379123003DF9EC /* HCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClient.h; path = HoccerClient/HCClient.h; sourceTree = "<group>"; };
 		22A5C98E12379123003DF9EC /* HCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCClient.m; path = HoccerClient/HCClient.m; sourceTree = "<group>"; };
 		22A5C9BE12379B36003DF9EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		22C02E5C123FAB500035A73D /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YAJLIOS.framework; sourceTree = "<group>"; };
 		22C02EC9123FBF310035A73D /* HCGeoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorage.h; path = HoccerClient/HCGeoStorage.h; sourceTree = "<group>"; };
 		22C02ECA123FBF310035A73D /* HCGeoStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCGeoStorage.m; path = HoccerClient/HCGeoStorage.m; sourceTree = "<group>"; };
 		22C02ED9123FC9210035A73D /* HCGeoStorageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorageDelegate.h; path = HoccerClient/HCGeoStorageDelegate.h; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */,
-				220C636B1238D7DD0014AECB /* GHUnitIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,10 +103,10 @@
 				220C63AC1238DA130014AECB /* CoreGraphics.framework in Frameworks */,
 				220C63AD1238DA180014AECB /* Foundation.framework in Frameworks */,
 				220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */,
-				220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */,
 				220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */,
-				22C02E5D123FAB500035A73D /* YAJLIOS.framework in Frameworks */,
 				22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */,
+				220E4B7A1243547F0059A287 /* GHUnitIOS.framework in Frameworks */,
+				220E4B7B1243547F0059A287 /* YAJLIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,11 +114,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22E9031E1240CC6B00993693 /* YAJLIOS.framework in Frameworks */,
 				22E904031240CC8800993693 /* UIKit.framework in Frameworks */,
 				22E904041240CC8800993693 /* Foundation.framework in Frameworks */,
 				22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */,
 				22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */,
+				220E4B7C1243547F0059A287 /* GHUnitIOS.framework in Frameworks */,
+				220E4B7D1243547F0059A287 /* YAJLIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +153,7 @@
 			children = (
 				22FDCC61123E1473001FA03C /* MockedObjects */,
 				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
-				220C63B41238DAE60014AECB /* HoccerTests.m */,
+				220E4B6B1243546F0059A287 /* HoccerTests.m */,
 				22E902B01240C61A00993693 /* HCGeoStorageTests.m */,
 			);
 			name = Tests;
@@ -229,12 +230,12 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				220E4B781243547F0059A287 /* GHUnitIOS.framework */,
+				220E4B791243547F0059A287 /* YAJLIOS.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				22A5C9BE12379B36003DF9EC /* CoreLocation.framework */,
-				220C636A1238D7DD0014AECB /* GHUnitIOS.framework */,
-				22C02E5C123FAB500035A73D /* YAJLIOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -372,11 +373,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */,
-				220C63C01238DBA60014AECB /* HoccerTests.m in Sources */,
 				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
 				22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */,
 				220E4B5B124352F60059A287 /* HttpClient.m in Sources */,
 				220E4B5C124352F60059A287 /* HttpConnection.m in Sources */,
+				220E4B6C1243546F0059A287 /* HoccerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +389,7 @@
 				22E903091240CC3000993693 /* HCGeoStorage.m in Sources */,
 				220E4B5E124352F60059A287 /* HttpClient.m in Sources */,
 				220E4B60124352F60059A287 /* HttpConnection.m in Sources */,
+				220E4B6D1243546F0059A287 /* HoccerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +440,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -469,6 +472,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -498,6 +502,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -521,6 +526,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
