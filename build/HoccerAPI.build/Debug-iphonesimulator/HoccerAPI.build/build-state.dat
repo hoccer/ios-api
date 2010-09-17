@@ -1,0 +1,1818 @@
+THoccerAPI
+v7
+r0
+t305651753.202158
+cCheck dependencies
+cProcessInfoPlistFile /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist HoccerAPI-Info.plist
+cCompileXIB /Users/robertp/Documents/workspace/v3_clients/iphone/MainWindow.xib
+cCompileXIB /Users/robertp/Documents/workspace/v3_clients/iphone/HoccerAPIViewController.xib
+cProcessPCH /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch.gch HoccerAPI_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o /Users/robertp/Documents/workspace/v3_clients/iphone/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpClient.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI normal i386
+cGenerateDSYMFile /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app.dSYM /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+cTouch /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk
+c000000004C5259980000000000000110
+t1280465304
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004C4FEEB900000000002958A0
+t1280306873
+s2709664
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/CoreLocation.framework/CoreLocation
+c000000004C53AAEF000000000006B7C0
+t1280551663
+s440256
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.h
+c000000004C53AAE800000000000001D0
+t1280551656
+s464
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004C4FEFCC000000000029D580
+t1280307148
+s2741632
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004C4FEFBB0000000000001466
+t1280307131
+s5222
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004C5257B900000000000009CD
+t1280464825
+s2509
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004C5258770000000001E21620
+t1280465015
+s31594016
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/arpa/inet.h
+c000000004A4180D20000000000001533
+t1245806802
+s5427
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/dlfcn.h
+c000000004AB98DF40000000000000B1C
+t1253674484
+s2844
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk/usr/include/ifaddrs.h
+c000000004A4180E20000000000000782
+t1245806818
+s1922
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIAppDelegate.h
+c000000004C87677200000000000001ED
+t1283942258
+s493
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIAppDelegate.m
+c000000004C87677B0000000000000A95
+t1283942267
+s2709
+i"HoccerAPIAppDelegate.h"
+i"HoccerAPIViewController.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIViewController.h
+c000000004C8767E60000000000000117
+t1283942374
+s279
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIViewController.m
+c000000004C8767FE00000000000005F2
+t1283942398
+s1522
+i"HoccerAPIViewController.h"
+i"Hoccer.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Hoccer.h
+c000000004C878097000000000000027A
+t1283948695
+s634
+i<UIKit/UIKit.h>
+i"HoccerDelegate.h"
+i"LocationControllerDelegate.h"
+i"HoccerRegister.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Hoccer.m
+c000000004C87812E00000000000004D5
+t1283948846
+s1237
+i"Hoccer.h"
+i"LocationController.h"
+i"HoccerRegister.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Subrequests/HoccerRegister.h
+c000000004C8781190000000000000213
+t1283948825
+s531
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Subrequests/HoccerRegister.m
+c000000004C87807B000000000000062C
+t1283948667
+s1580
+i"HoccerRegister.h"
+i"NSString+SBJSON.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerDelegate.h
+c000000004C875A370000000000000168
+t1283938871
+s360
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/JSON.h
+c000000004B47351500000000000008F9
+t1262957845
+s2297
+i"SBJSON.h"
+i"NSObject+SBJSON.h"
+i"NSString+SBJSON.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSObject+SBJSON.h
+c000000004B4735150000000000000A01
+t1262957845
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSObject+SBJSON.m
+c000000004B473515000000000000089C
+t1262957845
+s2204
+i"NSObject+SBJSON.h"
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSString+SBJSON.h
+c000000004B4735150000000000000916
+t1262957845
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSString+SBJSON.m
+c000000004B473515000000000000087C
+t1262957845
+s2172
+i"NSString+SBJSON.h"
+i"SBJsonParser.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJSON.h
+c000000004B4735150000000000000AED
+t1262957845
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJSON.m
+c000000004B4735150000000000001ABC
+t1262957845
+s6844
+i"SBJSON.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonBase.h
+c000000004B4735150000000000000B82
+t1262957845
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonBase.m
+c000000004B4735150000000000000AC1
+t1262957845
+s2753
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonParser.h
+c000000004B4735150000000000000C0B
+t1262957845
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonParser.m
+c000000004B47351500000000000036CF
+t1262957845
+s14031
+i"SBJsonParser.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonWriter.h
+c000000004B4735150000000000001140
+t1262957845
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonWriter.m
+c000000004B4735150000000000001E83
+t1262957845
+s7811
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationController.h
+c000000004C876411000000000000040E
+t1283941393
+s1038
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+i"WifiScannerDelegate.h"
+i"LocationControllerDelegate.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationController.m
+c000000004C86540A0000000000001414
+t1283871754
+s5140
+i<CoreLocation/CoreLocation.h>
+i"LocationController.h"
+i"WifiScanner.h"
+i"HocLocation.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationControllerDelegate.h
+c000000004BE179060000000000000151
+t1273067782
+s337
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/HocLocation.h
+c000000004C0CAD44000000000000020F
+t1275899204
+s527
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/HocLocation.m
+c000000004C0CAD44000000000000022D
+t1275899204
+s557
+i"HocLocation.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScanner.h
+c000000004C06207800000000000002CD
+t1275469944
+s717
+i<Foundation/Foundation.h>
+i"WifiScannerDelegate.h"
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScanner.m
+c000000004C4FF4DB0000000000000C4F
+t1280308443
+s3151
+i"WifiScanner.h"
+i<dlfcn.h>
+i<ifaddrs.h>
+i<arpa/inet.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScannerDelegate.h
+c000000004BE179060000000000000132
+t1273067782
+s306
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/HoccerAPIViewController.xib
+c000000004C8756800000000000001A4D
+t1283937920
+s6733
+
+N/Users/robertp/Documents/workspace/HoccerAPI/HoccerAPI_Prefix.pch
+c000000004C87568000000000000000BB
+t1283937920
+s187
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/HoccerAPI/MainWindow.xib
+c000000004C8756800000000000004E41
+t1283937920
+s20033
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app
+t1283948850
+s238
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app.dSYM
+t1283948850
+s102
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+t1283948850
+s83468
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPIViewController.nib
+t1283944480
+s1269
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist
+t1283944478
+s599
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/MainWindow.nib
+t1283944480
+s1685
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/PkgInfo
+t1283944478
+s8
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o
+t1283944483
+s11204
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o
+t1283948850
+s15956
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPI.LinkFileList
+c000000004C8777F400000000000007B1
+t1283946484
+s1969
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o
+t1283944483
+s47972
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o
+t1283948850
+s36340
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o
+t1283948850
+s15868
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o
+t1283944483
+s33344
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o
+t1283946485
+s8312
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o
+t1283946485
+s8232
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o
+t1283946485
+s20100
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o
+t1283946485
+s13232
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o
+t1283946485
+s35908
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o
+t1283946485
+s24876
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o
+t1283944483
+s18912
+
+N/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o
+t1283944483
+s6316
+
+N/Users/robertp/Documents/workspace/HoccerAPI/main.m
+c000000004C875680000000000000016D
+t1283937920
+s365
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.h
+c000000004C87677200000000000001ED
+t1283942258
+s493
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.m
+c000000004C87677B0000000000000A95
+t1283942267
+s2709
+i"HoccerAPIAppDelegate.h"
+i"HoccerAPIViewController.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.h
+c000000004C8767E60000000000000117
+t1283942374
+s279
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.m
+c000000004C8767FE00000000000005F2
+t1283942398
+s1522
+i"HoccerAPIViewController.h"
+i"Hoccer.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.h
+c000000004C87A015000000000000026E
+t1283956757
+s622
+i<UIKit/UIKit.h>
+i"HoccerDelegate.h"
+i"LocationControllerDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.m
+c000000004C87A374000000000000075C
+t1283957620
+s1884
+i"Hoccer.h"
+i"LocationController.h"
+i"HocLocation.h"
+i"HttpClient.h"
+i"NSString+SBJSON.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HoccerRegister.h
+c000000004C8781190000000000000213
+t1283948825
+s531
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HoccerRegister.m
+c000000004C8784B8000000000000062E
+t1283949752
+s1582
+i"HoccerRegister.h"
+i"NSString+SBJSON.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.h
+c000000004C879C180000000000000238
+t1283955736
+s568
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.m
+c000000004C87A1FC0000000000000C26
+t1283957244
+s3110
+i"HttpClient.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerDelegate.h
+c000000004C875A370000000000000168
+t1283938871
+s360
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.h
+c000000004B4735150000000000000A01
+t1262957845
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.m
+c000000004C878939000000000000089E
+t1283950905
+s2206
+i"NSObject+SBJSON.h"
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.h
+c000000004B4735150000000000000916
+t1262957845
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.m
+c000000004B473515000000000000087C
+t1262957845
+s2172
+i"NSString+SBJSON.h"
+i"SBJsonParser.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.h
+c000000004B4735150000000000000AED
+t1262957845
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.m
+c000000004B4735150000000000001ABC
+t1262957845
+s6844
+i"SBJSON.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.h
+c000000004B4735150000000000000B82
+t1262957845
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.m
+c000000004B4735150000000000000AC1
+t1262957845
+s2753
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.h
+c000000004B4735150000000000000C0B
+t1262957845
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.m
+c000000004B47351500000000000036CF
+t1262957845
+s14031
+i"SBJsonParser.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.h
+c000000004B4735150000000000001140
+t1262957845
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.m
+c000000004B4735150000000000001E83
+t1262957845
+s7811
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.h
+c000000004C876411000000000000040E
+t1283941393
+s1038
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+i"WifiScannerDelegate.h"
+i"LocationControllerDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.m
+c000000004C86540A0000000000001414
+t1283871754
+s5140
+i<CoreLocation/CoreLocation.h>
+i"LocationController.h"
+i"WifiScanner.h"
+i"HocLocation.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationControllerDelegate.h
+c000000004BE179060000000000000151
+t1273067782
+s337
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.h
+c000000004C8799940000000000000230
+t1283955092
+s560
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.m
+c000000004C878E4400000000000005D9
+t1283952196
+s1497
+i"HocLocation.h"
+i"NSObject+SBJSON.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.h
+c000000004C06207800000000000002CD
+t1275469944
+s717
+i<Foundation/Foundation.h>
+i"WifiScannerDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.m
+c000000004C4FF4DB0000000000000C4F
+t1280308443
+s3151
+i"WifiScanner.h"
+i<dlfcn.h>
+i<ifaddrs.h>
+i<arpa/inet.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScannerDelegate.h
+c000000004BE179060000000000000132
+t1273067782
+s306
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/HoccerAPIViewController.xib
+c000000004C8756800000000000001A4D
+t1283937920
+s6733
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/HoccerAPI_Prefix.pch
+c000000004C87568000000000000000BB
+t1283937920
+s187
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/MainWindow.xib
+c000000004C8756800000000000004E41
+t1283937920
+s20033
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app
+t1283958936
+s238
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app.dSYM
+t1283958936
+s102
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+t1283958936
+s89932
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPIViewController.nib
+t1283944480
+s1269
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist
+t1283944478
+s599
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/MainWindow.nib
+t1283944480
+s1685
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/PkgInfo
+t1283944478
+s8
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o
+t1283958935
+s15136
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o
+t1283958935
+s18508
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPI.LinkFileList
+c000000004C87A896000000000000081D
+t1283958934
+s2077
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o
+t1283949702
+s47988
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o
+t1283958935
+s36404
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o
+t1283949758
+s15888
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpClient.o
+t1283958935
+s22560
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o
+t1283958935
+s33368
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o
+t1283958935
+s8328
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o
+t1283949703
+s8248
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o
+t1283949703
+s20116
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o
+t1283949703
+s13248
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o
+t1283949703
+s35932
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o
+t1283949703
+s24892
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o
+t1283949703
+s18928
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o
+t1283949702
+s6332
+
+N/Users/robertp/Documents/workspace/v3_clients/iphone/main.m
+c000000004C875680000000000000016D
+t1283937920
+s365
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HCClientDelegate.h
+c000000004C908B6800000000000001D1
+t1284541288
+s465
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerAPIAppDelegate.h
+c000000004C87677200000000000001ED
+t1283942258
+s493
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerAPIAppDelegate.m
+c000000004C87677B0000000000000A95
+t1283942267
+s2709
+i"HoccerAPIAppDelegate.h"
+i"HoccerAPIViewController.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerAPIViewController.h
+c000000004C90959E0000000000000189
+t1284543902
+s393
+i<UIKit/UIKit.h>
+i"HCClientDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerAPIViewController.m
+c000000004C9095B30000000000000907
+t1284543923
+s2311
+i"HoccerAPIViewController.h"
+i"HCClient.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/HCClient.h
+c000000004C908B4F0000000000000358
+t1284541263
+s856
+i<UIKit/UIKit.h>
+i"HCClientDelegate.h"
+i"LocationControllerDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/HCClient.m
+c000000004C90B4AB0000000000001517
+t1284551851
+s5399
+i<YAJLIOS/YAJLIOS.h>
+i"HCClient.h"
+i"LocationController.h"
+i"HCLocation.h"
+i"HttpClient.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/HCGeoStorage.h
+c000000004C9095C10000000000000195
+t1284543937
+s405
+i<Foundation/Foundation.h>
+i"HttpClient.h"
+i"LocationController.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/HCGeoStorage.m
+c000000004C90B44F00000000000005DE
+t1284551759
+s1502
+i<YAJLIOS/YAJLIOS.h>
+i"HCGeoStorage.h"
+i"HCLocation.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Hoccer.h
+c000000004C8A05BB0000000000000337
+t1284113851
+s823
+i<UIKit/UIKit.h>
+i"HoccerDelegate.h"
+i"LocationControllerDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Hoccer.m
+c000000004C8DDD780000000000001073
+t1284365688
+s4211
+i"Hoccer.h"
+i"LocationController.h"
+i"HocLocation.h"
+i"HttpClient.h"
+i"NSString+SBJSON.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Subrequests/HttpClient.h
+c000000004C8F7A4A0000000000000319
+t1284471370
+s793
+i<UIKit/UIKit.h>
+i"HttpConnection.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Subrequests/HttpClient.m
+c000000004C8F7A40000000000000154B
+t1284471360
+s5451
+i"HttpClient.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Subrequests/HttpConnection.h
+c000000004C8F79FF00000000000001B7
+t1284471295
+s439
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Subrequests/HttpConnection.m
+c000000004C8F7A1300000000000000FF
+t1284471315
+s255
+i"HttpConnection.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerDelegate.h
+c000000004C88E94D00000000000001C5
+t1284041037
+s453
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/NSObject+SBJSON.h
+c000000004B4735150000000000000A01
+t1262957845
+s2561
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/NSObject+SBJSON.m
+c000000004C878939000000000000089E
+t1283950905
+s2206
+i"NSObject+SBJSON.h"
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/NSString+SBJSON.h
+c000000004B4735150000000000000916
+t1262957845
+s2326
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/NSString+SBJSON.m
+c000000004B473515000000000000087C
+t1262957845
+s2172
+i"NSString+SBJSON.h"
+i"SBJsonParser.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJSON.h
+c000000004B4735150000000000000AED
+t1262957845
+s2797
+i<Foundation/Foundation.h>
+i"SBJsonParser.h"
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJSON.m
+c000000004B4735150000000000001ABC
+t1262957845
+s6844
+i"SBJSON.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonBase.h
+c000000004B4735150000000000000B82
+t1262957845
+s2946
+i<Foundation/Foundation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonBase.m
+c000000004B4735150000000000000AC1
+t1262957845
+s2753
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonParser.h
+c000000004B4735150000000000000C0B
+t1262957845
+s3083
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonParser.m
+c000000004B47351500000000000036CF
+t1262957845
+s14031
+i"SBJsonParser.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonWriter.h
+c000000004B4735150000000000001140
+t1262957845
+s4416
+i<Foundation/Foundation.h>
+i"SBJsonBase.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonWriter.m
+c000000004B4735150000000000001E83
+t1262957845
+s7811
+i"SBJsonWriter.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/HCLocation.h
+c000000004C8F89D60000000000000248
+t1284475350
+s584
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/HCLocation.m
+c000000004C90B45000000000000005BD
+t1284551760
+s1469
+i<YAJLIOS/YAJLIOS.h>
+i"HCLocation.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/HocLocation.h
+c000000004C8F89D60000000000000248
+t1284475350
+s584
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/HocLocation.m
+c000000004C8F8FB900000000000005C0
+t1284476857
+s1472
+i<YAJLIOS/YAJLIOS.h>
+i"HocLocation.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/WifiScanner.m
+c000000004C4FF4DB0000000000000C4F
+t1280308443
+s3151
+i"WifiScanner.h"
+i<dlfcn.h>
+i<ifaddrs.h>
+i<arpa/inet.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/WifiScannerDelegate.h
+c000000004BE179060000000000000132
+t1273067782
+s306
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/LocationController.h
+c000000004C90B45000000000000003B2
+t1284551760
+s946
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+i"WifiScannerDelegate.h"
+i"LocationControllerDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/LocationController.m
+c000000004C90B4500000000000001464
+t1284551760
+s5220
+i<CoreLocation/CoreLocation.h>
+i"LocationController.h"
+i"WifiScanner.h"
+i"HCLocation.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/LocationControllerDelegate.h
+c000000004BE179060000000000000151
+t1273067782
+s337
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/HCLocation.h
+c000000004C90B44F0000000000000247
+t1284551759
+s583
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/HocLocation.h
+c000000004C8F89D60000000000000248
+t1284475350
+s584
+i<Foundation/Foundation.h>
+i<CoreLocation/CoreLocation.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/HocLocation.m
+c000000004C8A2E89000000000000058B
+t1284124297
+s1419
+i"HocLocation.h"
+i"NSObject+SBJSON.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/WifiScanner.h
+c000000004C06207800000000000002CD
+t1275469944
+s717
+i<Foundation/Foundation.h>
+i"WifiScannerDelegate.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/WifiScanner.m
+c000000004C4FF4DB0000000000000C4F
+t1280308443
+s3151
+i"WifiScanner.h"
+i<dlfcn.h>
+i<ifaddrs.h>
+i<arpa/inet.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/WifiScannerDelegate.h
+c000000004BE179060000000000000132
+t1273067782
+s306
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/GHUnitIOS.framework/GHUnitIOS
+c000000004C7DEE6D0000000000165C9C
+t1283321453
+s1465500
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/HoccerAPIViewController.xib
+c000000004C8A4A4F000000000000549F
+t1284131407
+s21663
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/HoccerAPI_Prefix.pch
+c000000004C87568000000000000000BB
+t1283937920
+s187
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/MainWindow.xib
+c000000004C8756800000000000004E41
+t1283937920
+s20033
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/NSBundle+YAJL.h
+c000000004C7E99600000000000000715
+t1283365216
+s1813
+i"YAJLParser.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/NSObject+YAJL.h
+c000000004C7E99600000000000000F28
+t1283365216
+s3880
+i"YAJLGen.h"
+i"YAJLParser.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/YAJLDocument.h
+c000000004C7E99600000000000000CA5
+t1283365216
+s3237
+i"YAJLParser.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/YAJLGen.h
+c000000004C7E99600000000000000AD7
+t1283365216
+s2775
+i"yajl_gen.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/YAJLIOS.h
+c000000004C7E99600000000000000539
+t1283365216
+s1337
+i"YAJLParser.h"
+i"YAJLDocument.h"
+i"YAJLGen.h"
+i"NSObject+YAJL.h"
+i"NSBundle+YAJL.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/YAJLParser.h
+c000000004C7E99600000000000000EB6
+t1283365216
+s3766
+i"yajl_parse.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/yajl_common.h
+c000000004C7E99600000000000000C3B
+t1283365216
+s3131
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/yajl_gen.h
+c000000004C7E99600000000000001C28
+t1283365216
+s7208
+i"yajl_common.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/YAJLIOS.framework/Headers/yajl_parse.h
+c000000004C7E99600000000000002132
+t1283365216
+s8498
+i"yajl_common.h"
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app
+t1283958936
+s238
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app.dSYM
+t1283958936
+s102
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+t1283958936
+s89932
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPIViewController.nib
+t1283944480
+s1269
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist
+t1283944478
+s599
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/MainWindow.nib
+t1283944480
+s1685
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/PkgInfo
+t1283944478
+s8
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HCClient.o
+t2
+s0
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HCGeoStorage.o
+t2
+s0
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HCLocation.o
+t2
+s0
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o
+t1283958935
+s15136
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o
+t1283958935
+s18508
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPI.LinkFileList
+c000000004C87A896000000000000081D
+t1283958934
+s2077
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o
+t1283949702
+s47988
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o
+t1283958935
+s36404
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpClient.o
+t1283958935
+s22560
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpConnection.o
+t2
+s0
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o
+t1283958935
+s33368
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o
+t1283958935
+s8328
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o
+t1283949703
+s8248
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o
+t1283949703
+s20116
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o
+t1283949703
+s13248
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o
+t1283949703
+s35932
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o
+t1283949703
+s24892
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o
+t1283949703
+s18928
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o
+t1283949702
+s6332
+
+N/Users/robertp/Documents/workspace/v3_clients/objective-c/main.m
+c000000004C875680000000000000016D
+t1283937920
+s365
+i<UIKit/UIKit.h>
+
+N/var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch.gch
+t1283944482
+s10204720
+
+N/var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch.gch
+t1283949702
+s10204720
+
+N/var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-fwafgzcbssvwkxgylfwcibufcrfg/HoccerAPI_Prefix.pch.gch
+t2
+s0
+
+NHoccerAPI-Info.plist
+c000000004C875680000000000000038D
+t1283937920
+s909
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies305651753#305651753#0(0"0(0#1#0"2501173184#0"0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HCClient.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/HCClient.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HCGeoStorage.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/HCGeoStorage.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HCLocation.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/HCLocation.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/HocLocation.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305637283.219162
+e305637283.342119
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/HocLocation.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@79"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/HocLocation.m305637283#305637283#0(0"0(0#0#71"/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/HocLocation.m2501173184#2047"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/HocLocation.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305651735.281388
+e305651735.384195
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@87"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.m305651735#305651735#0(0"0(0#0#79"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.m2501173184#2135"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/HocLocation.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/HocLocation.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HocLocation.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/HocLocation.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Hoccer.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305641650.390696
+e305641650.700928
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Hoccer.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@82"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Hoccer.m305641650#305641650#0(0"0(0#0#74"/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Hoccer.m2501173184#2045"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Hoccer.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305651734.149989
+e305651735.281248
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@90"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.m305651734#305651735#0(0"0(0#0#82"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.m2501173184#2133"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Hoccer.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/Hoccer.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Hoccer.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305637282.730990
+e305637283.150378
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@83"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIAppDelegate.m305637282#305637283#0(0"0(0#0#75"/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIAppDelegate.m2501173184#2060"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIAppDelegate.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642502.791374
+e305642502.934283
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@91"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.m305642502#305642502#0(0"0(0#0#83"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.m2501173184#2148"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIAppDelegate.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIAppDelegate.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerAPIAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305641650.388380
+e305641650.580335
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@86"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIViewController.m305641650#305641650#0(0"0(0#0#78"/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIViewController.m2501173184#2066"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerAPIViewController.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305651734.147223
+e305651735.283709
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@94"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.m305651734#305651735#0(0"0(0#0#86"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.m2501173184#2154"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerAPIViewController.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPIViewController.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerAPIViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Subrequests/HoccerRegister.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305641650.580849
+e305641650.684069
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Subrequests/HoccerRegister.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@102"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Subrequests/HoccerRegister.m305641650#305641650#0(0"0(0#0#94"/Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Subrequests/HoccerRegister.m2501173184#2073"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/HoccerClient/Subrequests/HoccerRegister.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HoccerRegister.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642557.843750
+e305642558.010969
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HoccerRegister.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@110"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HoccerRegister.m305642557#305642558#0(0"0(0#0#102"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HoccerRegister.m2501173184#2161"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HoccerRegister.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerRegister.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpClient.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305651735.440522
+e305651735.544271
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpClient.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@106"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.m305651735#305651735#0(0"0(0#0#98"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.m2501173184#2153"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/HoccerClient/Subrequests/HttpClient.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpClient.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpClient.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Subrequests/HttpClient.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HttpConnection.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/HoccerClient/Subrequests/HttpConnection.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305637283.342261
+e305637283.457638
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@100"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationController.m305637283#305637283#0(0"0(0#0#92"/Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationController.m2501173184#2075"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/LocationController/LocationController.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305651735.283978
+e305651735.439765
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@108"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.m305651735#305651735#0(0"0(0#0#100"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.m2501173184#2163"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/LocationController/LocationController.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/LocationController.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/LocationController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305639285.004832
+e305639285.155248
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSObject+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@83"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSObject+SBJSON.m305639285#305639285#0(0"0(0#0#75"/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSObject+SBJSON.m2501173184#2055"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSObject+SBJSON.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305651735.384337
+e305651735.492606
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@91"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.m305651735#305651735#0(0"0(0#0#83"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.m2501173184#2143"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSObject+SBJSON.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSObject+SBJSON.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/NSObject+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305639285.075879
+e305639285.157098
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSString+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@83"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSString+SBJSON.m305639285#305639285#0(0"0(0#0#75"/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSString+SBJSON.m2501173184#2055"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/NSString+SBJSON.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642503.321425
+e305642503.414027
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@91"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.m305642503#305642503#0(0"0(0#0#83"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.m2501173184#2143"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/NSString+SBJSON.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/NSString+SBJSON.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/NSString+SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305639285.155387
+e305639285.370399
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@74"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJSON.m305639285#305639285#0(0"0(0#0#66"/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJSON.m2501173184#2037"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJSON.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642503.358885
+e305642503.518973
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@82"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.m305642503#305642503#0(0"0(0#0#74"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.m2501173184#2125"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJSON.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJSON.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJSON.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305639285.157216
+e305639285.278652
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonBase.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@78"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonBase.m305639285#305639285#0(0"0(0#0#70"/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonBase.m2501173184#2045"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonBase.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642503.414229
+e305642503.541001
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@86"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.m305642503#305642503#0(0"0(0#0#78"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.m2501173184#2133"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonBase.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonBase.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonBase.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305639285.279054
+e305639285.452683
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonParser.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@80"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonParser.m305639285#305639285#0(0"0(0#0#72"/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonParser.m2501173184#2049"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonParser.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642503.519133
+e305642503.699854
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@88"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.m305642503#305642503#0(0"0(0#0#80"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.m2501173184#2137"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonParser.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonParser.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonParser.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305639285.370528
+e305639285.494027
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonWriter.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@80"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonWriter.m305639285#305639285#0(0"0(0#0#72"/Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonWriter.m2501173184#2049"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/JSON/SBJsonWriter.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642503.541233
+e305642503.679205
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@88"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.m305642503#305642503#0(0"0(0#0#80"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.m2501173184#2137"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/JSON/SBJsonWriter.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/SBJsonWriter.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/JSON/SBJsonWriter.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o /Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScanner.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305637283.277361
+e305637283.561091
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o
+x/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScanner.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@79"Compile /Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScanner.m305637283#305637283#0(0"0(0#0#71"/Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScanner.m2501173184#2047"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/Classes/Wifi/WifiScanner.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642503.030870
+e305642503.168022
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@87"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.m305642503#305642503#0(0"0(0#0#79"/Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.m2501173184#2135"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/Classes/Wifi/WifiScanner.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/LocationController/../Wifi/WifiScanner.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/WifiScanner.o /Users/robertp/Documents/workspace/v3_clients/objective-c/Classes/Wifi/WifiScanner.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o /Users/robertp/Documents/workspace/HoccerAPI/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305637282.729462
+e305637283.128378
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o
+x/Users/robertp/Documents/workspace/HoccerAPI/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@59"Compile /Users/robertp/Documents/workspace/HoccerAPI/main.m305637282#305637283#0(0"0(0#0#51"/Users/robertp/Documents/workspace/HoccerAPI/main.m2501173184#2020"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/HoccerAPI/main.m -o /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o /Users/robertp/Documents/workspace/v3_clients/iphone/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642502.775115
+e305642502.882772
+r1
+xCompileC
+xbuild/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o
+x/Users/robertp/Documents/workspace/v3_clients/iphone/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@67"Compile /Users/robertp/Documents/workspace/v3_clients/iphone/main.m305642502#305642502#0(0"0(0#0#59"/Users/robertp/Documents/workspace/v3_clients/iphone/main.m2501173184#2108"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -include /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch -c /Users/robertp/Documents/workspace/v3_clients/iphone/main.m -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o0#
+
+CCompileC build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/main.o /Users/robertp/Documents/workspace/v3_clients/objective-c/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CCompileXIB /Users/robertp/Documents/workspace/HoccerAPI/HoccerAPIViewController.xib
+s305637278.326618
+e305637280.919389
+r1
+xCompileXIB
+x/Users/robertp/Documents/workspace/HoccerAPI/HoccerAPIViewController.xib
+lSLF07#2@38"CompileXIB HoccerAPIViewController.xib305637278#305637280#0(0"0(0#0#72"/Users/robertp/Documents/workspace/HoccerAPI/HoccerAPIViewController.xib2501173184#616"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPIViewController.nib /Users/robertp/Documents/workspace/HoccerAPI/HoccerAPIViewController.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk0#
+
+CCompileXIB /Users/robertp/Documents/workspace/HoccerAPI/MainWindow.xib
+s305637278.320788
+e305637280.981898
+r1
+xCompileXIB
+x/Users/robertp/Documents/workspace/HoccerAPI/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib305637278#305637280#0(0"0(0#0#59"/Users/robertp/Documents/workspace/HoccerAPI/MainWindow.xib2501173184#590"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 4.1    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/MainWindow.nib /Users/robertp/Documents/workspace/HoccerAPI/MainWindow.xib --sdk /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk0#
+
+CCompileXIB /Users/robertp/Documents/workspace/v3_clients/iphone/HoccerAPIViewController.xib
+r0
+
+CCompileXIB /Users/robertp/Documents/workspace/v3_clients/iphone/MainWindow.xib
+r0
+
+CCompileXIB /Users/robertp/Documents/workspace/v3_clients/objective-c/HoccerAPIViewController.xib
+r0
+
+CCompileXIB /Users/robertp/Documents/workspace/v3_clients/objective-c/MainWindow.xib
+r0
+
+CGenerateDSYMFile /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app.dSYM /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+s305641650.762875
+e305641650.805611
+r1
+xGenerateDSYMFile
+x/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app.dSYM
+x/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+lSLF07#2@115"GenerateDSYMFile build/Debug-iphonesimulator/HoccerAPI.app.dSYM build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI305641650#305641650#0(0"0(0#0#96"/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI2501173184#407"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI -o /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app.dSYM0#
+
+CGenerateDSYMFile /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app.dSYM /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+s305651736.629025
+e305651736.697380
+r1
+xGenerateDSYMFile
+x/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app.dSYM
+x/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+lSLF07#2@115"GenerateDSYMFile build/Debug-iphonesimulator/HoccerAPI.app.dSYM build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI305651736#305651736#0(0"0(0#0#104"/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI2501173184#431"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app.dSYM0#
+
+CGenerateDSYMFile /Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app.dSYM /Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+r0
+
+CLd /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI normal i386
+s305641650.701040
+e305641650.762735
+r1
+xLd
+x/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+xnormal
+xi386
+lSLF07#2@101"Link /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI305641650#305641650#0(0"0(0#0#0"2501173184#964"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -L/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -filelist /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPI.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreLocation -o /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI0#
+
+CLd /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI normal i386
+s305651735.544396
+e305651736.628796
+r1
+xLd
+x/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI
+xnormal
+xi386
+lSLF07#2@109"Link /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI305651735#305651736#0(0"0(0#0#0"2501173184#1004"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -L/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -filelist /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/Objects-normal/i386/HoccerAPI.LinkFileList -mmacosx-version-min=10.6 -Xlinker -objc_abi_version -Xlinker 2 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreLocation -o /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI0#
+
+CLd /Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/HoccerAPI normal i386
+r0
+
+CProcessInfoPlistFile /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist HoccerAPI-Info.plist
+s305637278.313130
+e305637278.320664
+r1
+xProcessInfoPlistFile
+x/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist
+xHoccerAPI-Info.plist
+lSLF07#2@28"Process HoccerAPI-Info.plist305637278#305637278#0(0"0(0#0#65"/Users/robertp/Documents/workspace/HoccerAPI/HoccerAPI-Info.plist2501173184#503"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility HoccerAPI-Info.plist -genpkginfo /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist0#
+
+CProcessInfoPlistFile /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist HoccerAPI-Info.plist
+r0
+
+CProcessInfoPlistFile /Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app/Info.plist HoccerAPI-Info.plist
+r0
+
+CProcessPCH /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch.gch HoccerAPI_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s305637280.982138
+e305637282.729238
+r1
+xProcessPCH
+x/var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch.gch
+xHoccerAPI_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile HoccerAPI_Prefix.pch305637280#305637282#0(0"0(0#0#65"/Users/robertp/Documents/workspace/HoccerAPI/HoccerAPI_Prefix.pch2501173184#1904"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/HoccerAPI/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -c /Users/robertp/Documents/workspace/HoccerAPI/HoccerAPI_Prefix.pch -o /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-bbuyvywemexzytamdlqwynwmbqay/HoccerAPI_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch.gch HoccerAPI_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s305642501.879264
+e305642502.774934
+r1
+xProcessPCH
+x/var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch.gch
+xHoccerAPI_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@31"Precompile HoccerAPI_Prefix.pch305642501#305642502#0(0"0(0#0#73"/Users/robertp/Documents/workspace/v3_clients/iphone/HoccerAPI_Prefix.pch2501173184#1984"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=40100 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.1.sdk -fexceptions -fvisibility=hidden -mmacosx-version-min=10.6 -gdwarf-2 -fobjc-abi-version=2 -fobjc-legacy-dispatch -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-generated-files.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-own-target-headers.hmap -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-all-target-headers.hmap -iquote /Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/HoccerAPI-project-headers.hmap -F/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/include -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources/i386 -I/Users/robertp/Documents/workspace/v3_clients/iphone/build/HoccerAPI.build/Debug-iphonesimulator/HoccerAPI.build/DerivedSources -c /Users/robertp/Documents/workspace/v3_clients/iphone/HoccerAPI_Prefix.pch -o /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-cnqnovdfbktamtblrnfxgwgumjya/HoccerAPI_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/Dg/DgRwjn8YETuO+yWwprqQrU+++TQ/-Caches-/com.apple.Xcode.503/SharedPrecompiledHeaders/HoccerAPI_Prefix-fwafgzcbssvwkxgylfwcibufcrfg/HoccerAPI_Prefix.pch.gch HoccerAPI_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+r0
+
+CTouch /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app
+s305641650.805729
+e305641650.812989
+r1
+xTouch
+x/Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app
+lSLF07#2@92"Touch /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app305641650#305641650#0(0"0(0#0#0"2501173184#292"    cd /Users/robertp/Documents/workspace/HoccerAPI    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/robertp/Documents/workspace/HoccerAPI/build/Debug-iphonesimulator/HoccerAPI.app0#
+
+CTouch /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app
+s305651736.697519
+e305651736.701713
+r1
+xTouch
+x/Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app
+lSLF07#2@100"Touch /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app305651736#305651736#0(0"0(0#0#0"2501173184#308"    cd /Users/robertp/Documents/workspace/v3_clients/iphone    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/robertp/Documents/workspace/v3_clients/iphone/build/Debug-iphonesimulator/HoccerAPI.app0#
+
+CTouch /Users/robertp/Documents/workspace/v3_clients/objective-c/build/Debug-iphonesimulator/HoccerAPI.app
+r0
+

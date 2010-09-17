@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* HoccerAPIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* HoccerAPIAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		220C636B1238D7DD0014AECB /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C636A1238D7DD0014AECB /* GHUnitIOS.framework */; };
+		220C63AC1238DA130014AECB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		220C63AD1238DA180014AECB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220C636A1238D7DD0014AECB /* GHUnitIOS.framework */; };
+		220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */; };
+		220C63C01238DBA60014AECB /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B41238DAE60014AECB /* HoccerTests.m */; };
+		220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
+		220E4B5B124352F60059A287 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
+		220E4B5C124352F60059A287 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
+		220E4B5D124352F60059A287 /* HttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B57124352F60059A287 /* HttpClient.h */; };
+		220E4B5E124352F60059A287 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
+		220E4B5F124352F60059A287 /* HttpConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B59124352F60059A287 /* HttpConnection.h */; };
+		220E4B60124352F60059A287 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
+		220E4B621243530B0059A287 /* HCClientDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B611243530B0059A287 /* HCClientDelegate.h */; };
+		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
+		22C02E5D123FAB500035A73D /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
+		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
+		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
+		22E903091240CC3000993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
+		22E9031E1240CC6B00993693 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C02E5C123FAB500035A73D /* YAJLIOS.framework */; };
+		22E904031240CC8800993693 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		22E904041240CC8800993693 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
+		22E904751240D13800993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
+		22E904761240D13800993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
+		22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E903001240CB9A00993693 /* libHoccerLib.a */; };
+		22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEB9D2123A34BE00276368 /* MockedLocationController.m */; };
+		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* HoccerAPIViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* HoccerAPIAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoccerAPIAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* HoccerAPIAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerAPIAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* HoccerAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoccerAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		220C636A1238D7DD0014AECB /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = "<group>"; };
+		220C63A51238D9DB0014AECB /* Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		220C63A71238D9DB0014AECB /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
+		220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
+		220C63B41238DAE60014AECB /* HoccerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerTests.m; sourceTree = "<group>"; };
+		220E4B57124352F60059A287 /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClient.h; sourceTree = "<group>"; };
+		220E4B58124352F60059A287 /* HttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClient.m; sourceTree = "<group>"; };
+		220E4B59124352F60059A287 /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnection.h; sourceTree = "<group>"; };
+		220E4B5A124352F60059A287 /* HttpConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnection.m; sourceTree = "<group>"; };
+		220E4B611243530B0059A287 /* HCClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClientDelegate.h; path = HoccerClient/HCClientDelegate.h; sourceTree = "<group>"; };
+		22A5C98D12379123003DF9EC /* HCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClient.h; path = HoccerClient/HCClient.h; sourceTree = "<group>"; };
+		22A5C98E12379123003DF9EC /* HCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCClient.m; path = HoccerClient/HCClient.m; sourceTree = "<group>"; };
+		22A5C9BE12379B36003DF9EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		22C02E5C123FAB500035A73D /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YAJLIOS.framework; sourceTree = "<group>"; };
+		22C02EC9123FBF310035A73D /* HCGeoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorage.h; path = HoccerClient/HCGeoStorage.h; sourceTree = "<group>"; };
+		22C02ECA123FBF310035A73D /* HCGeoStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCGeoStorage.m; path = HoccerClient/HCGeoStorage.m; sourceTree = "<group>"; };
+		22C02ED9123FC9210035A73D /* HCGeoStorageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorageDelegate.h; path = HoccerClient/HCGeoStorageDelegate.h; sourceTree = "<group>"; };
+		22E902B01240C61A00993693 /* HCGeoStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCGeoStorageTests.m; path = Tests/HCGeoStorageTests.m; sourceTree = "<group>"; };
+		22E903001240CB9A00993693 /* libHoccerLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHoccerLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		22EEB9D1123A34BE00276368 /* MockedLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockedLocationController.h; path = Tests/MockedLocationController.h; sourceTree = "<group>"; };
+		22EEB9D2123A34BE00276368 /* MockedLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockedLocationController.m; path = Tests/MockedLocationController.m; sourceTree = "<group>"; };
+		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoccerAPIViewController.xib; sourceTree = "<group>"; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28D7ACF60DDB3853001CB0EB /* HoccerAPIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoccerAPIViewController.h; sourceTree = "<group>"; };
+		28D7ACF70DDB3853001CB0EB /* HoccerAPIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoccerAPIViewController.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* HoccerAPI_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoccerAPI_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* HoccerAPI-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HoccerAPI-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */,
+				220C636B1238D7DD0014AECB /* GHUnitIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220C63A31238D9DB0014AECB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220C63AC1238DA130014AECB /* CoreGraphics.framework in Frameworks */,
+				220C63AD1238DA180014AECB /* Foundation.framework in Frameworks */,
+				220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */,
+				220C63AF1238DA340014AECB /* GHUnitIOS.framework in Frameworks */,
+				220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */,
+				22C02E5D123FAB500035A73D /* YAJLIOS.framework in Frameworks */,
+				22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E902FE1240CB9A00993693 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E9031E1240CC6B00993693 /* YAJLIOS.framework in Frameworks */,
+				22E904031240CC8800993693 /* UIKit.framework in Frameworks */,
+				22E904041240CC8800993693 /* Foundation.framework in Frameworks */,
+				22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */,
+				22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				22A5C98C123790E5003DF9EC /* HoccerClient */,
+				1D3623240D0F684500981E51 /* HoccerAPIAppDelegate.h */,
+				1D3623250D0F684500981E51 /* HoccerAPIAppDelegate.m */,
+				28D7ACF60DDB3853001CB0EB /* HoccerAPIViewController.h */,
+				28D7ACF70DDB3853001CB0EB /* HoccerAPIViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* HoccerAPI.app */,
+				220C63A51238D9DB0014AECB /* Tests.app */,
+				22E903001240CB9A00993693 /* libHoccerLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		220C63B01238DA3E0014AECB /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				22FDCC61123E1473001FA03C /* MockedObjects */,
+				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
+				220C63B41238DAE60014AECB /* HoccerTests.m */,
+				22E902B01240C61A00993693 /* HCGeoStorageTests.m */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		220E4B56124352F60059A287 /* HttpClient */ = {
+			isa = PBXGroup;
+			children = (
+				220E4B57124352F60059A287 /* HttpClient.h */,
+				220E4B58124352F60059A287 /* HttpClient.m */,
+				220E4B59124352F60059A287 /* HttpConnection.h */,
+				220E4B5A124352F60059A287 /* HttpConnection.m */,
+			);
+			name = HttpClient;
+			path = HoccerClient/HttpClient;
+			sourceTree = "<group>";
+		};
+		22A5C98C123790E5003DF9EC /* HoccerClient */ = {
+			isa = PBXGroup;
+			children = (
+				220E4B56124352F60059A287 /* HttpClient */,
+				22A5C98D12379123003DF9EC /* HCClient.h */,
+				22A5C98E12379123003DF9EC /* HCClient.m */,
+				220E4B611243530B0059A287 /* HCClientDelegate.h */,
+				22C02ED9123FC9210035A73D /* HCGeoStorageDelegate.h */,
+				22C02EC9123FBF310035A73D /* HCGeoStorage.h */,
+				22C02ECA123FBF310035A73D /* HCGeoStorage.m */,
+			);
+			name = HoccerClient;
+			sourceTree = "<group>";
+		};
+		22FDCC61123E1473001FA03C /* MockedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				22EEB9D1123A34BE00276368 /* MockedLocationController.h */,
+				22EEB9D2123A34BE00276368 /* MockedLocationController.m */,
+			);
+			name = MockedObjects;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				220C63B01238DA3E0014AECB /* Tests */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				220C63A71238D9DB0014AECB /* Tests-Info.plist */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* HoccerAPI_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* HoccerAPI-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				22A5C9BE12379B36003DF9EC /* CoreLocation.framework */,
+				220C636A1238D7DD0014AECB /* GHUnitIOS.framework */,
+				22C02E5C123FAB500035A73D /* YAJLIOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		22E902FC1240CB9A00993693 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220E4B5D124352F60059A287 /* HttpClient.h in Headers */,
+				220E4B5F124352F60059A287 /* HttpConnection.h in Headers */,
+				220E4B621243530B0059A287 /* HCClientDelegate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* HoccerAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "HoccerAPI" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HoccerAPI;
+			productName = HoccerAPI;
+			productReference = 1D6058910D05DD3D006BFB54 /* HoccerAPI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		220C63A41238D9DB0014AECB /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 220C63AA1238D9DB0014AECB /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				220C63A11238D9DB0014AECB /* Resources */,
+				220C63A21238D9DB0014AECB /* Sources */,
+				220C63A31238D9DB0014AECB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 220C63A51238D9DB0014AECB /* Tests.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22E902FF1240CB9A00993693 /* HoccerLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22E903071240CBC400993693 /* Build configuration list for PBXNativeTarget "HoccerLib" */;
+			buildPhases = (
+				22E902FC1240CB9A00993693 /* Headers */,
+				22E902FD1240CB9A00993693 /* Sources */,
+				22E902FE1240CB9A00993693 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HoccerLib;
+			productName = HoccerLib;
+			productReference = 22E903001240CB9A00993693 /* libHoccerLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Hoccer GmbH";
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HoccerAPI" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* HoccerAPI */,
+				220C63A41238D9DB0014AECB /* Tests */,
+				22E902FF1240CB9A00993693 /* HoccerLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220C63A11238D9DB0014AECB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* HoccerAPIAppDelegate.m in Sources */,
+				28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */,
+				22E904751240D13800993693 /* HCClient.m in Sources */,
+				22E904761240D13800993693 /* HCGeoStorage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220C63A21238D9DB0014AECB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */,
+				220C63C01238DBA60014AECB /* HoccerTests.m in Sources */,
+				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
+				22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */,
+				220E4B5B124352F60059A287 /* HttpClient.m in Sources */,
+				220E4B5C124352F60059A287 /* HttpConnection.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E902FD1240CB9A00993693 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E903081240CC3000993693 /* HCClient.m in Sources */,
+				22E903091240CC3000993693 /* HCGeoStorage.m in Sources */,
+				220E4B5E124352F60059A287 /* HttpClient.m in Sources */,
+				220E4B60124352F60059A287 /* HttpConnection.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				INFOPLIST_FILE = "HoccerAPI-Info.plist";
+				PRODUCT_NAME = HoccerAPI;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				INFOPLIST_FILE = "HoccerAPI-Info.plist";
+				PRODUCT_NAME = HoccerAPI;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		220C63A81238D9DB0014AECB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Debug;
+		};
+		220C63A91238D9DB0014AECB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				SDKROOT = iphoneos4.1;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		22E903011240CB9B00993693 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = HoccerLib;
+			};
+			name = Debug;
+		};
+		22E903021240CB9B00993693 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = HoccerLib;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "HoccerAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		220C63AA1238D9DB0014AECB /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				220C63A81238D9DB0014AECB /* Debug */,
+				220C63A91238D9DB0014AECB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22E903071240CBC400993693 /* Build configuration list for PBXNativeTarget "HoccerLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E903011240CB9B00993693 /* Debug */,
+				22E903021240CB9B00993693 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HoccerAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
