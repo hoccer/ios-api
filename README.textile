@@ -9,7 +9,7 @@ h3. Install the .framework
 ** MapKit.framework
 * Add -load_all, -ObjC to Other Linker Flags in your Project Build Options
 
-h4. Sample Usage
+h3. Sample Usage
 
 bc.. 
 #import <Hoccer/Hoccer.h>
@@ -31,5 +31,4 @@ bc..
     NSLog(@"items: %@", items);
 }
 
-p. A larger example can be found in the sample folder
-
+p. A larger example can be found in the sample folder.
