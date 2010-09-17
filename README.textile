@@ -1,0 +1,5 @@
+Add Hoccer.framework and YAJLIOS.framework to the project
+
+Add CoreLocation.framework and MapKit.framework
+
+Add -load_all, -ObjC to Other Linker Flags 
