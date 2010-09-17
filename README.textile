@@ -3,7 +3,7 @@ h2. Install Hoccer to your project
 h3. Install the .framework
 
 * Get the Hoccer.framework and YAJLIOS.framework
-* Add both frameworks to your Project
+* Add both frameworks to your project (from the lib folder)
 * Add following system frameworks:
 ** CoreLocation.framework
 ** MapKit.framework
