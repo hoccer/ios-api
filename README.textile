@@ -1,6 +1,6 @@
 h2. Install Hoccer to your project
 
-h3. Using the .framework
+h3. Install the .framework
 
 * Get the Hoccer.framework and YAJLIOS.framework
 * Add both frameworks to your Project
@@ -12,19 +12,17 @@ h3. Using the .framework
 h4. Sample Usage
 
 bc.. 
-
 #import <Hoccer/Hoccer.h>
 
 @interface GeostoreSampleViewController : UIViewController <HCGeoStorageDelegate> {
 	HCGeoStorage *geostorage;
 }
-
 @end
 
 @implementation GeostoreSampleViewController
 
 - (void)viewDidLoad {
-    ..
+
     geostorage = [[HCGeoStorage alloc] init];
     geostorage.delegate = self;
 }
@@ -33,6 +31,5 @@ bc..
     NSLog(@"items: %@", items);
 }
 
-
-h3. Using the Souce
+p. A larger example can be found in the sample folder
 
