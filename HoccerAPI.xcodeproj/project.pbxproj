@@ -24,7 +24,6 @@
 		220E4B60124352F60059A287 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
 		220E4B621243530B0059A287 /* HCClientDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B611243530B0059A287 /* HCClientDelegate.h */; };
 		220E4B6C1243546F0059A287 /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B6B1243546F0059A287 /* HoccerTests.m */; };
-		220E4B6D1243546F0059A287 /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B6B1243546F0059A287 /* HoccerTests.m */; };
 		220E4B7A1243547F0059A287 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B781243547F0059A287 /* GHUnitIOS.framework */; };
 		220E4B7B1243547F0059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
 		220E4B7C1243547F0059A287 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B781243547F0059A287 /* GHUnitIOS.framework */; };
@@ -441,7 +440,6 @@
 				22E903091240CC3000993693 /* HCGeoStorage.m in Sources */,
 				220E4B5E124352F60059A287 /* HttpClient.m in Sources */,
 				220E4B60124352F60059A287 /* HttpConnection.m in Sources */,
-				220E4B6D1243546F0059A287 /* HoccerTests.m in Sources */,
 				220E4BB6124355900059A287 /* HCEnvironment.m in Sources */,
 				220E4BB8124355900059A287 /* HCEnvironmentManager.m in Sources */,
 				220E4BBB124355900059A287 /* WifiScanner.m in Sources */,
