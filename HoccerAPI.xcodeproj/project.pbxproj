@@ -39,6 +39,7 @@
 		220E4BBA124355900059A287 /* WifiScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BAF124355900059A287 /* WifiScanner.h */; };
 		220E4BBB124355900059A287 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BB0124355900059A287 /* WifiScanner.m */; };
 		220E4BBC124355900059A287 /* WifiScannerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BB1124355900059A287 /* WifiScannerDelegate.h */; };
+		220E4D83124370910059A287 /* Hoccer.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4D82124370910059A287 /* Hoccer.h */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
 		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
@@ -82,6 +83,7 @@
 		220E4BAF124355900059A287 /* WifiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScanner.h; sourceTree = "<group>"; };
 		220E4BB0124355900059A287 /* WifiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiScanner.m; sourceTree = "<group>"; };
 		220E4BB1124355900059A287 /* WifiScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScannerDelegate.h; sourceTree = "<group>"; };
+		220E4D82124370910059A287 /* Hoccer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Hoccer.h; path = HoccerClient/Hoccer.h; sourceTree = "<group>"; };
 		22A5C98D12379123003DF9EC /* HCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClient.h; path = HoccerClient/HCClient.h; sourceTree = "<group>"; };
 		22A5C98E12379123003DF9EC /* HCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCClient.m; path = HoccerClient/HCClient.m; sourceTree = "<group>"; };
 		22A5C9BE12379B36003DF9EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -224,6 +226,7 @@
 				22C02ED9123FC9210035A73D /* HCGeoStorageDelegate.h */,
 				22C02EC9123FBF310035A73D /* HCGeoStorage.h */,
 				22C02ECA123FBF310035A73D /* HCGeoStorage.m */,
+				220E4D82124370910059A287 /* Hoccer.h */,
 			);
 			name = HoccerClient;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				220E4BB9124355900059A287 /* HCEnvironmentManagerDelegate.h in Headers */,
 				220E4BBA124355900059A287 /* WifiScanner.h in Headers */,
 				220E4BBC124355900059A287 /* WifiScannerDelegate.h in Headers */,
+				220E4D83124370910059A287 /* Hoccer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
