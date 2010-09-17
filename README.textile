@@ -25,6 +25,7 @@ bc..
 
     geostorage = [[HCGeoStorage alloc] init];
     geostorage.delegate = self;
+    [geostorage searchNearby];
 }
 
 - (void)geostorage: (HCGeoStorage *)geoStorage didFindItems: (NSArray *)items {
