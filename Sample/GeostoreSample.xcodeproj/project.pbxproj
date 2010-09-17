@@ -11,8 +11,8 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		220E4CBD12435FE80059A287 /* libHoccerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4C1F12435C6C0059A287 /* libHoccerLib.a */; };
 		220E4CD8124360520059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4CD7124360520059A287 /* YAJLIOS.framework */; };
+		220E4DD6124372250059A287 /* Hoccer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4DD5124372250059A287 /* Hoccer.framework */; };
 		22E904F71240EF6500993693 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E904F61240EF6500993693 /* MapKit.framework */; };
 		22E9050A1240F27400993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E905091240F27400993693 /* CoreLocation.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -27,19 +27,8 @@
 		1D3623250D0F684500981E51 /* GeostoreSampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeostoreSampleAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* GeostoreSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeostoreSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		220E4C1F12435C6C0059A287 /* libHoccerLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libHoccerLib.a; path = "../build/Debug-iphoneos/libHoccerLib.a"; sourceTree = SOURCE_ROOT; };
-		220E4C2312435C780059A287 /* HCEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironment.h; sourceTree = "<group>"; };
-		220E4C2512435C780059A287 /* HCEnvironmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManager.h; sourceTree = "<group>"; };
-		220E4C2712435C780059A287 /* HCEnvironmentManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManagerDelegate.h; sourceTree = "<group>"; };
-		220E4C2912435C780059A287 /* WifiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScanner.h; sourceTree = "<group>"; };
-		220E4C2B12435C780059A287 /* WifiScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScannerDelegate.h; sourceTree = "<group>"; };
-		220E4C2D12435C780059A287 /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClient.h; sourceTree = "<group>"; };
-		220E4C2F12435C780059A287 /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnection.h; sourceTree = "<group>"; };
-		220E4C3112435C780059A287 /* HCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClient.h; path = ../Classes/HoccerClient/HCClient.h; sourceTree = SOURCE_ROOT; };
-		220E4C3312435C780059A287 /* HCClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClientDelegate.h; path = ../Classes/HoccerClient/HCClientDelegate.h; sourceTree = SOURCE_ROOT; };
-		220E4C3412435C780059A287 /* HCGeoStorageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorageDelegate.h; path = ../Classes/HoccerClient/HCGeoStorageDelegate.h; sourceTree = SOURCE_ROOT; };
-		220E4C3512435C780059A287 /* HCGeoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCGeoStorage.h; path = ../Classes/HoccerClient/HCGeoStorage.h; sourceTree = SOURCE_ROOT; };
 		220E4CD7124360520059A287 /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLIOS.framework; path = ../lib/YAJLIOS.framework; sourceTree = SOURCE_ROOT; };
+		220E4DD5124372250059A287 /* Hoccer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hoccer.framework; path = ../build/Framework/Hoccer.framework; sourceTree = SOURCE_ROOT; };
 		22E904F61240EF6500993693 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		22E905091240F27400993693 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,8 +51,8 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				22E904F71240EF6500993693 /* MapKit.framework in Frameworks */,
 				22E9050A1240F27400993693 /* CoreLocation.framework in Frameworks */,
-				220E4CBD12435FE80059A287 /* libHoccerLib.a in Frameworks */,
 				220E4CD8124360520059A287 /* YAJLIOS.framework in Frameworks */,
+				220E4DD6124372250059A287 /* Hoccer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,55 +79,9 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		220E4C2112435C780059A287 /* HoccerClient */ = {
-			isa = PBXGroup;
-			children = (
-				220E4C2212435C780059A287 /* EnvironmentController */,
-				220E4C2C12435C780059A287 /* HttpClient */,
-				220E4C3112435C780059A287 /* HCClient.h */,
-				220E4C3312435C780059A287 /* HCClientDelegate.h */,
-				220E4C3412435C780059A287 /* HCGeoStorageDelegate.h */,
-				220E4C3512435C780059A287 /* HCGeoStorage.h */,
-			);
-			name = HoccerClient;
-			sourceTree = "<group>";
-		};
-		220E4C2212435C780059A287 /* EnvironmentController */ = {
-			isa = PBXGroup;
-			children = (
-				220E4C2312435C780059A287 /* HCEnvironment.h */,
-				220E4C2512435C780059A287 /* HCEnvironmentManager.h */,
-				220E4C2712435C780059A287 /* HCEnvironmentManagerDelegate.h */,
-				220E4C2812435C780059A287 /* Wifi */,
-			);
-			name = EnvironmentController;
-			path = ../Classes/HoccerClient/EnvironmentController;
-			sourceTree = SOURCE_ROOT;
-		};
-		220E4C2812435C780059A287 /* Wifi */ = {
-			isa = PBXGroup;
-			children = (
-				220E4C2912435C780059A287 /* WifiScanner.h */,
-				220E4C2B12435C780059A287 /* WifiScannerDelegate.h */,
-			);
-			path = Wifi;
-			sourceTree = "<group>";
-		};
-		220E4C2C12435C780059A287 /* HttpClient */ = {
-			isa = PBXGroup;
-			children = (
-				220E4C2D12435C780059A287 /* HttpClient.h */,
-				220E4C2F12435C780059A287 /* HttpConnection.h */,
-			);
-			name = HttpClient;
-			path = ../Classes/HoccerClient/HttpClient;
-			sourceTree = SOURCE_ROOT;
-		};
 		22E905411240F8E900993693 /* HCGeostorage */ = {
 			isa = PBXGroup;
 			children = (
-				220E4C2112435C780059A287 /* HoccerClient */,
-				220E4C1F12435C6C0059A287 /* libHoccerLib.a */,
 			);
 			name = HCGeostorage;
 			sourceTree = "<group>";
@@ -177,6 +120,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				220E4DD5124372250059A287 /* Hoccer.framework */,
 				220E4CD7124360520059A287 /* YAJLIOS.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -266,6 +210,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../lib\"",
+					"\"$(SRCROOT)/../build/Framework\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -294,6 +239,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../lib\"",
+					"\"$(SRCROOT)/../build/Framework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GeostoreSample_Prefix.pch;

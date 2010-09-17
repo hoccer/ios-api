@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
-
-#import "HCGeoStorage.h"
+#import <Hoccer/Hoccer.h>
 
 @interface GeostoreSampleViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, HCGeoStorageDelegate> {
 	MKMapView *mapView;
