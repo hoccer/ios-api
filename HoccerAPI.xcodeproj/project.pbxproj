@@ -29,6 +29,17 @@
 		220E4B7B1243547F0059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
 		220E4B7C1243547F0059A287 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B781243547F0059A287 /* GHUnitIOS.framework */; };
 		220E4B7D1243547F0059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
+		220E4BB2124355900059A287 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAA124355900059A287 /* HCEnvironment.m */; };
+		220E4BB3124355900059A287 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAC124355900059A287 /* HCEnvironmentManager.m */; };
+		220E4BB4124355900059A287 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BB0124355900059A287 /* WifiScanner.m */; };
+		220E4BB5124355900059A287 /* HCEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BA9124355900059A287 /* HCEnvironment.h */; };
+		220E4BB6124355900059A287 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAA124355900059A287 /* HCEnvironment.m */; };
+		220E4BB7124355900059A287 /* HCEnvironmentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BAB124355900059A287 /* HCEnvironmentManager.h */; };
+		220E4BB8124355900059A287 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAC124355900059A287 /* HCEnvironmentManager.m */; };
+		220E4BB9124355900059A287 /* HCEnvironmentManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BAD124355900059A287 /* HCEnvironmentManagerDelegate.h */; };
+		220E4BBA124355900059A287 /* WifiScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BAF124355900059A287 /* WifiScanner.h */; };
+		220E4BBB124355900059A287 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BB0124355900059A287 /* WifiScanner.m */; };
+		220E4BBC124355900059A287 /* WifiScannerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BB1124355900059A287 /* WifiScannerDelegate.h */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
 		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
@@ -64,6 +75,14 @@
 		220E4B6B1243546F0059A287 /* HoccerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HoccerTests.m; path = Tests/HoccerTests.m; sourceTree = "<group>"; };
 		220E4B781243547F0059A287 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = lib/GHUnitIOS.framework; sourceTree = "<group>"; };
 		220E4B791243547F0059A287 /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLIOS.framework; path = lib/YAJLIOS.framework; sourceTree = "<group>"; };
+		220E4BA9124355900059A287 /* HCEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironment.h; sourceTree = "<group>"; };
+		220E4BAA124355900059A287 /* HCEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCEnvironment.m; sourceTree = "<group>"; };
+		220E4BAB124355900059A287 /* HCEnvironmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManager.h; sourceTree = "<group>"; };
+		220E4BAC124355900059A287 /* HCEnvironmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCEnvironmentManager.m; sourceTree = "<group>"; };
+		220E4BAD124355900059A287 /* HCEnvironmentManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManagerDelegate.h; sourceTree = "<group>"; };
+		220E4BAF124355900059A287 /* WifiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScanner.h; sourceTree = "<group>"; };
+		220E4BB0124355900059A287 /* WifiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiScanner.m; sourceTree = "<group>"; };
+		220E4BB1124355900059A287 /* WifiScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScannerDelegate.h; sourceTree = "<group>"; };
 		22A5C98D12379123003DF9EC /* HCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCClient.h; path = HoccerClient/HCClient.h; sourceTree = "<group>"; };
 		22A5C98E12379123003DF9EC /* HCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCClient.m; path = HoccerClient/HCClient.m; sourceTree = "<group>"; };
 		22A5C9BE12379B36003DF9EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -171,9 +190,34 @@
 			path = HoccerClient/HttpClient;
 			sourceTree = "<group>";
 		};
+		220E4BA8124355900059A287 /* EnvironmentController */ = {
+			isa = PBXGroup;
+			children = (
+				220E4BA9124355900059A287 /* HCEnvironment.h */,
+				220E4BAA124355900059A287 /* HCEnvironment.m */,
+				220E4BAB124355900059A287 /* HCEnvironmentManager.h */,
+				220E4BAC124355900059A287 /* HCEnvironmentManager.m */,
+				220E4BAD124355900059A287 /* HCEnvironmentManagerDelegate.h */,
+				220E4BAE124355900059A287 /* Wifi */,
+			);
+			name = EnvironmentController;
+			path = HoccerClient/EnvironmentController;
+			sourceTree = "<group>";
+		};
+		220E4BAE124355900059A287 /* Wifi */ = {
+			isa = PBXGroup;
+			children = (
+				220E4BAF124355900059A287 /* WifiScanner.h */,
+				220E4BB0124355900059A287 /* WifiScanner.m */,
+				220E4BB1124355900059A287 /* WifiScannerDelegate.h */,
+			);
+			path = Wifi;
+			sourceTree = "<group>";
+		};
 		22A5C98C123790E5003DF9EC /* HoccerClient */ = {
 			isa = PBXGroup;
 			children = (
+				220E4BA8124355900059A287 /* EnvironmentController */,
 				220E4B56124352F60059A287 /* HttpClient */,
 				22A5C98D12379123003DF9EC /* HCClient.h */,
 				22A5C98E12379123003DF9EC /* HCClient.m */,
@@ -250,6 +294,11 @@
 				220E4B5D124352F60059A287 /* HttpClient.h in Headers */,
 				220E4B5F124352F60059A287 /* HttpConnection.h in Headers */,
 				220E4B621243530B0059A287 /* HCClientDelegate.h in Headers */,
+				220E4BB5124355900059A287 /* HCEnvironment.h in Headers */,
+				220E4BB7124355900059A287 /* HCEnvironmentManager.h in Headers */,
+				220E4BB9124355900059A287 /* HCEnvironmentManagerDelegate.h in Headers */,
+				220E4BBA124355900059A287 /* WifiScanner.h in Headers */,
+				220E4BBC124355900059A287 /* WifiScannerDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +427,9 @@
 				220E4B5B124352F60059A287 /* HttpClient.m in Sources */,
 				220E4B5C124352F60059A287 /* HttpConnection.m in Sources */,
 				220E4B6C1243546F0059A287 /* HoccerTests.m in Sources */,
+				220E4BB2124355900059A287 /* HCEnvironment.m in Sources */,
+				220E4BB3124355900059A287 /* HCEnvironmentManager.m in Sources */,
+				220E4BB4124355900059A287 /* WifiScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +442,9 @@
 				220E4B5E124352F60059A287 /* HttpClient.m in Sources */,
 				220E4B60124352F60059A287 /* HttpConnection.m in Sources */,
 				220E4B6D1243546F0059A287 /* HoccerTests.m in Sources */,
+				220E4BB6124355900059A287 /* HCEnvironment.m in Sources */,
+				220E4BB8124355900059A287 /* HCEnvironmentManager.m in Sources */,
+				220E4BBB124355900059A287 /* WifiScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

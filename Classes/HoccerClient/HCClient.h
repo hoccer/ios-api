@@ -17,8 +17,6 @@ enum HoccerErrors {
 	HoccerNoSenderError
 };
 
-
-
 @class HttpClient;
 
 @interface HCClient : NSObject <HCEnvironmentManagerDelegate> {
