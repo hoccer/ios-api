@@ -14,6 +14,4 @@
 
 @optional
 - (void)wifiScannerDidUpdateBssids: (WifiScanner *)scanner;
-
-
 @end
