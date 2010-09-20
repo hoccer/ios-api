@@ -110,7 +110,7 @@
 									   toCoordinateFromView:mapView];
 	
 	[geostorage storeDictionary:[NSDictionary dictionaryWithObject:@"wooo" forKey:@"note"] 
-					 atLocation:location];
+					 atLocation:location forTimeInterval: HCGeoStorageDefaultStorageTimeInterval];
 	
 	[geostorage searchInRegion:mapView.region];
 }
