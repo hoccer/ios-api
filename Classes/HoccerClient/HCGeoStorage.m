@@ -36,6 +36,7 @@
 - (void) dealloc {
 	[httpClient release];
 	[environmentController release];
+	
 	[super dealloc];
 }
 
@@ -62,7 +63,6 @@
 	[httpClient postURI:@"/store" 
 				payload:[payloadJSON dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didSendData:)];
-	
 }
 
 - (void)searchNearby {

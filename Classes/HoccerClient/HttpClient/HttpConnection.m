@@ -14,4 +14,13 @@
 @synthesize uri;
 @synthesize request, response;
 
+-(void) dealloc {
+	[request release];
+	[response release];
+	[uri release];
+	
+	[super dealloc];
+}
+
+
 @end
