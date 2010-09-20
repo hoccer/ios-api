@@ -57,16 +57,16 @@
 	[WifiScanner sharedScanner].delegate = nil;
 	
 	[lastLocationUpdate release];
+	[bssids release];
+
 	[locationManager stopUpdatingLocation];
 	[locationManager release];
-	[bssids release];
 	
 	[super dealloc];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
 		   fromLocation:(CLLocation *)oldLocation {
-// 	self.currentLocation = newLocation;
 	[self updateHoccability];
 	
 	self.lastLocationUpdate = [NSDate date];
