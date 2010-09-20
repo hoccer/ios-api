@@ -33,6 +33,12 @@
 	return self;
 }
 
+- (void) dealloc {
+	[httpClient release];
+	[environmentController release];
+	[super dealloc];
+}
+
 - (CLLocation *)location {
 	return environmentController.environment.location;
 }
