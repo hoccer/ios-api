@@ -189,13 +189,11 @@
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
 }
 
-
 - (void)dealloc {
 	[httpClient cancelAllRequest];
 	[httpClient release];
 	[environmentController release];
     [super dealloc];
 }
-
 
 @end

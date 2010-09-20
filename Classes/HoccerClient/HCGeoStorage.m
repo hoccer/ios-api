@@ -16,7 +16,8 @@
 @interface HCGeoStorage ()
 
 - (NSArray *)arrayFromCLLocationCoordinate: (CLLocationCoordinate2D)coordinate;
-- (void)storeDictionary:(NSDictionary *)dictionary withEnvironment:(HCEnvironment *)environment;
+- (void)storeDictionary:(NSDictionary *)dictionary withEnvironment:(HCEnvironment *)environment 
+		forTimeInterval: (NSTimeInterval)seconds ;
 
 @end
 
@@ -45,19 +46,33 @@
 }
 
 - (void)store: (NSDictionary *)dictionary {
-	[self storeDictionary:dictionary withEnvironment:environmentController.environment];
+	[self storeDictionary:dictionary withEnvironment:environmentController.environment 
+		  forTimeInterval: HCGeoStorageDefaultStorageTimeInterval];
 }
 
-- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location {
+- (void)store: (NSDictionary *)dictionary forTimeInterval: (NSTimeInterval)seconds {
+	[self storeDictionary:dictionary withEnvironment:environmentController.environment 
+		  forTimeInterval: seconds];
+}
+
+- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location
+		forTimeInterval: (NSTimeInterval)seconds 
+{
 	HCEnvironment *environment = [[HCEnvironment alloc] initWithCoordinate: location];
-	
-	[self storeDictionary:dictionary withEnvironment: environment];
+	[self storeDictionary:dictionary withEnvironment: environment forTimeInterval: seconds];
 }
 
-- (void)storeDictionary:(NSDictionary *)dictionary withEnvironment:(HCEnvironment *)environment {
-	NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:
+- (void)storeDictionary:(NSDictionary *)dictionary 
+		withEnvironment:(HCEnvironment *)environment 
+		forTimeInterval: (NSTimeInterval)seconds 
+{
+	NSMutableDictionary *payload = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 							 [environment dict], @"environment",
 							 dictionary, @"params", nil];
+	
+	if (seconds > 0.0) {
+		[payload setObject:[NSNumber numberWithDouble:seconds] forKey:@"time_interval"];
+	}
 	
 	NSString *payloadJSON = [payload yajl_JSONString];
 	[httpClient postURI:@"/store" 

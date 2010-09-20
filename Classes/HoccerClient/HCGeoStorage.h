@@ -13,6 +13,8 @@
 #import "HCEnvironmentManager.h"
 #import "HCGeoStorageDelegate.h"
 
+#define HCGeoStorageDefaultStorageTimeInterval -1
+
 
 @interface HCGeoStorage : NSObject {
 	HCEnvironmentManager *environmentController;
@@ -25,7 +27,8 @@
 @property (readonly) CLLocation *location;
 
 - (void)store: (NSDictionary *)dictionary;
-- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location;
+- (void)store: (NSDictionary *)dictionary forTimeInterval: (NSTimeInterval)seconds;
+- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location forTimeInterval: (NSTimeInterval)seconds; 
 
 - (void)searchNearby;
 - (void)searchInRegion: (MKCoordinateRegion)region;
