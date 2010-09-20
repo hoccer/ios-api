@@ -32,7 +32,7 @@
 
 - (void)searchNearby;
 - (void)searchInRegion: (MKCoordinateRegion)region;
-// - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius;
+- (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius;
 
 // - (void)searchNearbyFor: (HCQuery *)query;
 // - (void)searchFor: (HCQuery *)query inRegion: (MKCoordinateRegion)region;

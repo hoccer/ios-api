@@ -98,7 +98,7 @@
 }
 
 - (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	NSLog(@"%@ %@", method, uri);
+	NSLog(@"%@ %@ %@", method, baseURL, uri);
 	
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -143,6 +143,8 @@
 	if ([self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response]) {
 		return;
 	}
+	
+	NSLog(@"body: %@", [[[NSString alloc] initWithData:container.receivedData encoding:NSUTF8StringEncoding] autorelease]);
 	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.httpConnection withObject:container.receivedData];

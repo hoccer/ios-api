@@ -16,20 +16,15 @@
 		220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */; };
 		220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
-		220E4B5B124352F60059A287 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
-		220E4B5C124352F60059A287 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
 		220E4B5D124352F60059A287 /* HttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B57124352F60059A287 /* HttpClient.h */; };
 		220E4B5E124352F60059A287 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
 		220E4B5F124352F60059A287 /* HttpConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B59124352F60059A287 /* HttpConnection.h */; };
 		220E4B60124352F60059A287 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
 		220E4B621243530B0059A287 /* HCClientDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4B611243530B0059A287 /* HCClientDelegate.h */; };
-		220E4B6C1243546F0059A287 /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B6B1243546F0059A287 /* HoccerTests.m */; };
 		220E4B7A1243547F0059A287 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B781243547F0059A287 /* GHUnitIOS.framework */; };
 		220E4B7B1243547F0059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
 		220E4B7C1243547F0059A287 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B781243547F0059A287 /* GHUnitIOS.framework */; };
 		220E4B7D1243547F0059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
-		220E4BB2124355900059A287 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAA124355900059A287 /* HCEnvironment.m */; };
-		220E4BB3124355900059A287 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAC124355900059A287 /* HCEnvironmentManager.m */; };
 		220E4BB4124355900059A287 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BB0124355900059A287 /* WifiScanner.m */; };
 		220E4BB5124355900059A287 /* HCEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BA9124355900059A287 /* HCEnvironment.h */; };
 		220E4BB6124355900059A287 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAA124355900059A287 /* HCEnvironment.m */; };
@@ -40,6 +35,13 @@
 		220E4BBB124355900059A287 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BB0124355900059A287 /* WifiScanner.m */; };
 		220E4BBC124355900059A287 /* WifiScannerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4BB1124355900059A287 /* WifiScannerDelegate.h */; };
 		220E4D83124370910059A287 /* Hoccer.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4D82124370910059A287 /* Hoccer.h */; };
+		227C61831247A08D00059B66 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAA124355900059A287 /* HCEnvironment.m */; };
+		227C61841247A08D00059B66 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAC124355900059A287 /* HCEnvironmentManager.m */; };
+		227C61851247A09700059B66 /* libHoccerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E903001240CB9A00993693 /* libHoccerLib.a */; };
+		227C61861247A09F00059B66 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
+		227C61871247A09F00059B66 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
+		227C61881247A0B000059B66 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
+		227C61891247A0B000059B66 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
 		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
@@ -48,9 +50,6 @@
 		22E904041240CC8800993693 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
-		22E904751240D13800993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
-		22E904761240D13800993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
-		22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E903001240CB9A00993693 /* libHoccerLib.a */; };
 		22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEB9D2123A34BE00276368 /* MockedLocationController.m */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
@@ -113,6 +112,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */,
+				227C61851247A09700059B66 /* libHoccerLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +124,6 @@
 				220C63AD1238DA180014AECB /* Foundation.framework in Frameworks */,
 				220C63AE1238DA230014AECB /* UIKit.framework in Frameworks */,
 				220C63ED1238DC800014AECB /* CoreLocation.framework in Frameworks */,
-				22E904771240D15E00993693 /* libHoccerLib.a in Frameworks */,
 				220E4B7A1243547F0059A287 /* GHUnitIOS.framework in Frameworks */,
 				220E4B7B1243547F0059A287 /* YAJLIOS.framework in Frameworks */,
 			);
@@ -415,8 +414,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* HoccerAPIAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */,
-				22E904751240D13800993693 /* HCClient.m in Sources */,
-				22E904761240D13800993693 /* HCGeoStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,12 +424,13 @@
 				220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */,
 				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
 				22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */,
-				220E4B5B124352F60059A287 /* HttpClient.m in Sources */,
-				220E4B5C124352F60059A287 /* HttpConnection.m in Sources */,
-				220E4B6C1243546F0059A287 /* HoccerTests.m in Sources */,
-				220E4BB2124355900059A287 /* HCEnvironment.m in Sources */,
-				220E4BB3124355900059A287 /* HCEnvironmentManager.m in Sources */,
 				220E4BB4124355900059A287 /* WifiScanner.m in Sources */,
+				227C61831247A08D00059B66 /* HCEnvironment.m in Sources */,
+				227C61841247A08D00059B66 /* HCEnvironmentManager.m in Sources */,
+				227C61861247A09F00059B66 /* HCClient.m in Sources */,
+				227C61871247A09F00059B66 /* HCGeoStorage.m in Sources */,
+				227C61881247A0B000059B66 /* HttpClient.m in Sources */,
+				227C61891247A0B000059B66 /* HttpConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,8 @@
 @property (retain) CLLocation *location;
 @property (assign) NSInteger hoccability;
 
-- (id) initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids;
+- (id)initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids;
+- (id)initWithCoordinate: (CLLocationCoordinate2D)coordinate accuracy: (CLLocationAccuracy)accuracy;
 - (NSString *)JSONRepresentation;
 - (NSDictionary *)dict;
 
