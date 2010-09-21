@@ -109,7 +109,7 @@
 	CLLocationCoordinate2D location = [mapView convertPoint: [recognizer locationInView:mapView] 
 									   toCoordinateFromView:mapView];
 	
-	[geostorage storeDictionary:[NSDictionary dictionaryWithObject:@"wooo" forKey:@"note"] 
+	[geostorage storeProperties:[NSDictionary dictionaryWithObject:@"wooo" forKey:@"note"] 
 					 atLocation:location forTimeInterval: HCGeoStorageDefaultStorageTimeInterval];
 	
 	[geostorage searchInRegion:mapView.region];
@@ -141,8 +141,8 @@
 
 #pragma mark -
 #pragma mark Geostorage Delegate Methods
-- (void)geostorageDidSaveSuccessful: (HCGeoStorage *)geoStorage {
-	
+- (void)geostorage: (HCGeoStorage *)geoStorage didFinishStoringWithId: (NSString *)urlId {
+	NSLog(@"stored with id: %@", urlId);
 }
 
 - (void)geostorage: (HCGeoStorage *)geoStorage didFindItems: (NSArray *)items {
@@ -165,7 +165,7 @@
 	NSDictionary *note = [NSDictionary dictionaryWithObjectsAndKeys:
 						  @"Hoccer API was here", @"note", nil];
 	
-	[geostorage store:note];
+	[geostorage storeProperties: note];
 }
 
 - (IBAction)query: (id)sender {

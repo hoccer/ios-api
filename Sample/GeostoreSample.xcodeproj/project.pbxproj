@@ -12,7 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		220E4CD8124360520059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4CD7124360520059A287 /* YAJLIOS.framework */; };
-		220E4DD6124372250059A287 /* Hoccer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4DD5124372250059A287 /* Hoccer.framework */; };
+		229EE7CE1248D50600519CDE /* Hoccer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 229EE7CD1248D50600519CDE /* Hoccer.framework */; };
 		22E904F71240EF6500993693 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E904F61240EF6500993693 /* MapKit.framework */; };
 		22E9050A1240F27400993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E905091240F27400993693 /* CoreLocation.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -28,7 +28,7 @@
 		1D6058910D05DD3D006BFB54 /* GeostoreSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeostoreSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		220E4CD7124360520059A287 /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLIOS.framework; path = ../lib/YAJLIOS.framework; sourceTree = SOURCE_ROOT; };
-		220E4DD5124372250059A287 /* Hoccer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hoccer.framework; path = ../build/Framework/Hoccer.framework; sourceTree = SOURCE_ROOT; };
+		229EE7CD1248D50600519CDE /* Hoccer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hoccer.framework; path = ../lib/Hoccer.framework; sourceTree = SOURCE_ROOT; };
 		22E904F61240EF6500993693 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		22E905091240F27400993693 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -52,7 +52,7 @@
 				22E904F71240EF6500993693 /* MapKit.framework in Frameworks */,
 				22E9050A1240F27400993693 /* CoreLocation.framework in Frameworks */,
 				220E4CD8124360520059A287 /* YAJLIOS.framework in Frameworks */,
-				220E4DD6124372250059A287 /* Hoccer.framework in Frameworks */,
+				229EE7CE1248D50600519CDE /* Hoccer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				220E4DD5124372250059A287 /* Hoccer.framework */,
+				229EE7CD1248D50600519CDE /* Hoccer.framework */,
 				220E4CD7124360520059A287 /* YAJLIOS.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
