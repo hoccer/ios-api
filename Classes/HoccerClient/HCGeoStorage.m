@@ -32,7 +32,6 @@
 	self = [super init];
 	if (self != nil) {
 		environmentController = [[HCEnvironmentManager alloc] init];
-		NSLog(@"url: %@", HOCCER_GEOSTORAGE_URI);
 		httpClient = [[HttpClient alloc] initWithURLString:HOCCER_GEOSTORAGE_URI];
 		httpClient.target = self;
 	}

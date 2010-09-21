@@ -44,7 +44,6 @@
 }
 
 - (NSString *)JSONRepresentation {
-	
 	return [[self dict] yajl_JSONString];
 }
 
