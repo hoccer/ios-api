@@ -72,3 +72,7 @@ cp Classes/HoccerClient/HttpClient/*.h $FRAMEWORK_DIR/Headers/
 cp Classes/HoccerClient/EnvironmentController/Wifi/*.h $FRAMEWORK_DIR/Headers/
 
 cp HoccerAPI-Info.plist $FRAMEWORK_DIR/Resources/Info.plist
+
+mv $FRAMEWORK_DIR/ lib/
+
+
