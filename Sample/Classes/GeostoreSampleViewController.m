@@ -118,6 +118,10 @@
 #pragma mark -
 #pragma mark MapView Delegate Methods
 - (MKAnnotationView *) mapView:(MKMapView *)aMapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	if (![annotation isKindOfClass:[SampleAnnotation class]]) {
+		return nil;
+	}
+	
 	static NSString * annotationName = @"SimpleAnnotation";
 	
 	MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[aMapView dequeueReusableAnnotationViewWithIdentifier:annotationName];
