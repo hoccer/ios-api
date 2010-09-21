@@ -90,7 +90,7 @@
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang clan ain't nothing to fuck wit" forKey:@"note"];
 	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
 	
-	[storage storeDictionary:dict atLocation:coords forTimeInterval:30];
+	[storage storeProperties:dict atLocation:coords forTimeInterval:30];
 	[self runForInterval:2];
 	GHAssertNotNil(mockedDelegate.url, @"should have returned an url");
 	
@@ -98,7 +98,7 @@
 	[self runForInterval:2];	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 1, @"should have found one item");
 	
-	[storage delete: mockedDelegate.url];
+	[storage deletePropertiesWithId: mockedDelegate.url];
 	[self runForInterval:1];
 	mockedDelegate.items = nil;
 	[storage searchAtLocation:coords radius:100];
@@ -111,7 +111,7 @@
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang clan ain't nothin' to fuck wit" forKey:@"note"];
 	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
 	
-	[storage storeDictionary:dict atLocation:coords forTimeInterval:2];
+	[storage storeProperties:dict atLocation:coords forTimeInterval:2];
 	[self runForInterval:3];
 	GHAssertNotNil(mockedDelegate.url, @"should have returned an url");
 	
@@ -119,14 +119,14 @@
 	[self runForInterval:2];	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 0, @"item should be expired");
 	
-	[storage delete: mockedDelegate.url];
+	[storage deletePropertiesWithId: mockedDelegate.url];
 	[self runForInterval:1];
 }
 
 - (void)testSearchNearby {
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"bada bing" forKey:@"note"];
 	
-	[storage store: dict];
+	[storage storeProperties: dict];
 	[self runForInterval:2];
 	
 	[storage searchNearby];
@@ -134,7 +134,7 @@
 	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 1, @"item should be expired");
 	
-	[storage delete: mockedDelegate.url];
+	[storage deletePropertiesWithId: mockedDelegate.url];
 	[self runForInterval:1];
 }
 
@@ -142,7 +142,7 @@
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang clan ain't nothin' to fuck wit" forKey:@"note"];
 	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
 	
-	[storage storeDictionary:dict atLocation:coords forTimeInterval:2];
+	[storage storeProperties:dict atLocation:coords forTimeInterval:30];
 	[self runForInterval:3];
 	GHAssertNotNil(mockedDelegate.url, @"should have returned an url");
 	
@@ -153,7 +153,7 @@
 	GHAssertNotNil(mockedDelegate.items, @"items should not be nil");
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 0, @"item should be expired");
 	
-	[storage delete: mockedDelegate.url];
+	[storage deletePropertiesWithId: mockedDelegate.url];
 	[self runForInterval:1];
 	
 }

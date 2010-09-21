@@ -12,7 +12,7 @@
 #import "HCEnvironment.h"
 
 // #define HOCCER_GEOSTORAGE_URI @"http://beta.hoccer.com/v3"
-#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.157:9292"
+#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.155:9292"
 
 
 @interface HCGeoStorage ()
@@ -52,17 +52,17 @@
 
 #pragma mark -
 #pragma mark Methods for Storing
-- (void)store: (NSDictionary *)dictionary {
+- (void)storeProperties: (NSDictionary *)dictionary {
 	[self storeDictionary:dictionary withEnvironment:environmentController.environment 
 		  forTimeInterval: HCGeoStorageDefaultStorageTimeInterval];
 }
 
-- (void)store: (NSDictionary *)dictionary forTimeInterval: (NSTimeInterval)seconds {
+- (void)storeProperties: (NSDictionary *)dictionary forTimeInterval: (NSTimeInterval)seconds {
 	[self storeDictionary:dictionary withEnvironment:environmentController.environment 
 		  forTimeInterval: seconds];
 }
 
-- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location
+- (void)storeProperties: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location
 		forTimeInterval: (NSTimeInterval)seconds 
 {
 	HCEnvironment *environment = [[HCEnvironment alloc] initWithCoordinate: location accuracy:5];
@@ -129,9 +129,9 @@
 #pragma mark -
 #pragma mark Delete Methods
 
-- (void)delete: (NSString *)url {
-	[httpClient deleteURI:url 
-				  success:@selector(httpConnectionDidDelete:)];
+- (void)deletePropertiesWithId: (NSString *)propertiesId {
+	[httpClient deleteURI:[@"/store" stringByAppendingPathComponent:propertiesId]  
+				   success:@selector(httpConnectionDidDelete:)];
 }
 
 #pragma mark -
@@ -139,9 +139,10 @@
 
 - (void)httpConnection: (HttpConnection *)connection didStoreData: (NSData *)data {
 	NSDictionary *response = [data yajl_JSON];
+	NSString *propertyId = [[response objectForKey:@"url"] lastPathComponent];
 	
 	if ([delegate respondsToSelector:@selector(geostorage:didFinishStoringWithId:)]) {
-		[delegate geostorage: self didFinishStoringWithId:[response objectForKey:@"url"]];
+		[delegate geostorage: self didFinishStoringWithId:propertyId];
 	}
 }
 

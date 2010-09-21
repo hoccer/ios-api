@@ -26,15 +26,15 @@
 @property (assign) id <HCGeoStorageDelegate> delegate;
 @property (readonly) CLLocation *location;
 
-- (void)store: (NSDictionary *)dictionary;
-- (void)store: (NSDictionary *)dictionary forTimeInterval: (NSTimeInterval)seconds;
-- (void)storeDictionary: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location forTimeInterval: (NSTimeInterval)seconds; 
+- (void)storeProperties: (NSDictionary *)dictionary;
+- (void)storeProperties: (NSDictionary *)dictionary forTimeInterval: (NSTimeInterval)seconds;
+- (void)storeProperties: (NSDictionary *)dictionary atLocation: (CLLocationCoordinate2D)location forTimeInterval: (NSTimeInterval)seconds; 
 
 - (void)searchNearby;
 - (void)searchInRegion: (MKCoordinateRegion)region;
 - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius;
 
-- (void)delete: (NSString *)url;
+- (void)deletePropertiesWithId: (NSString *)propertiesId;
 
 // - (void)searchNearbyFor: (HCQuery *)query;
 // - (void)searchFor: (HCQuery *)query inRegion: (MKCoordinateRegion)region;
