@@ -7,10 +7,13 @@
 //
 
 #import <GHUnitIOS/GHUnitIOS.h>
+#import <MapKit/MapKit.h>
 #import "HCGeoStorage.h"
 #import "HCGeoStorageDelegate.h"
 #import "MockedLocationController.h"
 
+
+static NSMutableArray *allRecordIds;
 
 @interface HCGeoStorage (TestEnvironment)
 - (void)setTestEnvironment;
@@ -41,7 +44,20 @@
 
 @synthesize url, items, error;
 
+- (id) init
+{
+	self = [super init];
+	if (self != nil) {
+		if (allRecordIds == nil) {
+			allRecordIds = [[NSMutableArray alloc] init];
+		} 
+	}
+	return self;
+}
+
+
 - (void)geostorage: (HCGeoStorage *)geoStorage didFinishStoringWithId: (NSString *)urlId {
+	[allRecordIds addObject: urlId];
 	self.url = urlId;
 }
 
@@ -70,6 +86,9 @@
 	HCGeoStorage *storage;
 }
 
+- (void)createRecordAtLong: (CLLocationDegrees)longituge lat: (CLLocationDegrees) latitude properties: (NSDictionary *)dict;
+- (void)deleteRecords;
+
 @end
 
 @implementation HCGeoStorageTests
@@ -82,6 +101,7 @@
 }
 
 - (void)tearDown {
+	[self deleteRecords];
 	[storage release];
 	[mockedDelegate release];
 }
@@ -118,9 +138,6 @@
 	[storage searchAtLocation:coords radius:100];
 	[self runForInterval:2];	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 0, @"item should be expired");
-	
-	[storage deletePropertiesWithId: mockedDelegate.url];
-	[self runForInterval:1];
 }
 
 - (void)testSearchNearby {
@@ -133,15 +150,11 @@
 	[self runForInterval:2];
 	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 1, @"item should be expired");
-	
-	[storage deletePropertiesWithId: mockedDelegate.url];
-	[self runForInterval:1];
 }
 
 - (void)testSearchNotInRadius {
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang clan ain't nothin' to fuck wit" forKey:@"note"];
 	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
-	
 	[storage storeProperties:dict atLocation:coords forTimeInterval:30];
 	[self runForInterval:3];
 	GHAssertNotNil(mockedDelegate.url, @"should have returned an url");
@@ -152,11 +165,58 @@
 	
 	GHAssertNotNil(mockedDelegate.items, @"items should not be nil");
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 0, @"item should be expired");
+}
+
+- (void)testSearchInRegion {
+	[self createRecordAtLong:12.5 lat:11.5 properties:nil];
+	[self createRecordAtLong:11.5 lat:12.5 properties:nil];
+	[self createRecordAtLong:10.5 lat:11.5 properties:nil];
+	[self runForInterval:2];
 	
-	[storage deletePropertiesWithId: mockedDelegate.url];
+	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
+	MKCoordinateRegion region; region.center = coords; region.span = MKCoordinateSpanMake(1, 1);
+	[storage searchInRegion:region];
 	[self runForInterval:1];
 	
+	GHAssertEquals((NSInteger)[mockedDelegate.items count], 2, @"should return all records in region");
 }
+
+- (void)testSearchInProperties {
+	[self createRecordAtLong:12 lat:12 properties:[NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"]];
+	[self createRecordAtLong:12 lat:12 properties:[NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"]];
+	[self createRecordAtLong:12 lat:12 properties:[NSDictionary dictionaryWithObject:@"wu tang" forKey:@"layer"]];
+	[self runForInterval:2];
+	
+	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
+	MKCoordinateRegion region; region.center = coords; region.span = MKCoordinateSpanMake(1, 1);
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"];
+	
+	[storage searchInRegion:region withProperties: dict];
+	[self runForInterval:1];
+	
+	GHAssertEquals((NSInteger)[mockedDelegate.items count], 2, @"should return all record with layer");}
+
+
+- (void)createRecordAtLong: (CLLocationDegrees)longituge lat: (CLLocationDegrees) latitude properties: (NSDictionary *)dict {
+	CLLocationCoordinate2D coords; 
+	coords.latitude = latitude; 
+	coords.longitude = longituge;
+	
+	[storage storeProperties:dict atLocation:coords forTimeInterval:30];
+}
+
+
+- (void)deleteRecords {
+	for (NSString *recordId in allRecordIds) {
+		[storage deletePropertiesWithId: recordId];
+	}
+	[allRecordIds removeAllObjects];
+	
+	[self runForInterval:2];
+}
+
+
 
 
 @end

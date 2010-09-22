@@ -11,8 +11,8 @@
 #import "HCGeoStorage.h"
 #import "HCEnvironment.h"
 
-#define HOCCER_GEOSTORAGE_URI @"http://geostore.beta.hoccer.com"
-// #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.155:9292"
+// #define HOCCER_GEOSTORAGE_URI @"http://geostore.beta.hoccer.com"
+#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.155:9292"
 
 
 @interface HCGeoStorage ()
@@ -111,6 +111,30 @@
 				payload:[jsonPayload dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didFindData:)];
 }
+
+- (void)searchInRegion: (MKCoordinateRegion)region withProperties: (NSDictionary *)properties {
+	CLLocationCoordinate2D lowerLeft, upperRight;
+	lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta / 2;
+	lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta / 2;
+	
+	upperRight.latitude = region.center.latitude + region.span.latitudeDelta / 2;
+	upperRight.longitude = region.center.longitude + region.span.longitudeDelta / 2;
+	
+	NSArray *boundingBox = [NSArray arrayWithObjects:
+							[self arrayFromCLLocationCoordinate:lowerLeft],
+							[self arrayFromCLLocationCoordinate:upperRight], nil];
+	
+	NSString *jsonPayload = [[NSDictionary dictionaryWithObjectsAndKeys:
+							  boundingBox, @"box",
+							  properties, @"find", nil] yajl_JSONString];
+
+	[httpClient postURI:@"/query" 
+				payload:[jsonPayload dataUsingEncoding:NSUTF8StringEncoding] 
+				success:@selector(httpConnection:didFindData:)];
+	
+}
+
+
 
 - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius {
 	HCEnvironment *environment = [[[HCEnvironment alloc] initWithCoordinate:location accuracy: radius] autorelease];

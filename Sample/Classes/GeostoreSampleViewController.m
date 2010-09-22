@@ -48,8 +48,6 @@
 @end
 
 
-
-
 @implementation GeostoreSampleViewController
 @synthesize mapView;
 
