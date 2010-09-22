@@ -45,6 +45,18 @@
 	return [[dict objectForKey:@"params"] objectForKey:@"note"];
 }
 
+- (BOOL) isEqual:(id)object {
+	if (![object isKindOfClass:[SampleAnnotation class]]) {
+		return NO;
+	}
+	
+	return [self coordinate].latitude == [object coordinate].latitude;
+}
+
+- (NSString *) description {
+	return [NSString stringWithFormat:@"lat: %f, lng: %f", [self coordinate].latitude, [self coordinate].longitude];
+}
+
 @end
 
 
@@ -62,7 +74,7 @@
 	geostorage.delegate = self;
 	
 	UIGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self 
-																					 action:@selector(addPin:)];
+																					action:@selector(addPin:)];
 	[mapView addGestureRecognizer:recognizer];
 	[recognizer release];
 }
@@ -134,7 +146,7 @@
 }
 
 - (void) mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-	// [self query:self];
+	[self query:self];
 }
 
 #pragma mark -
@@ -144,12 +156,21 @@
 }
 
 - (void)geostorage: (HCGeoStorage *)geoStorage didFindItems: (NSArray *)items {
-	[mapView removeAnnotations: mapView.annotations];
+	NSMutableArray *loadedAnnotations = [NSMutableArray array];
 	
 	for (NSDictionary *item in items) {
 		SampleAnnotation *annotation = [[SampleAnnotation alloc] initWithDictionary: item];
-		[mapView addAnnotation:annotation];
+		[loadedAnnotations addObject:annotation];
 	}
+	
+	NSMutableArray *newRecords = [[loadedAnnotations mutableCopy] autorelease];
+	for (SampleAnnotation *annotation in loadedAnnotations) {
+		if ([mapView.annotations containsObject:annotation]) {
+			[newRecords removeObject:annotation];
+		}
+	}
+
+	[mapView addAnnotations:newRecords];	
 }
 
 - (void)geostorage: (HCGeoStorage *)geoStorage didFailWithError: (NSError *)error {
