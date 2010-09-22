@@ -195,7 +195,25 @@ static NSMutableArray *allRecordIds;
 	[storage searchInRegion:region withProperties: dict];
 	[self runForInterval:1];
 	
-	GHAssertEquals((NSInteger)[mockedDelegate.items count], 2, @"should return all record with layer");}
+	GHAssertEquals((NSInteger)[mockedDelegate.items count], 2, @"should return all record with layer");
+}
+
+- (void)testSearchInPropertiesNearby {
+	[storage storeProperties:[NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"]];
+	[storage storeProperties:[NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"]];
+	[storage storeProperties:[NSDictionary dictionaryWithObject:@"wu tang" forKey:@"layer"]];
+	[self runForInterval:2];
+	
+	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
+	MKCoordinateRegion region; region.center = coords; region.span = MKCoordinateSpanMake(1, 1);
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang" forKey:@"layer"];
+	
+	[storage searchNearbyWithProperties: dict];
+	[self runForInterval:1];
+	
+	GHAssertEquals((NSInteger)[mockedDelegate.items count], 1, @"should return all record with correct layer");
+}
 
 
 - (void)createRecordAtLong: (CLLocationDegrees)longituge lat: (CLLocationDegrees) latitude properties: (NSDictionary *)dict {

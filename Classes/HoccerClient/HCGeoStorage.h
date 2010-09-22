@@ -34,14 +34,10 @@
 - (void)searchInRegion: (MKCoordinateRegion)region;
 - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius;
 
-// - (void)searchNearby;
+- (void)searchNearbyWithProperties: (NSDictionary *)properties;
 - (void)searchInRegion: (MKCoordinateRegion)region withProperties: (NSDictionary *)properties;
-// - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius;
-
+- (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius withProperties: (NSDictionary *)properties;
 
 - (void)deletePropertiesWithId: (NSString *)propertiesId;
-
-// - (void)searchNearbyFor: (HCQuery *)query;
-// - (void)searchFor: (HCQuery *)query inRegion: (MKCoordinateRegion)region;
 
 @end

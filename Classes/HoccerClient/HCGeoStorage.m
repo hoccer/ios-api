@@ -20,7 +20,7 @@
 - (NSArray *)arrayFromCLLocationCoordinate: (CLLocationCoordinate2D)coordinate;
 - (void)storeDictionary:(NSDictionary *)dictionary withEnvironment:(HCEnvironment *)environment 
 		forTimeInterval: (NSTimeInterval)seconds ;
-- (void)searchForEnvironment: (HCEnvironment *)environment;
+- (void)searchForEnvironment: (HCEnvironment *)environment withProperties: (NSDictionary *)properties;
 
 
 @end
@@ -90,26 +90,39 @@
 #pragma mark -
 #pragma mark Methods for Searching
 - (void)searchNearby {
-	[self searchForEnvironment:environmentController.environment];
+	[self searchForEnvironment:environmentController.environment withProperties: nil];
+}
+
+- (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius {
+	[self searchAtLocation:location radius:radius withProperties:nil];
+}
+
+- (void)searchNearbyWithProperties: (NSDictionary *)properties; {
+	[self searchForEnvironment:environmentController.environment withProperties: properties];
+}
+
+- (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius 
+		  withProperties: (NSDictionary *)properties 
+{
+	HCEnvironment *environment = [[[HCEnvironment alloc] initWithCoordinate:location accuracy: radius] autorelease];
+	[self searchForEnvironment:environment withProperties: properties];
+}
+
+
+- (void)searchForEnvironment: (HCEnvironment *)environment withProperties:(NSDictionary *)properties {
+	NSMutableDictionary *query = [[[environment dict] mutableCopy] autorelease];
+	
+	if (properties != nil) {
+		[query setObject:properties forKey:@"find"];
+	}
+	
+	[httpClient postURI:@"/query" 
+				payload:[[query yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
+				success:@selector(httpConnection:didFindData:)];
 }
 
 - (void)searchInRegion: (MKCoordinateRegion)region {
-	CLLocationCoordinate2D lowerLeft, upperRight;
-	lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta / 2;
-	lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta / 2;
-	
-	upperRight.latitude = region.center.latitude + region.span.latitudeDelta / 2;
-	upperRight.longitude = region.center.longitude + region.span.longitudeDelta / 2;
-
-	NSArray *boundingBox = [NSArray arrayWithObjects:
-							[self arrayFromCLLocationCoordinate:lowerLeft],
-							[self arrayFromCLLocationCoordinate:upperRight], nil];
-	
-	NSString *jsonPayload = [[NSDictionary dictionaryWithObject:boundingBox forKey:@"box"] yajl_JSONString];
-	
-	[httpClient postURI:@"/query" 
-				payload:[jsonPayload dataUsingEncoding:NSUTF8StringEncoding] 
-				success:@selector(httpConnection:didFindData:)];
+	[self searchInRegion:region withProperties: nil];
 }
 
 - (void)searchInRegion: (MKCoordinateRegion)region withProperties: (NSDictionary *)properties {
@@ -124,29 +137,16 @@
 							[self arrayFromCLLocationCoordinate:lowerLeft],
 							[self arrayFromCLLocationCoordinate:upperRight], nil];
 	
-	NSString *jsonPayload = [[NSDictionary dictionaryWithObjectsAndKeys:
-							  boundingBox, @"box",
-							  properties, @"find", nil] yajl_JSONString];
-
-	[httpClient postURI:@"/query" 
-				payload:[jsonPayload dataUsingEncoding:NSUTF8StringEncoding] 
-				success:@selector(httpConnection:didFindData:)];
+	NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObject:boundingBox forKey:@"box"];
 	
-}
-
-
-
-- (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius {
-	HCEnvironment *environment = [[[HCEnvironment alloc] initWithCoordinate:location accuracy: radius] autorelease];
-	[self searchForEnvironment:environment];
-}
-
-- (void)searchForEnvironment: (HCEnvironment *)environment {
-	NSString *jsonEnvironment = [environment JSONRepresentation];
+	if (properties != nil) {
+		[query setObject:properties forKey:@"find"];
+	}
 	
 	[httpClient postURI:@"/query" 
-				payload:[jsonEnvironment dataUsingEncoding:NSUTF8StringEncoding] 
+				payload:[[query yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didFindData:)];
+	
 }
 
 #pragma mark -
