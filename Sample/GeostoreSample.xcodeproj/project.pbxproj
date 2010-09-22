@@ -13,7 +13,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		220E4CD8124360520059A287 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4CD7124360520059A287 /* YAJLIOS.framework */; };
 		229EE7CE1248D50600519CDE /* Hoccer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 229EE7CD1248D50600519CDE /* Hoccer.framework */; };
-		229EE8391248F45C00519CDE /* HCMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 229EE8381248F45C00519CDE /* HCMapView.m */; };
 		22E904F71240EF6500993693 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E904F61240EF6500993693 /* MapKit.framework */; };
 		22E9050A1240F27400993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E905091240F27400993693 /* CoreLocation.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -30,8 +29,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		220E4CD7124360520059A287 /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLIOS.framework; path = ../lib/YAJLIOS.framework; sourceTree = SOURCE_ROOT; };
 		229EE7CD1248D50600519CDE /* Hoccer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hoccer.framework; path = ../lib/Hoccer.framework; sourceTree = SOURCE_ROOT; };
-		229EE8371248F45C00519CDE /* HCMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCMapView.h; sourceTree = "<group>"; };
-		229EE8381248F45C00519CDE /* HCMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCMapView.m; sourceTree = "<group>"; };
 		22E904F61240EF6500993693 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		22E905091240F27400993693 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,7 +62,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				22E905411240F8E900993693 /* HCGeostorage */,
 				1D3623240D0F684500981E51 /* GeostoreSampleAppDelegate.h */,
 				1D3623250D0F684500981E51 /* GeostoreSampleAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* GeostoreSampleViewController.h */,
@@ -80,23 +76,6 @@
 				1D6058910D05DD3D006BFB54 /* GeostoreSample.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		229EE8361248F21E00519CDE /* HCMapView */ = {
-			isa = PBXGroup;
-			children = (
-				229EE8371248F45C00519CDE /* HCMapView.h */,
-				229EE8381248F45C00519CDE /* HCMapView.m */,
-			);
-			name = HCMapView;
-			sourceTree = "<group>";
-		};
-		22E905411240F8E900993693 /* HCGeostorage */ = {
-			isa = PBXGroup;
-			children = (
-				229EE8361248F21E00519CDE /* HCMapView */,
-			);
-			name = HCGeostorage;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -208,7 +187,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* GeostoreSampleAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* GeostoreSampleViewController.m in Sources */,
-				229EE8391248F45C00519CDE /* HCMapView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,8 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import <Hoccer/Hoccer.h>
 
-@interface GeostoreSampleViewController : UIViewController <MKMapViewDelegate> {
+@interface GeostoreSampleViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, HCGeoStorageDelegate> {
 	MKMapView *mapView;
+	
+	CLLocationManager *locationManager;
+	HCGeoStorage *geostorage;
 }
 
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
