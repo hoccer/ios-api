@@ -74,7 +74,7 @@
 {
 	NSMutableDictionary *payload = [NSMutableDictionary dictionaryWithObjectsAndKeys:
 							 [environment dict], @"environment",
-							 dictionary, @"params", nil];
+							 dictionary, @"data", nil];
 	
 	if (seconds > 0.0) {
 		[payload setObject:[NSNumber numberWithDouble:seconds] forKey:@"lifetime"];
@@ -94,15 +94,15 @@
 }
 
 - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius {
-	[self searchAtLocation:location radius:radius withProperties:nil];
+	[self searchAtLocation:location radius:radius withConditions:nil];
 }
 
-- (void)searchNearbyWithProperties: (NSDictionary *)properties; {
+- (void)searchNearbyWithConditions: (NSDictionary *)properties; {
 	[self searchForEnvironment:environmentController.environment withProperties: properties];
 }
 
 - (void)searchAtLocation: (CLLocationCoordinate2D)location radius: (CLLocationDistance)radius 
-		  withProperties: (NSDictionary *)properties 
+		  withConditions: (NSDictionary *)properties 
 {
 	HCEnvironment *environment = [[[HCEnvironment alloc] initWithCoordinate:location accuracy: radius] autorelease];
 	[self searchForEnvironment:environment withProperties: properties];
@@ -113,7 +113,7 @@
 	NSMutableDictionary *query = [[[environment dict] mutableCopy] autorelease];
 	
 	if (properties != nil) {
-		[query setObject:properties forKey:@"find"];
+		[query setObject:properties forKey:@"conditions"];
 	}
 	
 	[httpClient postURI:@"/query" 
@@ -122,10 +122,10 @@
 }
 
 - (void)searchInRegion: (MKCoordinateRegion)region {
-	[self searchInRegion:region withProperties: nil];
+	[self searchInRegion:region withConditions: nil];
 }
 
-- (void)searchInRegion: (MKCoordinateRegion)region withProperties: (NSDictionary *)properties {
+- (void)searchInRegion: (MKCoordinateRegion)region withConditions: (NSDictionary *)properties {
 	CLLocationCoordinate2D lowerLeft, upperRight;
 	lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta / 2;
 	lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta / 2;
@@ -137,10 +137,10 @@
 							[self arrayFromCLLocationCoordinate:lowerLeft],
 							[self arrayFromCLLocationCoordinate:upperRight], nil];
 	
-	NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObject:boundingBox forKey:@"box"];
+	NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObject:boundingBox forKey:@"bbox"];
 	
 	if (properties != nil) {
-		[query setObject:properties forKey:@"find"];
+		[query setObject:properties forKey:@"conditions"];
 	}
 	
 	[httpClient postURI:@"/query" 
@@ -152,7 +152,7 @@
 #pragma mark -
 #pragma mark Delete Methods
 
-- (void)deletePropertiesWithId: (NSString *)propertiesId {
+- (void)deleteRecordWithId: (NSString *)propertiesId {
 	[httpClient deleteURI:[@"/store" stringByAppendingPathComponent:propertiesId]  
 				   success:@selector(httpConnectionDidDelete:)];
 }

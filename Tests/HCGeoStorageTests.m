@@ -118,7 +118,7 @@ static NSMutableArray *allRecordIds;
 	[self runForInterval:2];	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 1, @"should have found one item");
 	
-	[storage deletePropertiesWithId: mockedDelegate.url];
+	[storage deleteRecordWithId: mockedDelegate.url];
 	[self runForInterval:1];
 	mockedDelegate.items = nil;
 	[storage searchAtLocation:coords radius:100];
@@ -192,7 +192,7 @@ static NSMutableArray *allRecordIds;
 	
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"];
 	
-	[storage searchInRegion:region withProperties: dict];
+	[storage searchInRegion:region withConditions: dict];
 	[self runForInterval:1];
 	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 2, @"should return all record with layer");
@@ -209,7 +209,7 @@ static NSMutableArray *allRecordIds;
 	
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang" forKey:@"layer"];
 	
-	[storage searchNearbyWithProperties: dict];
+	[storage searchNearbyWithConditions: dict];
 	[self runForInterval:1];
 	
 	GHAssertEquals((NSInteger)[mockedDelegate.items count], 1, @"should return all record with correct layer");
@@ -227,7 +227,7 @@ static NSMutableArray *allRecordIds;
 
 - (void)deleteRecords {
 	for (NSString *recordId in allRecordIds) {
-		[storage deletePropertiesWithId: recordId];
+		[storage deleteRecordWithId: recordId];
 	}
 	[allRecordIds removeAllObjects];
 	
