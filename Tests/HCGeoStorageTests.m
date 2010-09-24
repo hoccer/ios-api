@@ -94,7 +94,7 @@ static NSMutableArray *allRecordIds;
 @implementation HCGeoStorageTests
 
 - (void)setUp {
-	storage = [[HCGeoStorage alloc] init];
+	storage = [[HCGeoStorage alloc] initWithApiKey:@"ddefcf00aa13012d2bd6001ec2be2ed9" secret: @"123456"];
 	[storage setTestEnvironment];
 	mockedDelegate = [[MockedGeoStorageDelegate alloc] init];
 	storage.delegate = mockedDelegate;

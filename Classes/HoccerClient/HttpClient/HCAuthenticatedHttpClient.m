@@ -20,9 +20,9 @@
 }
 
 - (NSString *)signedURI: (NSString *)uri {
+	long timestamp = [[NSDate date] timeIntervalSince1970];
 	NSString *path = [uri stringByRemovingQuery];
 	NSString *paramsString = [uri URLQuery];
-	long timestamp = [[NSDate date] timeIntervalSince1970];
 	
 	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithURLParams:paramsString];
 	[params setObject:apiKey forKey:@"apiKey"];
@@ -33,15 +33,13 @@
 	const char *cKey  = [secret cStringUsingEncoding:NSASCIIStringEncoding];
 	const char *cData = [newUri cStringUsingEncoding:NSASCIIStringEncoding];
 	
-	unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+	unsigned char cHMAC[CC_SHA1_DIGEST_LENGTH];
 	
-	CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+	CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
 	
 	NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC
 										  length:sizeof(cHMAC)];
-	
-	// return [HMAC base64Encoding];
-	
+		
 	return [NSString stringWithFormat:@"%@&signature=%@", newUri, [[HMAC asBase64EncodedString] urlEncodeValue]];
 }
 

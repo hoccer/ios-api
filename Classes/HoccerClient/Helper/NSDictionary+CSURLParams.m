@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+CSURLParams.h"
+#import "NSString+URLHelper.h"
 
 
 @implementation NSDictionary (CSURLParams)
@@ -26,7 +27,8 @@
 - (NSString *)URLParams {
 	NSMutableArray *array = [NSMutableArray array];
 	for (NSString *key in self) {
-		NSString *keyValues = [NSString stringWithFormat:@"%@=%@", key, [self objectForKey:key]];
+		NSString *value = [self objectForKey:key];
+		NSString *keyValues = [NSString stringWithFormat:@"%@=%@", key, [value urlEncodeValue]];
 		[array addObject:keyValues];
 	}
 	

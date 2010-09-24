@@ -15,4 +15,5 @@
 - (NSString *) stringByRemovingQuery;
 - (NSString *) stringByAppendingQuery: (NSString *)query;
 
+- (NSString *) urlEncodeValue;
 @end

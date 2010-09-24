@@ -33,4 +33,9 @@
 	return [NSString stringWithFormat: @"%@?%@", self, query];
 }
 
+- (NSString *)urlEncodeValue {
+	NSString *result = (NSString *) CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)self, NULL, CFSTR(":/?#[]@!$&’()*+,;="), kCFStringEncodingUTF8);
+	return [result autorelease];
+}
+
 @end
