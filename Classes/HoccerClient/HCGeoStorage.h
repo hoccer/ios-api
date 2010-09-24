@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
-#import "HttpClient.h"
+#import "HCAuthenticatedHttpClient.h"
 #import "HCEnvironmentManager.h"
 #import "HCGeoStorageDelegate.h"
 
@@ -18,13 +18,15 @@
 
 @interface HCGeoStorage : NSObject {
 	HCEnvironmentManager *environmentController;
-	HttpClient *httpClient;
+	HCAuthenticatedHttpClient *httpClient;
 	
 	id <HCGeoStorageDelegate> delegate;
 }
 
 @property (assign) id <HCGeoStorageDelegate> delegate;
 @property (readonly) CLLocation *location;
+
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 
 - (void)storeProperties: (NSDictionary *)dictionary;
 - (void)storeProperties: (NSDictionary *)dictionary forTimeInterval: (NSTimeInterval)seconds;

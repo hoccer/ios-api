@@ -11,8 +11,8 @@
 #import "HCGeoStorage.h"
 #import "HCEnvironment.h"
 
-#define HOCCER_GEOSTORAGE_URI @"http://geostore.beta.hoccer.com"
-// #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.155:9292"
+// #define HOCCER_GEOSTORAGE_URI @"http://geostore.beta.hoccer.com"
+#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.157:9293"
 
 
 @interface HCGeoStorage ()
@@ -28,12 +28,14 @@
 @implementation HCGeoStorage
 @synthesize delegate;
 
-- (id) init {
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	self = [super init];
 	if (self != nil) {
 		environmentController = [[HCEnvironmentManager alloc] init];
-		httpClient = [[HttpClient alloc] initWithURLString:HOCCER_GEOSTORAGE_URI];
+		httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:HOCCER_GEOSTORAGE_URI];
 		httpClient.target = self;
+		httpClient.secret = secret;
+		httpClient.apiKey = key;
 	}
 	return self;
 }
