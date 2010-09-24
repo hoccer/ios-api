@@ -28,6 +28,7 @@
 - (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 - (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 - (void)deleteURI: (NSString *)uri success: (SEL)success;
+- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 
 - (void)cancelAllRequest;
 

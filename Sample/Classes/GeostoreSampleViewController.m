@@ -59,7 +59,6 @@
 
 @end
 
-
 @implementation GeostoreSampleViewController
 @synthesize mapView;
 
@@ -78,7 +77,6 @@
 	[mapView addGestureRecognizer:recognizer];
 	[recognizer release];
 }
-
 
 - (void)dealloc {
 	[geostorage release];

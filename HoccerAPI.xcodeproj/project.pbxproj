@@ -43,7 +43,6 @@
 		227C61881247A0B000059B66 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
 		227C61891247A0B000059B66 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
-		22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
 		22E903081240CC3000993693 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
 		22E903091240CC3000993693 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
 		22E904031240CC8800993693 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -51,6 +50,24 @@
 		22E904051240CC8800993693 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		22E904061240CC8800993693 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEB9D2123A34BE00276368 /* MockedLocationController.m */; };
+		22F460DA124BA925007FC482 /* HCAuthenticatedHttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F460D8124BA925007FC482 /* HCAuthenticatedHttpClient.h */; };
+		22F460DB124BA925007FC482 /* HCAuthenticatedHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F460D9124BA925007FC482 /* HCAuthenticatedHttpClient.m */; };
+		22F460DC124BA925007FC482 /* HCAuthenticatedHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F460D9124BA925007FC482 /* HCAuthenticatedHttpClient.m */; };
+		22FABF2F124CA41500B6AC40 /* NSDictionaryURLParamsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABF2E124CA41500B6AC40 /* NSDictionaryURLParamsTests.m */; };
+		22FABF34124CA97E00B6AC40 /* NSDictionary+CSURLParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FABF32124CA97E00B6AC40 /* NSDictionary+CSURLParams.h */; };
+		22FABF35124CA97E00B6AC40 /* NSDictionary+CSURLParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABF33124CA97E00B6AC40 /* NSDictionary+CSURLParams.m */; };
+		22FABF36124CA97E00B6AC40 /* NSDictionary+CSURLParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABF33124CA97E00B6AC40 /* NSDictionary+CSURLParams.m */; };
+		22FABFEC124CCEF300B6AC40 /* NSString+URLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FABFEA124CCEF300B6AC40 /* NSString+URLHelper.h */; };
+		22FABFED124CCEF300B6AC40 /* NSString+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABFEB124CCEF300B6AC40 /* NSString+URLHelper.m */; };
+		22FABFEE124CCEF300B6AC40 /* NSString+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABFEB124CCEF300B6AC40 /* NSString+URLHelper.m */; };
+		22FABFF1124CCF9D00B6AC40 /* NSStringURLHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABFF0124CCF9D00B6AC40 /* NSStringURLHelperTests.m */; };
+		22FAC02A124CD55B00B6AC40 /* HCGeoStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E902B01240C61A00993693 /* HCGeoStorageTests.m */; };
+		22FAC03C124CD6A900B6AC40 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC039124CD6A900B6AC40 /* Base64Transcoder.c */; };
+		22FAC03D124CD6A900B6AC40 /* Base64Transcoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FAC03A124CD6A900B6AC40 /* Base64Transcoder.h */; };
+		22FAC040124CD6C300B6AC40 /* NSData_Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC03F124CD6C300B6AC40 /* NSData_Base64Extensions.m */; };
+		22FAC041124CD6C300B6AC40 /* NSData_Base64Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FAC03E124CD6C300B6AC40 /* NSData_Base64Extensions.h */; };
+		22FAC042124CD6C300B6AC40 /* NSData_Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC03F124CD6C300B6AC40 /* NSData_Base64Extensions.m */; };
+		22FAC06A124CD8B000B6AC40 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC039124CD6A900B6AC40 /* Base64Transcoder.c */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
@@ -93,6 +110,18 @@
 		22E903001240CB9A00993693 /* libHoccerLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHoccerLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		22EEB9D1123A34BE00276368 /* MockedLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MockedLocationController.h; path = Tests/MockedLocationController.h; sourceTree = "<group>"; };
 		22EEB9D2123A34BE00276368 /* MockedLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MockedLocationController.m; path = Tests/MockedLocationController.m; sourceTree = "<group>"; };
+		22F460D8124BA925007FC482 /* HCAuthenticatedHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCAuthenticatedHttpClient.h; sourceTree = "<group>"; };
+		22F460D9124BA925007FC482 /* HCAuthenticatedHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCAuthenticatedHttpClient.m; sourceTree = "<group>"; };
+		22FABF2E124CA41500B6AC40 /* NSDictionaryURLParamsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDictionaryURLParamsTests.m; path = Tests/NSDictionaryURLParamsTests.m; sourceTree = "<group>"; };
+		22FABF32124CA97E00B6AC40 /* NSDictionary+CSURLParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+CSURLParams.h"; path = "HoccerClient/Helper/NSDictionary+CSURLParams.h"; sourceTree = "<group>"; };
+		22FABF33124CA97E00B6AC40 /* NSDictionary+CSURLParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+CSURLParams.m"; path = "HoccerClient/Helper/NSDictionary+CSURLParams.m"; sourceTree = "<group>"; };
+		22FABFEA124CCEF300B6AC40 /* NSString+URLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLHelper.h"; sourceTree = "<group>"; };
+		22FABFEB124CCEF300B6AC40 /* NSString+URLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLHelper.m"; sourceTree = "<group>"; };
+		22FABFF0124CCF9D00B6AC40 /* NSStringURLHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringURLHelperTests.m; path = Tests/NSStringURLHelperTests.m; sourceTree = "<group>"; };
+		22FAC039124CD6A900B6AC40 /* Base64Transcoder.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = Base64Transcoder.c; path = HoccerClient/Helper/Base64Transcoder.c; sourceTree = "<group>"; };
+		22FAC03A124CD6A900B6AC40 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64Transcoder.h; path = HoccerClient/Helper/Base64Transcoder.h; sourceTree = "<group>"; };
+		22FAC03E124CD6C300B6AC40 /* NSData_Base64Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSData_Base64Extensions.h; path = HoccerClient/Helper/NSData_Base64Extensions.h; sourceTree = "<group>"; };
+		22FAC03F124CD6C300B6AC40 /* NSData_Base64Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSData_Base64Extensions.m; path = HoccerClient/Helper/NSData_Base64Extensions.m; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HoccerAPIViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -174,6 +203,8 @@
 				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
 				220E4B6B1243546F0059A287 /* HoccerTests.m */,
 				22E902B01240C61A00993693 /* HCGeoStorageTests.m */,
+				22FABF2E124CA41500B6AC40 /* NSDictionaryURLParamsTests.m */,
+				22FABFF0124CCF9D00B6AC40 /* NSStringURLHelperTests.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -185,6 +216,8 @@
 				220E4B58124352F60059A287 /* HttpClient.m */,
 				220E4B59124352F60059A287 /* HttpConnection.h */,
 				220E4B5A124352F60059A287 /* HttpConnection.m */,
+				22F460D8124BA925007FC482 /* HCAuthenticatedHttpClient.h */,
+				22F460D9124BA925007FC482 /* HCAuthenticatedHttpClient.m */,
 			);
 			name = HttpClient;
 			path = HoccerClient/HttpClient;
@@ -217,6 +250,7 @@
 		22A5C98C123790E5003DF9EC /* HoccerClient */ = {
 			isa = PBXGroup;
 			children = (
+				22FABF04124C947200B6AC40 /* Helper */,
 				220E4BA8124355900059A287 /* EnvironmentController */,
 				220E4B56124352F60059A287 /* HttpClient */,
 				22A5C98D12379123003DF9EC /* HCClient.h */,
@@ -228,6 +262,21 @@
 				220E4D82124370910059A287 /* Hoccer.h */,
 			);
 			name = HoccerClient;
+			sourceTree = "<group>";
+		};
+		22FABF04124C947200B6AC40 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				22FAC03E124CD6C300B6AC40 /* NSData_Base64Extensions.h */,
+				22FAC03F124CD6C300B6AC40 /* NSData_Base64Extensions.m */,
+				22FAC039124CD6A900B6AC40 /* Base64Transcoder.c */,
+				22FAC03A124CD6A900B6AC40 /* Base64Transcoder.h */,
+				22FABF32124CA97E00B6AC40 /* NSDictionary+CSURLParams.h */,
+				22FABF33124CA97E00B6AC40 /* NSDictionary+CSURLParams.m */,
+				22FABFEA124CCEF300B6AC40 /* NSString+URLHelper.h */,
+				22FABFEB124CCEF300B6AC40 /* NSString+URLHelper.m */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 		22FDCC61123E1473001FA03C /* MockedObjects */ = {
@@ -301,6 +350,11 @@
 				220E4BBA124355900059A287 /* WifiScanner.h in Headers */,
 				220E4BBC124355900059A287 /* WifiScannerDelegate.h in Headers */,
 				220E4D83124370910059A287 /* Hoccer.h in Headers */,
+				22F460DA124BA925007FC482 /* HCAuthenticatedHttpClient.h in Headers */,
+				22FABF34124CA97E00B6AC40 /* NSDictionary+CSURLParams.h in Headers */,
+				22FABFEC124CCEF300B6AC40 /* NSString+URLHelper.h in Headers */,
+				22FAC03D124CD6A900B6AC40 /* Base64Transcoder.h in Headers */,
+				22FAC041124CD6C300B6AC40 /* NSData_Base64Extensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +477,6 @@
 			files = (
 				220C63BB1238DB6C0014AECB /* GHUnitIOSTestMain.m in Sources */,
 				22EEB9D3123A34BE00276368 /* MockedLocationController.m in Sources */,
-				22E902B11240C61A00993693 /* HCGeoStorageTests.m in Sources */,
 				220E4BB4124355900059A287 /* WifiScanner.m in Sources */,
 				227C61831247A08D00059B66 /* HCEnvironment.m in Sources */,
 				227C61841247A08D00059B66 /* HCEnvironmentManager.m in Sources */,
@@ -431,6 +484,14 @@
 				227C61871247A09F00059B66 /* HCGeoStorage.m in Sources */,
 				227C61881247A0B000059B66 /* HttpClient.m in Sources */,
 				227C61891247A0B000059B66 /* HttpConnection.m in Sources */,
+				22F460DC124BA925007FC482 /* HCAuthenticatedHttpClient.m in Sources */,
+				22FABF2F124CA41500B6AC40 /* NSDictionaryURLParamsTests.m in Sources */,
+				22FABF36124CA97E00B6AC40 /* NSDictionary+CSURLParams.m in Sources */,
+				22FABFEE124CCEF300B6AC40 /* NSString+URLHelper.m in Sources */,
+				22FABFF1124CCF9D00B6AC40 /* NSStringURLHelperTests.m in Sources */,
+				22FAC02A124CD55B00B6AC40 /* HCGeoStorageTests.m in Sources */,
+				22FAC040124CD6C300B6AC40 /* NSData_Base64Extensions.m in Sources */,
+				22FAC06A124CD8B000B6AC40 /* Base64Transcoder.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +506,11 @@
 				220E4BB6124355900059A287 /* HCEnvironment.m in Sources */,
 				220E4BB8124355900059A287 /* HCEnvironmentManager.m in Sources */,
 				220E4BBB124355900059A287 /* WifiScanner.m in Sources */,
+				22F460DB124BA925007FC482 /* HCAuthenticatedHttpClient.m in Sources */,
+				22FABF35124CA97E00B6AC40 /* NSDictionary+CSURLParams.m in Sources */,
+				22FABFED124CCEF300B6AC40 /* NSString+URLHelper.m in Sources */,
+				22FAC03C124CD6A900B6AC40 /* Base64Transcoder.c in Sources */,
+				22FAC042124CD6C300B6AC40 /* NSData_Base64Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,10 +572,6 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
-					"-framework",
-					Foundation,
-					"-framework",
-					UIKit,
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Tests;
@@ -537,10 +599,6 @@
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
-					"-framework",
-					Foundation,
-					"-framework",
-					UIKit,
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Tests;
@@ -602,6 +660,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
@@ -616,6 +676,8 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
