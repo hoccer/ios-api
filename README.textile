@@ -2,13 +2,13 @@ h2. Install Hoccer to your project
 
 h3. Install the .framework
 
-* Obtain an Api Key and the framework from hoccer.com/developer
-* Get the Hoccer.framework and YAJLIOS.framework (from the lib folder)
-* Add both frameworks to your project 
+* Obtain an Api Key and the framework from hoccer.com/developer.
+* Add the Hoccer.framework and YAJLIOS.framework (from the lib folder) to your Xcode.
+* Add both frameworks to your project. 
 * Add following system frameworks:
 ** CoreLocation.framework
 ** MapKit.framework
-* Add -load_all, -ObjC to Other Linker Flags in your Project Build Options
+* Add -load_all, -ObjC to Other Linker Flags in your Project Build Options.
 
 h3. Sample Usage
 
@@ -23,9 +23,8 @@ bc..
 @implementation GeostoreSampleViewController
 
 - (void)viewDidLoad {
-
     geostorage = [[HCGeoStorage alloc] initWithApiKey:<your api key> secret:<your secret>];
-	}
+}
     
 geostorage.delegate = self;
     [geostorage searchNearby];
