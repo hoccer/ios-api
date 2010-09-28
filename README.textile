@@ -24,9 +24,7 @@ bc..
 
 - (void)viewDidLoad {
 
-    geostorage = [[HCGeoStorage alloc]
-		initWithApiKey:<your api key> 
-		        secret:<your secret>];
+    geostorage = [[HCGeoStorage alloc] initWithApiKey:<your api key> secret:<your secret>];
     
 geostorage.delegate = self;
     [geostorage searchNearby];
