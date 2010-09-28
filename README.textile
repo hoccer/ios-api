@@ -2,6 +2,7 @@ h2. Install Hoccer to your project
 
 h3. Install the .framework
 
+* Obtain an Api Key and the framework from hoccer.com/developer
 * Get the Hoccer.framework and YAJLIOS.framework (from the lib folder)
 * Add both frameworks to your project 
 * Add following system frameworks:
@@ -23,8 +24,11 @@ bc..
 
 - (void)viewDidLoad {
 
-    geostorage = [[HCGeoStorage alloc] init];
-    geostorage.delegate = self;
+    geostorage = [[HCGeoStorage alloc]
+		initWithApiKey:<your api key> 
+		        secret:<your secret>];
+    
+geostorage.delegate = self;
     [geostorage searchNearby];
 }
 
