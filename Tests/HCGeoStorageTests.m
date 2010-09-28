@@ -199,21 +199,19 @@ static NSMutableArray *allRecordIds;
 }
 
 - (void)testInvalidAuthentification {
-	HCGeoStorage *s = [[HCGeoStorage alloc] initWithApiKey:@"ddefcf00aa13012d2bd6001ec2be2ed9" secret: @"12346"];
+	HCGeoStorage *s = [[HCGeoStorage alloc] initWithApiKey:@"aaaaa" secret: @"12346"];
 	[s setTestEnvironment];
-	storage.delegate = mockedDelegate;
+	s.delegate = mockedDelegate;
 
 	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang clan ain't nothing to fuck wit" forKey:@"note"];
 	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
 	
-	[storage storeProperties:dict atLocation:coords forTimeInterval:10];
+	[s storeProperties:dict atLocation:coords forTimeInterval:10];
 	[self runForInterval:2];
 	
 	GHAssertNotNil(mockedDelegate.error, @"should have returned error");
 	GHAssertEquals([mockedDelegate.error code], 401, nil);
 }
-
-
 
 - (void)testSearchInPropertiesNearby {
 	[storage storeProperties:[NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"]];
@@ -250,8 +248,5 @@ static NSMutableArray *allRecordIds;
 	
 	[self runForInterval:2];
 }
-
-
-
 
 @end
