@@ -94,7 +94,7 @@ static NSMutableArray *allRecordIds;
 @implementation HCGeoStorageTests
 
 - (void)setUp {
-	storage = [[HCGeoStorage alloc] initWithApiKey:@"ddefcf00aa13012d2bd6001ec2be2ed9" secret: @"123456"];
+	storage = [[HCGeoStorage alloc] initWithApiKey:@"d9e26760ad39012dc9cf00176ed99fe3" secret: @"3t/ULFbjL01v7VdNedAOjIjNOfM="];
 	[storage setTestEnvironment];
 	mockedDelegate = [[MockedGeoStorageDelegate alloc] init];
 	storage.delegate = mockedDelegate;
@@ -212,6 +212,30 @@ static NSMutableArray *allRecordIds;
 	GHAssertNotNil(mockedDelegate.error, @"should have returned error");
 	GHAssertEquals([mockedDelegate.error code], 401, nil);
 }
+
+- (void)testAccountDestinction {
+	HCGeoStorage *storage2 = [[HCGeoStorage alloc] initWithApiKey:@"c43c98f0ad41012dc9cf00176ed99fe3" 
+														   secret: @"I+8cvWOBnhBsFIdxZM26diyvaeo="];
+	[storage2 setTestEnvironment];
+	storage2.delegate = mockedDelegate;
+	
+	NSDictionary *dict = [NSDictionary dictionaryWithObject:@"wu tang clan ain't nothing to fuck wit" forKey:@"note"];
+	CLLocationCoordinate2D coords; coords.latitude = 12; coords.longitude = 12;
+	
+	[storage2 storeProperties:dict atLocation:coords forTimeInterval:10];
+	[self runForInterval:2];
+	GHAssertNotNil(mockedDelegate.url, nil);
+	
+	
+	[storage searchAtLocation:coords radius:50];
+	[self runForInterval:2];
+	 
+	GHAssertNotNil(mockedDelegate.items, @"should have returned error");
+	GHAssertEquals((NSInteger)[mockedDelegate.items count], 0, nil);
+	
+}
+
+
 
 - (void)testSearchInPropertiesNearby {
 	[storage storeProperties:[NSDictionary dictionaryWithObject:@"beastie boys" forKey:@"layer"]];

@@ -8,7 +8,7 @@ h3. Install the .framework
 * Add following system frameworks:
 ** CoreLocation.framework
 ** MapKit.framework
-* Add -load_all, -ObjC to Other Linker Flags in your Project Build Options.
+* Add -all_load, -ObjC to Other Linker Flags in your Project Build Options.
 
 h3. Sample Usage
 

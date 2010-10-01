@@ -11,8 +11,8 @@
 #import "HCGeoStorage.h"
 #import "HCEnvironment.h"
 
-// #define HOCCER_GEOSTORAGE_URI @"http://geostore.beta.hoccer.com"
-#define HOCCER_GEOSTORAGE_URI @"http://192.168.2.157:9293"
+#define HOCCER_GEOSTORAGE_URI @"http://geostore.beta.hoccer.com"
+// #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.157:9293"
 
 
 @interface HCGeoStorage ()
@@ -178,6 +178,7 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didFailWithError: (NSError *)error {
+	NSLog(@"error");
 	if ([delegate respondsToSelector:@selector(geostorage:didFailWithError:)]) {
 		[delegate geostorage:self didFailWithError:error];
 	}
