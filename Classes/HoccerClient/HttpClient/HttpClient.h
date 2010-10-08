@@ -19,9 +19,12 @@
 	BOOL canceled;
 	
 	id target;
+	
+	NSString *userAgent;
 }
 
 @property (assign) id target;
+@property (retain) NSString *userAgent;
 
 - (id)initWithURLString: (NSString *)url;
 - (void)getURI: (NSString *)uri success: (SEL)success;

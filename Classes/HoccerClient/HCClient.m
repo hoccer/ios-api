@@ -12,7 +12,8 @@
 #import "HCEnvironment.h"
 #import "HttpClient.h"
 
-#define HOCCER_CLIENT_URI @"http://beta.hoccer.com/v3"
+#define HOCCER_CLIENT_URI @"http://linker.beta.hoccer.com"
+// #define HOCCER_CLIENT_URI @"http://192.168.2.155:9292"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 
@@ -41,11 +42,11 @@
 		httpClient.target = self;
 
 		uri = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
-		if (!uri) {
+		//if (!uri) {
 			[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
-		} else {
-			[self updateEnvironment];
-		}
+		//} else {
+//			[self updateEnvironment];
+//		}
 	}
 	
 	return self;

@@ -70,6 +70,7 @@
 @implementation HttpClient
 
 @synthesize target;
+@synthesize userAgent;
 
 - (id)initWithURLString: (NSString *)url {
 	self = [super init];
@@ -103,6 +104,7 @@
 	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
+	[request addValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
 
@@ -127,6 +129,7 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
+	NSLog(@"error %@", error);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	if (!canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
@@ -134,6 +137,7 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
+	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }
@@ -144,7 +148,7 @@
 		return;
 	}
 	
-	NSLog(@"body: %@", [[[NSString alloc] initWithData:container.receivedData encoding:NSUTF8StringEncoding] autorelease]);
+	NSLog(@"body: %@", [[[NSString alloc] initWithData: container.receivedData encoding:NSUTF8StringEncoding] autorelease]);
 	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.httpConnection withObject:container.receivedData];
@@ -160,6 +164,26 @@
 	
 	canceled = YES;
 }
+
+#pragma mark -
+#pragma mark Getter
+- (NSString *) userAgent {
+	if (userAgent == nil) {
+		// Hoccer 1.64 / iOs 4.1 de_de
+		
+		NSMutableString *buffer = [NSMutableString string];
+		[buffer appendFormat:@"%@ ", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
+		[buffer appendFormat:@"%@ / ", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+		[buffer appendFormat:@"%@ / ", [UIDevice currentDevice].model];
+		[buffer appendFormat:@"%@ %@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
+		userAgent = [buffer retain];
+		
+	}
+	NSLog(@"userAgent: %@", userAgent);
+	
+	return userAgent;
+}
+
 
 #pragma mark -
 #pragma mark HTTP Error Handling 

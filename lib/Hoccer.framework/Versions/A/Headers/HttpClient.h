@@ -19,15 +19,19 @@
 	BOOL canceled;
 	
 	id target;
+	
+	NSString *userAgent;
 }
 
 @property (assign) id target;
+@property (retain) NSString *userAgent;
 
 - (id)initWithURLString: (NSString *)url;
 - (void)getURI: (NSString *)uri success: (SEL)success;
 - (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 - (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 - (void)deleteURI: (NSString *)uri success: (SEL)success;
+- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 
 - (void)cancelAllRequest;
 
