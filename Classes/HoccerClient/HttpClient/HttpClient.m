@@ -169,17 +169,13 @@
 #pragma mark Getter
 - (NSString *) userAgent {
 	if (userAgent == nil) {
-		// Hoccer 1.64 / iOs 4.1 de_de
-		
 		NSMutableString *buffer = [NSMutableString string];
 		[buffer appendFormat:@"%@ ", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
 		[buffer appendFormat:@"%@ / ", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
 		[buffer appendFormat:@"%@ / ", [UIDevice currentDevice].model];
 		[buffer appendFormat:@"%@ %@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
 		userAgent = [buffer retain];
-		
 	}
-	NSLog(@"userAgent: %@", userAgent);
 	
 	return userAgent;
 }
