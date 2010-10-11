@@ -12,6 +12,9 @@
 
 #define HoccerError @"HoccerError"
 
+#define HCTransferModeOneToOne @"pass"
+#define HCTransferModeOneToMany @"distribute"
+
 enum HoccerErrors {
 	HoccerNoReceiverError = 1,
 	HoccerNoSenderError
@@ -34,7 +37,8 @@ enum HoccerErrors {
 @property (assign) id <HCClientDelegate> delegate;
 @property (assign) BOOL isRegistered;
 
-- (void)send: (NSData *)data withMode: (NSString *)mode;
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;  
+- (void)send: (NSDictionary *)data withMode: (NSString *)mode;
 - (void)receiveWithMode: (NSString *)mode;
 - (void)disconnect;
 
