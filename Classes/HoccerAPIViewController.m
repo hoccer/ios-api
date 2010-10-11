@@ -19,25 +19,6 @@
 @implementation HoccerAPIViewController
 @synthesize input, logger;
 
-
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -46,49 +27,71 @@
 	hoccer.delegate = self;
 }
 
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self.input resignFirstResponder];
+}
+
 - (IBAction)send: (id)sender {
 	NSString *message = input.text;
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:message forKey:@"message"];
 	[hoccer send:payload withMode:HCTransferModeOneToOne];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self log:@"send"];
 }
 
 - (IBAction)receive: (id)sender {
 	[hoccer receiveWithMode:HCTransferModeOneToOne];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self log:@"receive"];
 }
 
 - (IBAction)clearLog: (id)sender {
 	self.logger.text = @"";
 }
 
+- (void)terminate {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[hoccer disconnect];
+}
+
+
 #pragma mark -
 #pragma mark Hoccer Delegate Methods
 
 - (void)clientDidRegister: (HCClient *)hoccer; {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:NSStringFromSelector(_cmd)];
 	NSLog(@"registered");
 }
 
 - (void) client:(HCClient *)hoccer didSendDataWithInfo:(NSDictionary *)info {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), info]];
 	NSLog(@"send something");
 }
 
 - (void)client: (HCClient *)hoccer didReceiveData: (NSArray *)data {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), data]];
 
 	NSLog(@"hoccer did receive: %@", data);
 }
 
 - (void)client: (HCClient *)hoccer didFailWithError: (NSError *)error; {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), error]];
 
 	NSLog(@"error %@", error);
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self.input resignFirstResponder];
-}				   
-				   
+- (void)clientDidUnregister: (HCClient *)hoccer {
+	[self log:NSStringFromSelector(_cmd)];
+	NSLog(@"unregistered hoccer");
+}
+
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.

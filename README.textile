@@ -65,6 +65,8 @@ bc..
 
 @end
 
+p. See the HoccerApiViewController for more...
+
 
 h4. Using the geostorage api	
 

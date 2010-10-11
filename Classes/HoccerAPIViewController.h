@@ -24,5 +24,7 @@
 - (IBAction)receive: (id)sender;
 - (IBAction)clearLog: (id)sender;
 
+- (void)terminate;
+
 @end
 
