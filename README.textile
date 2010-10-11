@@ -13,8 +13,7 @@ h3. Install the .framework
 h3. Sample Usage
 
 h4. Using the linking service
-
-bc..
+bc.. 
 #import <Hoccer/Hoccer.h>
 
 @interface LinkingViewController : UIViewController <HCClientDelegate> {
