@@ -14,7 +14,6 @@ h3. Sample Usage
 
 h4. Using the linking service
 
-p.
 
 bc.. 
 #import <Hoccer/Hoccer.h>
