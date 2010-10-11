@@ -33,12 +33,11 @@ bc..
 
 - (IBAction)send: (id)sender {
 	NSDictionary *payload = [NSDictionary dictionaryWithObject: @"World" forKey: @"Hello"];
-	[client send: payload withMode:];
+	[client send: payload withMode: HCTransferModeDistribution];
 }
 
 - (IBAction)receive: (id)sender {
-	
-	[client receiveWithMode: ];
+	[client receiveWithMode: HCTransferModeDistribution];
 }
 
 #pragme mark -
@@ -53,7 +52,7 @@ bc..
 }
 
 - (void)client: (HCClient *)client didReceiveData: (NSArray *)data {
-	NSLog(@"received dictionary: %@", data)
+	NSLog(@"received data: %@", data)
 }
 
 - (void)client: (HCClient *)client didFailWithError: (NSError *)error {
