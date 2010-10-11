@@ -13,6 +13,9 @@ h3. Install the .framework
 h3. Sample Usage
 
 h4. Using the linking service
+
+p.
+
 bc.. 
 #import <Hoccer/Hoccer.h>
 
@@ -66,8 +69,8 @@ p.
 
 
 
-h4. Using the geostorage
-	
+h4. Using the geostorage	
+
 bc.. 
 #import <Hoccer/Hoccer.h>
 
