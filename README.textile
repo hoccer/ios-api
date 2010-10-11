@@ -27,7 +27,7 @@ bc..
 @implementation LinkingViewController 
 
 - (void)viewDidLoad {
-	client = [[HCClient alloc] initWithApiKey: @"1234567890" secret: @"geheim!!!11elf"];
+	client = [[HCClient alloc] initWithApiKey: @"1234567890" secret: @"secret!!!11elf"];
 	client.delegate = self;
 }
 
@@ -47,8 +47,8 @@ bc..
 	NSLog(@"ready for transfering data");
 }
 
-- (void)clientDidSendData: (HCClient *)hoccer {
-	NSLog(@"successfully send something");
+- (void)client: (HCClient *)hoccer didSendDataWithInfo: (NSDictionary):info  {
+	NSLog(@"successfully send something %@", info);
 }
 
 - (void)client: (HCClient *)client didReceiveData: (NSArray *)data {
@@ -60,9 +60,6 @@ bc..
 }
 
 @end
-
-p.
-
 
 
 h4. Using the geostorage api	

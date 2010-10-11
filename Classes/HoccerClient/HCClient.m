@@ -137,8 +137,8 @@
 		return;
 	}
 	
-	if ([delegate respondsToSelector:@selector(clientDidSendData:)]) {
-		[delegate clientDidSendData: self];
+	if ([delegate respondsToSelector:@selector(client:didSendDataWithInfo:)]) {
+		[delegate client: self didSendDataWithInfo: [data yajl_JSON]];
 	}
 }
 
@@ -158,6 +158,9 @@
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
 	NSLog(@"deleted resource");
+	if ([delegate respondsToSelector:@selector(clientDidUnregister:)]) {
+		[delegate clientDidUnregister: self];
+	}
 }
 
 #pragma mark -

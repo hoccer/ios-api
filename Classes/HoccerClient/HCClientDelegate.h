@@ -10,10 +10,11 @@
 @class HCClient;
 
 @protocol HCClientDelegate <NSObject>
-
+@optional
 - (void)clientDidRegister: (HCClient *)hoccer;
-- (void)clientDidSendData: (HCClient *)hoccer;
+- (void)client: (HCClient *)hoccer didSendDataWithInfo: (NSDictionary *)info ;
 - (void)client: (HCClient *)client didReceiveData: (NSArray *)data;
 - (void)client: (HCClient *)client didFailWithError: (NSError *)error;
+- (void)clientDidUnregister: (HCClient *)hoccer;
 
 @end

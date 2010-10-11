@@ -27,6 +27,7 @@
 @property (assign) NSInteger didFailWithErrorCalls;
 @property (readonly) NSArray *data;
 @property (readonly) NSError *error;
+//@property (readonly) NSDictionary *received;
 
 @end
 
@@ -40,7 +41,7 @@
 	didRegisterCalls += 1;
 }
 
-- (void)clientDidSendData: (HCClient *)hoccer {
+- (void)client: (HCClient *)hoccer didSendDataWithInfo: (NSDictionary *)info {
 	didSendDataCalls += 1;
 }
 
