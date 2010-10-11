@@ -27,15 +27,13 @@ bc..
 @implementation LinkingViewController 
 
 - (void)viewDidLoad {
-	client = [[HCClient alloc] init];
-	client.apiKey = "1234567890";
-	cleint.secret = "geheim!!!11elf"
+	client = [[HCClient alloc] initWithApiKey: @"1234567890" secret: @"geheim!!!11elf"];
 	client.delegate = self;
 }
 
 - (IBAction)send: (id)sender {
-		
-	[client send:withMode:];
+	NSDictionary *payload = [NSDictionary dictionaryWithObject: @"World" forKey: @"Hello"];
+	[client send: payload withMode:];
 }
 
 - (IBAction)receive: (id)sender {
