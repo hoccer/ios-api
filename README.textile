@@ -12,7 +12,7 @@ h3. Install the .framework
 
 h3. Sample Usage
 
-h4. Using the linking service
+h4. Using the linking service api
 
 
 bc.. 
@@ -33,11 +33,11 @@ bc..
 
 - (IBAction)send: (id)sender {
 	NSDictionary *payload = [NSDictionary dictionaryWithObject: @"World" forKey: @"Hello"];
-	[client send: payload withMode: HCTransferModeDistribution];
+	[client send: payload withMode: HCTransferModeOneToOne];
 }
 
 - (IBAction)receive: (id)sender {
-	[client receiveWithMode: HCTransferModeDistribution];
+	[client receiveWithMode: HCTransferModeOneToOne];
 }
 
 #pragme mark -
@@ -65,7 +65,7 @@ p.
 
 
 
-h4. Using the geostorage	
+h4. Using the geostorage api	
 
 bc.. 
 #import <Hoccer/Hoccer.h>

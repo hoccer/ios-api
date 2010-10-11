@@ -92,7 +92,7 @@
 	[self cleanupUserDefaults];
 	
 	mockedDelegate = [[MockedDelegate alloc] init]; 
-	hoccer = [[HCClient alloc] init];
+	hoccer = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret!"];
 	[hoccer setTestEnvironment];
 	hoccer.delegate = mockedDelegate;
 }
@@ -116,7 +116,7 @@
 - (void)testLonleySend {
 	[self runForInterval:1];
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"Peter" forKey:@"Hallo"];
-	[hoccer send:payload withMode:@"distribute"];
+	[hoccer send:payload withMode:HCTransferModeOneToMany];
 	[self runForInterval:2];
 	[hoccer disconnect];
 	[self runForInterval:1];
@@ -126,7 +126,7 @@
 
 - (void)testLonleyReceive {
 	[self runForInterval:1];
-	[hoccer receiveWithMode:@"distribute"];
+	[hoccer receiveWithMode:HCTransferModeOneToMany];
 	[self runForInterval:2];
 	[hoccer disconnect];
 	[self runForInterval:1];
@@ -137,15 +137,15 @@
 
 - (void)testSendAndReceive {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCClient *hoccer2 = [[HCClient alloc] init];
+	HCClient *hoccer2 = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret"];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
 	[self runForInterval:1];
 	
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"API3" forKey:@"Hello"];
-	[hoccer receiveWithMode:@"distribute"];
-	[hoccer2 send:payload withMode:@"distribute"];
+	[hoccer receiveWithMode:HCTransferModeOneToOne];
+	[hoccer2 send:payload withMode:HCTransferModeOneToOne];
 
 	[self runForInterval:7];
 
@@ -164,14 +164,14 @@
 }
 
 - (void)testReceivingWithoutPreconditions {
-	[hoccer receiveWithMode:@"distribute"];
+	[hoccer receiveWithMode:HCTransferModeOneToMany];
 	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");
 }
 
 
 - (void)testPassAndDistributeDoNotPair {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCClient *hoccer2 = [[HCClient alloc] init];
+	HCClient *hoccer2 = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret"];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
@@ -179,8 +179,8 @@
 	
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"API3" forKey:@"Hello"];
 	
-	[hoccer receiveWithMode:@"pass"];
-	[hoccer2 send:payload withMode:@"distribute"];
+	[hoccer receiveWithMode:HCTransferModeOneToOne];
+	[hoccer2 send:payload withMode:HCTransferModeOneToMany];
 	
 	[self runForInterval:7];
 		

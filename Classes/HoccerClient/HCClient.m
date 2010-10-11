@@ -32,7 +32,7 @@
 @synthesize environmentController;
 @synthesize isRegistered;
 
-- (id) init {
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	self = [super init];
 	if (self != nil) {
 		environmentController = [[HCEnvironmentManager alloc] init];
