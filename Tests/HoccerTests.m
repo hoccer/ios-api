@@ -18,14 +18,14 @@
 	NSInteger didRegisterCalls, didSendDataCalls, 
 			  didReceiveDataCalls, didFailWithErrorCalls;
 	NSError *_error;
-	NSData *_data; 
+	NSArray *_data; 
 }
 
 @property (assign) NSInteger didRegisterCalls;
 @property (assign) NSInteger didSendDataCalls;
 @property (assign) NSInteger didReceiveDataCalls;
 @property (assign) NSInteger didFailWithErrorCalls;
-@property (readonly) NSData *data;
+@property (readonly) NSArray *data;
 @property (readonly) NSError *error;
 
 @end
@@ -44,7 +44,7 @@
 	didSendDataCalls += 1;
 }
 
-- (void)client: (HCClient *)hoccer didReceiveData: (NSData *)data {
+- (void)client: (HCClient *)hoccer didReceiveData: (NSArray *)data {
 	didReceiveDataCalls += 1;
 	_data = [data retain];
 }
@@ -115,7 +115,8 @@
 
 - (void)testLonleySend {
 	[self runForInterval:1];
-	[hoccer send:[@"{\"Hallo\": \"Peter\"}" dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
+	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"Peter" forKey:@"Hallo"];
+	[hoccer send:payload withMode:@"distribute"];
 	[self runForInterval:2];
 	[hoccer disconnect];
 	[self runForInterval:1];
@@ -142,14 +143,12 @@
 	
 	[self runForInterval:1];
 	
-	NSString *payload = @"{\"Hallo\":\"API3\"}";
+	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"API3" forKey:@"Hello"];
 	[hoccer receiveWithMode:@"distribute"];
-	[hoccer2 send:[payload dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
+	[hoccer2 send:payload withMode:@"distribute"];
 
 	[self runForInterval:7];
 
-	NSString *received = [[[NSString alloc] initWithData:mockedDelegate.data encoding:NSUTF8StringEncoding] autorelease];
-	
 	[hoccer disconnect];
 	[hoccer2 disconnect];
 	[self runForInterval:1];
@@ -158,8 +157,10 @@
 	GHAssertEquals(mockedDelegate2.didSendDataCalls, 1, @"should have send some data");
 	GHAssertEquals(mockedDelegate.didReceiveDataCalls, 1, @"should have received some data");
 	
-	NSString *expected = [NSString stringWithFormat:@"[%@]", payload];
-	GHAssertEqualStrings(expected, received, @"should have received payload");
+	GHAssertTrue([mockedDelegate.data count] > 0, nil);
+	NSDictionary *received = [mockedDelegate.data objectAtIndex:0];
+
+	GHAssertEqualObjects(payload, received, @"should have received payload");
 }
 
 - (void)testReceivingWithoutPreconditions {
@@ -176,9 +177,10 @@
 	
 	[self runForInterval:1];
 	
-	NSString *payload = @"{\"Hallo\":\"API3\"}";
+	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"API3" forKey:@"Hello"];
+	
 	[hoccer receiveWithMode:@"pass"];
-	[hoccer2 send:[payload dataUsingEncoding:NSUTF8StringEncoding] withMode:@"distribute"];
+	[hoccer2 send:payload withMode:@"distribute"];
 	
 	[self runForInterval:7];
 		

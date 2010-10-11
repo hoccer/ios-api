@@ -7,6 +7,7 @@
 //
 
 #import "HttpClient.h"
+#import <YAJLIOS/YAJLIOS.h>
 
 @interface ConnectionContainer : NSObject 
 {
@@ -62,7 +63,6 @@
 
 @interface HttpClient ()
 
-- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
 - (BOOL)hasHttpError: (NSHTTPURLResponse *)response;
 
 @end

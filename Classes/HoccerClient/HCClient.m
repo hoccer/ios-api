@@ -52,14 +52,14 @@
 	return self;
 }
 
-- (void)send: (NSData *)data withMode: (NSString *)mode {
+- (void)send: (NSDictionary *)data withMode: (NSString *)mode {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	[httpClient postURI:[uri stringByAppendingPathComponent: actionString] 
-				payload:data
+				payload:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didSendData:)];	
 }
 
@@ -151,7 +151,7 @@
 	}
 
 	if ([delegate respondsToSelector:@selector(client:didReceiveData:)]) {
-		[delegate client: self didReceiveData: data];
+		[delegate client: self didReceiveData: [data yajl_JSON]];
 	}
 
 }

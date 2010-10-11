@@ -11,7 +11,62 @@ h3. Install the .framework
 * Add -all_load, -ObjC to Other Linker Flags in your Project Build Options.
 
 h3. Sample Usage
+h4. Using the linking service
+bc.
+#import <Hoccer/Hoccer.h>
 
+@interface LinkingViewController : UIViewController <HCClientDelegate> {
+	HCClient *client;
+}
+	
+@end
+
+@implementation LinkingViewController 
+
+- (void)viewDidLoad {
+	client = [[HCClient alloc] init];
+	client.apiKey = "1234567890";
+	cleint.secret = "geheim!!!1!elf"
+	client.delegate = self;
+}
+
+- (IBAction)send: (id)sender {
+		
+	[client send:withMode:];
+}
+
+- (IBAction)receive: (id)sender {
+	
+	[client receiveWithMode: ];
+}
+
+#pragme mark -
+#pragma mark HCClient Delegate Methods
+
+- (void)clientDidRegister: (HCClient *)hoccer {
+	NSLog(@"ready for transfering data");
+}
+
+- (void)clientDidSendData: (HCClient *)hoccer {
+	NSLog(@"successfully send something");
+}
+
+- (void)client: (HCClient *)client didReceiveData: (NSDictionary *)data {
+	NSLog(@"received dictionary: %@", data)
+}
+
+
+- (void)client: (HCClient *)client didFailWithError: (NSError *)error {
+	NSLog(@"failed with error: %@" error);
+}
+
+
+@end
+
+
+
+
+h4. Using the geostorage
 bc.. 
 #import <Hoccer/Hoccer.h>
 
@@ -24,14 +79,15 @@ bc..
 
 - (void)viewDidLoad {
     geostorage = [[HCGeoStorage alloc] initWithApiKey:<your api key> secret:<your secret>];
-}
+	geostorage.delegate = self;
     
-geostorage.delegate = self;
-    [geostorage searchNearby];
+	[geostorage searchNearby];
 }
 
 - (void)geostorage: (HCGeoStorage *)geoStorage didFindItems: (NSArray *)items {
     NSLog(@"items: %@", items);
 }
+
+- 
 
 p. A larger example can be found in the sample folder.

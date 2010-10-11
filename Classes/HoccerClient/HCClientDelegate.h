@@ -13,7 +13,7 @@
 
 - (void)clientDidRegister: (HCClient *)hoccer;
 - (void)clientDidSendData: (HCClient *)hoccer;
-- (void)client: (HCClient *)client didReceiveData: (NSData *)data;
+- (void)client: (HCClient *)client didReceiveData: (NSArray *)data;
 - (void)client: (HCClient *)client didFailWithError: (NSError *)error;
 
 @end
