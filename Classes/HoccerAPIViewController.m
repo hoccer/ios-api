@@ -7,10 +7,17 @@
 //
 
 #import "HoccerAPIViewController.h"
-#import "HCClient.h"
+
+@interface HoccerAPIViewController ()
+
+- (void)log: (NSString *)message;
+
+@end
+
+
 
 @implementation HoccerAPIViewController
-
+@synthesize input, logger;
 
 
 /*
@@ -35,39 +42,53 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	hoccer = [[HCClient alloc] init];
+	hoccer = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret111"];
 	hoccer.delegate = self;
 }
 
 - (IBAction)send: (id)sender {
-	NSData *data = [@"{\"inline\": \"Hallo\"}" dataUsingEncoding:NSUTF8StringEncoding];
-	
-	[hoccer send:data withMode:@"distribute"];
+	NSString *message = input.text;
+	NSDictionary *payload = [NSDictionary dictionaryWithObject:message forKey:@"message"];
+	[hoccer send:payload withMode:HCTransferModeOneToOne];
 }
 
 - (IBAction)receive: (id)sender {
-	[hoccer receiveWithMode:@"distribute"];
+	[hoccer receiveWithMode:HCTransferModeOneToOne];
+}
+
+- (IBAction)clearLog: (id)sender {
+	self.logger.text = @"";
 }
 
 #pragma mark -
 #pragma mark Hoccer Delegate Methods
 
 - (void)clientDidRegister: (HCClient *)hoccer; {
+	[self log:NSStringFromSelector(_cmd)];
 	NSLog(@"registered");
 }
 
-- (void)clientDidSendData: (HCClient *)hoccer; {
+- (void) client:(HCClient *)hoccer didSendDataWithInfo:(NSDictionary *)info {
+	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), info]];
 	NSLog(@"send something");
 }
 
-- (void)client: (HCClient *)hoccer didReceiveData: (NSData *)data {
-	NSLog(@"hoccer did receive: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+- (void)client: (HCClient *)hoccer didReceiveData: (NSArray *)data {
+	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), data]];
+
+	NSLog(@"hoccer did receive: %@", data);
 }
 
 - (void)client: (HCClient *)hoccer didFailWithError: (NSError *)error; {
+	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), error]];
+
 	NSLog(@"error %@", error);
 }
 
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self.input resignFirstResponder];
+}				   
+				   
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -87,6 +108,14 @@
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+}
+
+- (void) log:(NSString *)message {
+	if ([logger.text length] == 0) {
+		logger.text = message;
+	} else {
+		logger.text = [NSString stringWithFormat:@"%@\n\n%@", logger.text, message];
+	}
 }
 
 

@@ -59,6 +59,10 @@ bc..
 	NSLog(@"failed with error: %@" error);
 }
 
+- (void)clientDidUnregister: (HCClient *)hoccer {
+	NSLog(@"unregistered hoccer");
+}
+
 @end
 
 

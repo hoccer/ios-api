@@ -37,7 +37,6 @@
 		220E4D83124370910059A287 /* Hoccer.h in Headers */ = {isa = PBXBuildFile; fileRef = 220E4D82124370910059A287 /* Hoccer.h */; };
 		227C61831247A08D00059B66 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAA124355900059A287 /* HCEnvironment.m */; };
 		227C61841247A08D00059B66 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAC124355900059A287 /* HCEnvironmentManager.m */; };
-		227C61851247A09700059B66 /* libHoccerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E903001240CB9A00993693 /* libHoccerLib.a */; };
 		227C61861247A09F00059B66 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
 		227C61871247A09F00059B66 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
 		227C61881247A0B000059B66 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
@@ -68,6 +67,19 @@
 		22FAC041124CD6C300B6AC40 /* NSData_Base64Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FAC03E124CD6C300B6AC40 /* NSData_Base64Extensions.h */; };
 		22FAC042124CD6C300B6AC40 /* NSData_Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC03F124CD6C300B6AC40 /* NSData_Base64Extensions.m */; };
 		22FAC06A124CD8B000B6AC40 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC039124CD6A900B6AC40 /* Base64Transcoder.c */; };
+		22FD875E1263554B00219137 /* NSData_Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC03F124CD6C300B6AC40 /* NSData_Base64Extensions.m */; };
+		22FD875F1263554B00219137 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 22FAC039124CD6A900B6AC40 /* Base64Transcoder.c */; };
+		22FD87601263554B00219137 /* NSDictionary+CSURLParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABF33124CA97E00B6AC40 /* NSDictionary+CSURLParams.m */; };
+		22FD87611263554B00219137 /* NSString+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FABFEB124CCEF300B6AC40 /* NSString+URLHelper.m */; };
+		22FD87621263555200219137 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAA124355900059A287 /* HCEnvironment.m */; };
+		22FD87631263555200219137 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BAC124355900059A287 /* HCEnvironmentManager.m */; };
+		22FD87641263555E00219137 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
+		22FD87651263555E00219137 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
+		22FD87661263555E00219137 /* HCAuthenticatedHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F460D9124BA925007FC482 /* HCAuthenticatedHttpClient.m */; };
+		22FD87671263556900219137 /* HCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCClient.m */; };
+		22FD87681263556900219137 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
+		22FD876B1263558000219137 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4BB0124355900059A287 /* WifiScanner.m */; };
+		22FD87F81263576600219137 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E4B791243547F0059A287 /* YAJLIOS.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
@@ -141,7 +153,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */,
-				227C61851247A09700059B66 /* libHoccerLib.a in Frameworks */,
+				22FD87F81263576600219137 /* YAJLIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +480,18 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* HoccerAPIAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */,
+				22FD875E1263554B00219137 /* NSData_Base64Extensions.m in Sources */,
+				22FD875F1263554B00219137 /* Base64Transcoder.c in Sources */,
+				22FD87601263554B00219137 /* NSDictionary+CSURLParams.m in Sources */,
+				22FD87611263554B00219137 /* NSString+URLHelper.m in Sources */,
+				22FD87621263555200219137 /* HCEnvironment.m in Sources */,
+				22FD87631263555200219137 /* HCEnvironmentManager.m in Sources */,
+				22FD87641263555E00219137 /* HttpClient.m in Sources */,
+				22FD87651263555E00219137 /* HttpConnection.m in Sources */,
+				22FD87661263555E00219137 /* HCAuthenticatedHttpClient.m in Sources */,
+				22FD87671263556900219137 /* HCClient.m in Sources */,
+				22FD87681263556900219137 /* HCGeoStorage.m in Sources */,
+				22FD876B1263558000219137 /* WifiScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,12 +549,18 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "HoccerAPI-Info.plist";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = HoccerAPI;
 			};
 			name = Debug;
@@ -543,10 +573,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/lib\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = HoccerAPI_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "HoccerAPI-Info.plist";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PRODUCT_NAME = HoccerAPI;
 				VALIDATE_PRODUCT = YES;
 			};
