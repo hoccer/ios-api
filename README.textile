@@ -43,23 +43,23 @@ bc..
 #pragme mark -
 #pragma mark HCClient Delegate Methods
 
-- (void)linccerDidRegister: (HCLinccer *)hoccer {
+- (void)linccerDidRegister: (HCLinccer *)aLinccer {
 	NSLog(@"ready for transfering data");
 }
 
-- (void)linccer: (HCLinccer *)hoccer didSendDataWithInfo: (NSDictionary):info  {
+- (void)linccer: (HCLinccer *)aLinccer didSendDataWithInfo: (NSDictionary):info  {
 	NSLog(@"successfully send something %@", info);
 }
 
-- (void)linccer: (HCLinccer *)client didReceiveData: (NSArray *)data {
+- (void)linccer: (HCLinccer *)aLinccer didReceiveData: (NSArray *)data {
 	NSLog(@"received data: %@", data)
 }
 
-- (void)linccer: (HCLinccer *)client didFailWithError: (NSError *)error {
+- (void)linccer: (HCLinccer *)aLinccer didFailWithError: (NSError *)error {
 	NSLog(@"failed with error: %@" error);
 }
 
-- (void)linccerDidUnregister: (HCLinccer *)hoccer {
+- (void)linccerDidUnregister: (HCLinccer *)aLinccer {
 	NSLog(@"unregistered hoccer");
 }
 
