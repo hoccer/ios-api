@@ -22,7 +22,7 @@ enum HoccerErrors {
 
 @class HttpClient;
 
-@interface HCClient : NSObject <HCEnvironmentManagerDelegate> {
+@interface HCLinccer : NSObject <HCEnvironmentManagerDelegate> {
 	@private
 	HCEnvironmentManager *environmentController;
 	HttpClient *httpClient;
@@ -30,11 +30,11 @@ enum HoccerErrors {
 	NSString *uri;
 	BOOL isRegistered;
 	
-	id <HCClientDelegate> delegate;
+	id <HCLinccerDelegate> delegate;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;
-@property (assign) id <HCClientDelegate> delegate;
+@property (assign) id <HCLinccerDelegate> delegate;
 @property (assign) BOOL isRegistered;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;  

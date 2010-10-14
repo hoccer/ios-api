@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Hoccer.h"
-@class HCClient;
+@class HCLinccer;
 
-@interface HoccerAPIViewController : UIViewController <HCClientDelegate> {
-	HCClient *hoccer;
+@interface HoccerAPIViewController : UIViewController <HCLinccerDelegate> {
+	HCLinccer *linccer;
 	
 	UITextField *input;
 	UITextView *logger;

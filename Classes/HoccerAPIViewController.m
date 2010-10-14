@@ -23,8 +23,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	hoccer = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret111"];
-	hoccer.delegate = self;
+	linccer = [[HCLinccer alloc] initWithApiKey:@"123456789" secret:@"secret111"];
+	linccer.delegate = self;
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -34,14 +34,14 @@
 - (IBAction)send: (id)sender {
 	NSString *message = input.text;
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:message forKey:@"message"];
-	[hoccer send:payload withMode:HCTransferModeOneToOne];
+	[linccer send:payload withMode:HCTransferModeOneToOne];
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self log:@"send"];
 }
 
 - (IBAction)receive: (id)sender {
-	[hoccer receiveWithMode:HCTransferModeOneToOne];
+	[linccer receiveWithMode:HCTransferModeOneToOne];
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self log:@"receive"];
@@ -53,40 +53,40 @@
 
 - (void)terminate {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	[hoccer disconnect];
+	[linccer disconnect];
 }
 
 
 #pragma mark -
 #pragma mark Hoccer Delegate Methods
 
-- (void)clientDidRegister: (HCClient *)hoccer; {
+- (void)linccerDidRegister: (HCLinccer *)aLinccer; {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:NSStringFromSelector(_cmd)];
 	NSLog(@"registered");
 }
 
-- (void) client:(HCClient *)hoccer didSendDataWithInfo:(NSDictionary *)info {
+- (void)linccer:(HCLinccer *)aLinccer didSendDataWithInfo:(NSDictionary *)info {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), info]];
 	NSLog(@"send something");
 }
 
-- (void)client: (HCClient *)hoccer didReceiveData: (NSArray *)data {
+- (void)linccer: (HCLinccer *)aLinccer didReceiveData: (NSArray *)data {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), data]];
 
 	NSLog(@"hoccer did receive: %@", data);
 }
 
-- (void)client: (HCClient *)hoccer didFailWithError: (NSError *)error; {
+- (void)linccer: (HCLinccer *)aLinccer didFailWithError: (NSError *)error; {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), error]];
 
 	NSLog(@"error %@", error);
 }
 
-- (void)clientDidUnregister: (HCClient *)hoccer {
+- (void)linccerDidUnregister: (HCLinccer *)aLinccer {
 	[self log:NSStringFromSelector(_cmd)];
 	NSLog(@"unregistered hoccer");
 }
@@ -123,7 +123,7 @@
 
 
 - (void)dealloc {
-	[hoccer release];
+	[linccer release];
     [super dealloc];
 }
 

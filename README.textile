@@ -19,7 +19,7 @@ bc..
 #import <Hoccer/Hoccer.h>
 
 @interface LinkingViewController : UIViewController <HCClientDelegate> {
-	HCClient *client;
+	HCLinccer *client;
 }
 	
 @end
@@ -27,7 +27,7 @@ bc..
 @implementation LinkingViewController 
 
 - (void)viewDidLoad {
-	client = [[HCClient alloc] initWithApiKey: @"1234567890" secret: @"secret!!!11elf"];
+	client = [[HCLinccer alloc] initWithApiKey: @"1234567890" secret: @"secret!!!11elf"];
 	client.delegate = self;
 }
 
@@ -43,23 +43,23 @@ bc..
 #pragme mark -
 #pragma mark HCClient Delegate Methods
 
-- (void)clientDidRegister: (HCClient *)hoccer {
+- (void)linccerDidRegister: (HCLinccer *)hoccer {
 	NSLog(@"ready for transfering data");
 }
 
-- (void)client: (HCClient *)hoccer didSendDataWithInfo: (NSDictionary):info  {
+- (void)linccer: (HCLinccer *)hoccer didSendDataWithInfo: (NSDictionary):info  {
 	NSLog(@"successfully send something %@", info);
 }
 
-- (void)client: (HCClient *)client didReceiveData: (NSArray *)data {
+- (void)linccer: (HCLinccer *)client didReceiveData: (NSArray *)data {
 	NSLog(@"received data: %@", data)
 }
 
-- (void)client: (HCClient *)client didFailWithError: (NSError *)error {
+- (void)linccer: (HCLinccer *)client didFailWithError: (NSError *)error {
 	NSLog(@"failed with error: %@" error);
 }
 
-- (void)clientDidUnregister: (HCClient *)hoccer {
+- (void)linccerDidUnregister: (HCLinccer *)hoccer {
 	NSLog(@"unregistered hoccer");
 }
 

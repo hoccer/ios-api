@@ -6,5 +6,5 @@
 //  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
-#import "HCClient.h"
+#import "HCLinccer.h"
 #import "HCGeoStorage.h"

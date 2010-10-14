@@ -7,13 +7,12 @@
 //
 
 #import <GHUnitIOS/GHUnitIOS.h>
-#import "HCClient.h"
-#import "HCClientDelegate.h"
+#import "Hoccer.h"
 #import "MockedLocationController.h"
 
 #define HOCCER_CLIENT_URI @"hoccerClientUri" 
 
-@interface MockedDelegate : NSObject <HCClientDelegate>
+@interface MockedDelegate : NSObject <HCLinccerDelegate>
 {
 	NSInteger didRegisterCalls, didSendDataCalls, 
 			  didReceiveDataCalls, didFailWithErrorCalls;
@@ -37,20 +36,20 @@
 			didReceiveDataCalls, didFailWithErrorCalls;
 @synthesize data = _data, error = _error;
 
-- (void)clientDidRegister: (HCClient *)hoccer {
+- (void)linccerDidRegister: (HCLinccer *)hoccer {
 	didRegisterCalls += 1;
 }
 
-- (void)client: (HCClient *)hoccer didSendDataWithInfo: (NSDictionary *)info {
+- (void)linccer: (HCLinccer *)hoccer didSendDataWithInfo: (NSDictionary *)info {
 	didSendDataCalls += 1;
 }
 
-- (void)client: (HCClient *)hoccer didReceiveData: (NSArray *)data {
+- (void)linccer: (HCLinccer *)hoccer didReceiveData: (NSArray *)data {
 	didReceiveDataCalls += 1;
 	_data = [data retain];
 }
 
-- (void)client: (HCClient *)hoccer didFailWithError: (NSError *)error {
+- (void)linccer: (HCLinccer *)hoccer didFailWithError: (NSError *)error {
 	didFailWithErrorCalls += 1;
 	_error = [error retain];
 }
@@ -64,11 +63,11 @@
 
 @end
 
-@interface HCClient (TestEnvironment)
+@interface HCLinccer (TestEnvironment)
 - (void)setTestEnvironment;
 @end
 
-@implementation HCClient (TestEnvironment) 
+@implementation HCLinccer (TestEnvironment) 
 - (void)setTestEnvironment {
 	[environmentController release];
 	
@@ -78,7 +77,7 @@
 
 
 @interface HCClientTests : GHAsyncTestCase {
-	HCClient *hoccer;	
+	HCLinccer *hoccer;	
 	MockedDelegate *mockedDelegate;
 }
 
@@ -93,7 +92,7 @@
 	[self cleanupUserDefaults];
 	
 	mockedDelegate = [[MockedDelegate alloc] init]; 
-	hoccer = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret!"];
+	hoccer = [[HCLinccer alloc] initWithApiKey:@"123456789" secret:@"secret!"];
 	[hoccer setTestEnvironment];
 	hoccer.delegate = mockedDelegate;
 }
@@ -138,7 +137,7 @@
 
 - (void)testSendAndReceive {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCClient *hoccer2 = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret"];
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"123456789" secret:@"secret"];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
@@ -172,7 +171,7 @@
 
 - (void)testPassAndDistributeDoNotPair {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCClient *hoccer2 = [[HCClient alloc] initWithApiKey:@"123456789" secret:@"secret"];
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"123456789" secret:@"secret"];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	

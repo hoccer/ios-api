@@ -7,7 +7,7 @@
 //
 
 #import <YAJLIOS/YAJLIOS.h>
-#import "HCClient.h"
+#import "HCLinccer.h"
 #import "HCEnvironmentManager.h"
 #import "HCEnvironment.h"
 #import "HttpClient.h"
@@ -17,7 +17,7 @@
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 
-@interface HCClient ()
+@interface HCLinccer ()
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation HCClient
+@implementation HCLinccer
 @synthesize delegate;
 @synthesize environmentController;
 @synthesize isRegistered;
@@ -91,8 +91,8 @@
 }
 
 - (void)didFailWithError: (NSError *)error {
-	if ([delegate respondsToSelector:@selector(client:didFailWithError:)]) {
-		[delegate client:self didFailWithError:error];
+	if ([delegate respondsToSelector:@selector(linccer:didFailWithError:)]) {
+		[delegate linccer: self didFailWithError:error];
 	}
 }
 
@@ -124,8 +124,8 @@
 	}
 	
 	isRegistered = YES;
-	if ([delegate respondsToSelector:@selector(clientDidRegister:)]) {
-		[delegate clientDidRegister:self];
+	if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
+		[delegate linccerDidRegister:self];
 	}
 }
 
@@ -137,8 +137,8 @@
 		return;
 	}
 	
-	if ([delegate respondsToSelector:@selector(client:didSendDataWithInfo:)]) {
-		[delegate client: self didSendDataWithInfo: [data yajl_JSON]];
+	if ([delegate respondsToSelector:@selector(linccer:didSendDataWithInfo:)]) {
+		[delegate linccer: self didSendDataWithInfo: [data yajl_JSON]];
 	}
 }
 
@@ -150,16 +150,16 @@
 		return;
 	}
 
-	if ([delegate respondsToSelector:@selector(client:didReceiveData:)]) {
-		[delegate client: self didReceiveData: [data yajl_JSON]];
+	if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
+		[delegate linccer: self didReceiveData: [data yajl_JSON]];
 	}
 
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
 	NSLog(@"deleted resource");
-	if ([delegate respondsToSelector:@selector(clientDidUnregister:)]) {
-		[delegate clientDidUnregister: self];
+	if ([delegate respondsToSelector:@selector(linccerDidUnregister:)]) {
+		[delegate linccerDidUnregister: self];
 	}
 }
 
