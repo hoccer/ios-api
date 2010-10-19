@@ -7,13 +7,15 @@
 //
 
 #import <YAJLIOS/YAJLIOS.h>
+#import "NSString+URLHelper.h"
 #import "HCLinccer.h"
 #import "HCEnvironmentManager.h"
 #import "HCEnvironment.h"
 #import "HttpClient.h"
+#import "HCAuthenticatedHttpClient.h"
 
-#define HOCCER_CLIENT_URI @"http://linker.beta.hoccer.com"
-// #define HOCCER_CLIENT_URI @"http://192.168.2.155:9292"
+// #define HOCCER_CLIENT_URI @"http://linker.beta.hoccer.com"
+#define HOCCER_CLIENT_URI @"http://192.168.2.112:9292"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 
@@ -24,6 +26,8 @@
 
 - (NSDictionary *)userInfoForNoReceiver;
 - (NSDictionary *)userInfoForNoSender;
+
+- (NSString *)uuid;
 
 @end
 
@@ -38,15 +42,14 @@
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
 
-		httpClient = [[HttpClient alloc] initWithURLString:HOCCER_CLIENT_URI];
+		httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:HOCCER_CLIENT_URI];
+		httpClient.apiKey = key;
+		httpClient.secret = secret;
 		httpClient.target = self;
 
-		uri = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
-		//if (!uri) {
-			[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
-		//} else {
-//			[self updateEnvironment];
-//		}
+		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
+		
+		[self updateEnvironment];
 	}
 	
 	return self;
@@ -105,18 +108,6 @@
 
 #pragma mark -
 #pragma mark HttpClient Response Methods 
-- (void)httpConnection: (HttpConnection *)aConncetion didReceiveInfo: (NSData *)receivedData {
-	
-	NSString *string = [[[NSString alloc] initWithData: receivedData
-											  encoding:NSUTF8StringEncoding] autorelease];
-	
-	NSDictionary *info = [string yajl_JSON];
-	uri = [[info objectForKey:@"uri"] copy];
-	
-	[[NSUserDefaults standardUserDefaults] setObject:uri forKey:HOCCER_CLIENT_ID_KEY];
-	
-	[self updateEnvironment];
-};
 
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {
 	if (isRegistered) {
@@ -192,6 +183,23 @@
 			   payload:[[environmentController.environment JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
 }
+
+
+#pragma mark -
+#pragma mark Getter
+
+- (NSString *)uuid {
+	NSString *uuid = nil;
+	// uuid = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
+	if (!uuid) {
+		uuid = [NSString stringWithUUID];
+		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];
+
+	}
+	NSLog(@"uuid %@", uuid);
+	return uuid;
+}
+
 
 - (void)dealloc {
 	[httpClient cancelAllRequest];

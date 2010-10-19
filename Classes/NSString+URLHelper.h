@@ -11,9 +11,12 @@
 
 @interface NSString (URLHelper)
 
++ (NSString*) stringWithUUID;
+
 - (NSString *) URLQuery;
 - (NSString *) stringByRemovingQuery;
 - (NSString *) stringByAppendingQuery: (NSString *)query;
 
 - (NSString *) urlEncodeValue;
+
 @end
