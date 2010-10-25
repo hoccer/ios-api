@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HCClientDelegate.h"
+#import "HCLinccerDelegate.h"
 #import "HCEnvironmentManagerDelegate.h"
+#import "HCAuthenticatedHttpClient.h"
 
 #define HoccerError @"HoccerError"
 
@@ -25,7 +26,7 @@ enum HoccerErrors {
 @interface HCLinccer : NSObject <HCEnvironmentManagerDelegate> {
 	@private
 	HCEnvironmentManager *environmentController;
-	HttpClient *httpClient;
+	HCAuthenticatedHttpClient *httpClient;
 
 	NSString *uri;
 	BOOL isRegistered;
