@@ -44,8 +44,7 @@
     NSString *uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
     CFRelease(uuidObj);
     
-	[uuidString autorelease];
-	return [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+	return [uuidString autorelease];
 }
 
 @end

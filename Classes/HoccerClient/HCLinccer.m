@@ -14,8 +14,8 @@
 #import "HttpClient.h"
 #import "HCAuthenticatedHttpClient.h"
 
-// #define HOCCER_CLIENT_URI @"http://linker.beta.hoccer.com"
-#define HOCCER_CLIENT_URI @"http://192.168.2.112:9292"
+#define HOCCER_CLIENT_URI @"http://linker.beta.hoccer.com"
+// #define HOCCER_CLIENT_URI @"http://192.168.2.101:9292"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 
@@ -61,7 +61,7 @@
 	}
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
-	[httpClient postURI:[uri stringByAppendingPathComponent: actionString] 
+	[httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
 				payload:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didSendData:)];	
 }
@@ -175,7 +175,7 @@
 }
 
 - (void)updateEnvironment {	
-	if (uri == nil) {
+	if (uri == nil && [self.environmentController hasEnvironment]) {
 		return;
 	}
 	
@@ -196,7 +196,7 @@
 		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];
 
 	}
-	NSLog(@"uuid %@", uuid);
+
 	return uuid;
 }
 
