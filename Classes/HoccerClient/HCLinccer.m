@@ -52,6 +52,7 @@
 		[self updateEnvironment];
 	}
 	
+	
 	return self;
 }
 
@@ -189,8 +190,7 @@
 #pragma mark Getter
 
 - (NSString *)uuid {
-	NSString *uuid = nil;
-	// uuid = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
+	NSString *uuid = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
 	if (!uuid) {
 		uuid = [NSString stringWithUUID];
 		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];

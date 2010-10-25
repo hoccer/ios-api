@@ -13,8 +13,8 @@
 
 #define HoccerError @"HoccerError"
 
-#define HCTransferModeOneToOne @"pass"
-#define HCTransferModeOneToMany @"distribute"
+#define HCTransferModeOneToOne @"one-to-one"
+#define HCTransferModeOneToMany @"one-to-many"
 
 enum HoccerErrors {
 	HoccerNoReceiverError = 1,
