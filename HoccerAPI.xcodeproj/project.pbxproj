@@ -85,6 +85,7 @@
 		2899E5220DE3E06400AC0155 /* HoccerAPIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* HoccerAPIViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* HoccerAPIViewController.m */; };
+		E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +144,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* HoccerAPI_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoccerAPI_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* HoccerAPI-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HoccerAPI-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		E668E73C128305410003D10D /* HCLinccer+FakeUuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HCLinccer+FakeUuid.h"; path = "Tests/HCLinccer+FakeUuid.h"; sourceTree = "<group>"; };
+		E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HCLinccer+FakeUuid.m"; path = "Tests/HCLinccer+FakeUuid.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +300,8 @@
 			children = (
 				22EEB9D1123A34BE00276368 /* MockedLocationController.h */,
 				22EEB9D2123A34BE00276368 /* MockedLocationController.m */,
+				E668E73C128305410003D10D /* HCLinccer+FakeUuid.h */,
+				E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */,
 			);
 			name = MockedObjects;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 				22FAC06A124CD8B000B6AC40 /* Base64Transcoder.c in Sources */,
 				22934C91125B6CC20046007C /* HoccerTests.m in Sources */,
 				22CA6F4E12645CF2006BAE19 /* HoccerAPIViewController.m in Sources */,
+				E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

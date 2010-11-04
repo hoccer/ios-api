@@ -116,8 +116,8 @@
 - (void)testLonleySend {
 	[self runForInterval:1];
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"Peter" forKey:@"Hallo"];
-	[hoccer send:payload withMode:HCTransferModeOneToMany];
-	[self runForInterval:2];
+	[hoccer send:payload withMode:HCTransferModeOneToOne];
+	[self runForInterval:3];
 	[hoccer disconnect];
 	[self runForInterval:1];
 	
@@ -126,8 +126,8 @@
 
 - (void)testLonleyReceive {
 	[self runForInterval:1];
-	[hoccer receiveWithMode:HCTransferModeOneToMany];
-	[self runForInterval:2];
+	[hoccer receiveWithMode:HCTransferModeOneToOne];
+	[self runForInterval:3];
 	[hoccer disconnect];
 	[self runForInterval:1];
 	
