@@ -15,11 +15,12 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #define HOCCER_CLIENT_URI @"http://linker.beta.hoccer.com"
-// #define HOCCER_CLIENT_URI @"http://192.168.2.101:9292"
+// #define HOCCER_CLIENT_URI @"http://192.168.2.105:9292"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 
 @interface HCLinccer ()
+@property (retain) NSTimer *updateTimer;
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
@@ -32,6 +33,7 @@
 @end
 
 @implementation HCLinccer
+@synthesize updateTimer;
 @synthesize delegate;
 @synthesize environmentController;
 @synthesize isRegistered;
@@ -49,9 +51,8 @@
 
 		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
 		
-		[self updateEnvironment];
+		[self reactivate];
 	}
-	
 	
 	return self;
 }
@@ -75,6 +76,10 @@
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	[httpClient getURI:[uri stringByAppendingPathComponent: actionString] 
 			   success:@selector(httpConnection:didReceiveData:)];	
+}
+
+- (void)reactivate {
+	[self updateEnvironment];
 }
 
 - (void)disconnect {
@@ -122,7 +127,6 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
-	
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoReceiverError userInfo:[self userInfoForNoReceiver]];
 		[self didFailWithError:error];
@@ -135,7 +139,6 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
-
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
 		[self didFailWithError:error];
@@ -176,6 +179,9 @@
 }
 
 - (void)updateEnvironment {	
+	[updateTimer invalidate];
+	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:110 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
+	
 	if (uri == nil && [self.environmentController hasEnvironment]) {
 		return;
 	}

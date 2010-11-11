@@ -34,14 +34,14 @@
 - (IBAction)send: (id)sender {
 	NSString *message = input.text;
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:message forKey:@"message"];
-	[linccer send:payload withMode:HCTransferModeOneToOne];
+	[linccer send:payload withMode:HCTransferModeOneToMany];
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self log:@"send"];
 }
 
 - (IBAction)receive: (id)sender {
-	[linccer receiveWithMode:HCTransferModeOneToOne];
+	[linccer receiveWithMode:HCTransferModeOneToMany];
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self log:@"receive"];
@@ -54,6 +54,10 @@
 - (void)terminate {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[linccer disconnect];
+}
+
+- (void)reactivate {
+	[linccer reactivate];
 }
 
 
@@ -85,6 +89,7 @@
 
 	NSLog(@"error %@", error);
 }
+
 
 - (void)linccerDidUnregister: (HCLinccer *)aLinccer {
 	[self log:NSStringFromSelector(_cmd)];

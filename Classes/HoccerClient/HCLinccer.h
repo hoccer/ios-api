@@ -31,6 +31,8 @@ enum HoccerErrors {
 	NSString *uri;
 	BOOL isRegistered;
 	
+	NSTimer *updateTimer;
+	
 	id <HCLinccerDelegate> delegate;
 }
 
@@ -41,6 +43,8 @@ enum HoccerErrors {
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;  
 - (void)send: (NSDictionary *)data withMode: (NSString *)mode;
 - (void)receiveWithMode: (NSString *)mode;
+
+- (void)reactivate;
 - (void)disconnect;
 
 @end

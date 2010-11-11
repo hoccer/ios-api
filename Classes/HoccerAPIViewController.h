@@ -25,6 +25,7 @@
 - (IBAction)clearLog: (id)sender;
 
 - (void)terminate;
+- (void)reactivate;
 
 @end
 

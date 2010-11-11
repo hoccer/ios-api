@@ -92,7 +92,7 @@
 	[self cleanupUserDefaults];
 	
 	mockedDelegate = [[MockedDelegate alloc] init]; 
-	hoccer = [[HCLinccer alloc] initWithApiKey:@"cabfdb10bd96012d2df5001ec2be2ed9" secret:@"TfzWPdP8aS32FICbZo/QMb8I9aI="];
+	hoccer = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
 	[hoccer setTestEnvironment];
 	hoccer.delegate = mockedDelegate;
 }
@@ -137,7 +137,7 @@
 
 - (void)testSendAndReceive {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"cabfdb10bd96012d2df5001ec2be2ed9" secret:@"TfzWPdP8aS32FICbZo/QMb8I9aI="];
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
@@ -147,7 +147,7 @@
 	[hoccer receiveWithMode:HCTransferModeOneToOne];
 	[hoccer2 send:payload withMode:HCTransferModeOneToOne];
 
-	[self runForInterval:7];
+	[self runForInterval:3];
 
 	[hoccer disconnect];
 	[hoccer2 disconnect];
@@ -171,7 +171,7 @@
 
 - (void)testPassAndDistributeDoNotPair {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"123456789" secret:@"secret"];
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
@@ -197,8 +197,5 @@
 - (void)cleanupUserDefaults {
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:HOCCER_CLIENT_URI];
 }
-
-
-
 
 @end
