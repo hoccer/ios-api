@@ -15,7 +15,7 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #define HOCCER_CLIENT_URI @"http://linker.beta.hoccer.com"
-// #define HOCCER_CLIENT_URI @"http://192.168.2.105:9292"
+// #define HOCCER_CLIENT_URI @"http://192.168.2.101:9292"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 
@@ -180,7 +180,7 @@
 
 - (void)updateEnvironment {	
 	[updateTimer invalidate];
-	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:110 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
+	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:25 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
 	
 	if (uri == nil && [self.environmentController hasEnvironment]) {
 		return;
