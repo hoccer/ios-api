@@ -23,8 +23,25 @@
 	return self;
 }
 
-- (void)send: (NSString *)filepath; {}
-- (void)load: (NSString *)url; {}
+#pragma mark -
+#pragma mark Metods for Sending
+- (void)send: (NSString *)filepath; {
+	
+}
+
+
+#pragma mark -
+#pragma mark Methods for Fetching
+- (void)load: (NSString *)url {
+	[httpClient getURI:url success:@selector(httpConnection:didReceiveData:)];
+}
+
+- (void)httpConnection: (HttpConnection*)connection didReceiveData: (NSData *)data {
+	
+}
+
+
+
 - (void)cancenTransfer: (NSNumber *)transferId; {}
 
 
