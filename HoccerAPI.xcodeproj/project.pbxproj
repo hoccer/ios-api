@@ -86,6 +86,8 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* HoccerAPIViewController.m */; };
 		E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */; };
+		E6A7AD03129D45890034E2A7 /* HCFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A7AD02129D45890034E2A7 /* HCFileCache.m */; };
+		E6A7AD04129D45890034E2A7 /* HCFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A7AD02129D45890034E2A7 /* HCFileCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +148,8 @@
 		8D1107310486CEB800E47090 /* HoccerAPI-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HoccerAPI-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		E668E73C128305410003D10D /* HCLinccer+FakeUuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HCLinccer+FakeUuid.h"; path = "Tests/HCLinccer+FakeUuid.h"; sourceTree = "<group>"; };
 		E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HCLinccer+FakeUuid.m"; path = "Tests/HCLinccer+FakeUuid.m"; sourceTree = "<group>"; };
+		E6A7AD01129D45890034E2A7 /* HCFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCFileCache.h; path = HoccerClient/HCFileCache.h; sourceTree = "<group>"; };
+		E6A7AD02129D45890034E2A7 /* HCFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCFileCache.m; path = HoccerClient/HCFileCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +273,8 @@
 				22FABF04124C947200B6AC40 /* Helper */,
 				220E4BA8124355900059A287 /* EnvironmentController */,
 				220E4B56124352F60059A287 /* HttpClient */,
+				E6A7AD01129D45890034E2A7 /* HCFileCache.h */,
+				E6A7AD02129D45890034E2A7 /* HCFileCache.m */,
 				22A5C98D12379123003DF9EC /* HCLinccer.h */,
 				22A5C98E12379123003DF9EC /* HCLinccer.m */,
 				220E4B611243530B0059A287 /* HCLinccerDelegate.h */,
@@ -498,6 +504,7 @@
 				22FD87671263556900219137 /* HCLinccer.m in Sources */,
 				22FD87681263556900219137 /* HCGeoStorage.m in Sources */,
 				22FD876B1263558000219137 /* WifiScanner.m in Sources */,
+				E6A7AD03129D45890034E2A7 /* HCFileCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +531,7 @@
 				22934C91125B6CC20046007C /* HoccerTests.m in Sources */,
 				22CA6F4E12645CF2006BAE19 /* HoccerAPIViewController.m in Sources */,
 				E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */,
+				E6A7AD04129D45890034E2A7 /* HCFileCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
