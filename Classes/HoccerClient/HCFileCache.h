@@ -7,21 +7,38 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HttpClient.h"
+#import "HCAuthenticatedHttpClient.h"
+
 @class HCFileCache;
 
 @protocol HCFileCacheDelegate
 
 - (void)fileCache: (HCFileCache *)fileCache didFailWithError: (NSError *)error;
 - (void)fileCache: (HCFileCache *)fileCache didDownloadFile: (NSString *)path;
+- (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress;
+- (void)fileCache: (HCFileCache *)fileCache didUploadFile: (NSString *)path;
 
 @end
 
 
 @interface HCFileCache : NSObject {
-
+	HCAuthenticatedHttpClient *httpClient;
 }
+
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 
 - (void)send: (NSString *)filepath;
 - (void)load: (NSString *)url;
+- (void)cancenTransfer: (NSNumber *)transferId;
 
 @end
+
+
+/*
+ 
+ HCFileCache *cache = [[HCFileCache alloc] initWithApiKey: secret:];
+ [cache 
+ 
+*/
+
