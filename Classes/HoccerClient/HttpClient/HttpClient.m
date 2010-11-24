@@ -110,7 +110,7 @@
 
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
-	HttpConnection *httpConnection = [[HttpConnection alloc] init];
+	HttpConnection *httpConnection = [[[HttpConnection alloc] init] autorelease];
 	httpConnection.uri = uri;
 	httpConnection.request = request;
 	
