@@ -200,7 +200,6 @@
 	if (!uuid) {
 		uuid = [NSString stringWithUUID];
 		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];
-
 	}
 
 	return uuid;
