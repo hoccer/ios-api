@@ -28,9 +28,10 @@
 #pragma mark -
 #pragma mark Metods for Sending
 - (void)cacheData: (NSData *)data forTimeInterval: (NSTimeInterval)interval {
-	NSDictionary *params = [NSDictionary dictionaryWithObject:@"30" forKey:@"expires_in"];
-	NSString *uri = [@"/bla.txt" stringByAppendingQuery:[params URLParams]];
+	// NSDictionary *params = [NSDictionary dictionaryWithObject:@"30" forKey:@"expires_in"];
+	// NSString *uri = [@"/bla.txt" stringByAppendingQuery:[params URLParams]];
 	
+	NSString *uri = @"/bla.txt";
 	NSLog(@"uri: %@", uri);
 	
 	[httpClient putURI:uri payload:data success:@selector(httpConnection:didSendData:)];

@@ -43,8 +43,4 @@
 	return [NSString stringWithFormat:@"%@&signature=%@", newUri, [[HMAC asBase64EncodedString] urlEncodeValue]];
 }
 
-
-
-
-
 @end
