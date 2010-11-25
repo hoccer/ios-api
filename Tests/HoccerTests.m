@@ -166,6 +166,7 @@
 - (void)testReceivingWithoutPreconditions {
 	[hoccer receiveWithMode:HCTransferModeOneToMany];
 	GHAssertEquals(1, mockedDelegate.didFailWithErrorCalls, @"should have failed");
+	[hoccer disconnect];
 }
 
 

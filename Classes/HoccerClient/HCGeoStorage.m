@@ -11,7 +11,7 @@
 #import "HCGeoStorage.h"
 #import "HCEnvironment.h"
 
-#define HOCCER_GEOSTORAGE_URI @"http://geostore.beta.hoccer.com"
+#define HOCCER_GEOSTORAGE_URI @"https://geostore.beta.hoccer.com"
 // #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.157:9293"
 
 
