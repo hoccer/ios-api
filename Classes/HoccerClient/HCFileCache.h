@@ -28,7 +28,7 @@
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 
-- (void)send: (NSString *)filepath;
+- (void)cacheData: (NSData *)data forTimeInterval: (NSTimeInterval)interval;
 - (void)load: (NSString *)url;
 - (void)cancenTransfer: (NSNumber *)transferId;
 

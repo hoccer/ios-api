@@ -24,9 +24,11 @@
 	return params;
 }
 
-- (NSString *)URLParams {
+- (NSString *)URLParams {		
+	NSArray *keys = [[self allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+	
 	NSMutableArray *array = [NSMutableArray array];
-	for (NSString *key in self) {
+	for (NSString *key in keys) {
 		NSString *value = [self objectForKey:key];
 		NSString *keyValues = [NSString stringWithFormat:@"%@=%@", key, [value urlEncodeValue]];
 		[array addObject:keyValues];

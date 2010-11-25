@@ -9,7 +9,7 @@
 #import <GHUnitIOS/GHUnitIOS.h>
 #import "HCFileCache.h"
 
-@interface FileCacheTests : GHTestCase {
+@interface FileCacheTests : GHAsyncTestCase {
 	HCFileCache *fileCache;
 }
 
@@ -19,11 +19,14 @@
 @implementation FileCacheTests
 
 - (void)setUp {
-	fileCache = [[HCFileCache alloc] initWithApiKey:@"" secret:@""];
+	fileCache = [[HCFileCache alloc] initWithApiKey:@"f7f3b8b0dacc012de22a00176ed99fe3" secret:@"W5AeluYT7aOo9g0O9k9o2Iq1F2Y="];
 }
 
 - (void)testUploadingFile {
-	GHFail(@"fail");
+	NSData *data = [@"Hallo World" dataUsingEncoding:NSUTF8StringEncoding];
+	
+	[fileCache cacheData: data forTimeInterval: 30];
+	[self runForInterval: 3];
 }
 
 

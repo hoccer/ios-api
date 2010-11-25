@@ -41,7 +41,6 @@
 		227C61871247A09F00059B66 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C02ECA123FBF310035A73D /* HCGeoStorage.m */; };
 		227C61881247A0B000059B66 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B58124352F60059A287 /* HttpClient.m */; };
 		227C61891247A0B000059B66 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B5A124352F60059A287 /* HttpConnection.m */; };
-		22934C91125B6CC20046007C /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B6B1243546F0059A287 /* HoccerTests.m */; };
 		22A5C9BF12379B36003DF9EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A5C9BE12379B36003DF9EC /* CoreLocation.framework */; };
 		22CA6F4E12645CF2006BAE19 /* HoccerAPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* HoccerAPIViewController.m */; };
 		22E903081240CC3000993693 /* HCLinccer.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A5C98E12379123003DF9EC /* HCLinccer.m */; };
@@ -531,7 +530,6 @@
 				22FABFF1124CCF9D00B6AC40 /* NSStringURLHelperTests.m in Sources */,
 				22FAC040124CD6C300B6AC40 /* NSData_Base64Extensions.m in Sources */,
 				22FAC06A124CD8B000B6AC40 /* Base64Transcoder.c in Sources */,
-				22934C91125B6CC20046007C /* HoccerTests.m in Sources */,
 				22CA6F4E12645CF2006BAE19 /* HoccerAPIViewController.m in Sources */,
 				E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */,
 				E6A7AD04129D45890034E2A7 /* HCFileCache.m in Sources */,

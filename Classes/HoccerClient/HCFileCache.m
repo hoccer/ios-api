@@ -7,6 +7,8 @@
 //
 
 #import "HCFileCache.h"
+#import "NSDictionary+CSURLParams.h"
+#import "NSString+URLHelper.h"
 
 #define FILECACHE_URI @"http://filecache.sandbox.hoccer.com"
 @implementation HCFileCache
@@ -25,8 +27,13 @@
 
 #pragma mark -
 #pragma mark Metods for Sending
-- (void)send: (NSString *)filepath; {
+- (void)cacheData: (NSData *)data forTimeInterval: (NSTimeInterval)interval {
+	NSDictionary *params = [NSDictionary dictionaryWithObject:@"30" forKey:@"expires_in"];
+	NSString *uri = [@"/bla.txt" stringByAppendingQuery:[params URLParams]];
 	
+	NSLog(@"uri: %@", uri);
+	
+	[httpClient putURI:uri payload:data success:@selector(httpConnection:didSendData:)];
 }
 
 
@@ -36,11 +43,14 @@
 	[httpClient getURI:url success:@selector(httpConnection:didReceiveData:)];
 }
 
-- (void)httpConnection: (HttpConnection*)connection didReceiveData: (NSData *)data {
-	
+- (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
+	NSLog(@"did send data");
 }
 
 
+- (void)httpConnection: (HttpConnection*)connection didReceiveData: (NSData *)data {
+	NSLog(@"did receive data");
+}
 
 - (void)cancenTransfer: (NSNumber *)transferId; {}
 
