@@ -8,7 +8,7 @@
 
 #import "HCFileCache.h"
 
-#define FILECACHE_URI @"filecache.beta.hoccer.com"
+#define FILECACHE_URI @"http://filecache.sandbox.hoccer.com"
 @implementation HCFileCache
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {

@@ -88,6 +88,7 @@
 		E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */; };
 		E6A7AD03129D45890034E2A7 /* HCFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A7AD02129D45890034E2A7 /* HCFileCache.m */; };
 		E6A7AD04129D45890034E2A7 /* HCFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A7AD02129D45890034E2A7 /* HCFileCache.m */; };
+		E6A7AD4A129E648B0034E2A7 /* FileCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A7AD48129E648B0034E2A7 /* FileCacheTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +151,7 @@
 		E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HCLinccer+FakeUuid.m"; path = "Tests/HCLinccer+FakeUuid.m"; sourceTree = "<group>"; };
 		E6A7AD01129D45890034E2A7 /* HCFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCFileCache.h; path = HoccerClient/HCFileCache.h; sourceTree = "<group>"; };
 		E6A7AD02129D45890034E2A7 /* HCFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HCFileCache.m; path = HoccerClient/HCFileCache.m; sourceTree = "<group>"; };
+		E6A7AD48129E648B0034E2A7 /* FileCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCacheTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +227,7 @@
 				22E902B01240C61A00993693 /* HCGeoStorageTests.m */,
 				22FABF2E124CA41500B6AC40 /* NSDictionaryURLParamsTests.m */,
 				22FABFF0124CCF9D00B6AC40 /* NSStringURLHelperTests.m */,
+				E6A7AD48129E648B0034E2A7 /* FileCacheTests.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				22CA6F4E12645CF2006BAE19 /* HoccerAPIViewController.m in Sources */,
 				E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */,
 				E6A7AD04129D45890034E2A7 /* HCFileCache.m in Sources */,
+				E6A7AD4A129E648B0034E2A7 /* FileCacheTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
