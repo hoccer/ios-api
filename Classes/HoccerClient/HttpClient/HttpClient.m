@@ -101,25 +101,29 @@
 - (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
 	NSLog(@"%@ %@ %@", method, baseURL, uri);
 	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
+	[self requestMethod:method absoluteURL:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload success:success];
+}
+
+- (void)requestMethod:(NSString *)method absoluteURL:(NSString *)URLString payload:(NSData *)payload success:(SEL)success {
+	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
 	[request addValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
-
+	
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
 	HttpConnection *httpConnection = [[[HttpConnection alloc] init] autorelease];
-	httpConnection.uri = uri;
+	httpConnection.uri = URLString;
 	httpConnection.request = request;
 	
 	ConnectionContainer *container = [ConnectionContainer containerWithConnection: connection successSelector:success];
 	container.httpConnection = httpConnection;
 	
 	[connections setObject: container forKey:[connection description]];
+	
 }
-
 
 #pragma mark -
 #pragma mark NSURLConnection Delegate Methods

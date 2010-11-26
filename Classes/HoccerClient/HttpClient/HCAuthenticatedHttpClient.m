@@ -25,7 +25,7 @@
 	NSString *paramsString = [uri URLQuery];
 	
 	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithURLParams:paramsString];
-	[params setObject:apiKey forKey:@"apiKey"];
+	[params setObject:apiKey forKey:@"api_key"];
 	[params setObject:[[NSNumber numberWithDouble:timestamp] stringValue] forKey:@"timestamp"];
 	
 	NSString *newUri = [path stringByAppendingQuery: [params URLParams]];

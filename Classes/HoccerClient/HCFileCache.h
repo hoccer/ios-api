@@ -12,19 +12,23 @@
 
 @class HCFileCache;
 
-@protocol HCFileCacheDelegate
-
+@protocol HCFileCacheDelegate <NSObject>
+@optional
 - (void)fileCache: (HCFileCache *)fileCache didFailWithError: (NSError *)error;
 - (void)fileCache: (HCFileCache *)fileCache didDownloadFile: (NSString *)path;
 - (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress;
-- (void)fileCache: (HCFileCache *)fileCache didUploadFile: (NSString *)path;
+- (void)fileCache: (HCFileCache *)fileCache didUploadFileToPath: (NSString *)path;
 
 @end
 
 
 @interface HCFileCache : NSObject {
 	HCAuthenticatedHttpClient *httpClient;
+	
+	id <HCFileCacheDelegate> delegate;
 }
+
+@property (assign) id <HCFileCacheDelegate> delegate;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 
@@ -33,12 +37,3 @@
 - (void)cancenTransfer: (NSNumber *)transferId;
 
 @end
-
-
-/*
- 
- HCFileCache *cache = [[HCFileCache alloc] initWithApiKey: secret:];
- [cache 
- 
-*/
-
