@@ -29,15 +29,14 @@
 
 #pragma mark -
 #pragma mark Metods for Sending
-- (void)cacheData: (NSData *)data forTimeInterval: (NSTimeInterval)interval {
-	NSDictionary *params = [NSDictionary dictionaryWithObject:@"30" forKey:@"expires_in"];
-	NSString *uri = [@"/bla.txt" stringByAppendingQuery:[params URLParams]];
+- (void)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
+	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithFloat:interval] stringValue] forKey:@"expires_in"];
 	
-	NSLog(@"uri: %@", uri);
-	
-	[httpClient putURI:uri payload:data success:@selector(httpConnection:didSendData:)];
+	NSString *urlName = [@"/" stringByAppendingString:filename];
+	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];
+		
+	return [httpClient putURI:uri payload:data success:@selector(httpConnection:didSendData:)];
 }
-
 
 #pragma mark -
 #pragma mark Methods for Fetching
@@ -46,9 +45,9 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
-	if ([delegate respondsToSelector:@selector(fileCache:didUploadFileToPath:)]) {
+	if ([delegate respondsToSelector:@selector(fileCache:didUploadFileToURI:)]) {
 		NSString *body = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-		[delegate fileCache:self didUploadFileToPath:body];
+		[delegate fileCache:self didUploadFileToURI:body];
 	}
 }
 
@@ -56,7 +55,14 @@
 	NSLog(@"did receive data: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 }
 
+- (void)httpConnection:(HttpConnection *)connection didUpdateDownloadPercentage: (NSNumber *)percentage {
+	if ([delegate respondsToSelector:@selector(fileCache:didUpdateProgress:forURI:)]) {
+		[delegate fileCache:self didUpdateProgress:percentage forURI: connection.uri];
+	}
+}
 
-- (void) cancenTransfer:(NSNumber *)transferId {}
+- (void)cancelTransferWithURI: (NSString *)transferUri {
+	
+}
 
 @end

@@ -37,8 +37,8 @@
 	
 	CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
 	
-	NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC
-										  length:sizeof(cHMAC)];
+	NSData *HMAC = [[[NSData alloc] initWithBytes:cHMAC
+										  length:sizeof(cHMAC)] autorelease];
 		
 	return [NSString stringWithFormat:@"%@&signature=%@", newUri, [[HMAC asBase64EncodedString] urlEncodeValue]];
 }

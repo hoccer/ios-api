@@ -10,24 +10,44 @@
 #import "HCFileCache.h"
 
 
-@interface MockedFileCacheDelegate : NSObject <HCFileCacheDelegate>
-{
-	NSString *uploadPath;
+@interface MockedFileCacheDelegate : NSObject <HCFileCacheDelegate> {
+
+	
+	NSNumber *downloadedPercentage;
+	NSString *downloadedURI;
 }
 
 @property (retain, nonatomic) NSString *uploadPath;
+
+@property (retain, nonatomic) NSNumber *downloadedPercentage;
+@property (retain, nonatomic) NSString *downloadURI;
+@property (retain, nonatomic) NSData *receivedData;
+
 @end
 
 @implementation MockedFileCacheDelegate
 @synthesize uploadPath;
+@synthesize downloadedPercentage, downloadURI;
+@synthesize receivedData;
 
-
-- (void) fileCache:(HCFileCache *)fileCache didUploadFileToPath:(NSString *)path {
+- (void) fileCache:(HCFileCache *)fileCache didUploadFileToURI:(NSString *)path {
 	self.uploadPath = path;
+}
+
+- (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress forURI: (NSString *)uri {
+	self.downloadedPercentage = progress;
+	self.downloadURI = uri;
+}
+
+- (void) fileCache:(HCFileCache *)fileCache didDownloadData: (NSData *)data forURI: (NSString *)uri {
+	self.receivedData = data;
 }
 
 - (void) dealloc {
 	[uploadPath release];
+	[downloadedPercentage release];
+	[downloadURI release];
+	
 	[super dealloc];
 }
 
@@ -59,22 +79,18 @@
 - (void)testUploadingFile {
 	NSData *data = [@"Hallo World" dataUsingEncoding:NSUTF8StringEncoding];
 	
-	[fileCache cacheData: data forTimeInterval: 30];
+	[fileCache cacheData: data withFilename: @"word.txt" forTimeInterval: 30];
 	[self runForInterval: 2];
 	
 	GHAssertNotNil(fileCacheDelegate.uploadPath, @"upload should return an upload path, but was nil");
+	GHAssertEquals([fileCacheDelegate.downloadedPercentage intValue], 1, 
+				   [NSString stringWithFormat: @"should have downloaded up to 1, but was %@", fileCacheDelegate.downloadedPercentage]);
 	
 	[fileCache load:fileCacheDelegate.uploadPath];
 	[self runForInterval: 2];
+	
+	// GHAssertNotNil(fileCacheDelegate.receivedData, @"");
 }
-
-
--(void) fileCache:(HCFileCache *)fileCache didUploadFileToPath:(NSString *)path {
-	NSLog(@"uploaded to path: %@", path);
-}
-
-
-
 
 
 @end

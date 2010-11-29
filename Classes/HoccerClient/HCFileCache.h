@@ -16,8 +16,8 @@
 @optional
 - (void)fileCache: (HCFileCache *)fileCache didFailWithError: (NSError *)error;
 - (void)fileCache: (HCFileCache *)fileCache didDownloadFile: (NSString *)path;
-- (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress;
-- (void)fileCache: (HCFileCache *)fileCache didUploadFileToPath: (NSString *)path;
+- (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress forURI: (NSString *)uri;
+- (void)fileCache: (HCFileCache *)fileCache didUploadFileToURI: (NSString *)path;
 
 @end
 
@@ -32,8 +32,8 @@
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 
-- (void)cacheData: (NSData *)data forTimeInterval: (NSTimeInterval)interval;
+- (void)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval;
 - (void)load: (NSString *)url;
-- (void)cancenTransfer: (NSNumber *)transferId;
+- (void)cancelTransferWithURI: (NSString *)transferUri;
 
 @end

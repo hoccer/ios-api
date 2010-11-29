@@ -122,7 +122,6 @@
 	container.httpConnection = httpConnection;
 	
 	[connections setObject: container forKey:[connection description]];
-	
 }
 
 #pragma mark -
@@ -130,10 +129,17 @@
 - (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)data {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	[container.receivedData appendData:data];
+	
+	CGFloat downloaded = [container.httpConnection.response expectedContentLength] / [container.receivedData length];
+	NSLog(@"downloaded: %f", downloaded);
+	
+	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
+		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
+					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: downloaded]];
+	}
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-	NSLog(@"error %@", error);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	if (!canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
@@ -141,7 +147,7 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);
+	NSLog(@"response: %d", [(NSHTTPURLResponse *)response expectedContentLength]);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }

@@ -30,7 +30,8 @@ static CLLocationDegrees lastLatitude = 5, lastLongitue = 5;
 													  horizontalAccuracy:100 verticalAccuracy:20 timestamp:[NSDate date]];
 	
 	HCEnvironment *location = [[HCEnvironment alloc] initWithLocation:currentLocation bssids:array];
-	return location;
+	[currentLocation release];
+	return [location autorelease];
 }
 
 - (void)next {
