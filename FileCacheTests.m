@@ -35,6 +35,7 @@
 }
 
 - (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress forURI: (NSString *)uri {
+	NSLog(@"did update progress");
 	self.downloadedPercentage = progress;
 	self.downloadURI = uri;
 }
@@ -88,8 +89,16 @@
 	
 	[fileCache load:fileCacheDelegate.uploadPath];
 	[self runForInterval: 2];
-	
-	// GHAssertNotNil(fileCacheDelegate.receivedData, @"");
+}
+
+- (void)testAbortingUpload {
+	NSData *data = [@"Hallo Welt" dataUsingEncoding:NSUTF8StringEncoding];
+	NSString *uploadId = [fileCache cacheData:data withFilename:@"word.txt" forTimeInterval:30];
+	[fileCache cancelTransferWithURI:uploadId];
+
+	[self runForInterval:2];
+	GHAssertEquals([fileCacheDelegate.downloadedPercentage intValue], 0, 
+				   [NSString stringWithFormat: @"should have downloaded 0\%, but was %@", fileCacheDelegate.downloadedPercentage]);
 }
 
 
