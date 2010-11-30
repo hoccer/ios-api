@@ -32,8 +32,8 @@
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 
-- (void)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval;
-- (void)load: (NSString *)url;
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval;
+- (NSString *)load: (NSString *)url;
 - (void)cancelTransferWithURI: (NSString *)transferUri;
 
 @end

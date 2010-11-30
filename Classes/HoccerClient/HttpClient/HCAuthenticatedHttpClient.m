@@ -15,8 +15,8 @@
 
 @synthesize secret, apiKey;
 
-- (void) requestMethod:(NSString *)method URI:(NSString *)uri payload:(NSData *)payload success:(SEL)success {
-	[super requestMethod:method URI:[self signedURI:uri] payload:payload success:success];
+- (NSString *) requestMethod:(NSString *)method URI:(NSString *)uri payload:(NSData *)payload success:(SEL)success {
+	return [super requestMethod:method URI:[self signedURI:uri] payload:payload success:success];
 }
 
 - (NSString *)signedURI: (NSString *)uri {

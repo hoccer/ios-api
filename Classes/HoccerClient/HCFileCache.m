@@ -29,7 +29,7 @@
 
 #pragma mark -
 #pragma mark Metods for Sending
-- (void)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
 	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithFloat:interval] stringValue] forKey:@"expires_in"];
 	
 	NSString *urlName = [@"/" stringByAppendingString:filename];
@@ -40,8 +40,8 @@
 
 #pragma mark -
 #pragma mark Methods for Fetching
-- (void)load: (NSString *)url {
-	[httpClient requestMethod:@"GET" absoluteURL:url payload:nil success:@selector(httpConnection:didReceiveData:)];
+- (NSString *)load: (NSString *)url {
+	return [httpClient requestMethod:@"GET" absoluteURL:url payload:nil success:@selector(httpConnection:didReceiveData:)];
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {

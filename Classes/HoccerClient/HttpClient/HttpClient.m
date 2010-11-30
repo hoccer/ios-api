@@ -82,29 +82,29 @@
 	return self;	
 }
 
-- (void)getURI: (NSString *)uri success: (SEL)success {
-	[self requestMethod:@"GET" URI: uri payload:nil success:success];
+- (NSString *)getURI: (NSString *)uri success: (SEL)success {
+	return [self requestMethod:@"GET" URI: uri payload:nil success:success];
 }
 
-- (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	[self requestMethod:@"PUT" URI: uri payload:payload success:success];
+- (NSString *)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	return [self requestMethod:@"PUT" URI: uri payload:payload success:success];
 }
 
-- (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	[self requestMethod:@"POST" URI: uri payload:payload success:success];
+- (NSString *)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	return [self requestMethod:@"POST" URI: uri payload:payload success:success];
 }
 
-- (void)deleteURI: (NSString *)uri success: (SEL)success {
-	[self requestMethod:@"DELETE" URI:uri payload:nil success:success];
+- (NSString *)deleteURI: (NSString *)uri success: (SEL)success {
+	return [self requestMethod:@"DELETE" URI:uri payload:nil success:success];
 }
 
-- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+- (NSString *)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
 	NSLog(@"%@ %@ %@", method, baseURL, uri);
 	
-	[self requestMethod:method absoluteURL:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload success:success];
+	return [self requestMethod:method absoluteURL:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload success:success];
 }
 
-- (void)requestMethod:(NSString *)method absoluteURL:(NSString *)URLString payload:(NSData *)payload success:(SEL)success {
+- (NSString *)requestMethod:(NSString *)method absoluteURL:(NSString *)URLString payload:(NSData *)payload success:(SEL)success {
 	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
@@ -122,6 +122,8 @@
 	container.httpConnection = httpConnection;
 	
 	[connections setObject: container forKey:[connection description]];
+	
+	return URLString;
 }
 
 #pragma mark -
