@@ -62,7 +62,7 @@
 }
 
 - (void)cancelTransferWithURI: (NSString *)transferUri {
-	
+	[httpClient cancelRequest:transferUri];
 }
 
 @end

@@ -139,6 +139,16 @@
 	}
 }
 
+- (void) connection:(NSURLConnection *)aConnection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	
+	CGFloat uploaded = bytesWritten / totalBytesExpectedToWrite;
+	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
+		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
+					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: uploaded]];
+	}
+}
+
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	if (!canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
@@ -183,6 +193,19 @@
 	
 	canceled = YES;
 }
+
+- (void)cancelRequest:(NSString *)uri {
+	NSURLConnection *cancelableConnection = nil;
+	for (ConnectionContainer *container in [connections allValues]) {
+		if ([container.httpConnection.uri isEqualToString: uri]) {
+			cancelableConnection = container.connection;
+			break;
+		}
+	}
+	
+	[cancelableConnection cancel];
+}
+
 
 #pragma mark -
 #pragma mark Getter

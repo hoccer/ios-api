@@ -35,5 +35,6 @@
 - (void)requestMethod:(NSString *)method absoluteURL:(NSString *)url payload:(NSData *)payload success:(SEL)success;
 
 - (void)cancelAllRequest;
+- (void)cancelRequest: (NSString *)uri;
 
 @end
