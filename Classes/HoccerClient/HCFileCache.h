@@ -14,7 +14,7 @@
 
 @protocol HCFileCacheDelegate <NSObject>
 @optional
-- (void)fileCache: (HCFileCache *)fileCache didFailWithError: (NSError *)error;
+- (void)fileCache: (HCFileCache *)fileCache didFailWithError: (NSError *)error forURI: (NSString *)uri;
 - (void)fileCache: (HCFileCache *)fileCache didDownloadFile: (NSString *)path;
 - (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress forURI: (NSString *)uri;
 - (void)fileCache: (HCFileCache *)fileCache didUploadFileToURI: (NSString *)path;

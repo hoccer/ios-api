@@ -22,6 +22,7 @@
 @property (retain, nonatomic) NSNumber *downloadedPercentage;
 @property (retain, nonatomic) NSString *downloadURI;
 @property (retain, nonatomic) NSData *receivedData;
+@property (retain, nonatomic) NSError *error;
 
 @end
 
@@ -29,6 +30,7 @@
 @synthesize uploadPath;
 @synthesize downloadedPercentage, downloadURI;
 @synthesize receivedData;
+@synthesize error;
 
 - (void) fileCache:(HCFileCache *)fileCache didUploadFileToURI:(NSString *)path {
 	self.uploadPath = path;
@@ -42,6 +44,11 @@
 
 - (void) fileCache:(HCFileCache *)fileCache didDownloadData: (NSData *)data forURI: (NSString *)uri {
 	self.receivedData = data;
+}
+
+
+- (void) fileCache:(HCFileCache *)fileCache didFailWithError:(NSError *)aError forURI:(NSString *)uri {
+	self.error = aError;
 }
 
 - (void) dealloc {
@@ -73,6 +80,7 @@
 }
 
 - (void)tearDown {
+	fileCache.delegate = nil;
 	[fileCache release]; fileCache = nil;
 	[fileCacheDelegate release]; fileCacheDelegate = nil;
 }
@@ -99,6 +107,12 @@
 	[self runForInterval:2];
 	GHAssertEquals([fileCacheDelegate.downloadedPercentage intValue], 0, 
 				   [NSString stringWithFormat: @"should have downloaded 0\%, but was %@", fileCacheDelegate.downloadedPercentage]);
+}
+
+- (void)testError {
+	[fileCache load:@"http://www.sdfghjklaösdfjk.com"];
+	[self runForInterval:2];
+	GHAssertNotNil(fileCacheDelegate.error, @"should have received an error");
 }
 
 

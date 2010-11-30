@@ -11,6 +11,8 @@
 #import "NSString+URLHelper.h"
 
 #define FILECACHE_URI @"http://filecache.sandbox.hoccer.com"
+// #define FILECACHE_URI @"http://192.168.2.112"
+
 @implementation HCFileCache
 
 @synthesize delegate;
@@ -51,13 +53,15 @@
 	}
 }
 
-- (void)httpConnection: (HttpConnection*)connection didReceiveData: (NSData *)data {
-	NSLog(@"did receive data: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
-}
-
 - (void)httpConnection:(HttpConnection *)connection didUpdateDownloadPercentage: (NSNumber *)percentage {
 	if ([delegate respondsToSelector:@selector(fileCache:didUpdateProgress:forURI:)]) {
 		[delegate fileCache:self didUpdateProgress:percentage forURI: connection.uri];
+	}
+}
+
+- (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
+	if ([delegate respondsToSelector:@selector(fileCache:didFailWithError:forURI:)]) {
+		[delegate fileCache:self didFailWithError:error forURI:connection.uri];
 	}
 }
 
