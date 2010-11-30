@@ -8,3 +8,4 @@
 
 #import "HCLinccer.h"
 #import "HCGeoStorage.h"
+#import "HCFileCache.h"
