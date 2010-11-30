@@ -133,7 +133,6 @@
 	[container.receivedData appendData:data];
 	
 	CGFloat downloaded = [container.httpConnection.response expectedContentLength] / [container.receivedData length];
-	NSLog(@"downloaded: %f", downloaded);
 	
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
 		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
@@ -159,7 +158,6 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"response: %d", [(NSHTTPURLResponse *)response expectedContentLength]);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }
@@ -169,8 +167,6 @@
 	if ([self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response]) {
 		return;
 	}
-	
-	NSLog(@"body: %@", [[[NSString alloc] initWithData: container.receivedData encoding:NSUTF8StringEncoding] autorelease]);
 	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.httpConnection withObject:container.receivedData];
