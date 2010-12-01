@@ -158,6 +158,8 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
+	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);
+	
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }

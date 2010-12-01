@@ -194,6 +194,41 @@
 	GHAssertEquals(mockedDelegate.didFailWithErrorCalls, 1, @"reveiving should have failed");
 }
 
+- (void)testCollisions {
+	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
+	[hoccer2 setTestEnvironment];
+	hoccer2.delegate = mockedDelegate2;
+
+	MockedDelegate *mockedDelegate3 = [[MockedDelegate alloc] init]; 
+	HCLinccer *hoccer3 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
+	[hoccer3 setTestEnvironment];
+	hoccer3.delegate = mockedDelegate3;
+	
+	[self runForInterval:1];
+	
+	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"API3" forKey:@"Hello"];
+	
+	[hoccer receiveWithMode:HCTransferModeOneToOne];
+	[hoccer2 send:payload withMode:HCTransferModeOneToOne];
+	[hoccer3 send:payload withMode:HCTransferModeOneToOne];
+	
+	[self runForInterval:2];
+	
+	[hoccer disconnect];
+	[hoccer2 disconnect];
+	[hoccer3 disconnect];
+	
+	[self runForInterval:1];
+	[(MockedLocationController *)hoccer.environmentController next];
+
+	GHAssertEquals(mockedDelegate3.didFailWithErrorCalls, 1, @"sending should have failed");
+	GHAssertEquals(mockedDelegate2.didFailWithErrorCalls, 1, @"sending should have failed");
+	GHAssertEquals(mockedDelegate.didFailWithErrorCalls, 1, @"reveiving should have failed");
+	
+}
+
+
 
 - (void)cleanupUserDefaults {
 	[[NSUserDefaults standardUserDefaults] removeObjectForKey:HOCCER_CLIENT_URI];
