@@ -65,6 +65,12 @@
 	}
 }
 
+- (void)httpConnection:(HttpConnection *)connection didReceiveData: (NSData *)data {
+	if ([delegate respondsToSelector:@selector(fileCache:didDownloadData:forURI:)]) {
+		[delegate fileCache: self didDownloadData: data forURI: connection.uri];
+	}
+}
+
 - (void)cancelTransferWithURI: (NSString *)transferUri {
 	[httpClient cancelRequest:transferUri];
 }
