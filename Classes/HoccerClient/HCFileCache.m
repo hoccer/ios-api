@@ -10,7 +10,7 @@
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+URLHelper.h"
 
-#define FILECACHE_URI @"http://filecache.sandbox.hoccer.com"
+#define FILECACHE_URI @"http://filecache.beta.hoccer.com"
 // #define FILECACHE_URI @"http://192.168.2.112"
 
 @implementation HCFileCache

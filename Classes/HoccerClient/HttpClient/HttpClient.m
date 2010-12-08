@@ -129,8 +129,7 @@
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	[container.receivedData appendData:data];
 	
-	CGFloat downloaded = [container.httpConnection.response expectedContentLength] / [container.receivedData length];
-	
+	CGFloat downloaded = (float)[container.httpConnection.response expectedContentLength] / [container.receivedData length];
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
 		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
 					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: downloaded]];
@@ -140,7 +139,8 @@
 - (void) connection:(NSURLConnection *)aConnection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	
-	CGFloat uploaded = bytesWritten / totalBytesExpectedToWrite;
+	CGFloat uploaded = (float)totalBytesWritten / totalBytesExpectedToWrite;
+
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
 		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
 					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: uploaded]];

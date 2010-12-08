@@ -14,7 +14,7 @@
 #import "HttpClient.h"
 #import "HCAuthenticatedHttpClient.h"
 
-#define HOCCER_CLIENT_URI @"https://linker.beta.hoccer.com"
+#define HOCCER_CLIENT_URI @"https://linccer.beta.hoccer.com"
 // #define HOCCER_CLIENT_URI @"http://192.168.2.101:9292"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
