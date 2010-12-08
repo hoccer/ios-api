@@ -63,7 +63,7 @@
 
 @interface HttpClient ()
 
-- (BOOL)hasHttpError: (NSHTTPURLResponse *)response;
+- (NSError *)hasHttpError: (NSHTTPURLResponse *)response;
 
 @end
 
@@ -166,8 +166,9 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	if ([self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response]) {
-		return;
+	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
+	if (error != nil) {
+		[self connection:aConnection didFailWithError:error];
 	}
 	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
@@ -225,21 +226,17 @@
 
 #pragma mark -
 #pragma mark HTTP Error Handling 
-- (BOOL)hasHttpError: (NSHTTPURLResponse *)response {
+- (NSError *)hasHttpError: (NSHTTPURLResponse *)response {
 	if ([response statusCode] >= 400) {
 		NSDictionary *info = [NSDictionary dictionary];
 		NSError *httpError = [NSError errorWithDomain: HttpErrorDomain 
 												 code: [response statusCode] 
 											 userInfo: info];
-
-		if ([target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
-			[target performSelector:@selector(httpConnection:didFailWithError:) withObject: self withObject:httpError];
-		}
 		
-		return YES;
+		return httpError;
 	}
 	
-	return NO;
+	return nil;
 }
 
 - (void)dealloc {
