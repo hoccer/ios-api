@@ -60,11 +60,8 @@
 
 @end
 
-
 @interface HttpClient ()
-
 - (NSError *)hasHttpError: (NSHTTPURLResponse *)response;
-
 @end
 
 @implementation HttpClient
@@ -183,7 +180,6 @@
 }
 
 - (void) connection:(NSURLConnection *)aConnection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	
 	[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
 }
 
@@ -207,7 +203,6 @@
 	[cancelableConnection cancel];
 }
 
-
 #pragma mark -
 #pragma mark Getter
 - (NSString *) userAgent {
@@ -222,7 +217,6 @@
 	
 	return userAgent;
 }
-
 
 #pragma mark -
 #pragma mark HTTP Error Handling 
