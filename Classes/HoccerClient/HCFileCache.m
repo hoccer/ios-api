@@ -66,8 +66,8 @@
 }
 
 - (void)httpConnection:(HttpConnection *)connection didReceiveData: (NSData *)data {
-	if ([delegate respondsToSelector:@selector(fileCache:didDownloadData:forURI:)]) {
-		[delegate fileCache: self didDownloadData: data forURI: connection.uri];
+	if ([delegate respondsToSelector:@selector(fileCache:didReceiveResponse:withDownloadedData:forURI:)]) {
+		[delegate fileCache: self didReceiveResponse:connection.response withDownloadedData: data forURI: connection.uri];
 	}
 }
 
