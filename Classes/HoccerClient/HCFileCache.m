@@ -6,6 +6,7 @@
 //  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
+#import <YAJLIOS/YAJLIOS.h>
 #import "HCFileCache.h"
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+URLHelper.h"
@@ -34,10 +35,15 @@
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
 	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithFloat:interval] stringValue] forKey:@"expires_in"];
 	
-	NSString *urlName = [@"/" stringByAppendingString:filename];
+	// Content-Disposition: attachment; filename="test.jpg"
+	
+	NSString *contentDisposition = [NSString stringWithFormat:@"Content-Disposition: attachment; filename=\"%@\"", filename];
+	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 
+		
+	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
 	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];
 		
-	return [httpClient putURI:uri payload:data success:@selector(httpConnection:didSendData:)];
+	return [httpClient requestMethod:@"PUT" URI:uri payload:data header:headers success:@selector(httpConnection:didSendData:)];
 }
 
 #pragma mark -
@@ -45,6 +51,9 @@
 - (NSString *)load: (NSString *)url {
 	return [httpClient requestMethod:@"GET" absoluteURL:url payload:nil success:@selector(httpConnection:didReceiveData:)];
 }
+
+#pragma mark -
+#pragma mark HttpConnection Delegate Methods
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
 	if ([delegate respondsToSelector:@selector(fileCache:didUploadFileToURI:)]) {

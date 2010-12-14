@@ -96,16 +96,28 @@
 }
 
 - (NSString *)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	NSLog(@"%@ %@ %@", method, baseURL, uri);
-	
 	return [self requestMethod:method absoluteURL:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload success:success];
 }
 
 - (NSString *)requestMethod:(NSString *)method absoluteURL:(NSString *)URLString payload:(NSData *)payload success:(SEL)success {
+	return [self requestMethod:method absoluteURI:URLString payload:payload header: nil success:success];
+}
+
+- (NSString *)requestMethod:(NSString *)method URI:(NSString *)uri payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
+	return [self requestMethod:method absoluteURI:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload header: headers success:success];
+}
+
+- (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
+	NSLog(@"%@ %@ %@", method, baseURL, URLString);
+
 	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
 	[request addValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
+	for (NSString *key in headers) {
+		[request addValue:[headers objectForKey:key] forHTTPHeaderField:key];
+	}
+
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
 	
@@ -120,7 +132,7 @@
 	
 	[connections setObject: container forKey:[connection description]];
 	
-	return URLString;
+	return URLString;	
 }
 
 #pragma mark -
