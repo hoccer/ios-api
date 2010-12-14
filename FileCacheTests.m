@@ -42,7 +42,8 @@
 	self.downloadURI = uri;
 }
 
-- (void) fileCache:(HCFileCache *)fileCache didDownloadData: (NSData *)data forURI: (NSString *)uri {
+- (void)fileCache: (HCFileCache *)fileCache didReceiveResponse: (NSHTTPURLResponse *)response withDownloadedData: (NSData *)data forURI: (NSString *)uri {
+	NSLog(@"received data");
 	self.receivedData = data;
 }
 
@@ -97,6 +98,11 @@
 	
 	[fileCache load:fileCacheDelegate.uploadPath];
 	[self runForInterval: 2];
+	
+	
+	GHAssertNil(fileCacheDelegate.error, @"");
+	NSString *received = [[[NSString alloc] initWithData:fileCacheDelegate.receivedData encoding:NSUTF8StringEncoding] autorelease];
+	GHAssertEqualStrings(received, @"Hallo World", @"");
 }
 
 - (void)testAbortingUpload {
