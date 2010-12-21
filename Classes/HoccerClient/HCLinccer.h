@@ -40,7 +40,9 @@ enum HoccerErrors {
 @property (assign) id <HCLinccerDelegate> delegate;
 @property (assign) BOOL isRegistered;
 
-- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;  
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
+- (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox;
+
 - (void)send: (NSDictionary *)data withMode: (NSString *)mode;
 - (void)receiveWithMode: (NSString *)mode;
 

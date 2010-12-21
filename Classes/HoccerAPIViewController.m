@@ -7,6 +7,7 @@
 //
 
 #import "HoccerAPIViewController.h"
+#import "SandboxKeys.h"
 
 @interface HoccerAPIViewController ()
 
@@ -23,7 +24,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	linccer = [[HCLinccer alloc] initWithApiKey:@"e101e890ea97012d6b6f00163e001ab0" secret:@"JofbFD6w6xtNYdaDgp4KOXf/k/s="];
+	linccer = [[HCLinccer alloc] initWithApiKey:SANDBOX_APIKEY	secret:SANDBOX_SECRET];
 	linccer.delegate = self;
 }
 

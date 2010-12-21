@@ -7,6 +7,7 @@
 //
 
 #import <GHUnitIOS/GHUnitIOS.h>
+#import "SandboxKeys.h"
 #import "HCFileCache.h"
 
 
@@ -75,7 +76,7 @@
 
 - (void)setUp {
 	fileCacheDelegate = [[MockedFileCacheDelegate alloc] init];
-	fileCache = [[HCFileCache alloc] initWithApiKey:@"f7f3b8b0dacc012de22a00176ed99fe3" secret:@"W5AeluYT7aOo9g0O9k9o2Iq1F2Y="];
+	fileCache = [[HCFileCache alloc] initWithApiKey:SANDBOX_APIKEY secret:SANDBOX_SECRET sandboxed: YES];
 
 	fileCache.delegate = fileCacheDelegate;
 }

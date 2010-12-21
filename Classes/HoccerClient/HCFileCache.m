@@ -12,7 +12,7 @@
 #import "NSString+URLHelper.h"
 
 #define FILECACHE_URI @"http://filecache.sandbox.hoccer.com"
-// #define FILECACHE_URI @"http://192.168.2.112"
+#define FILECACHE_SANDBOX_URI @"http://filecache.hoccer.com"
 
 @implementation HCFileCache
 
@@ -29,6 +29,24 @@
 	
 	return self;
 }
+
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret sandboxed: (BOOL)sandbox {
+	self = [super init];
+	if (self != nil) {
+		if (sandbox) {
+			httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:FILECACHE_SANDBOX_URI];
+		} else {
+			httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:FILECACHE_URI];
+		}
+		
+		httpClient.apiKey = key;
+		httpClient.secret = secret;
+		httpClient.target = self;
+	}
+	
+	return self;
+}
+
 
 #pragma mark -
 #pragma mark Metods for Sending

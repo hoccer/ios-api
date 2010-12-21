@@ -11,9 +11,7 @@
 #import "HCGeoStorage.h"
 #import "HCEnvironment.h"
 
-#define HOCCER_GEOSTORAGE_URI @"https://geostore.beta.hoccer.com"
-// #define HOCCER_GEOSTORAGE_URI @"http://192.168.2.157:9293"
-
+#define HOCCER_GEOSTORAGE_URI @"https://geostore.sandbox.hoccer.com"
 
 @interface HCGeoStorage ()
 
@@ -21,7 +19,6 @@
 - (void)storeDictionary:(NSDictionary *)dictionary withEnvironment:(HCEnvironment *)environment 
 		forTimeInterval: (NSTimeInterval)seconds ;
 - (void)searchForEnvironment: (HCEnvironment *)environment withProperties: (NSDictionary *)properties;
-
 
 @end
 

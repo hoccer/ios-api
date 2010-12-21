@@ -33,6 +33,7 @@
 @property (assign) id <HCFileCacheDelegate> delegate;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret sandboxed: (BOOL)sandbox;
 
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval;
 - (NSString *)load: (NSString *)url;

@@ -147,6 +147,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* HoccerAPI_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoccerAPI_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* HoccerAPI-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HoccerAPI-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		E11DAE0112C0C0E800B8E5E5 /* SandboxKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxKeys.h; sourceTree = "<group>"; };
 		E668E73C128305410003D10D /* HCLinccer+FakeUuid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HCLinccer+FakeUuid.h"; path = "Tests/HCLinccer+FakeUuid.h"; sourceTree = "<group>"; };
 		E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HCLinccer+FakeUuid.m"; path = "Tests/HCLinccer+FakeUuid.m"; sourceTree = "<group>"; };
 		E6A7AD01129D45890034E2A7 /* HCFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HCFileCache.h; path = HoccerClient/HCFileCache.h; sourceTree = "<group>"; };
@@ -228,6 +229,7 @@
 				22FABF2E124CA41500B6AC40 /* NSDictionaryURLParamsTests.m */,
 				22FABFF0124CCF9D00B6AC40 /* NSStringURLHelperTests.m */,
 				E6A7AD48129E648B0034E2A7 /* FileCacheTests.m */,
+				E11DAE0112C0C0E800B8E5E5 /* SandboxKeys.h */,
 			);
 			name = Tests;
 			sourceTree = "<group>";

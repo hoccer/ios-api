@@ -14,10 +14,10 @@
 #import "HttpClient.h"
 #import "HCAuthenticatedHttpClient.h"
 
-#define HOCCER_CLIENT_URI @"https://linccer.hoccer.com"
-// #define HOCCER_CLIENT_URI @"http://192.168.2.101:9292"
-#define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
+#define LINCCER_URI @"https://linccer.hoccer.com"
+#define LINCCER_SANDBOX_URI @"https://linccer.sandbox.hoccer.com"
 
+#define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
 @property (retain) NSTimer *updateTimer;
@@ -29,7 +29,6 @@
 - (NSDictionary *)userInfoForNoSender;
 
 - (NSString *)uuid;
-
 @end
 
 @implementation HCLinccer
@@ -39,22 +38,31 @@
 @synthesize isRegistered;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
+	return [self initWithApiKey:key secret:secret sandboxed:NO];
+}
+
+- (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox {
 	self = [super init];
 	if (self != nil) {
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
-
-		httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:HOCCER_CLIENT_URI];
+		
+		if (sandbox) {
+			httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:LINCCER_SANDBOX_URI];
+		} else {
+			httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:LINCCER_URI];
+		}
+		
 		httpClient.apiKey = key;
 		httpClient.secret = secret;
 		httpClient.target = self;
-
+		
 		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
 		
 		[self reactivate];
 	}
 	
-	return self;
+	return self;	
 }
 
 - (void)send: (NSDictionary *)data withMode: (NSString *)mode {
@@ -206,7 +214,6 @@
 
 	return uuid;
 }
-
 
 - (void)dealloc {
 	[httpClient cancelAllRequest];
