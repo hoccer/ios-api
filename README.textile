@@ -26,7 +26,7 @@ bc..
 @implementation LinkingViewController 
 
 - (void)viewDidLoad {
-	client = [[HCLinccer alloc] initWithApiKey: @"1234567890" secret: @"secret!" sandboxed: YES];
+	client = [[HCLinccer alloc] initWithApiKey: @"apikey" secret: @"sharedSecret" sandboxed: YES];
 	client.delegate = self;
 }
 
@@ -64,8 +64,9 @@ bc..
 
 @end
 
-p. See the HoccerApiViewController.h for more...
+p. If you initialize the linccer with the sandbox option set to YES, you connect against our sandbox server. You should use this for development. For production you must set this value to NO.
 
+p. See the HoccerApiViewController.h for more...
 
 h4. Using the geostorage api	
 
