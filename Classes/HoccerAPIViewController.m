@@ -3,7 +3,7 @@
 //  HoccerAPI
 //
 //  Created by Robert Palmer on 08.09.10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
 #import "HoccerAPIViewController.h"
