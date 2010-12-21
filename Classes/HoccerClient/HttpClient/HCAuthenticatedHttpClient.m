@@ -15,8 +15,8 @@
 
 @synthesize secret, apiKey;
 
-- (void) requestMethod:(NSString *)method URI:(NSString *)uri payload:(NSData *)payload success:(SEL)success {
-	[super requestMethod:method URI:[self signedURI:uri] payload:payload success:success];
+- (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
+	return [super requestMethod:method absoluteURI:[self signedURI:URLString] payload:payload header:headers success:success];
 }
 
 - (NSString *)signedURI: (NSString *)uri {
@@ -25,7 +25,7 @@
 	NSString *paramsString = [uri URLQuery];
 	
 	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithURLParams:paramsString];
-	[params setObject:apiKey forKey:@"apiKey"];
+	[params setObject:apiKey forKey:@"api_key"];
 	[params setObject:[[NSNumber numberWithDouble:timestamp] stringValue] forKey:@"timestamp"];
 	
 	NSString *newUri = [path stringByAppendingQuery: [params URLParams]];
@@ -37,14 +37,10 @@
 	
 	CCHmac(kCCHmacAlgSHA1, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
 	
-	NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC
-										  length:sizeof(cHMAC)];
+	NSData *HMAC = [[[NSData alloc] initWithBytes:cHMAC
+										  length:sizeof(cHMAC)] autorelease];
 		
 	return [NSString stringWithFormat:@"%@&signature=%@", newUri, [[HMAC asBase64EncodedString] urlEncodeValue]];
 }
-
-
-
-
 
 @end

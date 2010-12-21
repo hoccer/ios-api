@@ -87,7 +87,7 @@
 }
 
 - (BOOL)hasLocation {
-	return (locationManager.location.horizontalAccuracy != 0.0);
+	return (locationManager.location != nil);
 }
 
 - (BOOL)hasBadLocation {
@@ -96,6 +96,10 @@
 
 - (BOOL)hasBSSID {
 	return self.bssids != nil;
+}
+
+- (BOOL)hasEnvironment {
+	return [self hasBSSID] && [self hasLocation];
 }
 
 - (void)updateHoccability {

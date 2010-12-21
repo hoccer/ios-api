@@ -7,6 +7,7 @@
 //
 
 #import "HttpClient.h"
+#import <YAJLIOS/YAJLIOS.h>
 
 @interface ConnectionContainer : NSObject 
 {
@@ -59,17 +60,14 @@
 
 @end
 
-
 @interface HttpClient ()
-
-- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
-- (BOOL)hasHttpError: (NSHTTPURLResponse *)response;
-
+- (NSError *)hasHttpError: (NSHTTPURLResponse *)response;
 @end
 
 @implementation HttpClient
 
 @synthesize target;
+@synthesize userAgent;
 
 - (id)initWithURLString: (NSString *)url {
 	self = [super init];
@@ -81,49 +79,84 @@
 	return self;	
 }
 
-- (void)getURI: (NSString *)uri success: (SEL)success {
-	[self requestMethod:@"GET" URI: uri payload:nil success:success];
+- (NSString *)getURI: (NSString *)uri success: (SEL)success {
+	return [self requestMethod:@"GET" URI: uri payload:nil success:success];
 }
 
-- (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	[self requestMethod:@"PUT" URI: uri payload:payload success:success];
+- (NSString *)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	return [self requestMethod:@"PUT" URI: uri payload:payload success:success];
 }
 
-- (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	[self requestMethod:@"POST" URI: uri payload:payload success:success];
+- (NSString *)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	return [self requestMethod:@"POST" URI: uri payload:payload success:success];
 }
 
-- (void)deleteURI: (NSString *)uri success: (SEL)success {
-	[self requestMethod:@"DELETE" URI:uri payload:nil success:success];
+- (NSString *)deleteURI: (NSString *)uri success: (SEL)success {
+	return [self requestMethod:@"DELETE" URI:uri payload:nil success:success];
 }
 
-- (void)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	NSLog(@"%@ %@ %@", method, baseURL, uri);
-	
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", baseURL, uri]];
+- (NSString *)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
+	return [self requestMethod:method absoluteURL:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload success:success];
+}
+
+- (NSString *)requestMethod:(NSString *)method absoluteURL:(NSString *)URLString payload:(NSData *)payload success:(SEL)success {
+	return [self requestMethod:method absoluteURI:URLString payload:payload header: nil success:success];
+}
+
+- (NSString *)requestMethod:(NSString *)method URI:(NSString *)uri payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
+	return [self requestMethod:method absoluteURI:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload header: headers success:success];
+}
+
+- (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
+	NSLog(@"%@ %@", method, URLString);
+
+	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
+	[request addValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
+	for (NSString *key in headers) {
+		[request addValue:[headers objectForKey:key] forHTTPHeaderField:key];
+	}
+
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
-
+	
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
-	HttpConnection *httpConnection = [[HttpConnection alloc] init];
-	httpConnection.uri = uri;
+	HttpConnection *httpConnection = [[[HttpConnection alloc] init] autorelease];
+	httpConnection.uri = URLString;
 	httpConnection.request = request;
 	
 	ConnectionContainer *container = [ConnectionContainer containerWithConnection: connection successSelector:success];
 	container.httpConnection = httpConnection;
 	
 	[connections setObject: container forKey:[connection description]];
+	
+	return URLString;	
 }
-
 
 #pragma mark -
 #pragma mark NSURLConnection Delegate Methods
 - (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)data {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	[container.receivedData appendData:data];
+	
+	CGFloat downloaded = (float)[container.httpConnection.response expectedContentLength] / [container.receivedData length];
+	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
+		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
+					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: downloaded]];
+	}
+}
+
+- (void) connection:(NSURLConnection *)aConnection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	
+	CGFloat uploaded = (float)totalBytesWritten / totalBytesExpectedToWrite;
+
+	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
+		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
+					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: uploaded]];
+	}
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
@@ -134,23 +167,34 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
+	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);
+	
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	if ([self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response]) {
-		return;
-	}
+	NSLog(@"%@", [[[NSString alloc] initWithData:container.receivedData encoding: NSUTF8StringEncoding] autorelease]);
 	
-	NSLog(@"body: %@", [[[NSString alloc] initWithData:container.receivedData encoding:NSUTF8StringEncoding] autorelease]);
+	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
+	if (error != nil) {
+		[self connection:aConnection didFailWithError:error];
+	}
 	
 	if (!canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.httpConnection withObject:container.receivedData];
 	}
 
 	[connections removeObjectForKey:[aConnection description]];
+}
+
+- (BOOL) connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+- (void) connection:(NSURLConnection *)aConnection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+	[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
 }
 
 - (void)cancelAllRequest {
@@ -161,23 +205,46 @@
 	canceled = YES;
 }
 
+- (void)cancelRequest:(NSString *)uri {
+	NSURLConnection *cancelableConnection = nil;
+	for (ConnectionContainer *container in [connections allValues]) {
+		if ([container.httpConnection.uri isEqualToString: uri]) {
+			cancelableConnection = container.connection;
+			break;
+		}
+	}
+	
+	[cancelableConnection cancel];
+}
+
+#pragma mark -
+#pragma mark Getter
+- (NSString *) userAgent {
+	if (userAgent == nil) {
+		NSMutableString *buffer = [NSMutableString string];
+		[buffer appendFormat:@"%@ ", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]];
+		[buffer appendFormat:@"%@ / ", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+		[buffer appendFormat:@"%@ / ", [UIDevice currentDevice].model];
+		[buffer appendFormat:@"%@ %@", [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion];
+		userAgent = [buffer retain];
+	}
+	
+	return userAgent;
+}
+
 #pragma mark -
 #pragma mark HTTP Error Handling 
-- (BOOL)hasHttpError: (NSHTTPURLResponse *)response {
+- (NSError *)hasHttpError: (NSHTTPURLResponse *)response {
 	if ([response statusCode] >= 400) {
 		NSDictionary *info = [NSDictionary dictionary];
 		NSError *httpError = [NSError errorWithDomain: HttpErrorDomain 
 												 code: [response statusCode] 
 											 userInfo: info];
-
-		if ([target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
-			[target performSelector:@selector(httpConnection:didFailWithError:) withObject: self withObject:httpError];
-		}
 		
-		return YES;
+		return httpError;
 	}
 	
-	return NO;
+	return nil;
 }
 
 - (void)dealloc {

@@ -7,16 +7,20 @@
 //
 
 #import <YAJLIOS/YAJLIOS.h>
-#import "HCClient.h"
+#import "NSString+URLHelper.h"
+#import "HCLinccer.h"
 #import "HCEnvironmentManager.h"
 #import "HCEnvironment.h"
 #import "HttpClient.h"
+#import "HCAuthenticatedHttpClient.h"
 
-#define HOCCER_CLIENT_URI @"http://beta.hoccer.com/v3"
+#define LINCCER_URI @"https://linccer.hoccer.com"
+#define LINCCER_SANDBOX_URI @"https://linccer.sandbox.hoccer.com"
+
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
-
-@interface HCClient ()
+@interface HCLinccer ()
+@property (retain) NSTimer *updateTimer;
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
@@ -24,41 +28,51 @@
 - (NSDictionary *)userInfoForNoReceiver;
 - (NSDictionary *)userInfoForNoSender;
 
+- (NSString *)uuid;
 @end
 
-@implementation HCClient
+@implementation HCLinccer
+@synthesize updateTimer;
 @synthesize delegate;
 @synthesize environmentController;
 @synthesize isRegistered;
 
-- (id) init {
+- (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
+	return [self initWithApiKey:key secret:secret sandboxed:NO];
+}
+
+- (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox {
 	self = [super init];
 	if (self != nil) {
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
-
-		httpClient = [[HttpClient alloc] initWithURLString:HOCCER_CLIENT_URI];
-		httpClient.target = self;
-
-		uri = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
-		if (!uri) {
-			[httpClient postURI:@"/clients" payload:nil success:@selector(httpConnection:didReceiveInfo:)];
+		
+		if (sandbox) {
+			httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:LINCCER_SANDBOX_URI];
 		} else {
-			[self updateEnvironment];
+			httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:LINCCER_URI];
 		}
+		
+		httpClient.apiKey = key;
+		httpClient.secret = secret;
+		httpClient.target = self;
+		
+		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
+		
+		[self reactivate];
 	}
 	
-	return self;
+	return self;	
 }
 
-- (void)send: (NSData *)data withMode: (NSString *)mode {
+- (void)send: (NSDictionary *)data withMode: (NSString *)mode {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
-	[httpClient postURI:[uri stringByAppendingPathComponent: actionString] 
-				payload:data
+	[httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
+				payload:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didSendData:)];	
 }
 
@@ -72,10 +86,16 @@
 			   success:@selector(httpConnection:didReceiveData:)];	
 }
 
+- (void)reactivate {
+	[self updateEnvironment];
+}
+
 - (void)disconnect {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
+	[self.updateTimer invalidate];
+	self.updateTimer = nil;
 	
 	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
 				  success:@selector(httpClientDidDelete:)];
@@ -90,8 +110,8 @@
 }
 
 - (void)didFailWithError: (NSError *)error {
-	if ([delegate respondsToSelector:@selector(client:didFailWithError:)]) {
-		[delegate client:self didFailWithError:error];
+	if ([delegate respondsToSelector:@selector(linccer:didFailWithError:)]) {
+		[delegate linccer: self didFailWithError:error];
 	}
 }
 
@@ -104,18 +124,6 @@
 
 #pragma mark -
 #pragma mark HttpClient Response Methods 
-- (void)httpConnection: (HttpConnection *)aConncetion didReceiveInfo: (NSData *)receivedData {
-	
-	NSString *string = [[[NSString alloc] initWithData: receivedData
-											  encoding:NSUTF8StringEncoding] autorelease];
-	
-	NSDictionary *info = [string yajl_JSON];
-	uri = [[info objectForKey:@"uri"] copy];
-	
-	[[NSUserDefaults standardUserDefaults] setObject:uri forKey:HOCCER_CLIENT_ID_KEY];
-	
-	[self updateEnvironment];
-};
 
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {
 	if (isRegistered) {
@@ -123,40 +131,41 @@
 	}
 	
 	isRegistered = YES;
-	if ([delegate respondsToSelector:@selector(clientDidRegister:)]) {
-		[delegate clientDidRegister:self];
+	if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
+		[delegate linccerDidRegister:self];
 	}
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
-	
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoReceiverError userInfo:[self userInfoForNoReceiver]];
 		[self didFailWithError:error];
 		return;
 	}
 	
-	if ([delegate respondsToSelector:@selector(clientDidSendData:)]) {
-		[delegate clientDidSendData: self];
+	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
+		[delegate linccer: self didSendData: [data yajl_JSON]];
 	}
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
-
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
 		[self didFailWithError:error];
 		return;
 	}
 
-	if ([delegate respondsToSelector:@selector(client:didReceiveData:)]) {
-		[delegate client: self didReceiveData: data];
+	if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
+		[delegate linccer: self didReceiveData: [data yajl_JSON]];
 	}
 
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
 	NSLog(@"deleted resource");
+	if ([delegate respondsToSelector:@selector(linccerDidUnregister:)]) {
+		[delegate linccerDidUnregister: self];
+	}
 }
 
 #pragma mark -
@@ -180,13 +189,30 @@
 }
 
 - (void)updateEnvironment {	
-	if (uri == nil) {
+	[updateTimer invalidate];
+	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:25 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
+	
+	if (uri == nil && [self.environmentController hasEnvironment]) {
 		return;
 	}
 	
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environmentController.environment JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
+}
+
+
+#pragma mark -
+#pragma mark Getter
+
+- (NSString *)uuid {
+	NSString *uuid = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
+	if (!uuid) {
+		uuid = [NSString stringWithUUID];
+		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];
+	}
+
+	return uuid;
 }
 
 - (void)dealloc {

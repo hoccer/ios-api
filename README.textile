@@ -12,6 +12,64 @@ h3. Install the .framework
 
 h3. Sample Usage
 
+h4. Using the linking service api
+
+
+bc.. 
+#import <Hoccer/Hoccer.h>
+
+@interface LinkingViewController : UIViewController <HCClientDelegate> {
+	HCLinccer *client;
+}
+	
+@end
+
+@implementation LinkingViewController 
+
+- (void)viewDidLoad {
+	client = [[HCLinccer alloc] initWithApiKey: @"1234567890" secret: @"secret!!!11elf"];
+	client.delegate = self;
+}
+
+- (IBAction)send: (id)sender {
+	NSDictionary *payload = [NSDictionary dictionaryWithObject: @"World" forKey: @"Hello"];
+	[client send: payload withMode: HCTransferModeOneToOne];
+}
+
+- (IBAction)receive: (id)sender {
+	[client receiveWithMode: HCTransferModeOneToOne];
+}
+
+#pragme mark -
+#pragma mark HCClient Delegate Methods
+
+- (void)linccerDidRegister: (HCLinccer *)aLinccer {
+	NSLog(@"ready for transfering data");
+}
+
+- (void)linccer: (HCLinccer *)aLinccer didSendDataWithInfo: (NSDictionary):info  {
+	NSLog(@"successfully send something %@", info);
+}
+
+- (void)linccer: (HCLinccer *)aLinccer didReceiveData: (NSArray *)data {
+	NSLog(@"received data: %@", data)
+}
+
+- (void)linccer: (HCLinccer *)aLinccer didFailWithError: (NSError *)error {
+	NSLog(@"failed with error: %@" error);
+}
+
+- (void)linccerDidUnregister: (HCLinccer *)aLinccer {
+	NSLog(@"unregistered hoccer");
+}
+
+@end
+
+p. See the HoccerApiViewController for more...
+
+
+h4. Using the geostorage api	
+
 bc.. 
 #import <Hoccer/Hoccer.h>
 
@@ -24,14 +82,15 @@ bc..
 
 - (void)viewDidLoad {
     geostorage = [[HCGeoStorage alloc] initWithApiKey:<your api key> secret:<your secret>];
-}
+	geostorage.delegate = self;
     
-geostorage.delegate = self;
-    [geostorage searchNearby];
+	[geostorage searchNearby];
 }
 
 - (void)geostorage: (HCGeoStorage *)geoStorage didFindItems: (NSArray *)items {
     NSLog(@"items: %@", items);
 }
+
+- 
 
 p. A larger example can be found in the sample folder.

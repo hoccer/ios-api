@@ -19,16 +19,25 @@
 	BOOL canceled;
 	
 	id target;
+	
+	NSString *userAgent;
 }
 
 @property (assign) id target;
+@property (retain) NSString *userAgent;
 
 - (id)initWithURLString: (NSString *)url;
-- (void)getURI: (NSString *)uri success: (SEL)success;
-- (void)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
-- (void)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
-- (void)deleteURI: (NSString *)uri success: (SEL)success;
+- (NSString *)getURI: (NSString *)uri success: (SEL)success;
+- (NSString *)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
+- (NSString *)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
+- (NSString *)deleteURI: (NSString *)uri success: (SEL)success;
+- (NSString *)requestMethod: (NSString *)method URI: (NSString *)uri payload: (NSData *)payload success: (SEL)success;
+- (NSString *)requestMethod:(NSString *)method absoluteURL:(NSString *)url payload:(NSData *)payload success:(SEL)success;
+- (NSString *)requestMethod:(NSString *)method URI:(NSString *)url payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success;
+- (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)url payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success;
+
 
 - (void)cancelAllRequest;
+- (void)cancelRequest: (NSString *)uri;
 
 @end

@@ -3,70 +3,100 @@
 //  HoccerAPI
 //
 //  Created by Robert Palmer on 08.09.10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
 #import "HoccerAPIViewController.h"
-#import "HCClient.h"
+#import "SandboxKeys.h"
+
+@interface HoccerAPIViewController ()
+
+- (void)log: (NSString *)message;
+
+@end
+
+
 
 @implementation HoccerAPIViewController
-
-
-
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
+@synthesize input, logger;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	hoccer = [[HCClient alloc] init];
-	hoccer.delegate = self;
+	linccer = [[HCLinccer alloc] initWithApiKey:SANDBOX_APIKEY	secret:SANDBOX_SECRET];
+	linccer.delegate = self;
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[self.input resignFirstResponder];
 }
 
 - (IBAction)send: (id)sender {
-	NSData *data = [@"{\"inline\": \"Hallo\"}" dataUsingEncoding:NSUTF8StringEncoding];
+	NSString *message = input.text;
+	NSDictionary *payload = [NSDictionary dictionaryWithObject:message forKey:@"message"];
+	[linccer send:payload withMode:HCTransferModeOneToMany];
 	
-	[hoccer send:data withMode:@"distribute"];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self log:@"send"];
 }
 
 - (IBAction)receive: (id)sender {
-	[hoccer receiveWithMode:@"distribute"];
+	[linccer receiveWithMode:HCTransferModeOneToMany];
+	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self log:@"receive"];
 }
+
+- (IBAction)clearLog: (id)sender {
+	self.logger.text = @"";
+}
+
+- (void)terminate {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[linccer disconnect];
+}
+
+- (void)reactivate {
+	[linccer reactivate];
+}
+
 
 #pragma mark -
 #pragma mark Hoccer Delegate Methods
 
-- (void)clientDidRegister: (HCClient *)hoccer; {
+- (void)linccerDidRegister: (HCLinccer *)aLinccer; {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self log:NSStringFromSelector(_cmd)];
 	NSLog(@"registered");
 }
 
-- (void)clientDidSendData: (HCClient *)hoccer; {
+- (void)linccer:(HCLinccer *)aLinccer didSendData:(NSArray *)data {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), data]];
 	NSLog(@"send something");
 }
 
-- (void)client: (HCClient *)hoccer didReceiveData: (NSData *)data {
-	NSLog(@"hoccer did receive: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+- (void)linccer: (HCLinccer *)aLinccer didReceiveData: (NSArray *)data {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), data]];
+
+	NSLog(@"hoccer did receive: %@", data);
 }
 
-- (void)client: (HCClient *)hoccer didFailWithError: (NSError *)error; {
+- (void)linccer: (HCLinccer *)aLinccer didFailWithError: (NSError *)error; {
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), error]];
+
 	NSLog(@"error %@", error);
 }
+
+
+- (void)linccerDidUnregister: (HCLinccer *)aLinccer {
+	[self log:NSStringFromSelector(_cmd)];
+	NSLog(@"unregistered hoccer");
+}
+
 
 
 /*
@@ -89,9 +119,17 @@
 	// e.g. self.myOutlet = nil;
 }
 
+- (void) log:(NSString *)message {
+	if ([logger.text length] == 0) {
+		logger.text = message;
+	} else {
+		logger.text = [NSString stringWithFormat:@"%@\n\n%@", logger.text, message];
+	}
+}
+
 
 - (void)dealloc {
-	[hoccer release];
+	[linccer release];
     [super dealloc];
 }
 

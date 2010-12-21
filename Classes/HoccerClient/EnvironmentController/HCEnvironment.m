@@ -3,7 +3,7 @@
 //  Hoccer
 //
 //  Created by Robert Palmer on 27.01.10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
 #import <YAJLIOS/YAJLIOS.h>
@@ -37,8 +37,8 @@
 }
 
 - (void) dealloc {
-	self.location = nil;
-	self.bssids = nil;
+	[location release];
+	[bssids release];
 	
 	[super dealloc];
 }
@@ -50,14 +50,17 @@
 - (NSDictionary *)dict {
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	NSDictionary *locationDict = [self locationAsDict: self.location];
-	if (locationDict) {
+	
+	if (self.location) {
+		NSDictionary *locationDict = [self locationAsDict: self.location];
 		[dict setObject:locationDict forKey: @"gps"];
 	}
 	
 	if (self.bssids) {
 		[dict setObject:self.bssids forKey:@"bssids"];
 	}
+	
+	NSLog(@"dict: %@", dict);
 	
 	return dict;
 }
@@ -67,7 +70,7 @@
 	return [NSDictionary dictionaryWithObjectsAndKeys:
 			[NSNumber numberWithDouble: aLocation.coordinate.latitude], @"latitude",
 			[NSNumber numberWithDouble: aLocation.coordinate.longitude], @"longitude",
-			// aLocation.timestamp, @"timestamp",
+			[NSNumber numberWithDouble: [aLocation.timestamp timeIntervalSince1970]], @"timestamp",
 			[NSNumber numberWithDouble: aLocation.horizontalAccuracy], @"accuracy", nil];
 }
 

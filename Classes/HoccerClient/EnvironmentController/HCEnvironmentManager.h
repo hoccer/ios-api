@@ -35,6 +35,7 @@
 
 - (BOOL)hasLocation;
 - (BOOL)hasBSSID;
+- (BOOL)hasEnvironment;
 - (NSError *)messageForLocationInformation;
 
 @end
