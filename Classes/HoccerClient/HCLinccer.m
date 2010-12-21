@@ -135,8 +135,8 @@
 		return;
 	}
 	
-	if ([delegate respondsToSelector:@selector(linccer:didSendDataWithInfo:)]) {
-		[delegate linccer: self didSendDataWithInfo: [data yajl_JSON]];
+	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
+		[delegate linccer: self didSendData: [data yajl_JSON]];
 	}
 }
 

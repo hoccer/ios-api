@@ -40,7 +40,7 @@
 	didRegisterCalls += 1;
 }
 
-- (void)linccer: (HCLinccer *)hoccer didSendDataWithInfo: (NSDictionary *)info {
+- (void)linccer: (HCLinccer *)hoccer didSendData: (NSArray *)info {
 	didSendDataCalls += 1;
 }
 

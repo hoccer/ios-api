@@ -70,9 +70,9 @@
 	NSLog(@"registered");
 }
 
-- (void)linccer:(HCLinccer *)aLinccer didSendDataWithInfo:(NSDictionary *)info {
+- (void)linccer:(HCLinccer *)aLinccer didSendData:(NSArray *)data {
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), info]];
+	[self log:[NSString stringWithFormat:@"%@\n%@", NSStringFromSelector(_cmd), data]];
 	NSLog(@"send something");
 }
 

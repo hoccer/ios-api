@@ -12,7 +12,7 @@
 @protocol HCLinccerDelegate <NSObject>
 @optional
 - (void)linccerDidRegister: (HCLinccer *)linccer;
-- (void)linccer: (HCLinccer *)linccer didSendDataWithInfo: (NSDictionary *)info ;
+- (void)linccer: (HCLinccer *)linccer didSendData: (NSArray *)data ;
 - (void)linccer: (HCLinccer *)linncer didReceiveData: (NSArray *)data;
 - (void)linccer: (HCLinccer *)linccer didFailWithError: (NSError *)error;
 - (void)linccerDidUnregister: (HCLinccer *)linccer;
