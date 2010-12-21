@@ -2,9 +2,8 @@ h2. Install Hoccer to your project
 
 h3. Install the .framework
 
-* Obtain an Api Key and the framework from hoccer.com/developer.
-* Add the Hoccer.framework and YAJLIOS.framework (from the lib folder) to your Xcode.
-* Add both frameworks to your project. 
+* Obtain an Api Key and the framework from developer.hoccer.com.
+* Add the Hoccer.framework and YAJLIOS.framework (from the lib folder) to your Xcode Project.
 * Add following system frameworks:
 ** CoreLocation.framework
 ** MapKit.framework
@@ -27,7 +26,7 @@ bc..
 @implementation LinkingViewController 
 
 - (void)viewDidLoad {
-	client = [[HCLinccer alloc] initWithApiKey: @"1234567890" secret: @"secret!!!11elf"];
+	client = [[HCLinccer alloc] initWithApiKey: @"1234567890" secret: @"secret!" sandboxed: YES];
 	client.delegate = self;
 }
 
@@ -47,8 +46,8 @@ bc..
 	NSLog(@"ready for transfering data");
 }
 
-- (void)linccer: (HCLinccer *)aLinccer didSendDataWithInfo: (NSDictionary):info  {
-	NSLog(@"successfully send something %@", info);
+- (void)linccer: (HCLinccer *)aLinccer didSendData: (NSArray *):data  {
+	NSLog(@"successfully send data %@", data);
 }
 
 - (void)linccer: (HCLinccer *)aLinccer didReceiveData: (NSArray *)data {
@@ -65,7 +64,7 @@ bc..
 
 @end
 
-p. See the HoccerApiViewController for more...
+p. See the HoccerApiViewController.h for more...
 
 
 h4. Using the geostorage api	

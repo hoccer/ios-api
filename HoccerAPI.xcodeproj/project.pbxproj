@@ -85,7 +85,6 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* HoccerAPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* HoccerAPIViewController.m */; };
 		E11DAE3612C0D78B00B8E5E5 /* SandboxKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = E11DAE3512C0D78B00B8E5E5 /* SandboxKeys.h */; };
-		E11DAE3812C0D7B300B8E5E5 /* FileCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E11DAE3712C0D7B300B8E5E5 /* FileCacheTests.m */; };
 		E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E73D128305410003D10D /* HCLinccer+FakeUuid.m */; };
 		E67B669F12A68D4B00B10441 /* HoccerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E4B6B1243546F0059A287 /* HoccerTests.m */; };
 		E6A7AD03129D45890034E2A7 /* HCFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A7AD02129D45890034E2A7 /* HCFileCache.m */; };
@@ -224,10 +223,10 @@
 		220C63B01238DA3E0014AECB /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				E11DAE3712C0D7B300B8E5E5 /* FileCacheTests.m */,
 				22FDCC61123E1473001FA03C /* MockedObjects */,
 				220C63B11238DA810014AECB /* GHUnitIOSTestMain.m */,
 				220E4B6B1243546F0059A287 /* HoccerTests.m */,
+				E11DAE3712C0D7B300B8E5E5 /* FileCacheTests.m */,
 				22E902B01240C61A00993693 /* HCGeoStorageTests.m */,
 				22FABF2E124CA41500B6AC40 /* NSDictionaryURLParamsTests.m */,
 				22FABFF0124CCF9D00B6AC40 /* NSStringURLHelperTests.m */,
@@ -539,7 +538,6 @@
 				E668E73E128305410003D10D /* HCLinccer+FakeUuid.m in Sources */,
 				E6A7AD04129D45890034E2A7 /* HCFileCache.m in Sources */,
 				E67B669F12A68D4B00B10441 /* HoccerTests.m in Sources */,
-				E11DAE3812C0D7B300B8E5E5 /* FileCacheTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
