@@ -40,8 +40,8 @@
 #import "HttpClient.h"
 #import "HCAuthenticatedHttpClient.h"
 
-#define LINCCER_URI @"https://linccer.hoccer.com"
-#define LINCCER_SANDBOX_URI @"https://linccer.sandbox.hoccer.com"
+#define LINCCER_URI @"https://linccer.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer.sandbox.hoccer.com/v3"
 
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 

@@ -91,6 +91,4 @@ bc..
     NSLog(@"items: %@", items);
 }
 
-- 
-
 p. A larger example can be found in the sample folder.

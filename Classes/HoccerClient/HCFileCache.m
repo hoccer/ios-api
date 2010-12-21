@@ -37,8 +37,8 @@
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+URLHelper.h"
 
-#define FILECACHE_URI @"http://filecache.sandbox.hoccer.com"
-#define FILECACHE_SANDBOX_URI @"http://filecache.hoccer.com"
+#define FILECACHE_URI @"https://filecache.hoccer.com/v3"
+#define FILECACHE_SANDBOX_URI @"https://filecache.sandbox.hoccer.com/v3"
 
 @implementation HCFileCache
 

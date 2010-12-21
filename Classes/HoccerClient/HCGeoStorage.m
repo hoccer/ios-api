@@ -37,7 +37,7 @@
 #import "HCGeoStorage.h"
 #import "HCEnvironment.h"
 
-#define HOCCER_GEOSTORAGE_URI @"https://geostore.sandbox.hoccer.com"
+#define HOCCER_GEOSTORAGE_URI @"https://geostore.sandbox.hoccer.com/v3"
 
 @interface HCGeoStorage ()
 
