@@ -116,7 +116,7 @@
 }
 
 - (void)testError {
-	[fileCache load:@"http://www.sdfghjklaösdfjk.com"];
+	[fileCache load:@"http://filecache.hoccer.com/sdfghjkl.jpg"];
 	[self runForInterval:2];
 	GHAssertNotNil(fileCacheDelegate.error, @"should have received an error");
 }

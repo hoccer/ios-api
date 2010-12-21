@@ -11,6 +11,9 @@
 #import "MockedLocationController.h"
 
 #define HOCCER_CLIENT_URI @"hoccerClientUri" 
+#define SANDBOX_APIKEY @"e101e890ea97012d6b6f00163e001ab0"
+#define SANDBOX_SECRET @"JofbFD6w6xtNYdaDgp4KOXf/k/s="
+
 
 @interface MockedDelegate : NSObject <HCLinccerDelegate>
 {
@@ -92,7 +95,7 @@
 	[self cleanupUserDefaults];
 	
 	mockedDelegate = [[MockedDelegate alloc] init]; 
-	hoccer = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
+	hoccer = [[HCLinccer alloc] initWithApiKey:SANDBOX_APIKEY secret:SANDBOX_SECRET];
 	[hoccer setTestEnvironment];
 	hoccer.delegate = mockedDelegate;
 }
@@ -137,7 +140,7 @@
 
 - (void)testSendAndReceive {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:SANDBOX_APIKEY secret:SANDBOX_SECRET];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
@@ -172,7 +175,7 @@
 
 - (void)testPassAndDistributeDoNotPair {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:SANDBOX_APIKEY secret:SANDBOX_SECRET];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
@@ -196,12 +199,12 @@
 
 - (void)testCollisions {
 	MockedDelegate *mockedDelegate2 = [[MockedDelegate alloc] init]; 
-	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
+	HCLinccer *hoccer2 = [[HCLinccer alloc] initWithApiKey:SANDBOX_APIKEY secret:SANDBOX_SECRET];
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 
 	MockedDelegate *mockedDelegate3 = [[MockedDelegate alloc] init]; 
-	HCLinccer *hoccer3 = [[HCLinccer alloc] initWithApiKey:@"06d61d00cafe012d2eeb001ec2be2ed9" secret:@"csxsOTcRzF/yyj/i6o/Z9vWogSI="];
+	HCLinccer *hoccer3 = [[HCLinccer alloc] initWithApiKey:SANDBOX_APIKEY secret:SANDBOX_SECRET];
 	[hoccer3 setTestEnvironment];
 	hoccer3.delegate = mockedDelegate3;
 	

@@ -11,7 +11,7 @@
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+URLHelper.h"
 
-#define FILECACHE_URI @"http://filecache.beta.hoccer.com"
+#define FILECACHE_URI @"http://filecache.sandbox.hoccer.com"
 // #define FILECACHE_URI @"http://192.168.2.112"
 
 @implementation HCFileCache
@@ -34,8 +34,6 @@
 #pragma mark Metods for Sending
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
 	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithFloat:interval] stringValue] forKey:@"expires_in"];
-	
-	// Content-Disposition: attachment; filename="test.jpg"
 	
 	NSString *contentDisposition = [NSString stringWithFormat:@"Content-Disposition: attachment; filename=\"%@\"", filename];
 	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 

@@ -108,7 +108,7 @@
 }
 
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
-	NSLog(@"%@ %@ %@", method, baseURL, URLString);
+	NSLog(@"%@ %@", method, URLString);
 
 	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -175,6 +175,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	NSLog(@"%@", [[[NSString alloc] initWithData:container.receivedData encoding: NSUTF8StringEncoding] autorelease]);
+	
 	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
 	if (error != nil) {
 		[self connection:aConnection didFailWithError:error];
