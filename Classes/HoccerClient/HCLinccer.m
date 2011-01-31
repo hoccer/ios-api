@@ -151,14 +151,15 @@
 #pragma mark -
 #pragma mark HttpClient Response Methods 
 
-- (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {
-	if (isRegistered) {
-		return;
+- (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {		
+	if (!isRegistered && [delegate respondsToSelector:@selector(linccerDidRegister:)]) {
+		[delegate linccerDidRegister:self];
 	}
 	
 	isRegistered = YES;
-	if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
-		[delegate linccerDidRegister:self];
+
+	if ([delegate respondsToSelector:@selector(linccer:didUpdateEnvironment:)]) {
+		[delegate linccer:self didUpdateEnvironment:[receivedData yajl_JSON]];
 	}
 }
 

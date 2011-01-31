@@ -83,7 +83,11 @@
 	}
 	
 	if (self.bssids) {
-		[dict setObject:self.bssids forKey:@"bssids"];
+		NSDictionary *wifi = [NSDictionary dictionaryWithObjectsAndKeys:
+							  self.bssids, @"bssids",
+							  [NSNumber numberWithDouble: [[NSDate date] timeIntervalSince1970]], @"timestamp", nil];
+		
+		[dict setObject:wifi forKey:@"wifi"];
 	}
 	
 	NSLog(@"dict: %@", dict);
