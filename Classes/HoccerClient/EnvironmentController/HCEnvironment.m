@@ -89,9 +89,7 @@
 		
 		[dict setObject:wifi forKey:@"wifi"];
 	}
-	
-	NSLog(@"dict: %@", dict);
-	
+		
 	return dict;
 }
 
