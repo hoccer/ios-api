@@ -44,11 +44,11 @@
 @property (retain) NSArray *bssids;
 
 - (void)updateHoccability;
-- (NSDictionary *)userInfoForImpreciseLocation;
-- (NSDictionary *)userInfoForBadLocation;
-- (NSDictionary *)userInfoForPerfectLocation;
++ (NSDictionary *)userInfoForImpreciseLocation: (NSDictionary *)hoccabilityInfo;
++ (NSDictionary *)userInfoForBadLocation: (NSDictionary *)hoccabilityInfo;
++ (NSDictionary *)userInfoForPerfectLocation: (NSDictionary *)hoccabilityInfo;
 
-- (NSString *)impoveSuggestion;
++ (NSString *)impoveSuggestion: (NSDictionary *)hoccabilityInfo;
 @end
 
 
@@ -130,61 +130,50 @@
 }
 
 - (void)updateHoccability {
-	self.hoccability = 0;
-	
-	if ([self hasLocation]) {
-		if (locationManager.location.horizontalAccuracy < 200) {
-			self.hoccability = 2;
-		} else if (locationManager.location.horizontalAccuracy < 5000) {
-			self.hoccability = 1;
-		}
-		
+	if ([delegate respondsToSelector:@selector(environmentControllerDidUpdateLocation:)]) {
+		[delegate environmentManagerDidUpdateEnvironment: self];
 	}
-
-	if ([self hasBSSID]) {
-		self.hoccability += 1;
-	}
-	
-	if (hoccability != oldHoccability) {
-		if ([delegate respondsToSelector:@selector(environmentControllerDidUpdateLocation:)]) {
-			[delegate environmentManagerDidUpdateEnvironment: self];
-			oldHoccability = hoccability;
-		} 
-	}
-
 }
 
-- (NSError *)messageForLocationInformation {
-	if (self.hoccability == 0) {
-		return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerBadLocation userInfo:[self userInfoForBadLocation]];
++ (NSError *)messageForLocationInformation: (NSDictionary *)hoccabilityInfo {
+	NSInteger hoc = [[hoccabilityInfo objectForKey:@"quality"] intValue];
+	
+	if (hoc == 0) {
+		return [NSError errorWithDomain:hoccerMessageErrorDomain 
+								   code:kHoccerBadLocation 
+							   userInfo:[self userInfoForBadLocation: hoccabilityInfo]];
 	}
 	
-	if (self.hoccability == 1) {
-		return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerImpreciseLocation userInfo:[self userInfoForImpreciseLocation]];
+	if (hoc == 1) {
+		return [NSError errorWithDomain:hoccerMessageErrorDomain 
+								   code:kHoccerImpreciseLocation 
+							   userInfo:[self userInfoForImpreciseLocation: hoccabilityInfo]];
 	}
 	
-	return [NSError errorWithDomain:hoccerMessageErrorDomain code:kHoccerPerfectLocation userInfo:[self userInfoForPerfectLocation]];
+	return [NSError errorWithDomain:hoccerMessageErrorDomain 
+							   code:kHoccerPerfectLocation 
+						   userInfo:[self userInfoForPerfectLocation:hoccabilityInfo]];
 }
 
 #pragma mark -
 #pragma mark private userInfo Methods
-- (NSDictionary *)userInfoForImpreciseLocation {
++ (NSDictionary *)userInfoForImpreciseLocation: (NSDictionary *)hoccabilityInfo {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
 	[userInfo setObject:@"Your location accuracy is imprecise!" forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:[self impoveSuggestion] forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[userInfo setObject:[self impoveSuggestion: hoccabilityInfo] forKey:NSLocalizedRecoverySuggestionErrorKey];
 
 	return [userInfo autorelease];
 }
 
-- (NSDictionary *)userInfoForBadLocation {
++ (NSDictionary *)userInfoForBadLocation: (NSDictionary *)hoccabilityInfo {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
 	[userInfo setObject:@"Your location accuracy is to imprecise for hoccing" forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:[self impoveSuggestion] forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[userInfo setObject:[self impoveSuggestion: hoccabilityInfo] forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
 	return [userInfo autorelease];
 }
 
-- (NSDictionary *)userInfoForPerfectLocation {
++ (NSDictionary *)userInfoForPerfectLocation: (NSDictionary *)hoccabilityInfo {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
 	[userInfo setObject:@"Your hoc location is perfect" forKey:NSLocalizedDescriptionKey];
 	[userInfo setObject:@"You suffice all requirements for reliable hoccing." forKey:NSLocalizedRecoverySuggestionErrorKey];
@@ -192,15 +181,18 @@
 	return [userInfo autorelease];
 }
 
-- (NSString *)impoveSuggestion {
++ (NSString *)impoveSuggestion: (NSDictionary *)hoccabilityInfo {
+	NSDictionary *wifi = [hoccabilityInfo objectForKey:@"wifi"];
+	NSDictionary *coordinates = [hoccabilityInfo objectForKey:@"coordinates"];
+	
 	NSMutableArray *suggestions = [[NSMutableArray alloc] initWithCapacity:2];
 	NSMutableString *suggestion = [[NSMutableString alloc] init];
 	
-	if (![self hasBSSID]) {
+	if ([[wifi objectForKey:@"quality"] intValue] == 0) {
 		[suggestions addObject:@"turning on the phones wifi"];
 	}
 	
-	if ([self hasBadLocation]) {
+	if ([[coordinates objectForKey:@"quality"] intValue] == 0) {
 		[suggestions addObject:@"going outside"];
 	}
 	
