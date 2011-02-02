@@ -99,6 +99,8 @@
 	[environmentController release];
 	
 	environmentController = [[MockedLocationController alloc] init];
+	
+	[self environmentManagerDidUpdateEnvironment:self.environmentController];
 }
 @end
 
@@ -168,7 +170,7 @@
 	[hoccer2 setTestEnvironment];
 	hoccer2.delegate = mockedDelegate2;
 	
-	[self runForInterval:1];
+	[self runForInterval:2];
 	
 	NSDictionary *payload = [NSDictionary dictionaryWithObject:@"API3" forKey:@"Hello"];
 	[hoccer receiveWithMode:HCTransferModeOneToOne];
@@ -252,7 +254,6 @@
 	GHAssertEquals(mockedDelegate3.didFailWithErrorCalls, 1, @"sending should have failed");
 	GHAssertEquals(mockedDelegate2.didFailWithErrorCalls, 1, @"sending should have failed");
 	GHAssertEquals(mockedDelegate.didFailWithErrorCalls, 1, @"reveiving should have failed");
-	
 }
 
 

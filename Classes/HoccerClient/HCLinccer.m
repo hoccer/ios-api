@@ -219,7 +219,7 @@
 	[updateTimer invalidate];
 	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:25 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
 	
-	if (uri == nil && [self.environmentController hasEnvironment]) {
+	if (uri == nil || ![self.environmentController hasEnvironment]) {
 		return;
 	}
 	

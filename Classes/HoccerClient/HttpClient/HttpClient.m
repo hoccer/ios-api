@@ -186,6 +186,7 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
+	NSLog(@"error: %@", error);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	if (!canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
@@ -201,8 +202,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	NSLog(@"%@", [[[NSString alloc] initWithData:container.receivedData encoding: NSUTF8StringEncoding] autorelease]);
-	
+	NSLog(@"data %@", [[[NSString alloc] initWithData:container.receivedData encoding:NSUTF8StringEncoding] autorelease]);
 	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
 	if (error != nil) {
 		[self connection:aConnection didFailWithError:error];

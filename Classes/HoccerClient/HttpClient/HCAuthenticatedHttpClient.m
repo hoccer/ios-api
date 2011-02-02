@@ -66,6 +66,8 @@
 	NSData *HMAC = [[[NSData alloc] initWithBytes:cHMAC
 										  length:sizeof(cHMAC)] autorelease];
 		
+	NSLog(@"calculation sha from %@", newUri);
+	
 	return [NSString stringWithFormat:@"%@&signature=%@", newUri, [[HMAC asBase64EncodedString] urlEncodeValue]];
 }
 

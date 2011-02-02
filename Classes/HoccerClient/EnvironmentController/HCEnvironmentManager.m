@@ -125,7 +125,8 @@
 }
 
 - (BOOL)hasEnvironment {
-	return [self hasBSSID] && [self hasLocation];
+	NSLog(@"has Envirinment: %d", ([self hasBSSID] || [self hasLocation]));
+	return [self hasBSSID] || [self hasLocation];
 }
 
 - (void)updateHoccability {

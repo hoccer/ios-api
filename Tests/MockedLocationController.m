@@ -45,6 +45,10 @@ static CLLocationDegrees lastLatitude = 5, lastLongitue = 5;
 	return self;
 }
 
+- (BOOL)hasLocation {
+	return YES;
+}
+
 - (HCEnvironment *)environment {
 	NSArray *array = [NSArray array];
 	

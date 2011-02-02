@@ -39,21 +39,14 @@
 
 #define FILECACHE_URI @"https://filecache.hoccer.com/v3"
 #define FILECACHE_SANDBOX_URI @"https://filecache.beta.hoccer.com/v3"
+//#define FILECACHE_SANDBOX_URI @"http://localhost:9212"
 
 @implementation HCFileCache
 
 @synthesize delegate;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
-	self = [super init];
-	if (self != nil) {
-		httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:FILECACHE_URI];
-		httpClient.apiKey = key;
-		httpClient.secret = secret;
-		httpClient.target = self;
-	}
-	
-	return self;
+	return [self initWithApiKey:key secret:secret sandboxed:NO];
 }
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret sandboxed: (BOOL)sandbox {

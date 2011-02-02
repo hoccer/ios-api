@@ -14,8 +14,7 @@ h3. Sample Usage
 h4. Using the linking service api
 
 
-bc.. 
-#import <Hoccer/Hoccer.h>
+bc.. #import <Hoccer/Hoccer.h>
 
 @interface LinkingViewController : UIViewController <HCClientDelegate> {
 	HCLinccer *client;
@@ -70,8 +69,7 @@ p. See the HoccerApiViewController.h for more...
 
 h4. Using the geostorage api	
 
-bc.. 
-#import <Hoccer/Hoccer.h>
+bc.. #import <Hoccer/Hoccer.h>
 
 @interface GeostoreSampleViewController : UIViewController <HCGeoStorageDelegate> {
 	HCGeoStorage *geostorage;
