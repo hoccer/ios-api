@@ -38,7 +38,7 @@
 #import "NSString+URLHelper.h"
 
 #define FILECACHE_URI @"https://filecache.hoccer.com/v3"
-#define FILECACHE_SANDBOX_URI @"https://filecache.sandbox.hoccer.com/v3"
+#define FILECACHE_SANDBOX_URI @"https://filecache.beta.hoccer.com/v3"
 
 @implementation HCFileCache
 
@@ -79,7 +79,7 @@
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
 	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithFloat:interval] stringValue] forKey:@"expires_in"];
 	
-	NSString *contentDisposition = [NSString stringWithFormat:@"Content-Disposition: attachment; filename=\"%@\"", filename];
+	NSString *contentDisposition = [NSString stringWithFormat:@"attachment; filename=\"%@\"", filename];
 	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 
 		
 	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
