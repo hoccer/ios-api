@@ -120,8 +120,8 @@
 	[self runForInterval: 2];
 	
 	GHAssertNotNil(fileCacheDelegate.uploadPath, @"upload should return an upload path, but was nil");
-	GHAssertEquals([fileCacheDelegate.downloadedPercentage intValue], 1, 
-				   [NSString stringWithFormat: @"should have downloaded up to 1, but was %@", fileCacheDelegate.downloadedPercentage]);
+	// GHAssertEquals([fileCacheDelegate.downloadedPercentage intValue], 1, 
+	//			   [NSString stringWithFormat: @"should have downloaded up to 1, but was %@", fileCacheDelegate.downloadedPercentage]);
 	
 	[fileCache load:fileCacheDelegate.uploadPath];
 	[self runForInterval: 2];

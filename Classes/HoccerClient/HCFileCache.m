@@ -38,22 +38,15 @@
 #import "NSString+URLHelper.h"
 
 #define FILECACHE_URI @"https://filecache.hoccer.com/v3"
-#define FILECACHE_SANDBOX_URI @"https://filecache.sandbox.hoccer.com/v3"
+#define FILECACHE_SANDBOX_URI @"https://filecache.beta.hoccer.com/v3"
+//#define FILECACHE_SANDBOX_URI @"http://localhost:9212"
 
 @implementation HCFileCache
 
 @synthesize delegate;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
-	self = [super init];
-	if (self != nil) {
-		httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:FILECACHE_URI];
-		httpClient.apiKey = key;
-		httpClient.secret = secret;
-		httpClient.target = self;
-	}
-	
-	return self;
+	return [self initWithApiKey:key secret:secret sandboxed:NO];
 }
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret sandboxed: (BOOL)sandbox {
@@ -79,7 +72,7 @@
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
 	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithFloat:interval] stringValue] forKey:@"expires_in"];
 	
-	NSString *contentDisposition = [NSString stringWithFormat:@"Content-Disposition: attachment; filename=\"%@\"", filename];
+	NSString *contentDisposition = [NSString stringWithFormat:@"attachment; filename=\"%@\"", filename];
 	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 
 		
 	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];

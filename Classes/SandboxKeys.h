@@ -35,3 +35,5 @@
 #define SANDBOX_APIKEY @"e101e890ea97012d6b6f00163e001ab0"
 #define SANDBOX_SECRET @"JofbFD6w6xtNYdaDgp4KOXf/k/s="
 
+//#define SANDBOX_APIKEY @"37d4b750fc95012d14a7109add515cd4"
+//#define SANDBOX_SECRET @"4sitG2bYCA9ov3tjsBdXp0BAx5M="
