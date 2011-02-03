@@ -201,7 +201,6 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didFailWithError: (NSError *)error {
-	NSLog(@"error");
 	if ([delegate respondsToSelector:@selector(geostorage:didFailWithError:)]) {
 		[delegate geostorage:self didFailWithError:error];
 	}

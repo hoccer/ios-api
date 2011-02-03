@@ -116,6 +116,11 @@
 	[self updateEnvironment];
 }
 
+- (BOOL)isLinccing {
+	return [httpClient hasActiveRequest];
+}
+
+
 - (void)disconnect {
 	if (!isRegistered) {
 		[self didFailWithError:nil];

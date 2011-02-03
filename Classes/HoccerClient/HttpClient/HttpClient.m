@@ -76,14 +76,6 @@
 	return self;
 }
 
-- (void) dealloc {
-	[connection release];
-	[receivedData release];  
-	[httpConnection release];
-	
-	[super dealloc];
-}
-
 @end
 
 @interface HttpClient ()
@@ -134,8 +126,6 @@
 }
 
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
-	NSLog(@"%@ %@", method, URLString);
-
 	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
@@ -165,8 +155,11 @@
 #pragma mark NSURLConnection Delegate Methods
 - (void)connection:(NSURLConnection *)aConnection didReceiveData:(NSData *)data {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	[container.receivedData appendData:data];
+	if (container == nil) {
+		return;
+	}
 	
+	[container.receivedData appendData:data];
 	CGFloat downloaded = (float)[container.receivedData length]/ [container.httpConnection.response expectedContentLength];
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
 		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
@@ -176,6 +169,9 @@
 
 - (void) connection:(NSURLConnection *)aConnection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	if (container == nil) {
+		return;
+	}
 	
 	CGFloat uploaded = (float)totalBytesWritten / totalBytesExpectedToWrite;
 
@@ -186,22 +182,32 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-	NSLog(@"error: %@", error);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	if (container == nil) {
+		return;
+	}
+	
 	if (!container.httpConnection.canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
 	}
 }
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);
-	
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	if (container == nil) {
+		return;
+	}
+	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);	
+	
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+	if (container == nil) {
+		return;
+	}
+	
 	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
 	if (error != nil) {
 		[self connection:aConnection didFailWithError:error];
@@ -228,6 +234,7 @@
 		container.httpConnection.canceled = YES;
 	}
 	
+	[connections removeAllObjects];	
 }
 
 - (void)cancelRequest:(NSString *)uri {
@@ -242,6 +249,12 @@
 	
 	[cancelableConnection.connection cancel];
 	cancelableConnection.httpConnection.canceled = YES;
+	
+	[connections removeObjectForKey:[cancelableConnection description]];
+}
+
+- (BOOL)hasActiveRequest {
+	return [connections count] > 0;
 }
 
 #pragma mark -
@@ -280,5 +293,6 @@
 	
     [super dealloc];
 }
+
 
 @end
