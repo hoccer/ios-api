@@ -211,6 +211,7 @@
 	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
 	if (error != nil) {
 		[self connection:aConnection didFailWithError:error];
+		return;
 	}
 	
 	if (!container.httpConnection.canceled && [target respondsToSelector:container.successAction]) {
