@@ -42,7 +42,6 @@
 	NSString *baseURL;
 	
 	NSMutableDictionary *connections;
-	BOOL canceled;
 	
 	id target;
 	

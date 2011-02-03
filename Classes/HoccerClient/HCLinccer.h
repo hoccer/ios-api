@@ -75,4 +75,6 @@ enum HoccerErrors {
 - (void)reactivate;
 - (void)disconnect;
 
+- (void)cancelAllRequest;
+
 @end

@@ -39,10 +39,14 @@
 	
 	NSURLRequest *request;
 	NSHTTPURLResponse *response;
+	
+	BOOL canceled;
 }
 
 @property (copy) NSString *uri;
 @property (retain, nonatomic) NSURLRequest *request;
 @property (retain, nonatomic) NSHTTPURLResponse *response;
+
+@property (assign) BOOL canceled;
 
 @end

@@ -41,7 +41,7 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer.sandbox.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-beta.hoccer.com/v3"
 
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
@@ -189,7 +189,6 @@
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
-	NSLog(@"deleted resource");
 	if ([delegate respondsToSelector:@selector(linccerDidUnregister:)]) {
 		[delegate linccerDidUnregister: self];
 	}
@@ -228,6 +227,9 @@
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
 }
 
+- (void)cancelAllRequest {
+	[httpClient cancelAllRequest];
+}
 
 #pragma mark -
 #pragma mark Getter

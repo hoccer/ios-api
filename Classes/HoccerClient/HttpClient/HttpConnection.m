@@ -39,6 +39,7 @@
 
 @synthesize uri;
 @synthesize request, response;
+@synthesize canceled;
 
 -(void) dealloc {
 	[request release];

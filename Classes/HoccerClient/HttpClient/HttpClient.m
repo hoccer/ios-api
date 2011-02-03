@@ -167,7 +167,8 @@
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	[container.receivedData appendData:data];
 	
-	CGFloat downloaded = (float)[container.httpConnection.response expectedContentLength] / [container.receivedData length];
+	NSLog(@"expected: %d, received %", [container.httpConnection.response expectedContentLength], [container.receivedData length]);
+	CGFloat downloaded = (float)[container.receivedData length]/ [container.httpConnection.response expectedContentLength];
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
 		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
 					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: downloaded]];
@@ -188,7 +189,7 @@
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
 	NSLog(@"error: %@", error);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	if (!canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
+	if (!container.httpConnection.canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
 	}
 }
@@ -208,7 +209,7 @@
 		[self connection:aConnection didFailWithError:error];
 	}
 	
-	if (!canceled && [target respondsToSelector:container.successAction]) {
+	if (!container.httpConnection.canceled && [target respondsToSelector:container.successAction]) {
 		[target performSelector:container.successAction withObject:container.httpConnection withObject:container.receivedData];
 	}
 
@@ -226,21 +227,23 @@
 - (void)cancelAllRequest {
 	for (ConnectionContainer *container in [connections allValues]) {
 		[container.connection cancel];
+		container.httpConnection.canceled = YES;
 	}
 	
-	canceled = YES;
 }
 
 - (void)cancelRequest:(NSString *)uri {
-	NSURLConnection *cancelableConnection = nil;
+	ConnectionContainer *cancelableConnection = nil;
 	for (ConnectionContainer *container in [connections allValues]) {
 		if ([container.httpConnection.uri isEqualToString: uri]) {
-			cancelableConnection = container.connection;
+			
+			cancelableConnection = container;
 			break;
 		}
 	}
 	
-	[cancelableConnection cancel];
+	[cancelableConnection.connection cancel];
+	cancelableConnection.httpConnection.canceled = YES;
 }
 
 #pragma mark -
