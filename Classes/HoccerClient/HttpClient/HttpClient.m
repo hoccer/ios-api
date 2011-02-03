@@ -167,7 +167,6 @@
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	[container.receivedData appendData:data];
 	
-	NSLog(@"expected: %d, received %", [container.httpConnection.response expectedContentLength], [container.receivedData length]);
 	CGFloat downloaded = (float)[container.receivedData length]/ [container.httpConnection.response expectedContentLength];
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
 		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
@@ -203,7 +202,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
-	NSLog(@"data %@", [[[NSString alloc] initWithData:container.receivedData encoding:NSUTF8StringEncoding] autorelease]);
 	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
 	if (error != nil) {
 		[self connection:aConnection didFailWithError:error];
