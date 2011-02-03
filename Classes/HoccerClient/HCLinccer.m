@@ -137,7 +137,18 @@
 #pragma mark Error Handling 
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
-	[self didFailWithError:error];
+	NSError *newError = nil;
+	if ([error code] == 409) {
+		NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+		[userInfo setObject:NSLocalizedString(@"There was a collision of actions.", nil) forKey:NSLocalizedDescriptionKey];
+		[userInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+		
+		newError = [NSError errorWithDomain:HoccerError code:409 userInfo:userInfo];
+	} else {
+		newError = error;
+	}
+											 
+	[self didFailWithError:newError];
 }
 
 - (void)didFailWithError: (NSError *)error {
@@ -205,16 +216,16 @@
 - (NSDictionary *)userInfoForNoReceiver {
 
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:NSLocalizedString(@"Could not establish connection", nil) forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:NSLocalizedString(@"", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[userInfo setObject:NSLocalizedString(@"No receiver was found.", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
 	return [userInfo autorelease];
 }
 
 - (NSDictionary *)userInfoForNoSender {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:NSLocalizedString(@"Could not establish connection", nil) forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:NSLocalizedString(@"", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[userInfo setObject:NSLocalizedString(@"No sender was found.", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
 	return [userInfo autorelease];	
 }
