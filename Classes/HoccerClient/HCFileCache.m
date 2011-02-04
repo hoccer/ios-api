@@ -119,4 +119,11 @@
 	[httpClient cancelRequest:transferUri];
 }
 
+- (void)dealloc {
+	httpClient.target = nil;
+	[httpClient release];
+	
+	[super dealloc];
+}
+
 @end

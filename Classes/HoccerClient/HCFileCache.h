@@ -52,7 +52,6 @@
 @interface HCFileCache : NSObject {
 	HCAuthenticatedHttpClient *httpClient;
 	
-	NSMutableArray *uuids;
 	id <HCFileCacheDelegate> delegate;
 }
 
