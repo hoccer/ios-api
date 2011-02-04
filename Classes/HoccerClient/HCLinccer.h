@@ -78,5 +78,6 @@ enum HoccerErrors {
 - (BOOL)isLinccing;
 
 - (void)cancelAllRequest;
+- (NSString *)uuid;
 
 @end

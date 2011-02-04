@@ -54,7 +54,6 @@
 - (NSDictionary *)userInfoForNoReceiver;
 - (NSDictionary *)userInfoForNoSender;
 
-- (NSString *)uuid;
 @end
 
 @implementation HCLinccer
