@@ -232,7 +232,7 @@
 
 - (void)updateEnvironment {	
 	[updateTimer invalidate];
-	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:25 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
+	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
 	
 	if (uri == nil || ![self.environmentController hasEnvironment]) {
 		return;
@@ -262,8 +262,12 @@
 
 - (void)dealloc {
 	[httpClient cancelAllRequest];
+	httpClient.target = nil;
 	[httpClient release];
+	
 	[environmentController release];
+	[uri release];
+	[updateTimer release];
     [super dealloc];
 }
 
