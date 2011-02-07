@@ -147,7 +147,8 @@
 	container.httpConnection = httpConnection;
 	
 	[connections setObject: container forKey:[connection description]];
-
+	
+	NSLog(@"request %@", URLString);
 	httpConnection.startTimestamp = [NSDate date];
 	return URLString;	
 }

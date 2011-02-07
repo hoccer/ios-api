@@ -56,7 +56,6 @@
 
 - (NSDictionary *)userInfoForNoReceiver;
 - (NSDictionary *)userInfoForNoSender;
-
 @end
 
 @implementation HCLinccer
@@ -64,6 +63,7 @@
 @synthesize delegate;
 @synthesize environmentController;
 @synthesize isRegistered;
+@synthesize latency;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -170,7 +170,8 @@
 #pragma mark HttpClient Response Methods 
 
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {		
-	NSLog(@"roundtriptime: %f", aConnection.roundTripTime);
+	self.latency = aConnection.roundTripTime;
+	NSLog(@"latancy %f", self.latency);
 	
 	if (!isRegistered && [delegate respondsToSelector:@selector(linccerDidRegister:)]) {
 		[delegate linccerDidRegister:self];
@@ -245,8 +246,11 @@
 		return;
 	}
 	
+	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
+	[environment setObject:[NSNumber numberWithDouble:self.latency] forKey:@"latency"];
+	
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
-			   payload:[[environmentController.environment JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding] 
+			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
 }
 
