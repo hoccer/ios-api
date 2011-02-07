@@ -148,7 +148,6 @@
 	
 	[connections setObject: container forKey:[connection description]];
 	
-	NSLog(@"request %@", URLString);
 	httpConnection.startTimestamp = [NSDate date];
 	return URLString;	
 }
@@ -202,7 +201,7 @@
 		return;
 	}
 	
-	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);	
+	// NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);	
 	container.httpConnection.endTimestamp = [NSDate date];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
 }

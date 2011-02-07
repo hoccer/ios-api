@@ -171,7 +171,6 @@
 
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {		
 	self.latency = aConnection.roundTripTime;
-	NSLog(@"latancy %f", self.latency);
 	
 	if (!isRegistered && [delegate respondsToSelector:@selector(linccerDidRegister:)]) {
 		[delegate linccerDidRegister:self];

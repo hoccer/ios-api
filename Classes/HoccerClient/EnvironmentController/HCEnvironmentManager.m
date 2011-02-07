@@ -125,7 +125,6 @@
 }
 
 - (BOOL)hasEnvironment {
-	NSLog(@"has Envirinment: %d", ([self hasBSSID] || [self hasLocation]));
 	return [self hasBSSID] || [self hasLocation];
 }
 
