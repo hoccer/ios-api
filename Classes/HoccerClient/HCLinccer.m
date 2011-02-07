@@ -38,10 +38,13 @@
 #import "HCEnvironmentManager.h"
 #import "HCEnvironment.h"
 #import "HttpClient.h"
+#import "HttpConnection.h"
+
 #import "HCAuthenticatedHttpClient.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-beta.hoccer.com/v3"
+// #define LINCCER_SANDBOX_URI @"https://linccer-beta.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"http://192.168.2.150:9292/v3"
 
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
@@ -167,15 +170,20 @@
 #pragma mark HttpClient Response Methods 
 
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {		
+	NSLog(@"roundtriptime: %f", aConnection.roundTripTime);
+	
 	if (!isRegistered && [delegate respondsToSelector:@selector(linccerDidRegister:)]) {
 		[delegate linccerDidRegister:self];
 	}
 	
 	isRegistered = YES;
-
-	if ([delegate respondsToSelector:@selector(linccer:didUpdateEnvironment:)]) {
-		[delegate linccer:self didUpdateEnvironment:[receivedData yajl_JSON]];
+	
+	@try {
+		if ([delegate respondsToSelector:@selector(linccer:didUpdateEnvironment:)]) {
+			[delegate linccer:self didUpdateEnvironment:[receivedData yajl_JSON]];
+		}
 	}
+	@catch (NSException * e) { NSLog(@"%@", e); }
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {

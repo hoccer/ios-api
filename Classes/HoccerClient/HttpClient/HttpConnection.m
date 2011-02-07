@@ -39,6 +39,8 @@
 
 @synthesize uri;
 @synthesize request, response;
+@synthesize startTimestamp;
+@synthesize endTimestamp;
 @synthesize canceled;
 
 -(void) dealloc {
@@ -48,6 +50,15 @@
 	
 	[super dealloc];
 }
+
+- (NSTimeInterval) roundTripTime {
+	if (!self.startTimestamp || !self.endTimestamp) {
+		return -1;
+	}
+	
+	return [self.endTimestamp timeIntervalSinceDate:self.startTimestamp];
+}
+
 
 
 @end
