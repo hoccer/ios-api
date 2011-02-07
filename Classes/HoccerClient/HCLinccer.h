@@ -81,4 +81,6 @@ enum HoccerErrors {
 - (void)cancelAllRequest;
 - (NSString *)uuid;
 
+- (void)updateEnvironment;
+
 @end
