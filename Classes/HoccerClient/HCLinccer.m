@@ -43,9 +43,8 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
-// #define LINCCER_SANDBOX_URI @"http://192.168.2.150:9292/v3"
-
+// #define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -64,6 +63,7 @@
 @synthesize environmentController;
 @synthesize isRegistered;
 @synthesize latency;
+@synthesize environmentUpdateInterval;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -86,7 +86,7 @@
 		httpClient.target = self;
 		
 		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
-		
+		environmentUpdateInterval = 20;	
 		[self reactivate];
 	}
 	
@@ -239,7 +239,11 @@
 
 - (void)updateEnvironment {	
 	[updateTimer invalidate];
-	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(updateEnvironment) userInfo:nil repeats:NO];
+	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:self.environmentUpdateInterval
+														target:self 
+													  selector:@selector(updateEnvironment) 
+													  userInfo:nil 
+													   repeats:NO];
 	
 	if (uri == nil || ![self.environmentController hasEnvironment]) {
 		return;
@@ -268,6 +272,22 @@
 	}
 
 	return uuid;
+}
+
+#pragma mark -
+#pragma mark Setter
+
+- (void) setEnvironmentUpdateInterval:(NSTimeInterval)newInterval {
+	if (environmentUpdateInterval != newInterval) {
+		environmentUpdateInterval = newInterval;
+		[self.updateTimer invalidate];
+		self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:self.environmentUpdateInterval
+															target:self 
+														  selector:@selector(updateEnvironment) 
+														  userInfo:nil 
+														   repeats:NO];
+	
+	}
 }
 
 - (void)dealloc {

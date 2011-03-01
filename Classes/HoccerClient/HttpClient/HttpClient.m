@@ -126,7 +126,7 @@
 }
 
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
-//	NSLog(@"request %@", URLString);
+	NSLog(@"request %@", URLString);
 	
 	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -283,7 +283,12 @@
 #pragma mark HTTP Error Handling 
 - (NSError *)hasHttpError: (NSHTTPURLResponse *)response {
 	if ([response statusCode] >= 400) {
-		NSDictionary *info = [NSDictionary dictionary];
+		NSString *message = @"The Server responded with an error. Try again leter.";
+		
+		NSMutableDictionary *info = [NSMutableDictionary dictionary];
+		[info setValue:[[response URL] absoluteString] forKey:@"HttpClientErrorURL"];
+		[info setValue:message forKey:NSLocalizedDescriptionKey];
+		
 		NSError *httpError = [NSError errorWithDomain: HttpErrorDomain 
 												 code: [response statusCode] 
 											 userInfo: info];
