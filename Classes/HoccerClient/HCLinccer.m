@@ -43,8 +43,8 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-// #define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-beta.hoccer.com/v3"
+// +#define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -110,8 +110,20 @@
 	}
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
-	[httpClient getURI:[uri stringByAppendingPathComponent: actionString] 
+	
+	[httpClient getURI:[uri stringByAppendingPathComponent: actionString]
 			   success:@selector(httpConnection:didReceiveData:)];	
+}
+
+- (void)pollWithMode: (NSString *)mode {
+	if (!isRegistered) {
+		[self didFailWithError:nil];
+	}
+	
+	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
+	[httpClient getURI:[uri stringByAppendingPathComponent: [actionString stringByAppendingQuery:@"waiting=true"]]
+			   success:@selector(httpConnection:didReceiveData:)];	
+	
 }
 
 - (void)reactivate {
@@ -139,18 +151,27 @@
 #pragma mark Error Handling 
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
-	NSError *newError = nil;
+	NSLog(@"error %@", error);
+	
+	if ([connection isLongpool] && ([error code] == 504)) {
+		NSURL *url = [NSURL URLWithString:connection.uri];
+		NSLog(@"uri path %@", [url path]);
+		
+		[httpClient getURI:[[url path] stringByAppendingQuery:@"waiting=true"]
+				   success:@selector(httpConnection:didReceiveData:)];	
+		
+		return;
+	} 
+	
 	if ([error code] == 409) {
 		NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 		[userInfo setObject:NSLocalizedString(@"There was a collision of actions.", nil) forKey:NSLocalizedDescriptionKey];
 		[userInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
-		newError = [NSError errorWithDomain:HoccerError code:409 userInfo:userInfo];
-	} else {
-		newError = error;
+		error = [NSError errorWithDomain:HoccerError code:409 userInfo:userInfo];
 	}
 											 
-	[self didFailWithError:newError];
+	[self didFailWithError:error];
 }
 
 - (void)didFailWithError: (NSError *)error {
@@ -251,6 +272,8 @@
 	
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency*1000] forKey:@"latency"];
+	
+	NSLog(@"environment %@", environment);
 	
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 

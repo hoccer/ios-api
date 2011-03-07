@@ -33,6 +33,7 @@
 //
 
 #import "HttpConnection.h"
+#import "NSString+Regexp.h"
 
 
 @implementation HttpConnection
@@ -43,7 +44,7 @@
 @synthesize endTimestamp;
 @synthesize canceled;
 
--(void) dealloc {
+- (void) dealloc {
 	[request release];
 	[response release];
 	[uri release];
@@ -59,6 +60,8 @@
 	return [self.endTimestamp timeIntervalSinceDate:self.startTimestamp];
 }
 
-
+- (BOOL) isLongpool {
+	return [self.uri contains:@"waiting=true"];
+}
 
 @end

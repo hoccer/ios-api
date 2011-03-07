@@ -38,8 +38,8 @@
 #import "NSString+URLHelper.h"
 
 #define FILECACHE_URI @"https://filecache.hoccer.com/v3"
-#define FILECACHE_SANDBOX_URI @"https://filecache-sandbox.hoccer.com/v3"
-//#define FILECACHE_SANDBOX_URI @"http://192.168.2.126:9212/v3"
+#define FILECACHE_SANDBOX_URI @"https://filecache-beta.hoccer.com/v3"
+// #define FILECACHE_SANDBOX_URI @"http://192.168.2.126:9212/v3"
 
 @implementation HCFileCache
 
@@ -70,11 +70,12 @@
 #pragma mark -
 #pragma mark Metods for Sending
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
-	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithFloat:interval] stringValue] forKey:@"expires_in"];
+	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithDouble:interval] stringValue] forKey:@"expires_in"];
 	
 	NSString *contentDisposition = [NSString stringWithFormat:@"attachment; filename=\"%@\"", filename];
 	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 
-		
+	NSLog(@"params %@", params);
+	
 	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
 	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];
 		

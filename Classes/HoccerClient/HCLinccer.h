@@ -74,6 +74,7 @@ enum HoccerErrors {
 
 - (void)send: (NSDictionary *)data withMode: (NSString *)mode;
 - (void)receiveWithMode: (NSString *)mode;
+- (void)pollWithMode: (NSString *)mode;
 
 - (void)reactivate;
 - (void)disconnect;

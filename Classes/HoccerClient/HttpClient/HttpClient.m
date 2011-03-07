@@ -138,6 +138,7 @@
 
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
+	[request setTimeoutInterval:60 * 60];
 	
 	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	

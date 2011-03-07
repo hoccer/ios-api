@@ -50,9 +50,11 @@
 @property (retain, nonatomic) NSHTTPURLResponse *response;
 @property (retain, nonatomic) NSDate *startTimestamp;
 @property (retain, nonatomic) NSDate *endTimestamp;
-
 @property (readonly) NSTimeInterval roundTripTime;
-
 @property (assign) BOOL canceled;
+
+- (BOOL)isLongpool;
+
+
 
 @end
