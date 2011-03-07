@@ -39,10 +39,20 @@
 	
 	NSURLRequest *request;
 	NSHTTPURLResponse *response;
+	NSDate *startTimestamp;
+	NSDate *endTimestamp;
+	
+	BOOL canceled;
 }
 
 @property (copy) NSString *uri;
 @property (retain, nonatomic) NSURLRequest *request;
 @property (retain, nonatomic) NSHTTPURLResponse *response;
+@property (retain, nonatomic) NSDate *startTimestamp;
+@property (retain, nonatomic) NSDate *endTimestamp;
+
+@property (readonly) NSTimeInterval roundTripTime;
+
+@property (assign) BOOL canceled;
 
 @end

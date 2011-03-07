@@ -58,13 +58,14 @@ enum HoccerErrors {
 	BOOL isRegistered;
 	
 	NSTimer *updateTimer;
-	
+	NSTimeInterval latency;
 	id <HCLinccerDelegate> delegate;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;
 @property (assign) id <HCLinccerDelegate> delegate;
 @property (assign) BOOL isRegistered;
+@property (assign) NSTimeInterval latency;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox;
@@ -74,5 +75,12 @@ enum HoccerErrors {
 
 - (void)reactivate;
 - (void)disconnect;
+
+- (BOOL)isLinccing;
+
+- (void)cancelAllRequest;
+- (NSString *)uuid;
+
+- (void)updateEnvironment;
 
 @end
