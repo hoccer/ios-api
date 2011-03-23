@@ -74,7 +74,6 @@
 	
 	NSString *contentDisposition = [NSString stringWithFormat:@"attachment; filename=\"%@\"", filename];
 	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 
-	NSLog(@"params %@", params);
 	
 	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
 	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];

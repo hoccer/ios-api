@@ -125,9 +125,7 @@
 	return [self requestMethod:method absoluteURI:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload header: headers success:success];
 }
 
-- (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {
-	NSLog(@"request %@", URLString);
-	
+- (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {	
 	NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	

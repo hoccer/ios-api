@@ -150,12 +150,9 @@
 #pragma mark -
 #pragma mark Error Handling 
 
-- (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
-	NSLog(@"error %@", error);
-	
+- (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {	
 	if ([connection isLongpool] && ([error code] == 504)) {
 		NSURL *url = [NSURL URLWithString:connection.uri];
-		NSLog(@"uri path %@", [url path]);
 		
 		[httpClient getURI:[[url path] stringByAppendingQuery:@"waiting=true"]
 				   success:@selector(httpConnection:didReceiveData:)];	
@@ -272,9 +269,7 @@
 	
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency*1000] forKey:@"latency"];
-	
-	NSLog(@"environment %@", environment);
-	
+		
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
