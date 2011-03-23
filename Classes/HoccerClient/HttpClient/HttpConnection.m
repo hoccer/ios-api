@@ -33,7 +33,18 @@
 //
 
 #import "HttpConnection.h"
-#import "NSString+Regexp.h"
+
+@interface NSString (HCString)
+- (BOOL)hc_contains: (NSString *)otherString;
+@end
+
+@implementation NSString (HCString)
+
+- (BOOL)hc_contains: (NSString *)substring {
+	return ([self rangeOfString:substring].location != NSNotFound);
+}
+
+@end
 
 
 @implementation HttpConnection
@@ -61,7 +72,7 @@
 }
 
 - (BOOL) isLongpool {
-	return [self.uri contains:@"waiting=true"];
+	return [self.uri hc_contains:@"waiting=true"];
 }
 
 @end
