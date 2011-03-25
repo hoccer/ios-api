@@ -49,7 +49,7 @@
 }
 
 @property (assign) id target;
-@property (retain) NSString *userAgent;
+@property (retain, nonatomic) NSString *userAgent;
 
 - (id)initWithURLString: (NSString *)url;
 - (NSString *)getURI: (NSString *)uri success: (SEL)success;
