@@ -36,6 +36,7 @@
 #import "HCLinccerDelegate.h"
 #import "HCEnvironmentManagerDelegate.h"
 #import "HCAuthenticatedHttpClient.h"
+#import "HCEnvironment.h"
 
 #define HoccerError @"HoccerError"
 
@@ -57,6 +58,8 @@ enum HoccerErrors {
 	NSString *uri;
 	BOOL isRegistered;
 	
+    NSString *groupId;
+    
 	NSTimer *updateTimer;
 	NSTimeInterval latency;
 	NSTimeInterval environmentUpdateInterval;
@@ -67,7 +70,7 @@ enum HoccerErrors {
 @property (assign) id <HCLinccerDelegate> delegate;
 @property (assign) BOOL isRegistered;
 @property (assign) NSTimeInterval latency;
-@property (assign) NSTimeInterval environmentUpdateInterval;
+@property (assign, nonatomic) NSTimeInterval environmentUpdateInterval;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox;

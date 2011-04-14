@@ -83,7 +83,7 @@ static WifiScanner *wifiScannerInstance;
 	[NSThread detachNewThreadSelector:@selector(scan) toTarget:self withObject:nil];
 	
 	if (repeat) {
-		[NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(scanNetwork) userInfo:nil repeats:NO];
+		[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(scanNetwork) userInfo:nil repeats:NO];
 	}
 }
 

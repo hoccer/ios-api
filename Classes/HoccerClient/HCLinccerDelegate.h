@@ -42,6 +42,7 @@
 - (void)linccer: (HCLinccer *)linccer didSendData: (NSArray *)data ;
 - (void)linccer: (HCLinccer *)linncer didReceiveData: (NSArray *)data;
 - (void)linccer: (HCLinccer *)linccer didFailWithError: (NSError *)error;
+- (void)linccer: (HCLinccer *)linccer didUpdateGroup: (NSArray *)group;
 - (void)linccerDidUnregister: (HCLinccer *)linccer;
 
 @end

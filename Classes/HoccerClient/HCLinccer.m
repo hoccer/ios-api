@@ -34,6 +34,7 @@
 
 #import <YAJLIOS/YAJLIOS.h>
 #import "NSString+URLHelper.h"
+#import "NSDictionary+CSURLParams.h"
 #import "HCLinccer.h"
 #import "HCEnvironmentManager.h"
 #import "HCEnvironment.h"
@@ -43,8 +44,8 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
-// +#define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
+// #define LINCCER_SANDBOX_URI @"https://linccer-beta.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -52,6 +53,7 @@
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
+- (void)peek;
 
 - (NSDictionary *)userInfoForNoReceiver;
 - (NSDictionary *)userInfoForNoSender;
@@ -190,10 +192,14 @@
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {		
 	self.latency = aConnection.roundTripTime;
 	
-	if (!isRegistered && [delegate respondsToSelector:@selector(linccerDidRegister:)]) {
-		[delegate linccerDidRegister:self];
-	}
-	
+    
+    if (!isRegistered) {
+        if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
+            [delegate linccerDidRegister:self];
+        }
+        
+        [self peek];
+    }
 	isRegistered = YES;
 	
 	@try {
@@ -269,7 +275,8 @@
 	
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency*1000] forKey:@"latency"];
-		
+    [environment setObject:[UIDevice currentDevice].name forKey:@"client_name"];
+    
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
@@ -278,6 +285,29 @@
 - (void)cancelAllRequest {
 	[httpClient cancelAllRequest];
 }
+
+
+- (void)peek {
+    NSString *peekUri = [uri stringByAppendingPathComponent:@"/peek"];
+    if (groupId) {
+        NSDictionary *params = [NSDictionary dictionaryWithObject:groupId forKey:@"group_id"];
+        peekUri = [peekUri stringByAppendingQuery:[params URLParams]];
+    }
+
+    [httpClient getURI:peekUri success:@selector(httpConnection:didUpdateGroup:)];
+}
+
+- (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSDictionary *)groupDictionary {
+    NSDictionary *dictionary = [groupDictionary yajl_JSON];
+    groupId = [dictionary objectForKey:@"group_id"];
+    
+    if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
+        [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
+    }
+    
+    [self peek];
+}
+
 
 #pragma mark -
 #pragma mark Getter
