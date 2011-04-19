@@ -52,18 +52,20 @@ enum HoccerErrors {
 
 @interface HCLinccer : NSObject <HCEnvironmentManagerDelegate> {
 	@private
+	id <HCLinccerDelegate> delegate;
+
 	HCEnvironmentManager *environmentController;
 	HCAuthenticatedHttpClient *httpClient;
 
 	NSString *uri;
-	BOOL isRegistered;
-	
-    NSString *groupId;
     
 	NSTimer *updateTimer;
 	NSTimeInterval latency;
 	NSTimeInterval environmentUpdateInterval;
-	id <HCLinccerDelegate> delegate;
+    
+    BOOL isRegistered;
+    NSString *groupId;
+    NSString *linccingId;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;

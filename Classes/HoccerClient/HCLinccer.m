@@ -50,6 +50,7 @@
 
 @interface HCLinccer ()
 @property (retain) NSTimer *updateTimer;
+@property (copy) NSString *linccingId;
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
@@ -66,6 +67,7 @@
 @synthesize isRegistered;
 @synthesize latency;
 @synthesize environmentUpdateInterval;
+@synthesize linccingId;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -103,7 +105,8 @@
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	[httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
 				payload:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
-				success:@selector(httpConnection:didSendData:)];	
+				success:@selector(httpConnection:didSendData:)];
+    
 }
 
 - (void)receiveWithMode: (NSString *)mode {
@@ -113,8 +116,9 @@
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	
-	[httpClient getURI:[uri stringByAppendingPathComponent: actionString]
+	self.linccingId = [httpClient getURI:[uri stringByAppendingPathComponent: actionString]
 			   success:@selector(httpConnection:didReceiveData:)];	
+    
 }
 
 - (void)pollWithMode: (NSString *)mode {
@@ -133,7 +137,7 @@
 }
 
 - (BOOL)isLinccing {
-	return [httpClient hasActiveRequest];
+	return self.linccingId != nil;
 }
 
 
@@ -153,7 +157,11 @@
 #pragma mark Error Handling 
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {	
-	if ([connection isLongpool] && ([error code] == 504)) {
+	if (linccingId == connection.uri) {
+        self.linccingId = nil;
+    }
+    
+    if ([connection isLongpool] && ([error code] == 504)) {
 		NSURL *url = [NSURL URLWithString:connection.uri];
 		
 		[httpClient getURI:[[url path] stringByAppendingQuery:@"waiting=true"]
@@ -211,28 +219,32 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
+    self.linccingId = nil;
+
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoReceiverError userInfo:[self userInfoForNoReceiver]];
 		[self didFailWithError:error];
 		return;
 	}
-	
+
+
 	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
 		[delegate linccer: self didSendData: [data yajl_JSON]];
 	}
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
-	if ([connection.response statusCode] == 204 ) {
+    self.linccingId = nil;
+    
+    if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
 		[self didFailWithError:error];
 		return;
 	}
-
-	if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
+	
+    if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
 		[delegate linccer: self didReceiveData: [data yajl_JSON]];
 	}
-
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
@@ -294,6 +306,7 @@
         peekUri = [peekUri stringByAppendingQuery:[params URLParams]];
     }
 
+    NSLog(@"peekURL %@", peekUri);
     [httpClient getURI:peekUri success:@selector(httpConnection:didUpdateGroup:)];
 }
 
