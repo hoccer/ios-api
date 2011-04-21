@@ -68,6 +68,7 @@
 @synthesize latency;
 @synthesize environmentUpdateInterval;
 @synthesize linccingId;
+@synthesize clientName;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -76,6 +77,8 @@
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox {
 	self = [super init];
 	if (self != nil) {
+        clientName = @"<unknown>";
+        
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
 		
@@ -91,7 +94,7 @@
 		
 		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
 		environmentUpdateInterval = 20;	
-		[self reactivate];
+		[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reactivate) userInfo:nil repeats:NO];
 	}
 	
 	return self;	
@@ -287,7 +290,7 @@
 	
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency*1000] forKey:@"latency"];
-    [environment setObject:[UIDevice currentDevice].name forKey:@"client_name"];
+    [environment setObject:self.clientName forKey:@"client_name"];
     
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
@@ -351,6 +354,13 @@
 	}
 }
 
+- (void)setClientName:(NSString *)newClientName {
+    [clientName release];
+    clientName = [newClientName copy];
+    
+    [self reactivate];
+}
+
 - (void)dealloc {
 	[httpClient cancelAllRequest];
 	httpClient.target = nil;
@@ -359,6 +369,7 @@
 	[environmentController release];
 	[uri release];
 	[updateTimer release];
+    [clientName release];
     [super dealloc];
 }
 
