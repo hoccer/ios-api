@@ -169,7 +169,7 @@
     }
     
     if ([self.peekId isEqual:connection.uri]) {
-        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
     }
     
     if ([connection isLongpool] && ([error code] == 504)) {
@@ -264,6 +264,17 @@
 	}
 }
 
+- (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSDictionary *)groupDictionary {
+    NSDictionary *dictionary = [groupDictionary yajl_JSON];
+    self.groupId = [dictionary objectForKey:@"group_id"];
+    
+    if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
+        [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
+    }
+    
+    [self peek];
+}
+
 #pragma mark -
 #pragma mark Private Methods
 
@@ -318,17 +329,6 @@
     }
 
     self.peekId = [httpClient getURI:peekUri success:@selector(httpConnection:didUpdateGroup:)];
-}
-
-- (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSDictionary *)groupDictionary {
-    NSDictionary *dictionary = [groupDictionary yajl_JSON];
-    self.groupId = [dictionary objectForKey:@"group_id"];
-    
-    if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
-        [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
-    }
-    
-    [self peek];
 }
 
 

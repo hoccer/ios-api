@@ -198,13 +198,15 @@
 
 - (void)connection:(NSURLConnection *)aConnection didReceiveResponse:(NSURLResponse *)response {
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
+    
 	if (container == nil) {
 		return;
 	}
-	
-//	NSLog(@"response: %d", [(NSHTTPURLResponse *)response statusCode]);	
+
 	container.httpConnection.endTimestamp = [NSDate date];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
+    
+    NSLog(@"%d, %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
