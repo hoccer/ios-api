@@ -51,6 +51,8 @@
 @interface HCLinccer ()
 @property (retain) NSTimer *updateTimer;
 @property (copy) NSString *linccingId;
+@property (copy) NSString *peekId;
+@property (copy) NSString *groupId;
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
@@ -68,6 +70,8 @@
 @synthesize latency;
 @synthesize environmentUpdateInterval;
 @synthesize linccingId;
+@synthesize peekId;
+@synthesize groupId;
 @synthesize clientName;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
@@ -160,8 +164,12 @@
 #pragma mark Error Handling 
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {	
-	if (linccingId == connection.uri) {
+	if ([linccingId isEqual: connection.uri]) {
         self.linccingId = nil;
+    }
+    
+    if ([self.peekId isEqual:connection.uri]) {
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
     }
     
     if ([connection isLongpool] && ([error code] == 504)) {
@@ -309,13 +317,12 @@
         peekUri = [peekUri stringByAppendingQuery:[params URLParams]];
     }
 
-    NSLog(@"peekURL %@", peekUri);
-    [httpClient getURI:peekUri success:@selector(httpConnection:didUpdateGroup:)];
+    self.peekId = [httpClient getURI:peekUri success:@selector(httpConnection:didUpdateGroup:)];
 }
 
 - (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSDictionary *)groupDictionary {
     NSDictionary *dictionary = [groupDictionary yajl_JSON];
-    groupId = [dictionary objectForKey:@"group_id"];
+    self.groupId = [dictionary objectForKey:@"group_id"];
     
     if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
         [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
@@ -370,6 +377,10 @@
 	[uri release];
 	[updateTimer release];
     [clientName release];
+    
+    [peekId release];
+    [linccingId release];
+    [groupId release];
     [super dealloc];
 }
 

@@ -65,7 +65,9 @@ enum HoccerErrors {
     
     BOOL isRegistered;
     NSString *groupId;
+    
     NSString *linccingId;
+    NSString *peekId;
     
     NSString *clientName;
 }
