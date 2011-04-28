@@ -54,6 +54,7 @@
 @synthesize startTimestamp;
 @synthesize endTimestamp;
 @synthesize canceled;
+@synthesize bgTask;
 
 - (void) dealloc {
 	[request release];

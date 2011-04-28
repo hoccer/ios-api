@@ -43,6 +43,8 @@
 	NSDate *endTimestamp;
 	
 	BOOL canceled;
+
+    UIBackgroundTaskIdentifier bgTask;
 }
 
 @property (copy) NSString *uri;
@@ -52,9 +54,8 @@
 @property (retain, nonatomic) NSDate *endTimestamp;
 @property (readonly) NSTimeInterval roundTripTime;
 @property (assign) BOOL canceled;
+@property (assign) UIBackgroundTaskIdentifier bgTask;
 
 - (BOOL)isLongpool;
-
-
 
 @end

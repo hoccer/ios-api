@@ -138,7 +138,7 @@
 	[request setHTTPBody:payload];
 	[request setTimeoutInterval:60 * 60];
 	
-	NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
 	HttpConnection *httpConnection = [[[HttpConnection alloc] init] autorelease];
 	httpConnection.uri = URLString;
@@ -150,7 +150,15 @@
 	[connections setObject: container forKey:[connection description]];
 	
 	httpConnection.startTimestamp = [NSDate date];
-	return URLString;	
+	
+    // background task
+    UIApplication *app = [UIApplication sharedApplication];
+    httpConnection.bgTask = [app beginBackgroundTaskWithExpirationHandler: ^{
+        [app endBackgroundTask:httpConnection.bgTask];
+        httpConnection.bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    return URLString;	
 }
 
 #pragma mark -
@@ -189,6 +197,9 @@
 		return;
 	}
 	
+    [[UIApplication sharedApplication] endBackgroundTask:container.httpConnection.bgTask];
+    container.httpConnection.bgTask = UIBackgroundTaskInvalid;
+
 	if (!container.httpConnection.canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
 	}
@@ -215,6 +226,9 @@
 		return;
 	}
 	
+    [[UIApplication sharedApplication] endBackgroundTask:container.httpConnection.bgTask];
+    container.httpConnection.bgTask = UIBackgroundTaskInvalid;
+    
 	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
 	if (error != nil) {
 		[self connection:aConnection didFailWithError:error];
@@ -257,6 +271,9 @@
 	
 	[cancelableConnection.connection cancel];
 	cancelableConnection.httpConnection.canceled = YES;
+
+    [[UIApplication sharedApplication] endBackgroundTask:cancelableConnection.httpConnection.bgTask];
+    cancelableConnection.httpConnection.bgTask = UIBackgroundTaskInvalid;
 	
 	[connections removeObjectForKey:[cancelableConnection description]];
 }
