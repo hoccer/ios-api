@@ -113,7 +113,6 @@
 	[httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
 				payload:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 				success:@selector(httpConnection:didSendData:)];
-    
 }
 
 - (void)receiveWithMode: (NSString *)mode {
@@ -318,6 +317,7 @@
 
 - (void)cancelAllRequest {
 	[httpClient cancelAllRequest];
+    self.linccingId = nil;
 }
 
 
