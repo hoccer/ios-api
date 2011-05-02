@@ -72,7 +72,7 @@
 @synthesize linccingId;
 @synthesize peekId;
 @synthesize groupId;
-@synthesize clientName;
+@synthesize userInfo;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -81,7 +81,7 @@
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox {
 	self = [super init];
 	if (self != nil) {
-        clientName = @"<unknown>";
+        userInfo = [[NSDictionary dictionaryWithObject:@"<unknown>" forKey:@"client_name"] retain];
         
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
@@ -181,11 +181,11 @@
 	} 
 	
 	if ([error code] == 409) {
-		NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-		[userInfo setObject:NSLocalizedString(@"There was a collision of actions.", nil) forKey:NSLocalizedDescriptionKey];
-		[userInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+		NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
+		[errorInfo setObject:NSLocalizedString(@"There was a collision of actions.", nil) forKey:NSLocalizedDescriptionKey];
+		[errorInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
-		error = [NSError errorWithDomain:HoccerError code:409 userInfo:userInfo];
+		error = [NSError errorWithDomain:HoccerError code:409 userInfo:errorInfo];
 	}
 											 
 	[self didFailWithError:error];
@@ -279,19 +279,19 @@
 
 - (NSDictionary *)userInfoForNoReceiver {
 
-	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:NSLocalizedString(@"No receiver was found.", nil) forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+	[info setObject:NSLocalizedString(@"No receiver was found.", nil) forKey:NSLocalizedDescriptionKey];
+	[info setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
-	return [userInfo autorelease];
+	return [info autorelease];
 }
 
 - (NSDictionary *)userInfoForNoSender {
-	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:NSLocalizedString(@"No sender was found.", nil) forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
+	[info setObject:NSLocalizedString(@"No sender was found.", nil) forKey:NSLocalizedDescriptionKey];
+	[info setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
-	return [userInfo autorelease];	
+	return [info autorelease];	
 }
 
 - (void)updateEnvironment {	
@@ -308,7 +308,9 @@
 	
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency*1000] forKey:@"latency"];
-    [environment setObject:self.clientName forKey:@"client_name"];
+    [environment addEntriesFromDictionary:self.userInfo];
+    
+    NSLog(@"environment %@", environment);
     
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
@@ -361,11 +363,13 @@
 	}
 }
 
-- (void)setClientName:(NSString *)newClientName {
-    [clientName release];
-    clientName = [newClientName copy];
-    
-    [self reactivate];
+-(void)setUserInfo:(NSDictionary *)newUserInfo {
+    if (newUserInfo != userInfo) {
+        [userInfo release];
+        userInfo = [newUserInfo retain];
+        
+        [self reactivate];
+    }
 }
 
 - (void)dealloc {
@@ -376,7 +380,6 @@
 	[environmentController release];
 	[uri release];
 	[updateTimer release];
-    [clientName release];
     
     [peekId release];
     [linccingId release];

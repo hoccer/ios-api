@@ -68,8 +68,8 @@ enum HoccerErrors {
     
     NSString *linccingId;
     NSString *peekId;
-    
-    NSString *clientName;
+        
+    NSDictionary *userInfo;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;
@@ -77,7 +77,8 @@ enum HoccerErrors {
 @property (assign) BOOL isRegistered;
 @property (assign) NSTimeInterval latency;
 @property (assign, nonatomic) NSTimeInterval environmentUpdateInterval;
-@property (copy, nonatomic) NSString *clientName;
+
+@property (retain, nonatomic) NSDictionary *userInfo;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox;
