@@ -32,7 +32,7 @@
 //  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
-#import <YAJLIOS/YAJLIOS.h>
+#import <YAJLiOS/YAJL.h>
 #import "NSString+URLHelper.h"
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+StringWithData.h"
@@ -253,10 +253,7 @@
 		return;
 	}
 	
-    if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
-        NSString *jsonString = [NSString stringWithData: data usingEncoding: NSASCIIStringEncoding];
-        NSLog(@"received %@", jsonString);
-        
+    if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {        
 		[delegate linccer: self didReceiveData: [data yajl_JSON]];
 	}
 }
@@ -313,9 +310,7 @@
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
-    
-    NSLog(@"environment %@", environment);
-    
+        
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
@@ -336,7 +331,6 @@
         peekUri = [peekUri stringByAppendingQuery:[params URLParams]];
     }
 
-    NSLog(@"peek");
     self.peekId = [httpClient getURI:peekUri success:@selector(httpConnection:didUpdateGroup:)];
 }
 

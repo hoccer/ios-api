@@ -32,7 +32,7 @@
 //  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
-#import <YAJLIOS/YAJLIOS.h>
+#import <YAJLiOs/YAJL.h>
 #import "HCEnvironment.h"
 
 @interface HCEnvironment ()

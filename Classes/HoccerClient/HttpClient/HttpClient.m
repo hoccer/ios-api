@@ -33,7 +33,7 @@
 //
 
 #import "HttpClient.h"
-#import <YAJLIOS/YAJLIOS.h>
+#import <YAJLiOs/YAJL.h>
 
 @interface ConnectionContainer : NSObject 
 {
