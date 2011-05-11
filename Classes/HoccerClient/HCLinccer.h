@@ -70,6 +70,8 @@ enum HoccerErrors {
     NSString *peekId;
         
     NSDictionary *userInfo;
+    
+    NSString *uuid;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;

@@ -339,10 +339,18 @@
 #pragma mark Getter
 
 - (NSString *)uuid {
-	NSString *uuid = [[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY];
-	if (!uuid) {
-		uuid = [NSString stringWithUUID];
+    if (uuid != nil) {
+        return uuid;
+    }
+
+    BOOL shouldCreateNewUUID = [[NSUserDefaults standardUserDefaults] boolForKey:@"renewUUID"];
+    uuid                     = [[[NSUserDefaults standardUserDefaults] stringForKey:HOCCER_CLIENT_ID_KEY] copy];
+    
+	if (shouldCreateNewUUID || !uuid) {
+		uuid = [[NSString stringWithUUID] copy];
 		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];
+        
+        NSLog(@"creating new uuid %@", uuid);
 	}
 
 	return uuid;
@@ -385,6 +393,8 @@
     [peekId release];
     [linccingId release];
     [groupId release];
+    
+    [uuid release];
     [super dealloc];
 }
 
