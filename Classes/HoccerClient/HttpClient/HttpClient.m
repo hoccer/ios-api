@@ -217,7 +217,7 @@
 	container.httpConnection.endTimestamp = [NSDate date];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
     
-    NSLog(@"%d, %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
+//    NSLog(@"%d, %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
