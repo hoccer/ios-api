@@ -310,7 +310,9 @@
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
-        
+     
+    NSLog(@"environment %@", environment);
+    
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
