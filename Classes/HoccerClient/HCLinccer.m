@@ -330,7 +330,6 @@
 
 
 - (void)peek {
-    NSLog(@"peek");
     NSString *peekUri = [uri stringByAppendingPathComponent:@"/peek"];
     if (groupId) {
         NSDictionary *params = [NSDictionary dictionaryWithObject:groupId forKey:@"group_id"];
@@ -355,9 +354,7 @@
 	if (shouldCreateNewUUID || !uuid) {
 		uuid = [[NSString stringWithUUID] copy];
 		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];
-        
-        NSLog(@"creating new uuid %@", uuid);
-	}
+    }
 
 	return uuid;
 }
