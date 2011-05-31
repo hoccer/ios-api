@@ -140,7 +140,10 @@
 }
 
 - (void)reactivate {
+    isRegistered = NO;
+    
 	[self updateEnvironment];
+    self.groupId = nil;
 }
 
 - (BOOL)isLinccing {
@@ -327,6 +330,7 @@
 
 
 - (void)peek {
+    NSLog(@"peek");
     NSString *peekUri = [uri stringByAppendingPathComponent:@"/peek"];
     if (groupId) {
         NSDictionary *params = [NSDictionary dictionaryWithObject:groupId forKey:@"group_id"];
