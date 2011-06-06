@@ -76,6 +76,12 @@
 	return self;
 }
 
+-(void)dealloc {
+    [receivedData release];
+    [super dealloc];
+}
+
+
 @end
 
 @interface HttpClient ()

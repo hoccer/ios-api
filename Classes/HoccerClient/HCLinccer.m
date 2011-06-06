@@ -319,6 +319,8 @@
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
+    
+    [environment release];
 }
 
 - (void)cancelAllRequest {
