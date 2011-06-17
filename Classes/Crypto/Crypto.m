@@ -9,6 +9,8 @@
 #import "NSData+CommonCrypto.h"
 
 #import "Crypto.h"
+#import "NSString+StringWithData.h"
+#import "NSData_Base64Extensions.h"
 
 @implementation NoCryptor
 
@@ -18,6 +20,14 @@
 
 - (NSData *)decrypt:(NSData *)data {
     return data;
+}
+
+- (NSString *)encryptString: (NSString *)string {
+    return string;
+}
+
+- (NSString *)decryptString: (NSString *)string {
+    return string;
 }
 
 @end
@@ -40,6 +50,21 @@
 - (NSData *)decrypt:(NSData *)data {
     return [data decryptedAES256DataUsingKey:key error:nil];
 }
+
+- (NSString *)encryptString: (NSString *)string {
+    NSData *data      = [string dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *encripted = [self encrypt:data];
+    
+    return [encripted asBase64EncodedString];
+}
+
+- (NSString *)decryptString: (NSString *)string {
+    NSData *data      = [NSData dataWithBase64EncodedString:string];
+    NSData *decrypted = [self decrypt:data];
+    
+    return [NSString stringWithData:decrypted usingEncoding:NSUTF8StringEncoding];
+}
+
 
 - (void)dealloc {
     [key release];

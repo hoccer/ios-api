@@ -74,7 +74,6 @@
 @synthesize peekId;
 @synthesize groupId;
 @synthesize userInfo;
-@synthesize cryptor;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -111,7 +110,8 @@
 		[self didFailWithError:nil];
 	}
 	
-    NSData *dataToSend = [self.cryptor encrypt:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding]]; 
+    NSLog(@"sending %@", [data yajl_JSONString]);
+    NSData *dataToSend = [[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding]; 
     
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	self.linccingId = [httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
@@ -244,10 +244,8 @@
 		return;
 	}
     
-    NSData *receivedData = [self.cryptor decrypt:data];
-
 	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
-		[delegate linccer: self didSendData: [receivedData yajl_JSON]];
+		[delegate linccer: self didSendData: [data yajl_JSON]];
 	}
 }
 
@@ -260,10 +258,8 @@
 		return;
 	}
 	
-    NSData *receivedData = [self.cryptor decrypt:data];
-
     if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {        
-		[delegate linccer: self didReceiveData: [receivedData yajl_JSON]];
+		[delegate linccer: self didReceiveData: [data yajl_JSON]];
 	}
 }
 
@@ -390,14 +386,6 @@
         
         [self reactivate];
     }
-}
-
-- (id<Cryptor>)cryptor {
-    if (cryptor == nil) {
-        cryptor = [[AESCryptor alloc] initWithKey:@"secret"];
-    }
-    
-    return cryptor;
 }
 
 - (void)dealloc {

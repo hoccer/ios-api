@@ -73,8 +73,6 @@ enum HoccerErrors {
     NSDictionary *userInfo;
     
     NSString *uuid;
-    
-    id <Cryptor> cryptor;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;
@@ -84,7 +82,6 @@ enum HoccerErrors {
 @property (assign, nonatomic) NSTimeInterval environmentUpdateInterval;
 
 @property (retain, nonatomic) NSDictionary *userInfo;
-@property (retain, nonatomic) id <Cryptor> cryptor;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox;

@@ -11,6 +11,8 @@
 @protocol Cryptor <NSObject>
 - (NSData *)encrypt: (NSData *)data;
 - (NSData *)decrypt: (NSData *)data;
+- (NSString *)encryptString: (NSString *)string;
+- (NSString *)decryptString: (NSString *)string;
 @end
 
 @interface NoCryptor : NSObject <Cryptor> {
