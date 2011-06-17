@@ -36,6 +36,7 @@
 #import "HCFileCache.h"
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+URLHelper.h"
+#import "NSData+CommonCrypto.h"
 
 #define FILECACHE_URI @"https://filecache.hoccer.com/v3"
 #define FILECACHE_SANDBOX_URI @"https://filecache-beta.hoccer.com/v3"
@@ -44,6 +45,7 @@
 @implementation HCFileCache
 
 @synthesize delegate;
+@synthesize cryptor;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -70,7 +72,10 @@
 #pragma mark -
 #pragma mark Metods for Sending
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
-	NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithDouble:interval] stringValue] forKey:@"expires_in"];
+	
+    NSData *dataToSend = [data AES256EncryptedDataUsingKey:@"secret" error:nil]; 
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithDouble:interval] stringValue] forKey:@"expires_in"];
 	
 	NSString *contentDisposition = [NSString stringWithFormat:@"attachment; filename=\"%@\"", filename];
 	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 
@@ -78,7 +83,7 @@
 	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
 	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];
 		
-	return [httpClient requestMethod:@"PUT" URI:uri payload:data header:headers success:@selector(httpConnection:didSendData:)];
+	return [httpClient requestMethod:@"PUT" URI:uri payload:dataToSend header:headers success:@selector(httpConnection:didSendData:)];
 }
 
 #pragma mark -
@@ -110,8 +115,10 @@
 }
 
 - (void)httpConnection:(HttpConnection *)connection didReceiveData: (NSData *)data {
-	if ([delegate respondsToSelector:@selector(fileCache:didReceiveResponse:withDownloadedData:forURI:)]) {
-		[delegate fileCache: self didReceiveResponse:connection.response withDownloadedData: data forURI: connection.uri];
+	NSData *decrypted = [self.cryptor decrypt:data];
+    
+    if ([delegate respondsToSelector:@selector(fileCache:didReceiveResponse:withDownloadedData:forURI:)]) {
+		[delegate fileCache: self didReceiveResponse:connection.response withDownloadedData: decrypted forURI: connection.uri];
 	}
 }
 
@@ -119,9 +126,21 @@
 	[httpClient cancelRequest:transferUri];
 }
 
+#pragma mark -
+#pragma mark Getter
+-(id<Cryptor>)cryptor {
+    if (cryptor == nil) {
+        cryptor = [[AESCryptor alloc] initWithKey:@"secret"];
+    }
+    
+    return cryptor;
+}
+
+
 - (void)dealloc {
 	httpClient.target = nil;
 	[httpClient release];
+    [cryptor release];
 	
 	[super dealloc];
 }

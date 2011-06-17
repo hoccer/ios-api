@@ -132,7 +132,9 @@
 }
 
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {	
-	NSURL *url = [NSURL URLWithString:URLString];
+	
+    NSLog(@"request %@", URLString);
+    NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
 	[request addValue:self.userAgent forHTTPHeaderField:@"User-Agent"];
@@ -223,7 +225,7 @@
 	container.httpConnection.endTimestamp = [NSDate date];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
     
-//    NSLog(@"%d, %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
+    NSLog(@"%d, %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {

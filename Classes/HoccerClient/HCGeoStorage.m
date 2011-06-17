@@ -91,6 +91,7 @@
 {
 	HCEnvironment *environment = [[HCEnvironment alloc] initWithCoordinate: location accuracy:5];
 	[self storeDictionary:dictionary withEnvironment: environment forTimeInterval: seconds];
+    [environment release];
 }
 
 - (void)storeDictionary:(NSDictionary *)dictionary 

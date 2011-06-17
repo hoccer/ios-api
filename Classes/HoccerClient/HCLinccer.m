@@ -45,7 +45,7 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-beta.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
 // #define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
@@ -74,6 +74,7 @@
 @synthesize peekId;
 @synthesize groupId;
 @synthesize userInfo;
+@synthesize cryptor;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -110,9 +111,11 @@
 		[self didFailWithError:nil];
 	}
 	
+    NSData *dataToSend = [self.cryptor encrypt:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding]]; 
+    
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	self.linccingId = [httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
-				payload:[[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
+				payload: dataToSend
 				success:@selector(httpConnection:didSendData:)];
 }
 
@@ -240,10 +243,11 @@
 		[self didFailWithError:error];
 		return;
 	}
-
+    
+    NSData *receivedData = [self.cryptor decrypt:data];
 
 	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
-		[delegate linccer: self didSendData: [data yajl_JSON]];
+		[delegate linccer: self didSendData: [receivedData yajl_JSON]];
 	}
 }
 
@@ -256,8 +260,10 @@
 		return;
 	}
 	
+    NSData *receivedData = [self.cryptor decrypt:data];
+
     if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {        
-		[delegate linccer: self didReceiveData: [data yajl_JSON]];
+		[delegate linccer: self didReceiveData: [receivedData yajl_JSON]];
 	}
 }
 
@@ -384,6 +390,14 @@
         
         [self reactivate];
     }
+}
+
+- (id<Cryptor>)cryptor {
+    if (cryptor == nil) {
+        cryptor = [[AESCryptor alloc] initWithKey:@"secret"];
+    }
+    
+    return cryptor;
 }
 
 - (void)dealloc {

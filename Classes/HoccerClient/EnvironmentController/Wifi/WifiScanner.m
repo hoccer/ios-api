@@ -61,18 +61,18 @@ static WifiScanner *wifiScannerInstance;
 #else 
 	self = [super init];
 	if (self != nil) {
-		void* libHandle = dlopen("/System/Library/SystemConfiguration/WiFiManager.bundle/WiFiManager", RTLD_LAZY);
-
-		open = dlsym(libHandle, "Apple80211Open");
-		bind = dlsym(libHandle, "Apple80211BindToInterface");
-		close = dlsym(libHandle, "Apple80211Close");
-		scan  = dlsym(libHandle, "Apple80211Scan");
-		
-		open(&wifiHandle);
-		bind(wifiHandle, @"en0");
-		
-		repeat = YES;
-		[self scanNetwork];
+//		void* libHandle = dlopen("/System/Library/SystemConfiguration/WiFiManager.bundle/WiFiManager", RTLD_LAZY);
+//
+//		open = dlsym(libHandle, "Apple80211Open");
+//		bind = dlsym(libHandle, "Apple80211BindToInterface");
+//		close = dlsym(libHandle, "Apple80211Close");
+//		scan  = dlsym(libHandle, "Apple80211Scan");
+//		
+//		open(&wifiHandle);
+//		bind(wifiHandle, @"en0");
+//		
+//		repeat = YES;
+//		[self scanNetwork];
 	}
 	
 	return self;

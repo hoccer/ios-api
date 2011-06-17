@@ -35,6 +35,7 @@
 #import <Foundation/Foundation.h>
 #import "HttpClient.h"
 #import "HCAuthenticatedHttpClient.h"
+#import "Crypto.h"
 
 @class HCFileCache;
 
@@ -52,10 +53,12 @@
 @interface HCFileCache : NSObject {
 	HCAuthenticatedHttpClient *httpClient;
 	
+    id <Cryptor> cryptor;
 	id <HCFileCacheDelegate> delegate;
 }
 
 @property (assign) id <HCFileCacheDelegate> delegate;
+@property (retain, nonatomic) id <Cryptor> cryptor;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret sandboxed: (BOOL)sandbox;
