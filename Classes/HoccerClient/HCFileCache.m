@@ -72,9 +72,7 @@
 #pragma mark -
 #pragma mark Metods for Sending
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
-	
-    NSData *dataToSend = [data AES256EncryptedDataUsingKey:@"secret" error:nil]; 
-    
+	    
     NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithDouble:interval] stringValue] forKey:@"expires_in"];
 	
 	NSString *contentDisposition = [NSString stringWithFormat:@"attachment; filename=\"%@\"", filename];
@@ -83,12 +81,13 @@
 	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
 	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];
 		
-	return [httpClient requestMethod:@"PUT" URI:uri payload:dataToSend header:headers success:@selector(httpConnection:didSendData:)];
+	return [httpClient requestMethod:@"PUT" URI:uri payload:data header:headers success:@selector(httpConnection:didSendData:)];
 }
 
 #pragma mark -
 #pragma mark Methods for Fetching
 - (NSString *)load: (NSString *)url {
+    NSLog(@"url %@", url);
 	return [httpClient requestMethod:@"GET" absoluteURL:url payload:nil success:@selector(httpConnection:didReceiveData:)];
 }
 
@@ -114,11 +113,9 @@
 	}
 }
 
-- (void)httpConnection:(HttpConnection *)connection didReceiveData: (NSData *)data {
-	NSData *decrypted = [self.cryptor decrypt:data];
-    
+- (void)httpConnection:(HttpConnection *)connection didReceiveData: (NSData *)data {    
     if ([delegate respondsToSelector:@selector(fileCache:didReceiveResponse:withDownloadedData:forURI:)]) {
-		[delegate fileCache: self didReceiveResponse:connection.response withDownloadedData: decrypted forURI: connection.uri];
+		[delegate fileCache: self didReceiveResponse:connection.response withDownloadedData: data forURI: connection.uri];
 	}
 }
 

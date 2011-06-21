@@ -64,4 +64,17 @@ free(theEncodedData);
 return(theString);
 }
 
+- (NSString*) hexString {
+    NSMutableString *stringBuffer = [NSMutableString
+                                     stringWithCapacity:([self length] * 2)];
+    const unsigned char *dataBuffer = [self bytes];
+    int i;
+    
+    for (i = 0; i < [self length]; ++i)
+        [stringBuffer appendFormat:@"%02x", (unsigned long)dataBuffer[ i ]];
+    
+    return [[stringBuffer copy] autorelease];
+}
+
+
 @end

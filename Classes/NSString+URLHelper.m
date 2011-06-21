@@ -32,8 +32,10 @@
 //  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
+#import <CommonCrypto/CommonCryptor.h>
+#import <CommonCrypto/CommonDigest.h>
 #import "NSString+URLHelper.h"
-
+#import "NSData_Base64Extensions.h"
 
 @implementation NSString (URLHelper)
 
@@ -71,6 +73,30 @@
     CFRelease(uuidObj);
     
 	return [uuidString autorelease];
+}
+
+- (NSData *)sha256 {
+	unsigned char hashedChars[CC_SHA256_DIGEST_LENGTH];
+	CC_SHA256([self UTF8String],
+			  [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding], 
+			  hashedChars);
+	NSData * hashedData = [NSData dataWithBytes:hashedChars length:CC_SHA256_DIGEST_LENGTH];
+    NSLog(@"sha256 %@", [hashedData hexString]);
+
+    
+	return hashedData;
+}
+
+- (NSData *)sha1 {
+    unsigned char hashedChars[CC_SHA1_DIGEST_LENGTH];
+	CC_SHA1([self UTF8String],
+            [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding], 
+			  hashedChars);
+	NSData * hashedData = [NSData dataWithBytes:hashedChars length:CC_SHA1_DIGEST_LENGTH];
+    NSLog(@"sha1 %@", [hashedData hexString]);
+    NSLog(@"sha1 %@", hashedData);
+	
+	return hashedData;
 }
 
 @end

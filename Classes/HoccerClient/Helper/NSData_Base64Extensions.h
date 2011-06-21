@@ -38,4 +38,6 @@
 - (NSString *)asBase64EncodedString;
 - (NSString *)asBase64EncodedString:(NSInteger)inFlags;
 
+- (NSString*) hexString;
+
 @end

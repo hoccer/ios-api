@@ -45,4 +45,7 @@
 
 - (NSString *) urlEncodeValue;
 
+- (NSData *)sha256;
+- (NSData *)sha1;
+
 @end
