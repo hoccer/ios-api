@@ -81,7 +81,6 @@ static RSA *instance;
     }
     
     [privateKeyAttr release];
-    [publicTag release];
     [keyPairAttr release];
 }
 

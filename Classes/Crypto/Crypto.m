@@ -117,7 +117,7 @@ static NSData *NotSoRandomSalt() {
 #pragma mark -
 #pragma mark Private Methods
 - (NSData *)saltedKeyHash {
-    NSMutableData *saltedKey = [[key dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
+    NSMutableData *saltedKey = [[[key dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
     [saltedKey appendData:salt];
     return [[saltedKey SHA256Hash] subdataWithRange:NSMakeRange(0, 32)];
 }

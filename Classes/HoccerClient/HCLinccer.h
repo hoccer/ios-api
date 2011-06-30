@@ -100,4 +100,6 @@ enum HoccerErrors {
 
 - (void)updateEnvironment;
 
+- (void)fetchPublicKeyForHash:(NSString *)theHash;
+
 @end

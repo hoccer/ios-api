@@ -36,6 +36,7 @@
 #import "NSString+URLHelper.h"
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+StringWithData.h"
+#import "NSData_Base64Extensions.h"
 #import "HCLinccer.h"
 #import "HCEnvironmentManager.h"
 #import "HCEnvironment.h"
@@ -47,8 +48,8 @@
 #import "RSA.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
-// #define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
+// #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"http://192.168.2.137:9292/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -144,6 +145,17 @@
 	[httpClient getURI:[uri stringByAppendingPathComponent: [actionString stringByAppendingQuery:@"waiting=true"]]
 			   success:@selector(httpConnection:didReceiveData:)];	
 	
+}
+
+- (void)fetchPublicKeyForHash:(NSString *)theHash{
+    
+    if (!isRegistered) {
+        [self didFailWithError:nil];
+    }
+    
+    NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
+    [httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
+    
 }
 
 - (void)reactivate {
@@ -273,17 +285,25 @@
 	}
 }
 
-- (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSDictionary *)groupDictionary {
-    NSDictionary *dictionary = [groupDictionary yajl_JSON];
+- (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSData *)groupData {
+    NSDictionary *dictionary = [groupData yajl_JSON];
+    NSLog(@"The Data: %@",dictionary);
     self.groupId = [dictionary objectForKey:@"group_id"];
     
     if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
         [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
     }
     
+    NSArray *theGroupArray = [dictionary objectForKey:@"group"];
+    NSArray *theHasheables = [theGroupArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(id !=  %@)", self.uuid]];
+    NSString *theHash = [[theHasheables objectAtIndex:0] objectForKey:@"pubkey"];
+    [self fetchPublicKeyForHash:theHash];
     [self peek];
 }
 
+- (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSString *)pubkey {
+    NSLog(@"The PublicKey: %@",pubkey);
+}
 #pragma mark -
 #pragma mark Private Methods
 
@@ -319,8 +339,10 @@
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
+    NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
+    [environment setObject:[pubKey asBase64EncodedString] forKey:@"pubkey"];
      
-//    NSLog(@"environment %@", environment);
+    NSLog(@"environment %@", environment);
     
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
