@@ -60,7 +60,7 @@ static WifiScanner *wifiScannerInstance;
 	return [super init];
 #else 
 	self = [super init];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] <5.0){
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] == NSOrderedAscending){
         if (self != nil) {
             void* libHandle = dlopen("/System/Library/SystemConfiguration/WiFiManager.bundle/WiFiManager", RTLD_LAZY);
             open = dlsym(libHandle, "Apple80211Open");
