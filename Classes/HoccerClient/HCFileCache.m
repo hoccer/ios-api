@@ -39,7 +39,7 @@
 #import "NSData+CommonCrypto.h"
 
 #define FILECACHE_URI @"https://filecache.hoccer.com/v3"
-#define FILECACHE_SANDBOX_URI @"https://filecache-beta.hoccer.com/v3"
+#define FILECACHE_SANDBOX_URI @"https://filecache-experimental.hoccer.com/v3"
 // #define FILECACHE_SANDBOX_URI @"http://192.168.2.126:9212/v3"
 
 @implementation HCFileCache
