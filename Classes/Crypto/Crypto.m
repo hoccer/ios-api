@@ -14,10 +14,10 @@
 #import "NSString+URLHelper.h"
 
 
-static NSData* randomSalt() {
+static NSData* RandomSalt() {
     NSMutableData *data = [NSMutableData data];
     
-    for (NSInteger i = 0; i < 16 / sizeof(u_int32_t); i++) {
+    for (NSInteger i = 0; i < 32 / sizeof(u_int32_t); i++) {
         u_int32_t r = arc4random();
         [data appendBytes:&r length:sizeof(u_int32_t)];
     }
@@ -25,10 +25,10 @@ static NSData* randomSalt() {
     return data;
 }
 
-static NSData *notSoRandomSalt() {
+static NSData *NotSoRandomSalt() {
     NSMutableData *data = [NSMutableData data];
     
-    for (NSInteger i = 1; i < 17; i++) {
+    for (NSInteger i = 1; i < 33; i++) {
         char c = (char)i;
         [data appendBytes:&c length:sizeof(char)];
     }
@@ -68,7 +68,7 @@ static NSData *notSoRandomSalt() {
 
 @implementation AESCryptor
 - (id)initWithKey: (NSString *)theKey {
-    return [self initWithKey:theKey salt:randomSalt()];
+    return [self initWithKey:theKey salt:RandomSalt()];
 }
 
 - (id)initWithKey:(NSString *)theKey salt: (NSData *)theSalt {
@@ -91,10 +91,7 @@ static NSData *notSoRandomSalt() {
 - (NSString *)encryptString: (NSString *)string {
     NSData *data      = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSData *encripted = [self encrypt:data];
-    
-    NSLog(@"encrypted %@ to %@", string, encripted);
-    NSLog(@"base64 %@", [encripted asBase64EncodedString]);
-    
+        
     return [encripted asBase64EncodedString];
 }
 
@@ -106,9 +103,14 @@ static NSData *notSoRandomSalt() {
 }
 
 - (void)appendInfoToDictionary: (NSMutableDictionary *)dictionary {
-    [dictionary setObject:@"AES" forKey:@"encryption"];
-    [dictionary setObject:[NSNumber numberWithInt:128] forKey:@"keysize"];
-    [dictionary setObject:[salt asBase64EncodedString] forKey:@"salt"];
+    NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"AES", @"method",
+                                [NSNumber numberWithInt:256], @"keysize",
+                                [salt asBase64EncodedString], @"salt", 
+                                @"SHA256", @"hash", nil];
+    
+    
+    [dictionary setObject:encryption forKey:@"encryption"];
 }
 
 
@@ -117,11 +119,7 @@ static NSData *notSoRandomSalt() {
 - (NSData *)saltedKeyHash {
     NSMutableData *saltedKey = [[key dataUsingEncoding:NSUTF8StringEncoding] mutableCopy];
     [saltedKey appendData:salt];
-    
-    NSLog(@"salt %@, salted key %@",salt, saltedKey);
-    NSLog(@"salted key sha %@", [saltedKey SHA1Hash]);
-    
-    return [[saltedKey SHA1Hash] subdataWithRange:NSMakeRange(0, 16)];
+    return [[saltedKey SHA256Hash] subdataWithRange:NSMakeRange(0, 32)];
 }
 
 

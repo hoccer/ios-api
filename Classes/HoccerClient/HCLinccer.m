@@ -44,6 +44,8 @@
 
 #import "HCAuthenticatedHttpClient.h"
 
+#import "RSA.h"
+
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
 #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
 // #define LINCCER_SANDBOX_URI @"http://192.168.2.126:9292/v3"
@@ -100,6 +102,8 @@
 		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
 		environmentUpdateInterval = 20;	
 		[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reactivate) userInfo:nil repeats:NO];
+        
+        [[RSA sharedInstance] testAsymmetricEncryptionAndDecryption];        
 	}
 	
 	return self;	
