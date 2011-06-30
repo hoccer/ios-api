@@ -8,19 +8,28 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RSA : NSObject
+@interface RSA : NSObject {
+    NSData *publicTag;
+    NSData *privateTag;
+}
 
 + (RSA*)sharedInstance;
 
 - (void)encryptWithPublicKey:(uint8_t *)plainBuffer cipherBuffer:(uint8_t *)cipherBuffer;
 - (void)generateKeyPairKeys;
-- (void)testAsymmetricEncryptionAndDecryption;
+- (void)testEncryption;
 
 - (SecKeyRef)getPrivateKeyRef;
 - (NSData *)getPublicKeyBits;
 - (SecKeyRef)getPublicKeyRef;
+- (NSData *)getPrivateKeyBits;
 
 - (void)decryptWithPrivateKey:(uint8_t *)cipherBuffer plainBuffer:(uint8_t *)plainBuffer;
 - (void)encryptWithPublicKey:(uint8_t *)plainBuffer cipherBuffer:(uint8_t *)cipherBuffer;
+
+- (NSData *)encryptWithKey:(SecKeyRef)key plainData:(NSData *)plainData;
+- (NSData *)decryptWithKey: (SecKeyRef)key cipherData: (NSData *)cipherData;
+
+- (void)getCertificate;
 
 @end

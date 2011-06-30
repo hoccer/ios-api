@@ -84,7 +84,7 @@
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox {
 	self = [super init];
 	if (self != nil) {
-        userInfo = [[NSDictionary dictionaryWithObject:@"<unknown>" forKey:@"client_name"] retain];
+       userInfo = [[NSDictionary dictionaryWithObject:@"<unknown>" forKey:@"client_name"] retain];
         
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
@@ -103,7 +103,7 @@
 		environmentUpdateInterval = 20;	
 		[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reactivate) userInfo:nil repeats:NO];
         
-        [[RSA sharedInstance] testAsymmetricEncryptionAndDecryption];        
+        [[RSA sharedInstance] testEncryption];        
 	}
 	
 	return self;	
