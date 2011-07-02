@@ -48,8 +48,8 @@
 #import "RSA.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-// #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"http://192.168.2.137:9292/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
+// #define LINCCER_SANDBOX_URI @"http://192.168.2.137:9292/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -295,14 +295,16 @@
     }
     
     NSArray *theGroupArray = [dictionary objectForKey:@"group"];
-    NSArray *theHasheables = [theGroupArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(id !=  %@)", self.uuid]];
-    NSString *theHash = [[theHasheables objectAtIndex:0] objectForKey:@"pubkey"];
-    [self fetchPublicKeyForHash:theHash];
+    if (theGroupArray.count > 1){
+        NSArray *theHasheables = [theGroupArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(id !=  %@)", self.uuid]];
+        NSString *theHash = [[theHasheables objectAtIndex:0] objectForKey:@"pubkey"];
+        [self fetchPublicKeyForHash:theHash];
+    }
     [self peek];
 }
 
-- (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSString *)pubkey {
-    NSLog(@"The PublicKey: %@",pubkey);
+- (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey {
+    NSLog(@"The PublicKey: %@",[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]);
 }
 #pragma mark -
 #pragma mark Private Methods
