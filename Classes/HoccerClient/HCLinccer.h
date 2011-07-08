@@ -38,6 +38,7 @@
 #import "HCAuthenticatedHttpClient.h"
 #import "HCEnvironment.h"
 #import "Crypto.h"
+#import "PublicKeyManager.h"
 
 #define HoccerError @"HoccerError"
 
@@ -57,6 +58,8 @@ enum HoccerErrors {
 
 	HCEnvironmentManager *environmentController;
 	HCAuthenticatedHttpClient *httpClient;
+    
+    PublicKeyManager *keyManager;
 
 	NSString *uri;
     
@@ -73,6 +76,8 @@ enum HoccerErrors {
     NSDictionary *userInfo;
     
     NSString *uuid;
+    NSString *pupKeyCache;
+    NSString *clientIdCache;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;
@@ -100,6 +105,7 @@ enum HoccerErrors {
 
 - (void)updateEnvironment;
 
-- (void)fetchPublicKeyForHash:(NSString *)theHash;
+- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSString *)clientId;
+- (void)storePublicKey:(NSString *)theKey forClient:(NSString *)clientId;
 
 @end

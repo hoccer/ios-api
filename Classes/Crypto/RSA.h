@@ -13,6 +13,7 @@
     NSData *privateTag;
 }
 
+
 + (RSA*)sharedInstance;
 
 - (void)encryptWithPublicKey:(uint8_t *)plainBuffer cipherBuffer:(uint8_t *)cipherBuffer;
@@ -29,6 +30,16 @@
 
 - (NSData *)encryptWithKey:(SecKeyRef)key plainData:(NSData *)plainData;
 - (NSData *)decryptWithKey: (SecKeyRef)key cipherData: (NSData *)cipherData;
+
+- (SecKeyRef)getKeyRefWithPersistentKeyRef:(CFTypeRef)persistentRef;
+- (CFTypeRef)getPersistentKeyRefWithKeyRef:(SecKeyRef)keyRef;
+- (void)removePeerPublicKey:(NSString *)peerName;
+- (SecKeyRef)getPeerKeyRef:(NSString *)peerName;
+
+- (NSData *)stripPublicKeyHeader:(NSData *)d_key;
+- (BOOL)addPublicKey:(NSString *)key withTag:(NSString *)tag;
+
+
 
 - (void)getCertificate;
 

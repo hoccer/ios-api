@@ -46,6 +46,7 @@
 #import "HCAuthenticatedHttpClient.h"
 
 #import "RSA.h"
+#import "PublicKeyManager.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
 #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
@@ -104,7 +105,10 @@
 		environmentUpdateInterval = 20;	
 		[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reactivate) userInfo:nil repeats:NO];
         
-        [[RSA sharedInstance] testEncryption];        
+        //[[RSA sharedInstance] testEncryption];
+        
+        keyManager = [[PublicKeyManager alloc] init];
+
 	}
 	
 	return self;	
@@ -147,16 +151,52 @@
 	
 }
 
-- (void)fetchPublicKeyForHash:(NSString *)theHash{
+- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSString *)clientId{
     
     if (!isRegistered) {
         [self didFailWithError:nil];
     }
     
-    NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
-    [httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
+    //NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
+    //[httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
+   pupKeyCache = @"MIGJAoGBAJfumuvmyXow3xApSJqsBX0FgC1wDKfgDxFSmLeNhogCWeepeIOwJYL0OVJLv3DTrIYYqvGrbrfHbFDmozeAuRsamCnyAiCmxqNlac5eBT0185dLHDEnmtYkOKk0Ehiqj0EbxYtWerJ42fEgRl0bHb6ZHtBppqV3Tj5QrzcEa5CBAgMBAAE=";
+    clientIdCache = clientId;
+    [self storePublicKey:pupKeyCache forClient:clientIdCache];
+}
+
+- (void)storePublicKey:(NSString *)theKey forClient:(NSString *)clientId{
+    if (theKey != nil){
+        if ([keyManager storeKey:theKey forClient:clientId]){
+            NSLog(@"Stored the key");
+        }
+    }
+
+}
+
+- (void)checkGroupForPublicKeys:(NSDictionary *)aDictionary{
+    
+    NSArray *theGroup = [aDictionary objectForKey:@"group"];
+    NSMutableArray *others = [NSMutableArray arrayWithCapacity:[theGroup count]];
+    for (NSDictionary *dict in theGroup) {
+        if (![[dict objectForKey:@"id"] isEqual:[self uuid]]) {
+            [others addObject:dict];            
+        }
+    }
+    
+    for (NSDictionary *aClient in others) {
+        if ([aClient objectForKey:@"pubkey"] !=nil){
+            if ([keyManager getKeyForClient:[aClient objectForKey:@"id"]] == nil){
+                [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey"] client:[aClient objectForKey:@"id"]];
+            }
+            else {
+                NSLog(@"We do have a key for this client! Yeah!");
+                //[keyManager deleteKeyForClient:[aClient objectForKey:@"id"]];
+            }
+        }
+    }
     
 }
+
 
 - (void)reactivate {
     isRegistered = NO;
@@ -185,7 +225,8 @@
 #pragma mark -
 #pragma mark Error Handling 
 
-- (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {	
+- (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
+	NSLog(@"httpConnection didFail.");
 	if ([linccingId isEqual: connection.uri]) {
         self.linccingId = nil;
     }
@@ -230,7 +271,8 @@
 #pragma mark -
 #pragma mark HttpClient Response Methods 
 
-- (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {		
+- (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {	
+    NSLog(@"httpConnection didUpdateEnviroment.");
 	self.latency = aConnection.roundTripTime;
 	
     
@@ -252,6 +294,8 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
+    NSLog(@"httpConnection didsenddata.");
+
     self.linccingId = nil;
 
 	if ([connection.response statusCode] == 204 ) {
@@ -266,6 +310,7 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
+    NSLog(@"httpConnection didReceiveData.");
     self.linccingId = nil;
     
     if ([connection.response statusCode] == 204 ) {
@@ -280,31 +325,33 @@
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
+    NSLog(@"httpConnection didDelete.");
 	if ([delegate respondsToSelector:@selector(linccerDidUnregister:)]) {
 		[delegate linccerDidUnregister: self];
 	}
 }
 
 - (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSData *)groupData {
+    NSLog(@"httpConnection didUpdateGroup.");
+
     NSDictionary *dictionary = [groupData yajl_JSON];
-    NSLog(@"The Data: %@",dictionary);
+
     self.groupId = [dictionary objectForKey:@"group_id"];
     
     if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
         [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
     }
     
-    NSArray *theGroupArray = [dictionary objectForKey:@"group"];
-    if (theGroupArray.count > 1){
-        NSArray *theHasheables = [theGroupArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(id !=  %@)", self.uuid]];
-        NSString *theHash = [[theHasheables objectAtIndex:0] objectForKey:@"pubkey"];
-        [self fetchPublicKeyForHash:theHash];
-    }
+    [self checkGroupForPublicKeys:dictionary];
+
     [self peek];
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey {
-    NSLog(@"The PublicKey: %@",[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]);
+    NSLog(@"The Key: %@",[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]);
+
+    pupKeyCache = [NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding];
+    [self storePublicKey:pupKeyCache forClient:clientIdCache];
 }
 #pragma mark -
 #pragma mark Private Methods
@@ -343,9 +390,7 @@
     [environment addEntriesFromDictionary:self.userInfo];
     NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
     [environment setObject:[pubKey asBase64EncodedString] forKey:@"pubkey"];
-     
-    NSLog(@"environment %@", environment);
-    
+         
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];

@@ -9,11 +9,31 @@
 #import "RSA.h"
 #import "NSData_Base64Extensions.h"
 
+
+
 @implementation RSA
+
+#if DEBUG
+#define LOGGING_FACILITY(X, Y)	\
+NSAssert(X, Y);	
+
+#define LOGGING_FACILITY1(X, Y, Z)	\
+NSAssert1(X, Y, Z);	
+#else
+#define LOGGING_FACILITY(X, Y)	\
+if (!(X)) {			\
+NSLog(Y);		\
+}					
+
+#define LOGGING_FACILITY1(X, Y, Z)	\
+if (!(X)) {				\
+NSLog(Y, Z);		\
+}						
+#endif
 
 const size_t BUFFER_SIZE = 64;
 const size_t CIPHER_BUFFER_SIZE = 1024;
-const uint32_t PADDING = kSecPaddingNone;
+const uint32_t PADDING = kSecPaddingPKCS1;
 
 static const uint8_t publicKeyIdentifier[]  = "com.hoccer.sample.publickey";
 static const uint8_t privateKeyIdentifier[] = "com.hoccer.sample.privatekey";
@@ -33,7 +53,7 @@ static RSA *instance;
             [instance generateKeyPairKeys];
         }
     }); 
-    [instance getCertificate];
+    //[instance getCertificate];
 
     return instance;
 }
@@ -81,20 +101,28 @@ static RSA *instance;
     }
     
     [privateKeyAttr release];
+    [publicKeyAttr release];
     [keyPairAttr release];
 }
 
 - (void)testEncryption {
-    NSString *plainText = @"Hello world, woooo";
+    NSString *plainText = @"This is just a string";
     NSData *plainData = [plainText dataUsingEncoding:NSUTF8StringEncoding];
     
     NSData *cipher = [self encryptWithKey:[self getPublicKeyRef] plainData:plainData];
     
-    NSLog(@"cypher %@", cipher);
-    NSData *decryptedData = [self decryptWithKey:[self getPrivateKeyRef] cipherData:cipher];
+    NSLog(@"cypher %@", [cipher asBase64EncodedString]);
+    NSLog(@"publickey: %@", [[self getPublicKeyBits] asBase64EncodedString]);
+    NSLog(@"privatekey: %@", [[self getPrivateKeyBits] asBase64EncodedString]);
+    
+    NSData *cipherFromAndroid = [NSData dataWithBase64EncodedString:@"A1aAv0xmKLfy5aQtAeXaGykdomDi/ISTwb8mq9pYNVXGp4rnl2nOc9LVHz2SYrU/YJj1QHj/57gNpfpigQLJ2jnm5DMDhdiJmVeBFCrftxzDD9pKNKNnnBvloboDl0groIoe4DPqKLfnkOE3mdfcGsuCBE0cPxaqLPT4zAV4NGU="];
+
+    NSData *decryptedData = [self decryptWithKey:[self getPrivateKeyRef] cipherData:cipherFromAndroid];
     NSString *decryptedString = [[[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding] autorelease];
     
     NSLog(@"decrypted %@", decryptedString);
+    
+    [cipherFromAndroid release];
 }
 
 
@@ -114,7 +142,7 @@ static RSA *instance;
     memset((void *)cipherBuffer, 0x0, cipherBufferSize);
         
     status = SecKeyEncrypt( key, 
-                           kSecPaddingNone, 
+                           PADDING, 
                            (const uint8_t *)[plainData bytes], 
                            dataBufferSize,
                            cipherBuffer,
@@ -145,7 +173,7 @@ static RSA *instance;
     memset((void *)plainBuffer, 0x0, plainBufferSize);
     
     status = SecKeyDecrypt(key, 
-                           kSecPaddingNone,
+                           PADDING,
                            (const uint8_t *)[cipherData bytes],
                            cipherBufferSize,
                            plainBuffer, 
@@ -257,7 +285,7 @@ static RSA *instance;
 	
 	// Get the key.
     resultCode = SecItemCopyMatching((CFDictionaryRef)queryPublicKey, (CFTypeRef *)&publicKeyCeritificate);
-    NSLog(@"getPublicKey: result code: %d", (int)resultCode);
+    NSLog(@"getCertificate: result code: %d", (int)resultCode);
 	
     if(resultCode != noErr)
     {
@@ -325,29 +353,184 @@ static RSA *instance;
 	OSStatus sanityCheck = noErr;
 	NSData * privateKeyBits = nil;
 	
-	NSMutableDictionary * queryPublicKey = [[NSMutableDictionary alloc] init];
+	NSMutableDictionary * queryPrivateKey = [[NSMutableDictionary alloc] init];
     
-	[queryPublicKey setObject:(id)kSecClassKey forKey:(id)kSecClass];
-	[queryPublicKey setObject:publicTag forKey:(id)kSecAttrApplicationTag];
-	[queryPublicKey setObject:(id)kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
-	[queryPublicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnData];
+	[queryPrivateKey setObject:(id)kSecClassKey forKey:(id)kSecClass];
+	[queryPrivateKey setObject:privateTag forKey:(id)kSecAttrApplicationTag];
+	[queryPrivateKey setObject:(id)kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
+	[queryPrivateKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnData];
     
-	sanityCheck = SecItemCopyMatching((CFDictionaryRef)queryPublicKey, (CFTypeRef *)&privateKeyBits);
+	sanityCheck = SecItemCopyMatching((CFDictionaryRef)queryPrivateKey, (CFTypeRef *)&privateKeyBits);
     
 	if (sanityCheck != noErr)
 	{
 		privateKeyBits = nil;
 	}
     
-	[queryPublicKey release];
+	[queryPrivateKey release];
 	
 	return privateKeyBits;
 }
 
-- (void)deleteKeyPair {
+- (NSData *)stripPublicKeyHeader:(NSData *)d_key
+{
+    // Skip ASN.1 public key header
+    if (d_key == nil) return(nil);
     
+    unsigned int len = [d_key length];
+    if (!len) return(nil);
+    
+    unsigned char *c_key = (unsigned char *)[d_key bytes];
+    unsigned int  idx    = 0;
+    
+    if (c_key[idx++] != 0x30) return(nil);
+    
+    if (c_key[idx] > 0x80) idx += c_key[idx] - 0x80 + 1;
+    else idx++;
+    
+    // PKCS #1 rsaEncryption szOID_RSA_RSA
+    static unsigned char seqiod[] =
+    { 0x30,   0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01,
+        0x01, 0x05, 0x00 };
+    if (memcmp(&c_key[idx], seqiod, 15)) return(nil);
+    
+    idx += 15;
+    
+    if (c_key[idx++] != 0x03) return(nil);
+    
+    if (c_key[idx] > 0x80) idx += c_key[idx] - 0x80 + 1;
+    else idx++;
+    
+    if (c_key[idx++] != '\0') return(nil);
+    
+    // Now make a new NSData from this buffer
+    return([NSData dataWithBytes:&c_key[idx] length:len - idx]);
 }
 
+- (BOOL)addPublicKey:(NSString *)key withTag:(NSString *)tag
+{
+    NSString *s_key = key;
+        // This will be base64 encoded, decode it.
+    NSData *d_key = [NSData dataWithBase64EncodedString:s_key];
+    //d_key = [self stripPublicKeyHeader:d_key];
+    if (d_key == nil) return(FALSE);
+    
+    NSData *d_tag = [NSData dataWithBytes:[tag UTF8String] length:[tag length]];
+    
+    // Delete any old lingering key with the same tag
+    NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
+    [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
+    [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
+    [publicKey setObject:d_tag forKey:(id)kSecAttrApplicationTag];
+    SecItemDelete((CFDictionaryRef)publicKey);
+    
+    CFTypeRef persistKey = nil;
+    
+    // Add persistent version of the key to system keychain
+    [publicKey setObject:d_key forKey:(id)kSecValueData];
+    [publicKey setObject:(id) kSecAttrKeyClassPublic forKey:(id)kSecAttrKeyClass];
+    [publicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnPersistentRef];
+    
+    OSStatus secStatus = SecItemAdd((CFDictionaryRef)publicKey, &persistKey);
+    if (persistKey != nil) CFRelease(persistKey);
+    
+    if ((secStatus != noErr) && (secStatus != errSecDuplicateItem)) {
+        [publicKey release];
+        [d_key release];
+        return(FALSE);
+    }
+    
+    // Now fetch the SecKeyRef version of the key
+    SecKeyRef keyRef = nil;
+    
+    [publicKey removeObjectForKey:(id)kSecValueData];
+    [publicKey removeObjectForKey:(id)kSecReturnPersistentRef];
+    [publicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnRef
+     ];
+    [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
+    SecItemCopyMatching((CFDictionaryRef)publicKey,
+                                    (CFTypeRef *)&keyRef);
+    
+    [publicKey release];
+    
+    if (keyRef == nil) return(FALSE);
+    
+    
+    return(TRUE);
+}
+
+
+
+- (void)removePeerPublicKey:(NSString *)peerName {
+	
+	
+	NSData * peerTag = [NSData dataWithBytes:[peerName UTF8String] length:[peerName length]];
+    NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
+    [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
+    [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
+    [publicKey setObject:peerTag forKey:(id)kSecAttrApplicationTag];
+     SecItemDelete((CFDictionaryRef)publicKey);
+
+	[publicKey release];
+}
+
+- (SecKeyRef)getKeyRefWithPersistentKeyRef:(CFTypeRef)persistentRef {
+	SecKeyRef keyRef = NULL;
+	
+	LOGGING_FACILITY(persistentRef != NULL, @"persistentRef object cannot be NULL." );
+	
+	NSMutableDictionary * queryKey = [[NSMutableDictionary alloc] init];
+	
+	// Set the SecKeyRef query dictionary.
+	[queryKey setObject:(id)persistentRef forKey:(id)kSecValuePersistentRef];
+	[queryKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnRef];
+	
+	// Get the persistent key reference.
+	SecItemCopyMatching((CFDictionaryRef)queryKey, (CFTypeRef *)&keyRef);
+    
+    
+    [queryKey release];
+
+    return keyRef;
+    
+	
+}
+
+- (CFTypeRef)getPersistentKeyRefWithKeyRef:(SecKeyRef)keyRef {
+	CFTypeRef persistentRef = NULL;
+	
+	LOGGING_FACILITY(keyRef != NULL, @"keyRef object cannot be NULL." );
+	
+	NSMutableDictionary * queryKey = [[NSMutableDictionary alloc] init];
+	
+	// Set the PersistentKeyRef key query dictionary.
+	[queryKey setObject:(id)keyRef forKey:(id)kSecValueRef];
+	[queryKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnPersistentRef];
+	
+	// Get the persistent key reference.
+	 SecItemCopyMatching((CFDictionaryRef)queryKey, (CFTypeRef *)&persistentRef);
+	[queryKey release];
+	
+	return persistentRef;
+}
+
+- (SecKeyRef)getPeerKeyRef:(NSString *)peerName {
+    SecKeyRef persistentRef = NULL;
+	
+	
+	NSData * peerTag = [NSData dataWithBytes:[peerName UTF8String] length:[peerName length]];
+    NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
+    [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
+    [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
+    [publicKey setObject:peerTag forKey:(id)kSecAttrApplicationTag];
+    [publicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnPersistentRef];
+	 SecItemCopyMatching((CFDictionaryRef)publicKey, (CFTypeRef *)&persistentRef);
+    
+	[publicKey release];
+    
+    return persistentRef;
+
+}
 
 
 

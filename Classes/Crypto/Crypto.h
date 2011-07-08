@@ -30,5 +30,6 @@
 
 - (id)initWithKey:(NSString *)key;
 - (id)initWithKey:(NSString *)key salt: (NSData *)salt;
+- (id)initWithRandomKey;
 
 @end

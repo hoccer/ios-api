@@ -308,7 +308,12 @@
 #pragma mark -
 #pragma mark HTTP Error Handling 
 - (NSError *)hasHttpError: (NSHTTPURLResponse *)response {
-	if ([response statusCode] >= 400) {
+    
+    //NSLog(@"Status Code: %d",[response statusCode]);
+    //NSLog(@"URL: %@",[response URL]);
+	if ([response statusCode] >= 400 && [response statusCode] <500) {
+        
+        
 		NSString *message = NSLocalizedString(@"The Server responded with an error. Try again later.", nil) ;
 		
 		NSMutableDictionary *info = [NSMutableDictionary dictionary];
@@ -321,7 +326,12 @@
 		
 		return httpError;
 	}
+    if ([response statusCode] >500){
+        NSLog(@"500! NA TOLL!");
+
+    }
 	
+
 	return nil;
 }
 

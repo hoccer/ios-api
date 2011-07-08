@@ -63,6 +63,7 @@ static NSData *NotSoRandomSalt() {
 
 @interface AESCryptor ()
 - (NSData *)saltedKeyHash;
+- (NSString *)genRandomString:(int)length;
 @end
 
 
@@ -78,6 +79,15 @@ static NSData *NotSoRandomSalt() {
         salt = [theSalt retain];
     }
     return self;
+}
+
+- (id)initWithRandomKey {
+    
+
+    NSString *theKey = [self genRandomString:64];
+    [[NSUserDefaults standardUserDefaults] setObject:theKey forKey:@"encryptionKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    return [self initWithKey:theKey salt:RandomSalt()];
 }
 
 - (NSData *)encrypt:(NSData *)data {
@@ -100,6 +110,7 @@ static NSData *NotSoRandomSalt() {
     NSData *decrypted = [self decrypt:data];
     
     return [NSString stringWithData:decrypted usingEncoding:NSUTF8StringEncoding];
+    [data release];
 }
 
 - (void)appendInfoToDictionary: (NSMutableDictionary *)dictionary {
@@ -120,6 +131,19 @@ static NSData *NotSoRandomSalt() {
     NSMutableData *saltedKey = [[[key dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease];
     [saltedKey appendData:salt];
     return [[saltedKey SHA256Hash] subdataWithRange:NSMakeRange(0, 32)];
+}
+
+- (NSString *)genRandomString:(int)length {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!§$%&/()=?";
+    
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: length];
+    
+    for (int i=0; i<length; i++) {
+        [randomString appendFormat: @"%c", [letters characterAtIndex: rand()%[letters length]]];
+    }
+    
+    return randomString;
+    
 }
 
 
