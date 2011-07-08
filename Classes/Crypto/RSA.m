@@ -255,7 +255,6 @@ static RSA *instance;
 		
 		// Get the key.
         resultCode = SecItemCopyMatching((CFDictionaryRef)queryPublicKey, (CFTypeRef *)&publicKeyReference);
-        NSLog(@"getPublicKey: result code: %d", (int)resultCode);
 		
         if(resultCode != noErr)
         {
@@ -266,7 +265,6 @@ static RSA *instance;
         publicKey = publicKeyReference;
     } 
 	
-    NSLog(@"public key ref %d", (NSInteger)publicTag);
 
     return publicKey;
 }
@@ -311,7 +309,6 @@ static RSA *instance;
 		
         // Get the key.
         resultCode = SecItemCopyMatching((CFDictionaryRef)queryPrivateKey, (CFTypeRef *)&privateKeyReference);
-        NSLog(@"getPrivateKey: result code: %d", (int)resultCode);
 		
         if(resultCode != noErr)
         {
@@ -322,7 +319,7 @@ static RSA *instance;
         privateKey = privateKeyReference;
     }
     
-    NSLog(@"private key ref %d", (NSInteger)privateKeyReference);
+
     return privateKey;
 }
 
