@@ -120,15 +120,14 @@ static NSData *NotSoRandomSalt() {
 
 - (void)appendInfoToDictionary: (NSMutableDictionary *)dictionary {
     
-    NSString *cryptedPassword = [self getEncryptedRandomStringForClient];
-    NSString *thePass = [[NSUserDefaults standardUserDefaults] stringForKey:@"encryptionKey"];
+    NSDictionary *cryptedPassword = [self getEncryptedRandomStringForClient];
      
     if (cryptedPassword != nil){
         NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @"AES", @"method",
                                     [NSNumber numberWithInt:256], @"keysize",
                                     [salt asBase64EncodedString], @"salt", 
-                                    @"SHA256", @"hash", cryptedPassword, @"password", thePass, @"uncrypted", nil];
+                                    @"SHA256", @"hash", cryptedPassword, @"password", nil];
 
     
         [dictionary setObject:encryption forKey:@"encryption"];
@@ -142,29 +141,34 @@ static NSData *NotSoRandomSalt() {
 
 
 
-- (NSString *)getEncryptedRandomStringForClient {
+- (NSDictionary *)getEncryptedRandomStringForClient {
     
     NSArray *selectedClients;
     PublicKeyManager *keyManager = [[PublicKeyManager alloc]init];
-    NSDictionary *theClient;
     
     if ([[NSUserDefaults standardUserDefaults] arrayForKey:@"selected_clients"] !=nil){
            selectedClients = [[NSUserDefaults standardUserDefaults] arrayForKey:@"selected_clients"];
         
-        if (selectedClients.count == 0 || selectedClients.count > 1){
+        if (selectedClients.count == 0 ){
             NSLog(@"So wird das nichts!");
             return nil;
         }
         else {
-            theClient = [selectedClients objectAtIndex:0];
+            NSDictionary *toReturn = [[NSMutableDictionary alloc]initWithCapacity:selectedClients.count];
+            
+            for (NSDictionary *aClient in selectedClients){
                 
-            NSString *thePass = [[NSUserDefaults standardUserDefaults] stringForKey:@"encryptionKey"];
-            NSData *passData = [thePass dataUsingEncoding:NSUTF8StringEncoding];
-            SecKeyRef theKeyRef = [keyManager getKeyForClient:[theClient objectForKey:@"id"]];
+                NSString *thePass = [[NSUserDefaults standardUserDefaults] stringForKey:@"encryptionKey"];
+                NSData *passData = [thePass dataUsingEncoding:NSUTF8StringEncoding];
+                SecKeyRef theKeyRef = [keyManager getKeyForClient:[aClient objectForKey:@"id"]];            
+                if (theKeyRef != nil){
         
-            NSData *cipher = [[RSA sharedInstance] encryptWithKey:theKeyRef plainData:passData];
-            NSLog(@"Cipher %@",[cipher asBase64EncodedString]);
-            return [cipher asBase64EncodedString];
+                    NSData *cipher = [[RSA sharedInstance] encryptWithKey:theKeyRef plainData:passData];
+                    NSLog(@"Cipher %@",[cipher asBase64EncodedString]);
+                    [toReturn setValue:[cipher asBase64EncodedString] forKey:[aClient objectForKey:@"id"]];
+                }
+            }
+            return toReturn;
         }
     }
     return nil;

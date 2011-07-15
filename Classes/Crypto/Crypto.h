@@ -36,6 +36,6 @@
 - (id)initWithKey:(NSString *)key salt: (NSData *)salt;
 - (id)initWithRandomKey;
 - (id)initWithRandomKeyWithSalt:(NSData *)theSalt;
-- (NSString *)getEncryptedRandomStringForClient;
+- (NSDictionary *)getEncryptedRandomStringForClient;
 
 @end
