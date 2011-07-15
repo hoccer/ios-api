@@ -309,8 +309,7 @@
 #pragma mark HTTP Error Handling 
 - (NSError *)hasHttpError: (NSHTTPURLResponse *)response {
     
-    //NSLog(@"Status Code: %d",[response statusCode]);
-    //NSLog(@"URL: %@",[response URL]);
+   
 	if ([response statusCode] >= 400 && [response statusCode] <500) {
         
         

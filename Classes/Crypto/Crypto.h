@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "HCLinccer.h"
 //static NSData* randomSalt();
+
 
 @protocol Cryptor <NSObject>
 - (NSData *)encrypt: (NSData *)data;
@@ -22,14 +23,19 @@
 @interface NoCryptor : NSObject <Cryptor> 
 @end
 
-@interface AESCryptor: NSObject <Cryptor> {
+@class HCLinccer;
+@interface AESCryptor: NSObject <Cryptor,HCLinccerDelegate> {
 @private
     NSString *key;
     NSData *salt;
+    HCLinccer *linccer;
 }
+
 
 - (id)initWithKey:(NSString *)key;
 - (id)initWithKey:(NSString *)key salt: (NSData *)salt;
 - (id)initWithRandomKey;
+- (id)initWithRandomKeyWithSalt:(NSData *)theSalt;
+- (NSString *)getEncryptedRandomStringForClient;
 
 @end

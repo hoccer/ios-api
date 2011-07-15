@@ -39,8 +39,10 @@
 - (NSData *)stripPublicKeyHeader:(NSData *)d_key;
 - (BOOL)addPublicKey:(NSString *)key withTag:(NSString *)tag;
 
-
+- (NSData *)getKeyBitsForPeerRef:(NSString *)peerName;
 
 - (void)getCertificate;
+
+- (NSString *)genRandomString:(int)length;
 
 @end

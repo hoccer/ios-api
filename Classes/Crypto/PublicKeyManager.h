@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PublicKeyManager : NSObject {
+@interface PublicKeyManager : NSObject{
 
 }
 
+@property (nonatomic,retain) NSMutableDictionary *collectedKeys;
 
 -(BOOL)storeKeyRef:(SecKeyRef)theKey;
 -(BOOL)storeKey:(NSString *)theKey forClient:(NSString *)theId;
 -(SecKeyRef)getKeyForClient:(NSString *)theId;
 -(void)deleteKeyForClient:(NSString *)theId;
--(BOOL)checkForKeyChange:(SecKeyRef)theKey;
+-(BOOL)checkForKeyChange:(NSString *)clientId withHash:(NSString *)theHash;
 
 @end

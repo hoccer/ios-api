@@ -1,3 +1,4 @@
+
 //
 //  RSA.m
 //  Hoccer
@@ -8,7 +9,6 @@
 
 #import "RSA.h"
 #import "NSData_Base64Extensions.h"
-
 
 
 @implementation RSA
@@ -54,7 +54,6 @@ static RSA *instance;
         }
     }); 
     //[instance getCertificate];
-
     return instance;
 }
 
@@ -71,6 +70,25 @@ static RSA *instance;
     return self;
 }
 
+
+- (NSString *)genRandomString:(int)length {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!§$%&/()=?";
+
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: length];
+    
+    for (int i=0; i<length; i++) {
+        [randomString appendFormat: @"%c", [letters characterAtIndex: rand()%[letters length]]];
+    }
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:randomString forKey:@"encryptionKey"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog (@"generated String %@",randomString);
+    
+    return randomString;
+    
+}
 
 - (void)generateKeyPairKeys
 {
@@ -110,19 +128,12 @@ static RSA *instance;
     NSData *plainData = [plainText dataUsingEncoding:NSUTF8StringEncoding];
     
     NSData *cipher = [self encryptWithKey:[self getPublicKeyRef] plainData:plainData];
-    
-    NSLog(@"cypher %@", [cipher asBase64EncodedString]);
-    NSLog(@"publickey: %@", [[self getPublicKeyBits] asBase64EncodedString]);
-    NSLog(@"privatekey: %@", [[self getPrivateKeyBits] asBase64EncodedString]);
-    
-    NSData *cipherFromAndroid = [NSData dataWithBase64EncodedString:@"A1aAv0xmKLfy5aQtAeXaGykdomDi/ISTwb8mq9pYNVXGp4rnl2nOc9LVHz2SYrU/YJj1QHj/57gNpfpigQLJ2jnm5DMDhdiJmVeBFCrftxzDD9pKNKNnnBvloboDl0groIoe4DPqKLfnkOE3mdfcGsuCBE0cPxaqLPT4zAV4NGU="];
 
-    NSData *decryptedData = [self decryptWithKey:[self getPrivateKeyRef] cipherData:cipherFromAndroid];
+    NSData *decryptedData = [self decryptWithKey:[self getPrivateKeyRef] cipherData:cipher];
     NSString *decryptedString = [[[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding] autorelease];
     
     NSLog(@"decrypted %@", decryptedString);
     
-    [cipherFromAndroid release];
 }
 
 
@@ -515,13 +526,15 @@ static RSA *instance;
     SecKeyRef persistentRef = NULL;
 	
 	
-	NSData * peerTag = [NSData dataWithBytes:[peerName UTF8String] length:[peerName length]];
+    NSData *d_tag = [NSData dataWithBytes:[peerName UTF8String] length:[peerName length]];
     NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
     [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
     [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
-    [publicKey setObject:peerTag forKey:(id)kSecAttrApplicationTag];
-    [publicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnPersistentRef];
-	 SecItemCopyMatching((CFDictionaryRef)publicKey, (CFTypeRef *)&persistentRef);
+    [publicKey setObject:d_tag forKey:(id)kSecAttrApplicationTag];
+    [publicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnRef];
+    [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];    
+    [publicKey setObject:(id) kSecAttrKeyClassPublic forKey:(id)kSecAttrKeyClass];
+    SecItemCopyMatching((CFDictionaryRef)publicKey,(CFTypeRef *)&persistentRef);
     
 	[publicKey release];
     
@@ -529,6 +542,29 @@ static RSA *instance;
 
 }
 
+- (NSData *)getKeyBitsForPeerRef:(NSString *)peerName {
+	OSStatus sanityCheck = noErr;
+	NSData * publicKeyBits = nil;
+	
+    NSData *d_tag = [NSData dataWithBytes:[peerName UTF8String] length:[peerName length]];
+
+    NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
+    [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
+    [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
+    [publicKey setObject:d_tag forKey:(id)kSecAttrApplicationTag];
+    [publicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnData];
+    
+	sanityCheck = SecItemCopyMatching((CFDictionaryRef)publicKey, (CFTypeRef *)&publicKeyBits);
+    
+	if (sanityCheck != noErr)
+	{
+		publicKeyBits = nil;
+	}
+    
+	[publicKey release];
+    	
+	return publicKeyBits;
+}
 
 
 @end

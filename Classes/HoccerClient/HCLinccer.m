@@ -50,7 +50,7 @@
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
 #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
-// #define LINCCER_SANDBOX_URI @"http://192.168.2.137:9292/v3"
+//#define LINCCER_SANDBOX_URI @"http://192.168.2.137:9292/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -76,8 +76,8 @@
 @synthesize environmentUpdateInterval;
 @synthesize linccingId;
 @synthesize peekId;
-@synthesize groupId;
 @synthesize userInfo;
+@synthesize groupId;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -108,6 +108,8 @@
         //[[RSA sharedInstance] testEncryption];
         
         keyManager = [[PublicKeyManager alloc] init];
+        
+        clientIDCache = [[NSMutableDictionary alloc]init];
 
 	}
 	
@@ -119,7 +121,7 @@
 		[self didFailWithError:nil];
 	}
 	
-    NSLog(@"sending %@", [data yajl_JSONString]);
+    //NSLog(@"sending %@", [data yajl_JSONString]);
     NSData *dataToSend = [[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding]; 
     
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
@@ -151,27 +153,6 @@
 	
 }
 
-- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSString *)clientId{
-    
-    if (!isRegistered) {
-        [self didFailWithError:nil];
-    }
-    
-    //NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
-    //[httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
-   pupKeyCache = @"MIGJAoGBAJfumuvmyXow3xApSJqsBX0FgC1wDKfgDxFSmLeNhogCWeepeIOwJYL0OVJLv3DTrIYYqvGrbrfHbFDmozeAuRsamCnyAiCmxqNlac5eBT0185dLHDEnmtYkOKk0Ehiqj0EbxYtWerJ42fEgRl0bHb6ZHtBppqV3Tj5QrzcEa5CBAgMBAAE=";
-    clientIdCache = clientId;
-    [self storePublicKey:pupKeyCache forClient:clientIdCache];
-}
-
-- (void)storePublicKey:(NSString *)theKey forClient:(NSString *)clientId{
-    if (theKey != nil){
-        if ([keyManager storeKey:theKey forClient:clientId]){
-            NSLog(@"Stored the key");
-        }
-    }
-
-}
 
 - (void)checkGroupForPublicKeys:(NSDictionary *)aDictionary{
     
@@ -190,8 +171,31 @@
             }
             else {
                 NSLog(@"We do have a key for this client! Yeah!");
-                //[keyManager deleteKeyForClient:[aClient objectForKey:@"id"]];
+                if ([keyManager checkForKeyChange:[aClient objectForKey:@"id"] withHash:[aClient objectForKey:@"pubkey"]]){
+                    NSLog(@"The key changed! panic!");
+                }
             }
+        }
+    }
+    
+}
+
+- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSString *)clientId{
+    
+    if (!isRegistered) {
+        [self didFailWithError:nil];
+    }
+    
+    NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
+    [httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
+    [clientIDCache setObject:clientId forKey:theHash];
+
+}
+
+- (void)storePublicKey:(NSString *)theKey forClient:(NSString *)clientId{
+    if (theKey != nil){
+        if ([keyManager storeKey:theKey forClient:clientId]){
+            //NSLog(@"Stored the key");
         }
     }
     
@@ -226,7 +230,7 @@
 #pragma mark Error Handling 
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
-	NSLog(@"httpConnection didFail.");
+	//NSLog(@"httpConnection didFail.");
 	if ([linccingId isEqual: connection.uri]) {
         self.linccingId = nil;
     }
@@ -272,7 +276,7 @@
 #pragma mark HttpClient Response Methods 
 
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {	
-    NSLog(@"httpConnection didUpdateEnviroment.");
+    //NSLog(@"httpConnection didUpdateEnviroment.");
 	self.latency = aConnection.roundTripTime;
 	
     
@@ -294,7 +298,7 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
-    NSLog(@"httpConnection didsenddata.");
+    //NSLog(@"httpConnection didsenddata.");
 
     self.linccingId = nil;
 
@@ -310,7 +314,7 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
-    NSLog(@"httpConnection didReceiveData.");
+    //NSLog(@"httpConnection didReceiveData.");
     self.linccingId = nil;
     
     if ([connection.response statusCode] == 204 ) {
@@ -325,14 +329,14 @@
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
-    NSLog(@"httpConnection didDelete.");
+    //NSLog(@"httpConnection didDelete.");
 	if ([delegate respondsToSelector:@selector(linccerDidUnregister:)]) {
 		[delegate linccerDidUnregister: self];
 	}
 }
 
 - (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSData *)groupData {
-    NSLog(@"httpConnection didUpdateGroup.");
+    //NSLog(@"httpConnection didUpdateGroup.");
 
     NSDictionary *dictionary = [groupData yajl_JSON];
 
@@ -348,10 +352,13 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey {
-    NSLog(@"The Key: %@",[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]);
+    //NSLog(@"The Key: %@",[[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""]);
 
-    pupKeyCache = [NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding];
-    [self storePublicKey:pupKeyCache forClient:clientIdCache];
+    NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    
+    NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
+    NSString *identifier = [uriArray objectAtIndex:6];
+    [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier]];
 }
 #pragma mark -
 #pragma mark Private Methods
@@ -372,6 +379,8 @@
 	
 	return [info autorelease];	
 }
+
+
 
 - (void)updateEnvironment {	
 	[updateTimer invalidate];
@@ -432,9 +441,11 @@
 		uuid = [[NSString stringWithUUID] copy];
 		[[NSUserDefaults standardUserDefaults] setObject:uuid forKey:HOCCER_CLIENT_ID_KEY];
     }
-
+    
 	return uuid;
 }
+
+
 
 #pragma mark -
 #pragma mark Setter
@@ -474,7 +485,9 @@
     [linccingId release];
     [groupId release];
     
+    
     [uuid release];
+    [userInfo release];
     [super dealloc];
 }
 

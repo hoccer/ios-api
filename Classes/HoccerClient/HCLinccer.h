@@ -76,8 +76,7 @@ enum HoccerErrors {
     NSDictionary *userInfo;
     
     NSString *uuid;
-    NSString *pupKeyCache;
-    NSString *clientIdCache;
+    NSMutableDictionary *clientIDCache;
 }
 
 @property (retain) HCEnvironmentManager* environmentController;

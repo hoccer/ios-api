@@ -9,17 +9,13 @@
 #import "PublicKeyManager.h"
 #import "RSA.h"
 #import "NSData_Base64Extensions.h"
+#import "NSData+CommonCrypto.h"
+#import "NSString+StringWithData.h"
+
 @implementation PublicKeyManager
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
+@synthesize collectedKeys;
+
 
 -(BOOL)storeKeyRef:(SecKeyRef)theKey{
     return YES;
@@ -29,7 +25,9 @@
     
     //SecKeyRef clientPubKey = [[RSA sharedInstance] addPeerPublicKey:[NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId] keyBits:[NSData dataWithBase64EncodedString:theKey]];
     
-    BOOL safed = [[RSA sharedInstance] addPublicKey:theKey withTag:[NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId]];
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId];
+    
+    BOOL safed = [[RSA sharedInstance] addPublicKey:theKey withTag:theName];
     
     if (safed){
         return YES;
@@ -42,19 +40,31 @@
     
     NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId];
 
+    NSLog(@"The Key: %@", theName);
     SecKeyRef theKey = [[RSA sharedInstance] getPeerKeyRef:theName];
     
     if (theKey != nil){
-
+        
         return theKey;
     }
     else {
         return nil;
     }
 }
--(BOOL)checkForKeyChange:(SecKeyRef)theKey{
+-(BOOL)checkForKeyChange:(NSString *)clientId withHash:(NSString *)theHash{
     
-    return NO;
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",clientId];
+
+    NSData *storedKey = [[RSA sharedInstance] getKeyBitsForPeerRef:theName];
+    
+    NSString *keyAsString = [storedKey asBase64EncodedString];
+            
+    if ([[[[[keyAsString dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] hexString] substringToIndex:8] isEqualToString:theHash]){
+        return NO;
+    }
+    else  {
+        return YES;
+    }
 }
 
 -(void)deleteKeyForClient:(NSString *)theId{
