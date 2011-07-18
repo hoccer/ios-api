@@ -170,9 +170,10 @@
                 [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey"] client:[aClient objectForKey:@"id"]];
             }
             else {
-                NSLog(@"We do have a key for this client! Yeah!");
                 if ([keyManager checkForKeyChange:[aClient objectForKey:@"id"] withHash:[aClient objectForKey:@"pubkey"]]){
-                    NSLog(@"The key changed! panic!");
+                    if ([delegate respondsToSelector:@selector(linccer:keyHasChangedForClientName:)]){
+                        [delegate linccer:self keyHasChangedForClientName:[aClient objectForKey:@"name"]];
+                    }
                 }
             }
         }
@@ -194,8 +195,16 @@
 
 - (void)storePublicKey:(NSString *)theKey forClient:(NSString *)clientId{
     if (theKey != nil){
-        if ([keyManager storeKey:theKey forClient:clientId]){
-            //NSLog(@"Stored the key");
+        if (![keyManager storeKey:theKey forClient:clientId]){
+            NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
+            [errorInfo setObject:NSLocalizedString(@"Could not save public key", nil) forKey:NSLocalizedDescriptionKey];
+            [errorInfo setObject:NSLocalizedString(@"Disable encryption and enable it again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+            
+            NSError *error = [NSError errorWithDomain:HoccerError code:700 userInfo:errorInfo];
+            
+            if ([delegate respondsToSelector:@selector(linccer:didFailWithError:)]) {
+                [delegate linccer: self didFailWithError:error];
+            }
         }
     }
     
@@ -399,10 +408,12 @@
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
     NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
-    [environment setObject:[pubKey asBase64EncodedString] forKey:@"pubkey"];
+    NSString *pubKeyAsString = [[[pubKey asBase64EncodedString]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    [environment setObject:pubKeyAsString forKey:@"pubkey"];
+    NSString *enviromentAsString = [environment yajl_JSONString];
          
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
-			   payload:[[environment yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
+			   payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];
     
     [environment release];

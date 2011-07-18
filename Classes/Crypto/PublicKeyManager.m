@@ -40,7 +40,6 @@
     
     NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId];
 
-    NSLog(@"The Key: %@", theName);
     SecKeyRef theKey = [[RSA sharedInstance] getPeerKeyRef:theName];
     
     if (theKey != nil){
@@ -57,7 +56,7 @@
 
     NSData *storedKey = [[RSA sharedInstance] getKeyBitsForPeerRef:theName];
     
-    NSString *keyAsString = [storedKey asBase64EncodedString];
+    NSString *keyAsString = [[[storedKey asBase64EncodedString]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
             
     if ([[[[[keyAsString dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] hexString] substringToIndex:8] isEqualToString:theHash]){
         return NO;
