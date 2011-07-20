@@ -70,7 +70,13 @@
 }
 
 - (NSString *)JSONRepresentation {
-	return [[self dict] yajl_JSONString];
+    
+    @try {
+        return [[self dict] yajl_JSONString];
+	}
+	@catch (NSException * e) { NSLog(@"%@", e); }
+    
+    return nil;
 }
 
 - (NSDictionary *)dict {

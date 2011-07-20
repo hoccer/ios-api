@@ -9,15 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface PublicKeyManager : NSObject{
+    
+    NSMutableArray *collectedKeys;
 
 }
 
-@property (nonatomic,retain) NSMutableDictionary *collectedKeys;
+@property (nonatomic,retain) NSMutableArray *collectedKeys;
 
 -(BOOL)storeKeyRef:(SecKeyRef)theKey;
--(BOOL)storeKey:(NSString *)theKey forClient:(NSString *)theId;
+-(BOOL)storeKey:(NSString *)theKey forClient:(NSDictionary *)client;
 -(SecKeyRef)getKeyForClient:(NSString *)theId;
 -(void)deleteKeyForClient:(NSString *)theId;
--(BOOL)checkForKeyChange:(NSString *)clientId withHash:(NSString *)theHash;
+-(BOOL)checkForKeyChange:(NSDictionary *)client withHash:(NSString *)theHash;
 
 @end

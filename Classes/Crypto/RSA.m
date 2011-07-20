@@ -116,6 +116,8 @@ static RSA *instance;
     
     if (status != noErr) {
         NSLog(@"something went wrong %d", (int)status);
+    }else {
+        NSLog(@"New key");
     }
     
     [privateKeyAttr release];

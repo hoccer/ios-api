@@ -16,20 +16,38 @@
 
 @synthesize collectedKeys;
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        
+        collectedKeys = [[NSMutableArray alloc]initWithArray:[[NSUserDefaults standardUserDefaults]arrayForKey:@"keyStore"]];
+        
+        if (collectedKeys == nil){
+            collectedKeys = [[NSMutableArray alloc] initWithCapacity:1];
+        }
+        
+    }
+    
+    return self;
+}
+
 
 -(BOOL)storeKeyRef:(SecKeyRef)theKey{
     return YES;
 }
 
--(BOOL)storeKey:(NSString *)theKey forClient:(NSString *)theId{
+-(BOOL)storeKey:(NSString *)theKey forClient:(NSDictionary *)client{
     
-    //SecKeyRef clientPubKey = [[RSA sharedInstance] addPeerPublicKey:[NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId] keyBits:[NSData dataWithBase64EncodedString:theKey]];
+    NSString *theTag = [NSString stringWithFormat:@"com.hoccer.publickeys.%@",[client objectForKey:@"id"]];
     
-    NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId];
-    
-    BOOL safed = [[RSA sharedInstance] addPublicKey:theKey withTag:theName];
+    BOOL safed = [[RSA sharedInstance] addPublicKey:theKey withTag:theTag];
     
     if (safed){
+        NSDictionary *keyDicitonary = [[NSDictionary alloc]initWithObjectsAndKeys:theKey,@"key",[client objectForKey:@"id"], @"clientId", [client objectForKey:@"name"], @"clientName", nil];
+        [collectedKeys addObject:keyDicitonary];
+        [keyDicitonary release];
+        [[NSUserDefaults standardUserDefaults] setObject:collectedKeys forKey:@"keyStore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         return YES;
     }
     
@@ -38,7 +56,7 @@
 
 -(SecKeyRef)getKeyForClient:(NSString *)theId{
     
-    NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId];
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickeys.%@",theId];
 
     SecKeyRef theKey = [[RSA sharedInstance] getPeerKeyRef:theName];
     
@@ -50,27 +68,44 @@
         return nil;
     }
 }
--(BOOL)checkForKeyChange:(NSString *)clientId withHash:(NSString *)theHash{
+-(BOOL)checkForKeyChange:(NSDictionary *)client withHash:(NSString *)theHash{
     
-    NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",clientId];
+    BOOL result = YES;
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickeys.%@",[client objectForKey:@"id"]];
 
     NSData *storedKey = [[RSA sharedInstance] getKeyBitsForPeerRef:theName];
     
     NSString *keyAsString = [[[storedKey asBase64EncodedString]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-            
-    if ([[[[[keyAsString dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] hexString] substringToIndex:8] isEqualToString:theHash]){
-        return NO;
+    [storedKey release];
+    
+    NSString *storedHash = [[[[keyAsString dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] hexString] substringToIndex:8];
+    
+    if ([storedHash isEqualToString:theHash]){
+        result =  NO;
     }
-    else  {
-        return YES;
+    NSArray *IDs = [collectedKeys valueForKey:@"clientId"];
+    NSString *search = [client objectForKey:@"id"];
+    NSUInteger index = [IDs indexOfObject:search];
+    NSDictionary *storedClient = [collectedKeys objectAtIndex: index];
+    
+    if (storedClient !=nil && ![[storedClient objectForKey:@"clientName"] isEqualToString:[client objectForKey:@"name"]] && [storedHash isEqualToString:[client objectForKey:@"pubkey"]]){
+            result = YES;
     }
+    
+    
+    
+    return result;
 }
 
 -(void)deleteKeyForClient:(NSString *)theId{
-    NSString *theName = [NSString stringWithFormat:@"com.hoccer.pubkeytest.%@",theId];
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickeys.%@",theId];
     [[RSA sharedInstance]removePeerPublicKey:theName];
 }
 
+- (void)dealloc {
+    [collectedKeys release];
+    [super dealloc];
+}
 
 
 @end

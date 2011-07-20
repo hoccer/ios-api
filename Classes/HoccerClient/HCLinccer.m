@@ -121,7 +121,6 @@
 		[self didFailWithError:nil];
 	}
 	
-    //NSLog(@"sending %@", [data yajl_JSONString]);
     NSData *dataToSend = [[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding]; 
     
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
@@ -167,13 +166,14 @@
     for (NSDictionary *aClient in others) {
         if ([aClient objectForKey:@"pubkey"] !=nil){
             if ([keyManager getKeyForClient:[aClient objectForKey:@"id"]] == nil){
-                [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey"] client:[aClient objectForKey:@"id"]];
+                [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey"] client:aClient];
             }
             else {
-                if ([keyManager checkForKeyChange:[aClient objectForKey:@"id"] withHash:[aClient objectForKey:@"pubkey"]]){
+                if ([keyManager checkForKeyChange:aClient withHash:[aClient objectForKey:@"pubkey"]]){
                     if ([delegate respondsToSelector:@selector(linccer:keyHasChangedForClientName:)]){
                         [delegate linccer:self keyHasChangedForClientName:[aClient objectForKey:@"name"]];
                     }
+                    [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey"] client:aClient];
                 }
             }
         }
@@ -181,7 +181,7 @@
     
 }
 
-- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSString *)clientId{
+- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client{
     
     if (!isRegistered) {
         [self didFailWithError:nil];
@@ -189,13 +189,13 @@
     
     NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
     [httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
-    [clientIDCache setObject:clientId forKey:theHash];
+    [clientIDCache setObject:client forKey:theHash];
 
 }
 
-- (void)storePublicKey:(NSString *)theKey forClient:(NSString *)clientId{
+- (void)storePublicKey:(NSString *)theKey forClient:(NSDictionary *)client{
     if (theKey != nil){
-        if (![keyManager storeKey:theKey forClient:clientId]){
+        if (![keyManager storeKey:theKey forClient:client]){
             NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
             [errorInfo setObject:NSLocalizedString(@"Could not save public key", nil) forKey:NSLocalizedDescriptionKey];
             [errorInfo setObject:NSLocalizedString(@"Disable encryption and enable it again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
@@ -239,7 +239,6 @@
 #pragma mark Error Handling 
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
-	//NSLog(@"httpConnection didFail.");
 	if ([linccingId isEqual: connection.uri]) {
         self.linccingId = nil;
     }
@@ -286,7 +285,6 @@
 #pragma mark HttpClient Response Methods 
 
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {	
-    //NSLog(@"httpConnection didUpdateEnviroment.");
 	self.latency = aConnection.roundTripTime;
 	
     
@@ -308,7 +306,6 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
-    //NSLog(@"httpConnection didsenddata.");
 
     self.linccingId = nil;
 
@@ -324,7 +321,6 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
-    //NSLog(@"httpConnection didReceiveData.");
     self.linccingId = nil;
     
     if ([connection.response statusCode] == 204 ) {
@@ -339,15 +335,17 @@
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
-    //NSLog(@"httpConnection didDelete.");
 	if ([delegate respondsToSelector:@selector(linccerDidUnregister:)]) {
 		[delegate linccerDidUnregister: self];
 	}
 }
 
 - (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSData *)groupData {
-    //NSLog(@"httpConnection didUpdateGroup.");
-
+    NSLog(@"httpConnection didUpdateGroup.");
+    
+    @try {
+	
+    
     NSDictionary *dictionary = [groupData yajl_JSON];
 
     self.groupId = [dictionary objectForKey:@"group_id"];
@@ -359,10 +357,15 @@
     [self checkGroupForPublicKeys:dictionary];
 
     [self peek];
+        
+    
+    }
+    @catch (NSException * e) { NSLog(@"%@", e); }
+
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey {
-    //NSLog(@"The Key: %@",[[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""]);
+   
 
     NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
