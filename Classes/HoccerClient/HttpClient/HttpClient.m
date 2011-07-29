@@ -309,8 +309,7 @@
 #pragma mark HTTP Error Handling 
 - (NSError *)hasHttpError: (NSHTTPURLResponse *)response {
     
-   
-	if ([response statusCode] >= 400 && [response statusCode] <500) {
+   	if ([response statusCode] >= 400 && [response statusCode] <500) {
         
         
 		NSString *message = NSLocalizedString(@"The Server responded with an error. Try again later.", nil) ;

@@ -49,8 +49,8 @@
 #import "PublicKeyManager.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
-//#define LINCCER_SANDBOX_URI @"http://192.168.2.137:9292/v3"
+// #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -354,7 +354,9 @@
         [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
     }
     
-    [self checkGroupForPublicKeys:dictionary];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] == YES){
+            [self checkGroupForPublicKeys:dictionary];
+        }
 
     [self peek];
         
