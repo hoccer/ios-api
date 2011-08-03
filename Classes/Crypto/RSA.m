@@ -35,8 +35,8 @@ const size_t BUFFER_SIZE = 64;
 const size_t CIPHER_BUFFER_SIZE = 1024;
 const uint32_t PADDING = kSecPaddingPKCS1;
 
-static const uint8_t publicKeyIdentifier[]  = "com.hoccer.sample.publickey";
-static const uint8_t privateKeyIdentifier[] = "com.hoccer.sample.privatekey";
+static const uint8_t publicKeyIdentifier[]  = "com.hoccer.client.publickey";
+static const uint8_t privateKeyIdentifier[] = "com.hoccer.client.privatekey";
 
 SecKeyRef publicKey;
 SecKeyRef privateKey; 
@@ -72,21 +72,25 @@ static RSA *instance;
 
 
 - (NSString *)genRandomString:(int)length {
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!§$%&/()=?";
+    
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"autoPassword"]){
+        NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!§$%&/()=?";
 
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: length];
+        NSMutableString *randomString = [NSMutableString stringWithCapacity: length];
     
-    for (int i=0; i<length; i++) {
-        [randomString appendFormat: @"%c", [letters characterAtIndex: rand()%[letters length]]];
-    }
+        for (int i=0; i<length; i++) {
+            [randomString appendFormat: @"%c", [letters characterAtIndex: rand()%[letters length]]];
+        }
     
     
-    [[NSUserDefaults standardUserDefaults] setObject:randomString forKey:@"encryptionKey"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSLog (@"generated String %@",randomString);
-    
+        [[NSUserDefaults standardUserDefaults] setObject:randomString forKey:@"encryptionKey"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
     return randomString;
+    }
+    else {
+        return [[NSUserDefaults standardUserDefaults]stringForKey:@"encryptionKey"];
+    }
     
 }
 

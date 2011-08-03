@@ -104,7 +104,7 @@ enum HoccerErrors {
 
 - (void)updateEnvironment;
 
-- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client;
-- (void)storePublicKey:(NSString *)theKey forClient:(NSDictionary *)client;
+- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client clientChanged:(BOOL)changed;
+- (void)storePublicKey:(NSString *)theKey forClient:(NSDictionary *)client clientChanged:(BOOL)changed;
 
 @end

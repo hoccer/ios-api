@@ -49,8 +49,8 @@
 #import "PublicKeyManager.h"
 
 #define LINCCER_URI @"https://linccer.hoccer.com/v3"
-// #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
+//#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -164,16 +164,13 @@
     }
     
     for (NSDictionary *aClient in others) {
-        if ([aClient objectForKey:@"pubkey"] !=nil){
+        if ([aClient objectForKey:@"pubkey_id"] !=nil){
             if ([keyManager getKeyForClient:[aClient objectForKey:@"id"]] == nil){
-                [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey"] client:aClient];
+                [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey_id"] client:aClient clientChanged:NO];
             }
             else {
-                if ([keyManager checkForKeyChange:aClient withHash:[aClient objectForKey:@"pubkey"]]){
-                    if ([delegate respondsToSelector:@selector(linccer:keyHasChangedForClientName:)]){
-                        [delegate linccer:self keyHasChangedForClientName:[aClient objectForKey:@"name"]];
-                    }
-                    [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey"] client:aClient];
+                if ([keyManager checkForKeyChange:aClient withHash:[aClient objectForKey:@"pubkey_id"]]){
+                    [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey_id"] client:aClient clientChanged:YES];
                 }
             }
         }
@@ -181,19 +178,29 @@
     
 }
 
-- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client{
+- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client clientChanged:(BOOL)changed{
     
     if (!isRegistered) {
         [self didFailWithError:nil];
     }
     
-    NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
-    [httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
-    [clientIDCache setObject:client forKey:theHash];
+    if (!changed){
+        NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
+        [httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceivePublicKey:)];
+        [clientIDCache setObject:client forKey:theHash];
+    }
+    else {
+        NSString *fetchString = [theHash stringByAppendingPathComponent:@"publickey"];
+        [httpClient getURI:[uri stringByAppendingPathComponent:fetchString] success:@selector(httpConnection:didReceiveChangedPublicKey:)];
+        [clientIDCache setObject:client forKey:theHash];
+    }
 
 }
 
-- (void)storePublicKey:(NSString *)theKey forClient:(NSDictionary *)client{
+- (void)storePublicKey:(NSString *)theKey forClient:(NSDictionary *)client clientChanged:(BOOL)changed{
+    if (changed){
+        [keyManager deleteKeyForClient:[client objectForKey:@"id"]];
+    }
     if (theKey != nil){
         if (![keyManager storeKey:theKey forClient:client]){
             NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
@@ -204,6 +211,13 @@
             
             if ([delegate respondsToSelector:@selector(linccer:didFailWithError:)]) {
                 [delegate linccer: self didFailWithError:error];
+            }
+        }
+        else {
+            if (changed){
+                if ([delegate respondsToSelector:@selector(linccer:keyHasChangedForClientName:)]){
+                    [delegate linccer:self keyHasChangedForClientName:[client objectForKey:@"name"]];
+                }
             }
         }
     }
@@ -366,14 +380,24 @@
 
 }
 
-- (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey {
+- (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey{
    
 
     NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
     NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
     NSString *identifier = [uriArray objectAtIndex:6];
-    [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier]];
+    [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
+}
+
+- (void)httpConnection: (HttpConnection *)connection didReceiveChangedPublicKey: (NSData *)pubkey{
+    
+    
+    NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    
+    NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
+    NSString *identifier = [uriArray objectAtIndex:6];
+    [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:YES];
 }
 #pragma mark -
 #pragma mark Private Methods
@@ -412,9 +436,11 @@
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
-    NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
-    NSString *pubKeyAsString = [[[pubKey asBase64EncodedString]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
-    [environment setObject:pubKeyAsString forKey:@"pubkey"];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoKey"]){
+        NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
+        NSString *pubKeyAsString = [[[pubKey asBase64EncodedString]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+        [environment setObject:pubKeyAsString forKey:@"pubkey"];
+    }
     NSString *enviromentAsString = [environment yajl_JSONString];
          
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]

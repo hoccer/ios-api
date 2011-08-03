@@ -120,9 +120,11 @@ static NSData *NotSoRandomSalt() {
 
 - (void)appendInfoToDictionary: (NSMutableDictionary *)dictionary {
     
-    NSDictionary *cryptedPassword = [self getEncryptedRandomStringForClient];
-     
-    if (cryptedPassword != nil){
+    NSDictionary *cryptedPassword;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sendPassword"]){
+        cryptedPassword = [self getEncryptedRandomStringForClient];
+    }
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sendPassword"]){
         NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @"AES", @"method",
                                     [NSNumber numberWithInt:256], @"keysize",
@@ -133,8 +135,15 @@ static NSData *NotSoRandomSalt() {
         [dictionary setObject:encryption forKey:@"encryption"];
     }
     else {
-        NSNotification *notification = [NSNotification notificationWithName:@"encryptionError" object:self];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    @"AES", @"method",
+                                    [NSNumber numberWithInt:256], @"keysize",
+                                    [salt asBase64EncodedString], @"salt", 
+                                    @"SHA256", @"hash", nil];
+        
+        
+        [dictionary setObject:encryption forKey:@"encryption"];
+
     }
     
 }
