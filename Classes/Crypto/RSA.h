@@ -43,6 +43,8 @@
 
 - (void)getCertificate;
 
+-(void)cleanKeyChain;
+
 - (NSString *)genRandomString:(int)length;
 
 @end

@@ -18,7 +18,7 @@
 
 -(BOOL)storeKeyRef:(SecKeyRef)theKey;
 -(BOOL)storeKey:(NSString *)theKey forClient:(NSDictionary *)client;
--(SecKeyRef)getKeyForClient:(NSString *)theId;
+-(SecKeyRef)getKeyForClient:(NSDictionary *)client;
 -(void)deleteKeyForClient:(NSString *)theId;
 -(BOOL)checkForKeyChange:(NSDictionary *)client withHash:(NSString *)theHash;
 

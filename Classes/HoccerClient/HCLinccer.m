@@ -165,7 +165,7 @@
     
     for (NSDictionary *aClient in others) {
         if ([aClient objectForKey:@"pubkey_id"] !=nil){
-            if ([keyManager getKeyForClient:[aClient objectForKey:@"id"]] == nil){
+            if ([keyManager getKeyForClient:aClient] == nil){
                 [self fetchPublicKeyForHash:[aClient objectForKey:@"pubkey_id"] client:aClient clientChanged:NO];
             }
             else {
@@ -207,11 +207,10 @@
             [errorInfo setObject:NSLocalizedString(@"Could not save public key", nil) forKey:NSLocalizedDescriptionKey];
             [errorInfo setObject:NSLocalizedString(@"Disable encryption and enable it again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
             
-            NSError *error = [NSError errorWithDomain:HoccerError code:700 userInfo:errorInfo];
+            NSError *error = [NSError errorWithDomain:@"PubKeyError" code:700 userInfo:errorInfo];
             
-            if ([delegate respondsToSelector:@selector(linccer:didFailWithError:)]) {
-                [delegate linccer: self didFailWithError:error];
-            }
+            
+            [self didFailWithError:error];
         }
         else {
             if (changed){
@@ -383,7 +382,13 @@
 - (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey{
    
 
-    NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    //NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    
+    NSDictionary *theResponse = [pubkey yajl_JSON];
+    
+    NSString *theKey = [theResponse objectForKey:@"pubkey"];
+    
+    NSLog(@"The Key we have recieved: %@", theKey);
     
     NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
     NSString *identifier = [uriArray objectAtIndex:6];
@@ -393,8 +398,11 @@
 - (void)httpConnection: (HttpConnection *)connection didReceiveChangedPublicKey: (NSData *)pubkey{
     
     
-    NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    NSDictionary *theResponse = [pubkey yajl_JSON];
     
+    NSString *theKey = [theResponse objectForKey:@"pubkey"];
+    
+    NSLog(@"The Key we have recieved: %@", theKey);    
     NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
     NSString *identifier = [uriArray objectAtIndex:6];
     [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:YES];

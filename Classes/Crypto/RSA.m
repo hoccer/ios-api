@@ -11,6 +11,7 @@
 #import "NSData_Base64Extensions.h"
 
 
+
 @implementation RSA
 
 #if DEBUG
@@ -50,7 +51,7 @@ static RSA *instance;
         instance = [[RSA alloc] init];
         if ([instance getPrivateKeyRef] == nil || [instance getPublicKeyRef] == nil) {
             NSLog(@"generating key");
-            [instance generateKeyPairKeys];
+            //[instance generateKeyPairKeys];
         }
     }); 
     //[instance getCertificate];
@@ -170,7 +171,6 @@ static RSA *instance;
     }
         
     cipher = [NSData dataWithBytes:(const void *)cipherBuffer length:(NSUInteger)cipherBufferSize];
-    NSLog(@"encoded %d bytes, data %@", (NSInteger)cipherBufferSize, cipher);
     
     return cipher;
 }
@@ -486,6 +486,19 @@ static RSA *instance;
      SecItemDelete((CFDictionaryRef)publicKey);
 
 	[publicKey release];
+}
+
+- (void)cleanKeyChain {
+    NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
+    [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
+    [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
+    [publicKey setObject:(id) kSecAttrKeyClassPublic forKey:(id)kSecAttrKeyClass];
+    SecItemDelete((CFDictionaryRef)publicKey);
+    [publicKey release];
+    
+    [self generateKeyPairKeys];
+    
+
 }
 
 - (SecKeyRef)getKeyRefWithPersistentKeyRef:(CFTypeRef)persistentRef {

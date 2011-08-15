@@ -124,15 +124,22 @@ static NSData *NotSoRandomSalt() {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sendPassword"]){
         cryptedPassword = [self getEncryptedRandomStringForClient];
     }
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sendPassword"]){
-        NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
+        if (cryptedPassword){
+            NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @"AES", @"method",
                                     [NSNumber numberWithInt:256], @"keysize",
                                     [salt asBase64EncodedString], @"salt", 
                                     @"SHA256", @"hash", cryptedPassword, @"password", nil];
 
     
-        [dictionary setObject:encryption forKey:@"encryption"];
+            [dictionary setObject:encryption forKey:@"encryption"];
+        }
+        else {
+            NSNotification *notification = [NSNotification notificationWithName:@"noPublicKey" object:self];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }
     }
     else {
         NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -147,7 +154,6 @@ static NSData *NotSoRandomSalt() {
     }
     
 }
-
 
 
 - (NSDictionary *)getEncryptedRandomStringForClient {
@@ -169,11 +175,10 @@ static NSData *NotSoRandomSalt() {
                 
                 NSString *thePass = [[NSUserDefaults standardUserDefaults] stringForKey:@"encryptionKey"];
                 NSData *passData = [thePass dataUsingEncoding:NSUTF8StringEncoding];
-                SecKeyRef theKeyRef = [keyManager getKeyForClient:[aClient objectForKey:@"id"]];            
+                SecKeyRef theKeyRef = [keyManager getKeyForClient:aClient];            
                 if (theKeyRef != nil){
         
                     NSData *cipher = [[RSA sharedInstance] encryptWithKey:theKeyRef plainData:passData];
-                    NSLog(@"Cipher %@",[cipher asBase64EncodedString]);
                     [toReturn setValue:[cipher asBase64EncodedString] forKey:[aClient objectForKey:@"id"]];
                 }
             }

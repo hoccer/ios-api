@@ -38,7 +38,7 @@
 
 -(BOOL)storeKey:(NSString *)theKey forClient:(NSDictionary *)client{
     
-    NSString *theTag = [NSString stringWithFormat:@"com.hoccer.publickey.%@",[client objectForKey:@"id"]];
+    NSString *theTag = [NSString stringWithFormat:@"com.hoccer.publickey.store.%@",[client objectForKey:@"id"]];
     
     BOOL safed = [[RSA sharedInstance] addPublicKey:theKey withTag:theTag];
     
@@ -46,9 +46,12 @@
         NSArray *IDs = [collectedKeys valueForKey:@"clientId"];
         NSString *search = [client objectForKey:@"id"];
         NSUInteger index = [IDs indexOfObject:search];
-        NSDictionary *storedClient = [collectedKeys objectAtIndex: index];
+        if (IDs.count >= index){
+            NSDictionary *storedClient = [collectedKeys objectAtIndex: index];
+            [collectedKeys removeObject:storedClient];
+        }
+        
 
-        [collectedKeys removeObject:storedClient];
         
         NSDictionary *keyDicitonary = [[NSDictionary alloc]initWithObjectsAndKeys:theKey,@"key",[client objectForKey:@"id"], @"clientId", [client objectForKey:@"name"], @"clientName", nil];
         [collectedKeys addObject:keyDicitonary];
@@ -60,9 +63,9 @@
     return safed;
 }
 
--(SecKeyRef)getKeyForClient:(NSString *)theId{
+-(SecKeyRef)getKeyForClient:(NSDictionary *)client{
     
-    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickey.%@",theId];
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickey.store.%@",[client objectForKey:@"id"]];
 
     SecKeyRef theKey = [[RSA sharedInstance] getPeerKeyRef:theName];
     
@@ -77,7 +80,7 @@
 -(BOOL)checkForKeyChange:(NSDictionary *)client withHash:(NSString *)theHash{
     
     BOOL result = YES;
-    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickey.%@",[client objectForKey:@"id"]];
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickey.store.%@",[client objectForKey:@"id"]];
 
     NSData *storedKey = [[RSA sharedInstance] getKeyBitsForPeerRef:theName];
     
@@ -92,19 +95,20 @@
     NSArray *IDs = [collectedKeys valueForKey:@"clientId"];
     NSString *search = [client objectForKey:@"id"];
     NSUInteger index = [IDs indexOfObject:search];
-    NSDictionary *storedClient = [collectedKeys objectAtIndex: index];
+    if (IDs.count >= index){
+        NSDictionary *storedClient = [collectedKeys objectAtIndex: index];
     
-    if ((storedClient !=nil && ![[storedClient objectForKey:@"clientName"] isEqualToString:[client objectForKey:@"name"]]) || (storedClient !=nil && ![storedHash isEqualToString: [client objectForKey:@"pubkey_id"]])){
-            result = YES;
+        if ((storedClient !=nil && ![[storedClient objectForKey:@"clientName"] isEqualToString:[client objectForKey:@"name"]]) || (storedClient !=nil && ![storedHash isEqualToString: [client objectForKey:@"pubkey_id"]])){
+                result = YES;
+        }
+    
     }
-    
-    
     
     return result;
 }
 
 -(void)deleteKeyForClient:(NSString *)theId{
-    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickey.%@",theId];
+    NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickey.store.%@",theId];
     [[RSA sharedInstance]removePeerPublicKey:theName];
 }
 

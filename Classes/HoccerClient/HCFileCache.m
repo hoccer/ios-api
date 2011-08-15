@@ -87,7 +87,6 @@
 #pragma mark -
 #pragma mark Methods for Fetching
 - (NSString *)load: (NSString *)url {
-    NSLog(@"url %@", url);
 	return [httpClient requestMethod:@"GET" absoluteURL:url payload:nil success:@selector(httpConnection:didReceiveData:)];
 }
 
