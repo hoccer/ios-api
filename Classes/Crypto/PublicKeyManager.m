@@ -84,7 +84,7 @@
 
     NSData *storedKey = [[RSA sharedInstance] getKeyBitsForPeerRef:theName];
     
-    NSString *keyAsString = [[[storedKey asBase64EncodedString]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+    NSString *keyAsString = [storedKey asBase64EncodedString];
     [storedKey release];
     
     NSString *storedHash = [[[[keyAsString dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] hexString] substringToIndex:8];
@@ -108,6 +108,16 @@
 }
 
 -(void)deleteKeyForClient:(NSString *)theId{
+    
+    NSArray *IDs = [collectedKeys valueForKey:@"clientId"];
+    NSString *search = theId;
+    NSUInteger index = [IDs indexOfObject:search];
+    
+    [collectedKeys removeObjectAtIndex:index];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:collectedKeys forKey:@"keyStore"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     NSString *theName = [NSString stringWithFormat:@"com.hoccer.publickey.store.%@",theId];
     [[RSA sharedInstance]removePeerPublicKey:theName];
 }

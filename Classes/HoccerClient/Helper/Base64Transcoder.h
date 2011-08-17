@@ -31,7 +31,7 @@
 #include <stdbool.h>
 
 typedef enum {
-	Base64Flags_IncludeNewlines = 0x01,
+	Base64Flags_IncludeNewlines = 0x00,
 	Base64Flags_Default = Base64Flags_IncludeNewlines,
 } EBase64Flags;
 

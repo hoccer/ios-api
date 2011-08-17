@@ -354,7 +354,6 @@
 }
 
 - (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSData *)groupData {
-    NSLog(@"httpConnection didUpdateGroup.");
     
     @try {
 	
@@ -387,8 +386,7 @@
     NSDictionary *theResponse = [pubkey yajl_JSON];
     
     NSString *theKey = [theResponse objectForKey:@"pubkey"];
-    
-    NSLog(@"The Key we have recieved: %@", theKey);
+    //NSLog(@"The Key we have recieved: %@", theKey);
     
     NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
     NSString *identifier = [uriArray objectAtIndex:6];
@@ -402,7 +400,7 @@
     
     NSString *theKey = [theResponse objectForKey:@"pubkey"];
     
-    NSLog(@"The Key we have recieved: %@", theKey);    
+    //NSLog(@"The Key we have recieved: %@", theKey);    
     NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
     NSString *identifier = [uriArray objectAtIndex:6];
     [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:YES];
@@ -446,7 +444,7 @@
     [environment addEntriesFromDictionary:self.userInfo];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoKey"]){
         NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
-        NSString *pubKeyAsString = [[[pubKey asBase64EncodedString]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+        NSString *pubKeyAsString = [pubKey asBase64EncodedString];
         [environment setObject:pubKeyAsString forKey:@"pubkey"];
     }
     NSString *enviromentAsString = [environment yajl_JSONString];

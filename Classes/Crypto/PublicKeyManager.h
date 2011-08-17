@@ -14,7 +14,7 @@
 
 }
 
-@property (nonatomic,retain) NSMutableArray *collectedKeys;
+@property (retain) NSMutableArray *collectedKeys;
 
 -(BOOL)storeKeyRef:(SecKeyRef)theKey;
 -(BOOL)storeKey:(NSString *)theKey forClient:(NSDictionary *)client;
