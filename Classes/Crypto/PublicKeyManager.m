@@ -112,8 +112,9 @@
     NSString *search = theId;
     NSUInteger index = [IDs indexOfObject:search];
     
-    [collectedKeys removeObjectAtIndex:index];
-    
+  if (IDs.count >= index){
+      [collectedKeys removeObjectAtIndex:index];
+  }
     [[NSUserDefaults standardUserDefaults] setObject:collectedKeys forKey:@"keyStore"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
