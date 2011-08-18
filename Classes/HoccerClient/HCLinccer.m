@@ -204,7 +204,7 @@
     if (theKey != nil){
         if (![keyManager storeKey:theKey forClient:client]){
             NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
-            [errorInfo setObject:NSLocalizedString(@"Could not save public key", nil) forKey:NSLocalizedDescriptionKey];
+            [errorInfo setObject:[NSString stringWithFormat:NSLocalizedString(@"Could not save public key for client %@", nil),[client objectForKey:@"name"]] forKey:NSLocalizedDescriptionKey];
             [errorInfo setObject:NSLocalizedString(@"Disable encryption and enable it again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
             
             NSError *error = [NSError errorWithDomain:@"PubKeyError" code:700 userInfo:errorInfo];

@@ -113,20 +113,14 @@ static NSData *NotSoRandomSalt() {
 - (NSString *)decryptString: (NSString *)string {
     NSData *data      = [NSData dataWithBase64EncodedString:string];
     NSData *decrypted = [self decrypt:data];
-    
     return [NSString stringWithData:decrypted usingEncoding:NSUTF8StringEncoding];
-    [data release];
 }
 
 - (void)appendInfoToDictionary: (NSMutableDictionary *)dictionary {
     
-    NSDictionary *cryptedPassword;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sendPassword"]){
-        cryptedPassword = [self getEncryptedRandomStringForClient];
-    }
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"sendPassword"]){
-        if (cryptedPassword){
+        NSDictionary *cryptedPassword = [self getEncryptedRandomStringForClient];
+        if (cryptedPassword!=nil){
             NSDictionary *encryption = [NSDictionary dictionaryWithObjectsAndKeys:
                                     @"AES", @"method",
                                     [NSNumber numberWithInt:256], @"keysize",
@@ -166,10 +160,11 @@ static NSData *NotSoRandomSalt() {
         
         if (selectedClients.count == 0 ){
             NSLog(@"So wird das nichts!");
+            [keyManager release];
             return nil;
         }
         else {
-            NSDictionary *toReturn = [[NSMutableDictionary alloc]initWithCapacity:selectedClients.count];
+            NSDictionary *toReturn = [[[NSMutableDictionary alloc]initWithCapacity:selectedClients.count] autorelease];;
             
             for (NSDictionary *aClient in selectedClients){
                 
@@ -182,11 +177,12 @@ static NSData *NotSoRandomSalt() {
                     [toReturn setValue:[cipher asBase64EncodedString] forKey:[aClient objectForKey:@"id"]];
                 }
             }
+            [keyManager release];
             return toReturn;
         }
     }
-    return nil;
     [keyManager release];
+    return nil;
 }
 
 

@@ -85,7 +85,6 @@
     NSData *storedKey = [[RSA sharedInstance] getKeyBitsForPeerRef:theName];
     
     NSString *keyAsString = [storedKey asBase64EncodedString];
-    [storedKey release];
     
     NSString *storedHash = [[[[keyAsString dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] hexString] substringToIndex:8];
     

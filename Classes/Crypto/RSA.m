@@ -36,8 +36,8 @@ const size_t BUFFER_SIZE = 64;
 const size_t CIPHER_BUFFER_SIZE = 1024;
 const uint32_t PADDING = kSecPaddingPKCS1;
 
-static const uint8_t publicKeyIdentifier[]  = "com.hoccer.client.publickey";
-static const uint8_t privateKeyIdentifier[] = "com.hoccer.client.privatekey";
+static const uint8_t publicKeyIdentifier[]  = "com.hoccer.publickey";
+static const uint8_t privateKeyIdentifier[] = "com.hoccer.privatekey";
 
 SecKeyRef publicKey;
 SecKeyRef privateKey; 
@@ -50,7 +50,7 @@ static RSA *instance;
     dispatch_once(&onceToken, ^{
         instance = [[RSA alloc] init];
         if ([instance getPrivateKeyRef] == nil || [instance getPublicKeyRef] == nil) {
-            NSLog(@"generating key");
+            NSLog(@"There are no keys! PANIC!");
             //[instance generateKeyPairKeys];
         }
     }); 
@@ -67,7 +67,7 @@ static RSA *instance;
         privateTag = [[NSData alloc] initWithBytes:privateKeyIdentifier length:sizeof(privateKeyIdentifier)];
         publicTag = [[NSData alloc] initWithBytes:publicKeyIdentifier length:sizeof(publicKeyIdentifier)];
     }
-    
+
     return self;
 }
 
@@ -97,6 +97,7 @@ static RSA *instance;
 
 - (void)generateKeyPairKeys
 {
+    NSLog(@"Generating Keys");
     OSStatus status = noErr;	
     NSMutableDictionary *privateKeyAttr = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *publicKeyAttr = [[NSMutableDictionary alloc] init];
@@ -477,7 +478,6 @@ static RSA *instance;
 
 - (void)removePeerPublicKey:(NSString *)peerName {
 	
-	
 	NSData * peerTag = [NSData dataWithBytes:[peerName UTF8String] length:[peerName length]];
     NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
     [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
@@ -489,6 +489,7 @@ static RSA *instance;
 }
 
 - (void)cleanKeyChain {
+    NSLog(@"Cleaning keychain");
     NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
     [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
     [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];

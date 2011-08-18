@@ -28,7 +28,6 @@
 @private
     NSString *key;
     NSData *salt;
-    HCLinccer *linccer;
 }
 
 
