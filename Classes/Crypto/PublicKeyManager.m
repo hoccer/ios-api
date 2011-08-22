@@ -55,7 +55,6 @@
         
         NSDictionary *keyDicitonary = [[NSDictionary alloc]initWithObjectsAndKeys:theKey,@"key",[client objectForKey:@"id"], @"clientId", [client objectForKey:@"name"], @"clientName", nil];
         [collectedKeys addObject:keyDicitonary];
-        [keyDicitonary release];
         [[NSUserDefaults standardUserDefaults] setObject:collectedKeys forKey:@"keyStore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
@@ -97,7 +96,7 @@
     if (IDs.count >= index){
         NSDictionary *storedClient = [collectedKeys objectAtIndex: index];
     
-        if ((storedClient !=nil && ![[storedClient objectForKey:@"clientName"] isEqualToString:[client objectForKey:@"name"]]) || (storedClient !=nil && ![storedHash isEqualToString: [client objectForKey:@"pubkey_id"]])){
+        if ( ![[storedClient objectForKey:@"clientName"] isEqualToString:[client objectForKey:@"name"]] || ![storedHash isEqualToString: [client objectForKey:@"pubkey_id"]]){
                 result = YES;
         }
     

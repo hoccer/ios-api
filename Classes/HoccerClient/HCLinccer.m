@@ -386,7 +386,7 @@
     NSDictionary *theResponse = [pubkey yajl_JSON];
     
     NSString *theKey = [theResponse objectForKey:@"pubkey"];
-    //NSLog(@"The Key we have recieved: %@", theKey);
+
     
     NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
     NSString *identifier = [uriArray objectAtIndex:6];
@@ -400,7 +400,6 @@
     
     NSString *theKey = [theResponse objectForKey:@"pubkey"];
     
-    //NSLog(@"The Key we have recieved: %@", theKey);    
     NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
     NSString *identifier = [uriArray objectAtIndex:6];
     [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:YES];

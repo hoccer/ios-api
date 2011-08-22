@@ -36,8 +36,8 @@ const size_t BUFFER_SIZE = 64;
 const size_t CIPHER_BUFFER_SIZE = 1024;
 const uint32_t PADDING = kSecPaddingPKCS1;
 
-static const uint8_t publicKeyIdentifier[]  = "com.hoccer.publickey";
-static const uint8_t privateKeyIdentifier[] = "com.hoccer.privatekey";
+static const uint8_t publicKeyIdentifier[]  = "com.hoccer.client.publickey";
+static const uint8_t privateKeyIdentifier[] = "com.hoccer.client.privatekey";
 
 SecKeyRef publicKey;
 SecKeyRef privateKey; 
@@ -199,6 +199,8 @@ static RSA *instance;
     
     if (status != noErr) {
         NSLog(@"Error decrypting, OSStatus = %d", (NSInteger)status);
+        NSNotification *notification = [NSNotification notificationWithName:@"encryptionError" object:self];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
     }
     
     NSLog(@"decoded %d bytes, status %d", (NSInteger)plainBufferSize, (NSInteger)status);
@@ -463,8 +465,7 @@ static RSA *instance;
     [publicKey setObject:[NSNumber numberWithBool:YES] forKey:(id)kSecReturnRef
      ];
     [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
-    SecItemCopyMatching((CFDictionaryRef)publicKey,
-                                    (CFTypeRef *)&keyRef);
+    SecItemCopyMatching((CFDictionaryRef)publicKey,(CFTypeRef *)&keyRef);
     
     [publicKey release];
     
@@ -493,7 +494,6 @@ static RSA *instance;
     NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
     [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
     [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];
-    [publicKey setObject:(id) kSecAttrKeyClassPublic forKey:(id)kSecAttrKeyClass];
     SecItemDelete((CFDictionaryRef)publicKey);
     [publicKey release];
     
