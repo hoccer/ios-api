@@ -14,24 +14,6 @@
 
 @implementation RSA
 
-#if DEBUG
-#define LOGGING_FACILITY(X, Y)	\
-NSAssert(X, Y);	
-
-#define LOGGING_FACILITY1(X, Y, Z)	\
-NSAssert1(X, Y, Z);	
-#else
-#define LOGGING_FACILITY(X, Y)	\
-if (!(X)) {			\
-NSLog(Y);		\
-}					
-
-#define LOGGING_FACILITY1(X, Y, Z)	\
-if (!(X)) {				\
-NSLog(Y, Z);		\
-}						
-#endif
-
 const size_t BUFFER_SIZE = 64;
 const size_t CIPHER_BUFFER_SIZE = 1024;
 const uint32_t PADDING = kSecPaddingPKCS1;
@@ -505,7 +487,6 @@ static RSA *instance;
 - (SecKeyRef)getKeyRefWithPersistentKeyRef:(CFTypeRef)persistentRef {
 	SecKeyRef keyRef = NULL;
 	
-	LOGGING_FACILITY(persistentRef != NULL, @"persistentRef object cannot be NULL." );
 	
 	NSMutableDictionary * queryKey = [[NSMutableDictionary alloc] init];
 	
@@ -527,7 +508,6 @@ static RSA *instance;
 - (CFTypeRef)getPersistentKeyRefWithKeyRef:(SecKeyRef)keyRef {
 	CFTypeRef persistentRef = NULL;
 	
-	LOGGING_FACILITY(keyRef != NULL, @"keyRef object cannot be NULL." );
 	
 	NSMutableDictionary * queryKey = [[NSMutableDictionary alloc] init];
 	
