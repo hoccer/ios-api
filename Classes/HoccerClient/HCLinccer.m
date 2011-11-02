@@ -342,9 +342,13 @@
 		return;
 	}
 	
-    if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {        
-		[delegate linccer: self didReceiveData: [data yajl_JSON]];
-	}
+    @try {
+        if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {        
+            [delegate linccer: self didReceiveData: [data yajl_JSON]];
+        }
+    }
+    @catch (NSException * e) { NSLog(@"%@", e); }
+
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
@@ -365,11 +369,11 @@
     if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
         [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
     }
-    
+    /*
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] == YES){
             [self checkGroupForPublicKeys:dictionary];
         }
-
+     */
     [self peek];
         
     
@@ -441,11 +445,13 @@
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
+    /*
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoKey"]){
         NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
         NSString *pubKeyAsString = [pubKey asBase64EncodedString];
         [environment setObject:pubKeyAsString forKey:@"pubkey"];
     }
+     */
     NSString *enviromentAsString = [environment yajl_JSONString];
          
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
