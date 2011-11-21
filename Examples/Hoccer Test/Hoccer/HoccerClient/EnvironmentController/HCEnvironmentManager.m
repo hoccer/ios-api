@@ -67,6 +67,8 @@
 		
 		locationManager = [[CLLocationManager alloc] init];
 		locationManager.delegate = self;
+        locationManager.purpose = NSLocalizedString(@"Hoccer needs you location to find out which devices are next to you. Otherwise Hoccer wont work.", nil); 
+
 		[locationManager startUpdatingLocation];
 		
 		[WifiScanner sharedScanner].delegate = self;
@@ -98,6 +100,13 @@
 	self.lastLocationUpdate = [NSDate date];
 	[self updateHoccability];
 }
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    UIAlertView *locationAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Could not locate you", nil) message:NSLocalizedString(@"We could not locate you but Hoccer needs your location to know which devices are next to you. Please make shure you have location services enabled", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+    [locationAlert show];
+    [locationAlert release];
+}
+
 
 - (void)wifiScannerDidUpdateBssids: (WifiScanner *)scanner {
 	self.bssids = [WifiScanner sharedScanner].bssids;
