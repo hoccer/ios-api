@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B49538C7147A5CEC00CABCD4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49538C6147A5CEC00CABCD4 /* UIKit.framework */; };
+		B49538C9147A5CEC00CABCD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49538C8147A5CEC00CABCD4 /* Foundation.framework */; };
+		B49538CB147A5CEC00CABCD4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49538CA147A5CEC00CABCD4 /* CoreGraphics.framework */; };
+		B49538D1147A5CEC00CABCD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B49538CF147A5CEC00CABCD4 /* InfoPlist.strings */; };
+		B49538D3147A5CEC00CABCD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538D2147A5CEC00CABCD4 /* main.m */; };
+		B49538D7147A5CEC00CABCD4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538D6147A5CEC00CABCD4 /* AppDelegate.m */; };
+		B49538DA147A5CEC00CABCD4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538D9147A5CEC00CABCD4 /* ViewController.m */; };
+		B49538DD147A5CEC00CABCD4 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B49538DB147A5CEC00CABCD4 /* ViewController.xib */; };
+		B4953906147A5D6100CABCD4 /* HCEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538E7147A5D6100CABCD4 /* HCEnvironment.m */; };
+		B4953907147A5D6100CABCD4 /* HCEnvironmentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538E9147A5D6100CABCD4 /* HCEnvironmentManager.m */; };
+		B4953908147A5D6100CABCD4 /* WifiScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538ED147A5D6100CABCD4 /* WifiScanner.m */; };
+		B4953909147A5D6100CABCD4 /* HCFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538F0147A5D6100CABCD4 /* HCFileCache.m */; };
+		B495390A147A5D6100CABCD4 /* HCGeoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538F2147A5D6100CABCD4 /* HCGeoStorage.m */; };
+		B495390B147A5D6100CABCD4 /* HCLinccer.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538F5147A5D6100CABCD4 /* HCLinccer.m */; };
+		B495390C147A5D6100CABCD4 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = B49538F8147A5D6100CABCD4 /* Base64Transcoder.c */; };
+		B495390D147A5D6100CABCD4 /* NSData_Base64Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538FB147A5D6100CABCD4 /* NSData_Base64Extensions.m */; };
+		B495390E147A5D6100CABCD4 /* NSDictionary+CSURLParams.m in Sources */ = {isa = PBXBuildFile; fileRef = B49538FD147A5D6100CABCD4 /* NSDictionary+CSURLParams.m */; };
+		B495390F147A5D6100CABCD4 /* HCAuthenticatedHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953901147A5D6100CABCD4 /* HCAuthenticatedHttpClient.m */; };
+		B4953910147A5D6100CABCD4 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953903147A5D6100CABCD4 /* HttpClient.m */; };
+		B4953911147A5D6100CABCD4 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953905147A5D6100CABCD4 /* HttpConnection.m */; };
+		B495391B147A5D6800CABCD4 /* Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953914147A5D6800CABCD4 /* Crypto.m */; };
+		B495391C147A5D6800CABCD4 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953916147A5D6800CABCD4 /* NSData+CommonCrypto.m */; };
+		B495391D147A5D6800CABCD4 /* PublicKeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953918147A5D6800CABCD4 /* PublicKeyManager.m */; };
+		B495391E147A5D6800CABCD4 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = B495391A147A5D6800CABCD4 /* RSA.m */; };
+		B495392A147A5DA000CABCD4 /* NSFileManager+FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953921147A5DA000CABCD4 /* NSFileManager+FileHelper.m */; };
+		B495392B147A5DA000CABCD4 /* NSObject+DelegateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953923147A5DA000CABCD4 /* NSObject+DelegateHelper.m */; };
+		B495392C147A5DA000CABCD4 /* NSString+Regexp.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953925147A5DA000CABCD4 /* NSString+Regexp.m */; };
+		B495392D147A5DA000CABCD4 /* NSString+StringWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953927147A5DA000CABCD4 /* NSString+StringWithData.m */; };
+		B495392E147A5DA000CABCD4 /* NSString+URLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4953929147A5DA000CABCD4 /* NSString+URLHelper.m */; };
+		B4953930147A5DDC00CABCD4 /* YAJLIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B495392F147A5DDC00CABCD4 /* YAJLIOS.framework */; };
+		B4953932147A5E6100CABCD4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4953931147A5E6100CABCD4 /* CoreLocation.framework */; };
+		B4953934147A5E6A00CABCD4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4953933147A5E6A00CABCD4 /* MapKit.framework */; };
+		B4953936147A609700CABCD4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4953935147A609700CABCD4 /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B49538C2147A5CEC00CABCD4 /* Hoccer Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hoccer Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B49538C6147A5CEC00CABCD4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B49538C8147A5CEC00CABCD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B49538CA147A5CEC00CABCD4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B49538CE147A5CEC00CABCD4 /* Hoccer Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hoccer Test-Info.plist"; sourceTree = "<group>"; };
+		B49538D0147A5CEC00CABCD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B49538D2147A5CEC00CABCD4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B49538D4147A5CEC00CABCD4 /* Hoccer Test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hoccer Test-Prefix.pch"; sourceTree = "<group>"; };
+		B49538D5147A5CEC00CABCD4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B49538D6147A5CEC00CABCD4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B49538D8147A5CEC00CABCD4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B49538D9147A5CEC00CABCD4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B49538DC147A5CEC00CABCD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		B49538E6147A5D6100CABCD4 /* HCEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironment.h; sourceTree = "<group>"; };
+		B49538E7147A5D6100CABCD4 /* HCEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCEnvironment.m; sourceTree = "<group>"; };
+		B49538E8147A5D6100CABCD4 /* HCEnvironmentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManager.h; sourceTree = "<group>"; };
+		B49538E9147A5D6100CABCD4 /* HCEnvironmentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCEnvironmentManager.m; sourceTree = "<group>"; };
+		B49538EA147A5D6100CABCD4 /* HCEnvironmentManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCEnvironmentManagerDelegate.h; sourceTree = "<group>"; };
+		B49538EC147A5D6100CABCD4 /* WifiScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScanner.h; sourceTree = "<group>"; };
+		B49538ED147A5D6100CABCD4 /* WifiScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiScanner.m; sourceTree = "<group>"; };
+		B49538EE147A5D6100CABCD4 /* WifiScannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiScannerDelegate.h; sourceTree = "<group>"; };
+		B49538EF147A5D6100CABCD4 /* HCFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCFileCache.h; sourceTree = "<group>"; };
+		B49538F0147A5D6100CABCD4 /* HCFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCFileCache.m; sourceTree = "<group>"; };
+		B49538F1147A5D6100CABCD4 /* HCGeoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCGeoStorage.h; sourceTree = "<group>"; };
+		B49538F2147A5D6100CABCD4 /* HCGeoStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCGeoStorage.m; sourceTree = "<group>"; };
+		B49538F3147A5D6100CABCD4 /* HCGeoStorageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCGeoStorageDelegate.h; sourceTree = "<group>"; };
+		B49538F4147A5D6100CABCD4 /* HCLinccer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCLinccer.h; sourceTree = "<group>"; };
+		B49538F5147A5D6100CABCD4 /* HCLinccer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCLinccer.m; sourceTree = "<group>"; };
+		B49538F6147A5D6100CABCD4 /* HCLinccerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCLinccerDelegate.h; sourceTree = "<group>"; };
+		B49538F8147A5D6100CABCD4 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
+		B49538F9147A5D6100CABCD4 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
+		B49538FA147A5D6100CABCD4 /* NSData_Base64Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSData_Base64Extensions.h; sourceTree = "<group>"; };
+		B49538FB147A5D6100CABCD4 /* NSData_Base64Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSData_Base64Extensions.m; sourceTree = "<group>"; };
+		B49538FC147A5D6100CABCD4 /* NSDictionary+CSURLParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSURLParams.h"; sourceTree = "<group>"; };
+		B49538FD147A5D6100CABCD4 /* NSDictionary+CSURLParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSURLParams.m"; sourceTree = "<group>"; };
+		B49538FE147A5D6100CABCD4 /* Hoccer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hoccer.h; sourceTree = "<group>"; };
+		B4953900147A5D6100CABCD4 /* HCAuthenticatedHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCAuthenticatedHttpClient.h; sourceTree = "<group>"; };
+		B4953901147A5D6100CABCD4 /* HCAuthenticatedHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCAuthenticatedHttpClient.m; sourceTree = "<group>"; };
+		B4953902147A5D6100CABCD4 /* HttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClient.h; sourceTree = "<group>"; };
+		B4953903147A5D6100CABCD4 /* HttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClient.m; sourceTree = "<group>"; };
+		B4953904147A5D6100CABCD4 /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnection.h; sourceTree = "<group>"; };
+		B4953905147A5D6100CABCD4 /* HttpConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnection.m; sourceTree = "<group>"; };
+		B4953913147A5D6800CABCD4 /* Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crypto.h; sourceTree = "<group>"; };
+		B4953914147A5D6800CABCD4 /* Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crypto.m; sourceTree = "<group>"; };
+		B4953915147A5D6800CABCD4 /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		B4953916147A5D6800CABCD4 /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		B4953917147A5D6800CABCD4 /* PublicKeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicKeyManager.h; sourceTree = "<group>"; };
+		B4953918147A5D6800CABCD4 /* PublicKeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicKeyManager.m; sourceTree = "<group>"; };
+		B4953919147A5D6800CABCD4 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
+		B495391A147A5D6800CABCD4 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		B4953920147A5DA000CABCD4 /* NSFileManager+FileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+FileHelper.h"; sourceTree = "<group>"; };
+		B4953921147A5DA000CABCD4 /* NSFileManager+FileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+FileHelper.m"; sourceTree = "<group>"; };
+		B4953922147A5DA000CABCD4 /* NSObject+DelegateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DelegateHelper.h"; sourceTree = "<group>"; };
+		B4953923147A5DA000CABCD4 /* NSObject+DelegateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DelegateHelper.m"; sourceTree = "<group>"; };
+		B4953924147A5DA000CABCD4 /* NSString+Regexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Regexp.h"; sourceTree = "<group>"; };
+		B4953925147A5DA000CABCD4 /* NSString+Regexp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Regexp.m"; sourceTree = "<group>"; };
+		B4953926147A5DA000CABCD4 /* NSString+StringWithData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringWithData.h"; sourceTree = "<group>"; };
+		B4953927147A5DA000CABCD4 /* NSString+StringWithData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringWithData.m"; sourceTree = "<group>"; };
+		B4953928147A5DA000CABCD4 /* NSString+URLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLHelper.h"; sourceTree = "<group>"; };
+		B4953929147A5DA000CABCD4 /* NSString+URLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLHelper.m"; sourceTree = "<group>"; };
+		B495392F147A5DDC00CABCD4 /* YAJLIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YAJLIOS.framework; sourceTree = "<group>"; };
+		B4953931147A5E6100CABCD4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B4953933147A5E6A00CABCD4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B4953935147A609700CABCD4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B49538BF147A5CEC00CABCD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4953936147A609700CABCD4 /* Security.framework in Frameworks */,
+				B4953934147A5E6A00CABCD4 /* MapKit.framework in Frameworks */,
+				B4953932147A5E6100CABCD4 /* CoreLocation.framework in Frameworks */,
+				B49538C7147A5CEC00CABCD4 /* UIKit.framework in Frameworks */,
+				B49538C9147A5CEC00CABCD4 /* Foundation.framework in Frameworks */,
+				B49538CB147A5CEC00CABCD4 /* CoreGraphics.framework in Frameworks */,
+				B4953930147A5DDC00CABCD4 /* YAJLIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B49538B7147A5CEC00CABCD4 = {
+			isa = PBXGroup;
+			children = (
+				B49538E3147A5D1200CABCD4 /* Hoccer */,
+				B49538CC147A5CEC00CABCD4 /* Hoccer Test */,
+				B49538C5147A5CEC00CABCD4 /* Frameworks */,
+				B49538C3147A5CEC00CABCD4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B49538C3147A5CEC00CABCD4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B49538C2147A5CEC00CABCD4 /* Hoccer Test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B49538C5147A5CEC00CABCD4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B4953935147A609700CABCD4 /* Security.framework */,
+				B4953933147A5E6A00CABCD4 /* MapKit.framework */,
+				B4953931147A5E6100CABCD4 /* CoreLocation.framework */,
+				B495392F147A5DDC00CABCD4 /* YAJLIOS.framework */,
+				B49538C6147A5CEC00CABCD4 /* UIKit.framework */,
+				B49538C8147A5CEC00CABCD4 /* Foundation.framework */,
+				B49538CA147A5CEC00CABCD4 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B49538CC147A5CEC00CABCD4 /* Hoccer Test */ = {
+			isa = PBXGroup;
+			children = (
+				B49538D5147A5CEC00CABCD4 /* AppDelegate.h */,
+				B49538D6147A5CEC00CABCD4 /* AppDelegate.m */,
+				B49538D8147A5CEC00CABCD4 /* ViewController.h */,
+				B49538D9147A5CEC00CABCD4 /* ViewController.m */,
+				B49538DB147A5CEC00CABCD4 /* ViewController.xib */,
+				B49538CD147A5CEC00CABCD4 /* Supporting Files */,
+			);
+			path = "Hoccer Test";
+			sourceTree = "<group>";
+		};
+		B49538CD147A5CEC00CABCD4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B49538CE147A5CEC00CABCD4 /* Hoccer Test-Info.plist */,
+				B49538CF147A5CEC00CABCD4 /* InfoPlist.strings */,
+				B49538D2147A5CEC00CABCD4 /* main.m */,
+				B49538D4147A5CEC00CABCD4 /* Hoccer Test-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B49538E3147A5D1200CABCD4 /* Hoccer */ = {
+			isa = PBXGroup;
+			children = (
+				B495391F147A5D7000CABCD4 /* Helper */,
+				B4953912147A5D6800CABCD4 /* Crypto */,
+				B49538E4147A5D6100CABCD4 /* HoccerClient */,
+			);
+			path = Hoccer;
+			sourceTree = "<group>";
+		};
+		B49538E4147A5D6100CABCD4 /* HoccerClient */ = {
+			isa = PBXGroup;
+			children = (
+				B49538E5147A5D6100CABCD4 /* EnvironmentController */,
+				B49538EF147A5D6100CABCD4 /* HCFileCache.h */,
+				B49538F0147A5D6100CABCD4 /* HCFileCache.m */,
+				B49538F1147A5D6100CABCD4 /* HCGeoStorage.h */,
+				B49538F2147A5D6100CABCD4 /* HCGeoStorage.m */,
+				B49538F3147A5D6100CABCD4 /* HCGeoStorageDelegate.h */,
+				B49538F4147A5D6100CABCD4 /* HCLinccer.h */,
+				B49538F5147A5D6100CABCD4 /* HCLinccer.m */,
+				B49538F6147A5D6100CABCD4 /* HCLinccerDelegate.h */,
+				B49538F7147A5D6100CABCD4 /* Helper */,
+				B49538FE147A5D6100CABCD4 /* Hoccer.h */,
+				B49538FF147A5D6100CABCD4 /* HttpClient */,
+			);
+			path = HoccerClient;
+			sourceTree = "<group>";
+		};
+		B49538E5147A5D6100CABCD4 /* EnvironmentController */ = {
+			isa = PBXGroup;
+			children = (
+				B49538E6147A5D6100CABCD4 /* HCEnvironment.h */,
+				B49538E7147A5D6100CABCD4 /* HCEnvironment.m */,
+				B49538E8147A5D6100CABCD4 /* HCEnvironmentManager.h */,
+				B49538E9147A5D6100CABCD4 /* HCEnvironmentManager.m */,
+				B49538EA147A5D6100CABCD4 /* HCEnvironmentManagerDelegate.h */,
+				B49538EB147A5D6100CABCD4 /* Wifi */,
+			);
+			path = EnvironmentController;
+			sourceTree = "<group>";
+		};
+		B49538EB147A5D6100CABCD4 /* Wifi */ = {
+			isa = PBXGroup;
+			children = (
+				B49538EC147A5D6100CABCD4 /* WifiScanner.h */,
+				B49538ED147A5D6100CABCD4 /* WifiScanner.m */,
+				B49538EE147A5D6100CABCD4 /* WifiScannerDelegate.h */,
+			);
+			path = Wifi;
+			sourceTree = "<group>";
+		};
+		B49538F7147A5D6100CABCD4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B49538F8147A5D6100CABCD4 /* Base64Transcoder.c */,
+				B49538F9147A5D6100CABCD4 /* Base64Transcoder.h */,
+				B49538FA147A5D6100CABCD4 /* NSData_Base64Extensions.h */,
+				B49538FB147A5D6100CABCD4 /* NSData_Base64Extensions.m */,
+				B49538FC147A5D6100CABCD4 /* NSDictionary+CSURLParams.h */,
+				B49538FD147A5D6100CABCD4 /* NSDictionary+CSURLParams.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		B49538FF147A5D6100CABCD4 /* HttpClient */ = {
+			isa = PBXGroup;
+			children = (
+				B4953900147A5D6100CABCD4 /* HCAuthenticatedHttpClient.h */,
+				B4953901147A5D6100CABCD4 /* HCAuthenticatedHttpClient.m */,
+				B4953902147A5D6100CABCD4 /* HttpClient.h */,
+				B4953903147A5D6100CABCD4 /* HttpClient.m */,
+				B4953904147A5D6100CABCD4 /* HttpConnection.h */,
+				B4953905147A5D6100CABCD4 /* HttpConnection.m */,
+			);
+			path = HttpClient;
+			sourceTree = "<group>";
+		};
+		B4953912147A5D6800CABCD4 /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				B4953913147A5D6800CABCD4 /* Crypto.h */,
+				B4953914147A5D6800CABCD4 /* Crypto.m */,
+				B4953915147A5D6800CABCD4 /* NSData+CommonCrypto.h */,
+				B4953916147A5D6800CABCD4 /* NSData+CommonCrypto.m */,
+				B4953917147A5D6800CABCD4 /* PublicKeyManager.h */,
+				B4953918147A5D6800CABCD4 /* PublicKeyManager.m */,
+				B4953919147A5D6800CABCD4 /* RSA.h */,
+				B495391A147A5D6800CABCD4 /* RSA.m */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		B495391F147A5D7000CABCD4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				B4953920147A5DA000CABCD4 /* NSFileManager+FileHelper.h */,
+				B4953921147A5DA000CABCD4 /* NSFileManager+FileHelper.m */,
+				B4953922147A5DA000CABCD4 /* NSObject+DelegateHelper.h */,
+				B4953923147A5DA000CABCD4 /* NSObject+DelegateHelper.m */,
+				B4953924147A5DA000CABCD4 /* NSString+Regexp.h */,
+				B4953925147A5DA000CABCD4 /* NSString+Regexp.m */,
+				B4953926147A5DA000CABCD4 /* NSString+StringWithData.h */,
+				B4953927147A5DA000CABCD4 /* NSString+StringWithData.m */,
+				B4953928147A5DA000CABCD4 /* NSString+URLHelper.h */,
+				B4953929147A5DA000CABCD4 /* NSString+URLHelper.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B49538C1147A5CEC00CABCD4 /* Hoccer Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B49538E0147A5CEC00CABCD4 /* Build configuration list for PBXNativeTarget "Hoccer Test" */;
+			buildPhases = (
+				B49538BE147A5CEC00CABCD4 /* Sources */,
+				B49538BF147A5CEC00CABCD4 /* Frameworks */,
+				B49538C0147A5CEC00CABCD4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Hoccer Test";
+			productName = "Hoccer Test";
+			productReference = B49538C2147A5CEC00CABCD4 /* Hoccer Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B49538B9147A5CEC00CABCD4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Hoccer GmbH";
+			};
+			buildConfigurationList = B49538BC147A5CEC00CABCD4 /* Build configuration list for PBXProject "Hoccer Test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B49538B7147A5CEC00CABCD4;
+			productRefGroup = B49538C3147A5CEC00CABCD4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B49538C1147A5CEC00CABCD4 /* Hoccer Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B49538C0147A5CEC00CABCD4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49538D1147A5CEC00CABCD4 /* InfoPlist.strings in Resources */,
+				B49538DD147A5CEC00CABCD4 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B49538BE147A5CEC00CABCD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B49538D3147A5CEC00CABCD4 /* main.m in Sources */,
+				B49538D7147A5CEC00CABCD4 /* AppDelegate.m in Sources */,
+				B49538DA147A5CEC00CABCD4 /* ViewController.m in Sources */,
+				B4953906147A5D6100CABCD4 /* HCEnvironment.m in Sources */,
+				B4953907147A5D6100CABCD4 /* HCEnvironmentManager.m in Sources */,
+				B4953908147A5D6100CABCD4 /* WifiScanner.m in Sources */,
+				B4953909147A5D6100CABCD4 /* HCFileCache.m in Sources */,
+				B495390A147A5D6100CABCD4 /* HCGeoStorage.m in Sources */,
+				B495390B147A5D6100CABCD4 /* HCLinccer.m in Sources */,
+				B495390C147A5D6100CABCD4 /* Base64Transcoder.c in Sources */,
+				B495390D147A5D6100CABCD4 /* NSData_Base64Extensions.m in Sources */,
+				B495390E147A5D6100CABCD4 /* NSDictionary+CSURLParams.m in Sources */,
+				B495390F147A5D6100CABCD4 /* HCAuthenticatedHttpClient.m in Sources */,
+				B4953910147A5D6100CABCD4 /* HttpClient.m in Sources */,
+				B4953911147A5D6100CABCD4 /* HttpConnection.m in Sources */,
+				B495391B147A5D6800CABCD4 /* Crypto.m in Sources */,
+				B495391C147A5D6800CABCD4 /* NSData+CommonCrypto.m in Sources */,
+				B495391D147A5D6800CABCD4 /* PublicKeyManager.m in Sources */,
+				B495391E147A5D6800CABCD4 /* RSA.m in Sources */,
+				B495392A147A5DA000CABCD4 /* NSFileManager+FileHelper.m in Sources */,
+				B495392B147A5DA000CABCD4 /* NSObject+DelegateHelper.m in Sources */,
+				B495392C147A5DA000CABCD4 /* NSString+Regexp.m in Sources */,
+				B495392D147A5DA000CABCD4 /* NSString+StringWithData.m in Sources */,
+				B495392E147A5DA000CABCD4 /* NSString+URLHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B49538CF147A5CEC00CABCD4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49538D0147A5CEC00CABCD4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B49538DB147A5CEC00CABCD4 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B49538DC147A5CEC00CABCD4 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B49538DE147A5CEC00CABCD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B49538DF147A5CEC00CABCD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B49538E1147A5CEC00CABCD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hoccer Test/Hoccer Test-Prefix.pch";
+				INFOPLIST_FILE = "Hoccer Test/Hoccer Test-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B49538E2147A5CEC00CABCD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hoccer Test/Hoccer Test-Prefix.pch";
+				INFOPLIST_FILE = "Hoccer Test/Hoccer Test-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B49538BC147A5CEC00CABCD4 /* Build configuration list for PBXProject "Hoccer Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B49538DE147A5CEC00CABCD4 /* Debug */,
+				B49538DF147A5CEC00CABCD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B49538E0147A5CEC00CABCD4 /* Build configuration list for PBXNativeTarget "Hoccer Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B49538E1147A5CEC00CABCD4 /* Debug */,
+				B49538E2147A5CEC00CABCD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B49538B9147A5CEC00CABCD4 /* Project object */;
+}
