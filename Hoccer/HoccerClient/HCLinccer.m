@@ -129,6 +129,15 @@
 				success:@selector(httpConnection:didSendData:)];
 }
 
+- (void)send: (NSDictionary *)data withMode: (NSString *)mode encrypted:(BOOL)encrypted {
+    if (!encrypted) {
+        [self send:data withMode:mode];
+    }
+    else {
+        
+    }
+}
+
 - (void)receiveWithMode: (NSString *)mode {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
@@ -369,11 +378,11 @@
     if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
         [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
     }
-    /*
+    
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] == YES){
             [self checkGroupForPublicKeys:dictionary];
         }
-     */
+     
     [self peek];
         
     
@@ -445,13 +454,13 @@
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
-    /*
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoKey"]){
         NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
         NSString *pubKeyAsString = [pubKey asBase64EncodedString];
         [environment setObject:pubKeyAsString forKey:@"pubkey"];
     }
-     */
+     
     NSString *enviromentAsString = [environment yajl_JSONString];
          
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]

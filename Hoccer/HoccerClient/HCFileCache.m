@@ -84,6 +84,15 @@
 	return [httpClient requestMethod:@"PUT" URI:uri payload:data header:headers success:@selector(httpConnection:didSendData:)];
 }
 
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted{
+    if (!encrypted) {
+        return [self cacheData:data withFilename:filename forTimeInterval:interval];
+    }
+    else {
+        return [self cacheData:data withFilename:filename forTimeInterval:interval];
+    }
+}
+
 #pragma mark -
 #pragma mark Methods for Fetching
 - (NSString *)load: (NSString *)url {
