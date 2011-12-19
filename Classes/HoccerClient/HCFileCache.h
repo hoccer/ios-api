@@ -64,6 +64,7 @@
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret sandboxed: (BOOL)sandbox;
 
 - (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval;
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted;
 - (NSString *)load: (NSString *)url;
 - (void)cancelTransferWithURI: (NSString *)transferUri;
 

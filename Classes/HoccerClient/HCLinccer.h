@@ -91,6 +91,8 @@ enum HoccerErrors {
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox;
 
 - (void)send: (NSDictionary *)data withMode: (NSString *)mode;
+- (void)send: (NSDictionary *)data withMode:(NSString *)mode encrypted:(BOOL)encrypted;
+
 - (void)receiveWithMode: (NSString *)mode;
 - (void)pollWithMode: (NSString *)mode;
 
