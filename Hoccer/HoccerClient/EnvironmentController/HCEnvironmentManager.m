@@ -102,9 +102,12 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    UIAlertView *locationAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Could not locate you", nil) message:NSLocalizedString(@"We could not locate you but Hoccer needs your location to know which devices are next to you. Please make shure you have location services enabled", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
-    [locationAlert show];
-    [locationAlert release];
+    
+    if (error.code == kCLErrorDenied){
+        UIAlertView *locationAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Could not locate you", nil) message:NSLocalizedString(@"We could not locate you but Hoccer needs your location to know which devices are next to you. Please make shure you have location services enabled", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+        [locationAlert show];
+        [locationAlert release];
+    }
 }
 
 

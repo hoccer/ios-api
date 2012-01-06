@@ -34,6 +34,8 @@
 
 #import <YAJLiOs/YAJL.h>
 #import "HCFileCache.h"
+#import "RSA.h"
+#import "Crypto.h"
 #import "NSDictionary+CSURLParams.h"
 #import "NSString+URLHelper.h"
 #import "NSData+CommonCrypto.h"
@@ -89,6 +91,12 @@
         return [self cacheData:data withFilename:filename forTimeInterval:interval];
     }
     else {
+
+        NSString *key = [[NSUserDefaults standardUserDefaults] stringForKey:@"encryptionKey"];
+            
+        self.cryptor = [[[AESCryptor alloc] initWithKey:key] autorelease];
+        
+        [self.cryptor encrypt:data];
         return [self cacheData:data withFilename:filename forTimeInterval:interval];
     }
 }

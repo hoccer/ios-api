@@ -396,26 +396,35 @@
 
     //NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
-    NSDictionary *theResponse = [pubkey yajl_JSON];
-    
-    NSString *theKey = [theResponse objectForKey:@"pubkey"];
+    @try {
+        NSDictionary *theResponse = [pubkey yajl_JSON];
+        
+        NSString *theKey = [theResponse objectForKey:@"pubkey"];
+        
+        
+        NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
+        NSString *identifier = [uriArray objectAtIndex:6];
+        [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
+    }
+    @catch (NSException * e) { NSLog(@"%@", e); }
 
     
-    NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
-    NSString *identifier = [uriArray objectAtIndex:6];
-    [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveChangedPublicKey: (NSData *)pubkey{
     
     
-    NSDictionary *theResponse = [pubkey yajl_JSON];
-    
-    NSString *theKey = [theResponse objectForKey:@"pubkey"];
-    
-    NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
-    NSString *identifier = [uriArray objectAtIndex:6];
-    [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:YES];
+    @try {
+        NSDictionary *theResponse = [pubkey yajl_JSON];
+        
+        NSString *theKey = [theResponse objectForKey:@"pubkey"];
+        
+        
+        NSArray *uriArray = [connection.uri componentsSeparatedByString:@"/"];
+        NSString *identifier = [uriArray objectAtIndex:6];
+        [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
+    }
+    @catch (NSException * e) { NSLog(@"%@", e); }
 }
 #pragma mark -
 #pragma mark Private Methods
