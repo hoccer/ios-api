@@ -146,6 +146,13 @@
 	}
 }
 
+- (void)deactivateLocation{
+    [locationManager stopUpdatingLocation];
+}
+- (void)activateLocation{
+    [locationManager startUpdatingLocation];
+}
+
 + (NSError *)messageForLocationInformation: (NSDictionary *)hoccabilityInfo {
 	NSInteger hoc = [[hoccabilityInfo objectForKey:@"quality"] intValue];
 	
