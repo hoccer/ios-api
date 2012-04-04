@@ -69,6 +69,7 @@
 		locationManager.delegate = self;
         locationManager.purpose = NSLocalizedString(@"Hoccer needs you location to find out which devices are next to you. Otherwise Hoccer wont work.", nil); 
 
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 		[locationManager startUpdatingLocation];
 		
 		[WifiScanner sharedScanner].delegate = self;
