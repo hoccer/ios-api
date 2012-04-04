@@ -62,6 +62,8 @@
 - (BOOL)hasLocation;
 - (BOOL)hasBSSID;
 - (BOOL)hasEnvironment;
+- (void)deactivateLocation;
+- (void)activateLocation;
 + (NSError *)messageForLocationInformation: (NSDictionary *)hoccabilityInfo;
 
 @end

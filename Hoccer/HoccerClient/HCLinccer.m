@@ -235,7 +235,8 @@
 
 - (void)reactivate {
     isRegistered = NO;
-    
+    [environmentController activateLocation];
+
 	[self updateEnvironment];
     self.groupId = nil;
 }
@@ -251,9 +252,11 @@
 	}
 	[self.updateTimer invalidate];
 	self.updateTimer = nil;
-	
+	[environmentController deactivateLocation];
 	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
 				  success:@selector(httpClientDidDelete:)];
+    
+    
 }
 
 
@@ -467,8 +470,10 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoKey"]){
         NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
         NSString *pubKeyAsString = [pubKey asBase64EncodedString];
-        [environment setObject:pubKeyAsString forKey:@"pubkey"];
-    }
+        if (pubKeyAsString){
+            [environment setObject:pubKeyAsString forKey:@"pubkey"];
+        }
+        }
      
     NSString *enviromentAsString = [environment yajl_JSONString];
          

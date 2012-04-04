@@ -33,7 +33,7 @@ static RSA *instance;
         instance = [[RSA alloc] init];
         if ([instance getPrivateKeyRef] == nil || [instance getPublicKeyRef] == nil) {
             NSLog(@"There are no keys! PANIC!");
-            //[instance generateKeyPairKeys];
+            [instance generateKeyPairKeys];
         }
     }); 
     //[instance getCertificate];
