@@ -37,16 +37,18 @@
 
 @interface HCEnvironment : NSObject {
 	NSArray *bssids;
+    NSArray *mdnsClients;
 	CLLocation *location;
 	
 	NSInteger hoccability;
 }
 
 @property (retain) NSArray *bssids;
+@property (retain) NSArray *mdnsClients;
 @property (retain) CLLocation *location;
 @property (assign) NSInteger hoccability;
 
-- (id)initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids;
+- (id)initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids mdnsClients: (NSArray*) theClients;
 - (id)initWithCoordinate: (CLLocationCoordinate2D)coordinate accuracy: (CLLocationAccuracy)accuracy;
 - (NSString *)JSONRepresentation;
 - (NSDictionary *)dict;

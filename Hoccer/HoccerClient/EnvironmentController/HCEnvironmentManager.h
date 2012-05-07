@@ -35,6 +35,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "WifiScannerDelegate.h"
+#import "MDNSBrowserDelegate.h"
 #import "HCEnvironmentManagerDelegate.h"
 
 #define kHoccerPerfectLocation 0
@@ -43,7 +44,7 @@
 
 @class HCEnvironment;
 
-@interface HCEnvironmentManager : NSObject <CLLocationManagerDelegate, WifiScannerDelegate> {
+@interface HCEnvironmentManager : NSObject <CLLocationManagerDelegate, WifiScannerDelegate, MDNSBrowserDelegate> {
 	@private 
 	CLLocationManager *locationManager;
 
@@ -51,6 +52,7 @@
 
 	NSDate *lastLocationUpdate;
 	NSArray *bssids;
+    NSArray *mdnsClients;
 		
 	id <HCEnvironmentManagerDelegate> delegate;
 }
@@ -61,6 +63,7 @@
 
 - (BOOL)hasLocation;
 - (BOOL)hasBSSID;
+- (BOOL)hasMDNSCLients;
 - (BOOL)hasEnvironment;
 - (void)deactivateLocation;
 - (void)activateLocation;

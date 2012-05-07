@@ -40,9 +40,9 @@
 #import "NSString+URLHelper.h"
 #import "NSData+CommonCrypto.h"
 
-#define FILECACHE_URI @"https://filecache.hoccer.com/v3"
-#define FILECACHE_SANDBOX_URI @"https://filecache-experimental.hoccer.com/v3"
-//#define FILECACHE_SANDBOX_URI @"https://filecache-sandbox.hoccer.com/v3"
+#define FILECACHE_URI @"https://filecache-production.hoccer.com/v3"
+//#define FILECACHE_SANDBOX_URI @"https://filecache-experimental.hoccer.com/v3"
+#define FILECACHE_SANDBOX_URI @"https://filecache-development.hoccer.com/v3"
 
 @implementation HCFileCache
 

@@ -36,12 +36,15 @@
 #import "HCEnvironmentManager.h"
 #import "WifiScanner.h"
 #import "HCEnvironment.h"
+#import "MDNSBrowser.h"
+#import "MDNSAnnouncer.h"
 
 #define hoccerMessageErrorDomain @"HoccerErrorDomain"
 
 @interface HCEnvironmentManager ()
 @property (retain) NSDate *lastLocationUpdate;
 @property (retain) NSArray *bssids;
+@property (retain) NSArray *mdnsClients;
 
 - (void)updateHoccability;
 + (NSDictionary *)userInfoForImpreciseLocation: (NSDictionary *)hoccabilityInfo;
@@ -59,6 +62,7 @@
 @synthesize hoccability;
 @synthesize delegate;
 @synthesize bssids;
+@synthesize mdnsClients;
 
 - (id) init {
 	self = [super init];
@@ -73,6 +77,11 @@
 		[locationManager startUpdatingLocation];
 		
 		[WifiScanner sharedScanner].delegate = self;
+        
+        [MDNSBrowser sharedBrowser].delegate = self;
+    
+        [[MDNSAnnouncer sharedAnnouncer] startAnnouncing];
+        
 		[self updateHoccability];
 		
 		[[WifiScanner sharedScanner] addObserver:self forKeyPath:@"bssids" options:NSKeyValueObservingOptionNew context:nil];
@@ -90,6 +99,9 @@
 
 	[locationManager stopUpdatingLocation];
 	[locationManager release];
+    
+    [MDNSBrowser sharedBrowser].delegate = nil;
+    [[MDNSAnnouncer sharedAnnouncer] stopAnnouncing];
 	
 	[super dealloc];
 }
@@ -117,9 +129,14 @@
 	[self updateHoccability];
 }
 
+- (void)mdnsBrowserDidUpdateDiscoveries:(MDNSBrowser *)browser {
+    self.mdnsClients = [MDNSBrowser sharedBrowser].discoveredClients;
+    [self updateHoccability];
+}
+
 - (HCEnvironment *)environment {
 	HCEnvironment *location = [[HCEnvironment alloc] 
-			 initWithLocation: locationManager.location bssids:[WifiScanner sharedScanner].bssids];
+			 initWithLocation: locationManager.location bssids:[WifiScanner sharedScanner].bssids mdnsClients:[MDNSBrowser sharedBrowser].discoveredClients];
 	location.hoccability = hoccability;
 	
 	return [location autorelease];
@@ -137,8 +154,11 @@
 	return self.bssids != nil;
 }
 
+- (BOOL)hasMDNSCLients {
+    return self.mdnsClients != nil;
+}
 - (BOOL)hasEnvironment {
-	return [self hasBSSID] || [self hasLocation];
+	return [self hasBSSID] || [self hasLocation] || [self hasMDNSCLients];
 }
 
 - (void)updateHoccability {
@@ -149,9 +169,13 @@
 
 - (void)deactivateLocation{
     [locationManager stopUpdatingLocation];
+    [[MDNSAnnouncer sharedAnnouncer] stopAnnouncing];
+    [[MDNSBrowser sharedBrowser] setDelegate:nil];
 }
 - (void)activateLocation{
     [locationManager startUpdatingLocation];
+    [[MDNSBrowser sharedBrowser] setDelegate:self];
+    [[MDNSAnnouncer sharedAnnouncer] startAnnouncing];
 }
 
 + (NSError *)messageForLocationInformation: (NSDictionary *)hoccabilityInfo {

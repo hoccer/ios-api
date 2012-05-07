@@ -76,6 +76,7 @@ enum HoccerErrors {
     NSDictionary *userInfo;
     
     NSString *uuid;
+    NSString *mdnsId;
     NSMutableDictionary *clientIDCache;
 }
 
@@ -102,6 +103,7 @@ enum HoccerErrors {
 
 - (void)cancelAllRequest;
 - (NSString *)uuid;
+- (NSString *)mdnsId;
 
 - (void)updateEnvironment;
 

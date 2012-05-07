@@ -108,7 +108,8 @@
 }
 
 - (NSString *)putURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
-	return [self requestMethod:@"PUT" URI: uri payload:payload success:success];
+    //NSLog(@"URI: %@ Payload: %@",uri, [[NSString alloc] initWithData:payload encoding:NSUTF8StringEncoding] );
+    return [self requestMethod:@"PUT" URI: uri payload:payload success:success];
 }
 
 - (NSString *)postURI: (NSString *)uri payload: (NSData *)payload success: (SEL)success {
@@ -133,7 +134,7 @@
 
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {	
 	
-    //NSLog(@"request %@", URLString);
+    NSLog(@"request %@", URLString);
     NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
@@ -158,14 +159,14 @@
 	[connections setObject: container forKey:[connection description]];
 	
 	httpConnection.startTimestamp = [NSDate date];
-	
+	/*
     // background task
     UIApplication *app = [UIApplication sharedApplication];
     httpConnection.bgTask = [app beginBackgroundTaskWithExpirationHandler: ^{
         [app endBackgroundTask:httpConnection.bgTask];
         httpConnection.bgTask = UIBackgroundTaskInvalid;
     }];
-    
+    */
     return URLString;	
 }
 
@@ -204,10 +205,10 @@
 	if (container == nil) {
 		return;
 	}
-	
+	/*
     [[UIApplication sharedApplication] endBackgroundTask:container.httpConnection.bgTask];
     container.httpConnection.bgTask = UIBackgroundTaskInvalid;
-
+     */
 	if (!container.httpConnection.canceled && [target respondsToSelector:@selector(httpConnection:didFailWithError:)]) {
 		[target performSelector:@selector(httpConnection:didFailWithError:) withObject: container.httpConnection withObject:error];
 	}
@@ -225,7 +226,7 @@
 	container.httpConnection.endTimestamp = [NSDate date];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
     
-    //NSLog(@"%d, %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
+    NSLog(@"CODE: %d, URL: %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
@@ -233,10 +234,10 @@
 	if (container == nil) {
 		return;
 	}
-	
+	/*
     [[UIApplication sharedApplication] endBackgroundTask:container.httpConnection.bgTask];
     container.httpConnection.bgTask = UIBackgroundTaskInvalid;
-    
+    */
 	NSError *error = [self hasHttpError: (NSHTTPURLResponse *)container.httpConnection.response];
 	if (error != nil) {
 		[self connection:aConnection didFailWithError:error];
@@ -279,10 +280,10 @@
 	
 	[cancelableConnection.connection cancel];
 	cancelableConnection.httpConnection.canceled = YES;
-
+    /*
     [[UIApplication sharedApplication] endBackgroundTask:cancelableConnection.httpConnection.bgTask];
     cancelableConnection.httpConnection.bgTask = UIBackgroundTaskInvalid;
-	
+	*/
 	[connections removeObjectForKey:[cancelableConnection description]];
 }
 

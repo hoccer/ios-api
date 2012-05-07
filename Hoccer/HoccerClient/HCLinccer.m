@@ -48,9 +48,9 @@
 #import "RSA.h"
 #import "PublicKeyManager.h"
 
-#define LINCCER_URI @"https://linccer.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
-//#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
+#define LINCCER_URI @"https://linccer-production.hoccer.com/v3"
+//#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-development.hoccer.com/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -87,7 +87,7 @@
 	self = [super init];
 	if (self != nil) {
        userInfo = [[NSDictionary dictionaryWithObject:@"<unknown>" forKey:@"client_name"] retain];
-        
+        [self mdnsId];
 		environmentController = [[HCEnvironmentManager alloc] init];
 		environmentController.delegate = self;
 		
@@ -522,7 +522,22 @@
 	return uuid;
 }
 
-
+- (NSString *)mdnsId {
+    if (mdnsId != nil) {
+        return mdnsId;
+    }
+    
+    BOOL shouldCreateNewUUID = [[NSUserDefaults standardUserDefaults] boolForKey:@"renewUUID"];
+    mdnsId = [[[NSUserDefaults standardUserDefaults] stringForKey:@"mdnsId"] copy];
+    
+    if (shouldCreateNewUUID || !mdnsId) {
+		mdnsId = [[NSString stringWithUUID] copy];
+		[[NSUserDefaults standardUserDefaults] setObject:mdnsId forKey:@"mdnsId"];
+    }
+    NSLog(@"MDNS: %@",mdnsId);
+    return mdnsId;
+    
+}
 
 #pragma mark -
 #pragma mark Setter
@@ -564,6 +579,7 @@
     
     
     [uuid release];
+    [mdnsId release];
     [userInfo release];
     [super dealloc];
 }

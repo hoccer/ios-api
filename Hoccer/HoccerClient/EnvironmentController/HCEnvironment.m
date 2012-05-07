@@ -44,12 +44,14 @@
 @synthesize location;
 @synthesize bssids;
 @synthesize hoccability;
+@synthesize mdnsClients;
 
-- (id) initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids {
+- (id) initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids mdnsClients:(NSArray *)theClients{
 	self = [super init];
 	if (self != nil) {
 		self.location = theLocation;
 		self.bssids = theBssids;
+        self.mdnsClients = theClients;
 	}
 	return self;
 }
@@ -59,12 +61,13 @@
 												 horizontalAccuracy:accuracy verticalAccuracy:accuracy 
 															timestamp:[NSDate date]] autorelease];
 	
-	return [self initWithLocation:newlocation bssids:nil];
+	return [self initWithLocation:newlocation bssids:nil mdnsClients:nil];
 }
 
 - (void) dealloc {
 	[location release];
 	[bssids release];
+    [mdnsClients release];
 	
 	[super dealloc];
 }
@@ -88,13 +91,24 @@
 		[dict setObject:locationDict forKey: @"gps"];
 	}
 	
-	if (self.bssids) {
+	if (self.bssids.count > 0) {
 		NSDictionary *wifi = [NSDictionary dictionaryWithObjectsAndKeys:
 							  self.bssids, @"bssids",
 							  [NSNumber numberWithDouble: [[NSDate date] timeIntervalSince1970]], @"timestamp", nil];
 		
 		[dict setObject:wifi forKey:@"wifi"];
 	}
+    
+    NSMutableDictionary *mdns = [NSMutableDictionary dictionary];
+    
+    [mdns setObject:[[NSUserDefaults standardUserDefaults] stringForKey:@"mdnsId"] forKey:@"own_id"];
+                                 
+    [mdns setObject:[NSNumber numberWithDouble: [[NSDate date] timeIntervalSince1970]] forKey:@"timestamp"];
+    
+    if (self.mdnsClients.count > 0) {        
+        [mdns setObject:self.mdnsClients forKey:@"seen_ids"];
+    }
+    [dict setObject:mdns forKey:@"mdns"];
 		
 	return dict;
 }
