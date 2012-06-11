@@ -134,7 +134,7 @@
 
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {	
 	
-    NSLog(@"request %@", URLString);
+    //NSLog(@"request %@", URLString);
     NSURL *url = [NSURL URLWithString:URLString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	
@@ -226,7 +226,7 @@
 	container.httpConnection.endTimestamp = [NSDate date];
 	container.httpConnection.response = (NSHTTPURLResponse *)response;
     
-    NSLog(@"CODE: %d, URL: %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
+    //NSLog(@"CODE: %d, URL: %@", [container.httpConnection.response statusCode], container.httpConnection.uri);
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {

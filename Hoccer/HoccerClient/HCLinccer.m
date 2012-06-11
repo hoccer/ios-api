@@ -339,10 +339,15 @@
 		[self didFailWithError:error];
 		return;
 	}
-    
-	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
-		[delegate linccer: self didSendData: [data yajl_JSON]];
-	}
+    @try {
+        if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
+            [delegate linccer: self didSendData: [data yajl_JSON]];
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception);
+    }
+	
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
@@ -476,6 +481,8 @@
         }
      
     NSString *enviromentAsString = [environment yajl_JSONString];
+    
+    NSLog(@"Environment %@",enviromentAsString);
          
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
