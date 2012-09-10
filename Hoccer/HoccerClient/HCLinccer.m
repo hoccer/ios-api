@@ -48,7 +48,7 @@
 #import "RSA.h"
 #import "PublicKeyManager.h"
 
-#define LINCCER_URI @"https://linccer.hoccer.com/v3"
+#define LINCCER_URI @"https://linccer-production.hoccer.com/v3"
 #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
 //#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
@@ -213,7 +213,7 @@
     if (theKey != nil){
         if (![keyManager storeKey:theKey forClient:client]){
             NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
-            [errorInfo setObject:[NSString stringWithFormat:NSLocalizedString(@"Could not save public key for client %@", nil),[client objectForKey:@"name"]] forKey:NSLocalizedDescriptionKey];
+            [errorInfo setObject:[NSString stringWithFormat:NSLocalizedString(@"The public key of %@ may be invalid, if this error occurs again please contact support@hoccer.com", nil),[client objectForKey:@"name"]] forKey:NSLocalizedDescriptionKey];
             [errorInfo setObject:NSLocalizedString(@"Disable encryption and enable it again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
             
             NSError *error = [NSError errorWithDomain:@"PubKeyError" code:700 userInfo:errorInfo];
@@ -283,7 +283,7 @@
 	
 	if ([error code] == 409) {
 		NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
-		[errorInfo setObject:NSLocalizedString(@"There was a collision of actions.", nil) forKey:NSLocalizedDescriptionKey];
+		[errorInfo setObject:NSLocalizedString(@"Too many files are flying around. Make sure that only one person is SENDING via HOCCER at one time", nil) forKey:NSLocalizedDescriptionKey];
 		[errorInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
 		error = [NSError errorWithDomain:HoccerError code:409 userInfo:errorInfo];
@@ -435,7 +435,7 @@
 - (NSDictionary *)userInfoForNoReceiver {
 
 	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-	[info setObject:NSLocalizedString(@"No receiver was found.", nil) forKey:NSLocalizedDescriptionKey];
+	[info setObject:NSLocalizedString(@"Apparently nobody wants your file. Please try SENDING again", nil) forKey:NSLocalizedDescriptionKey];
 	[info setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
 	return [info autorelease];
@@ -443,7 +443,7 @@
 
 - (NSDictionary *)userInfoForNoSender {
 	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-	[info setObject:NSLocalizedString(@"No sender was found.", nil) forKey:NSLocalizedDescriptionKey];
+	[info setObject:NSLocalizedString(@"Nobody seems to have SENT anything. Please tell the other users to try again.", nil) forKey:NSLocalizedDescriptionKey];
 	[info setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
 	return [info autorelease];	
@@ -473,7 +473,13 @@
         if (pubKeyAsString){
             [environment setObject:pubKeyAsString forKey:@"pubkey"];
         }
-        }
+    }
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apnToken"]){
+        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"apnToken"];
+        [environment setObject:deviceToken forKey:@"apndevicetoken"];
+        
+    }
      
     NSString *enviromentAsString = [environment yajl_JSONString];
          

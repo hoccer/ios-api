@@ -159,7 +159,7 @@ static NSData *NotSoRandomSalt() {
            selectedClients = [[NSUserDefaults standardUserDefaults] arrayForKey:@"selected_clients"];
         
         if (selectedClients.count == 0 ){
-            NSLog(@"So wird das nichts!");
+            //NSLog(@"So wird das nichts!");
             [keyManager release];
             return nil;
         }

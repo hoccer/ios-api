@@ -81,7 +81,7 @@
 			  [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding], 
 			  hashedChars);
 	NSData * hashedData = [NSData dataWithBytes:hashedChars length:CC_SHA256_DIGEST_LENGTH];
-    NSLog(@"sha256 %@", [hashedData hexString]);
+    //NSLog(@"sha256 %@", [hashedData hexString]);
 
     
 	return hashedData;
@@ -93,8 +93,8 @@
             [self lengthOfBytesUsingEncoding:NSUTF8StringEncoding], 
 			  hashedChars);
 	NSData * hashedData = [NSData dataWithBytes:hashedChars length:CC_SHA1_DIGEST_LENGTH];
-    NSLog(@"sha1 %@", [hashedData hexString]);
-    NSLog(@"sha1 %@", hashedData);
+    //NSLog(@"sha1 %@", [hashedData hexString]);
+    //NSLog(@"sha1 %@", hashedData);
 	
 	return hashedData;
 }

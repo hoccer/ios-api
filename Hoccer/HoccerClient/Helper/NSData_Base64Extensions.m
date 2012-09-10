@@ -71,7 +71,7 @@ return(theString);
     int i;
     
     for (i = 0; i < [self length]; ++i)
-        [stringBuffer appendFormat:@"%02x", (unsigned long)dataBuffer[ i ]];
+        [stringBuffer appendFormat:@"%02lx", (unsigned long)dataBuffer[ i ]];
     
     return [[stringBuffer copy] autorelease];
 }

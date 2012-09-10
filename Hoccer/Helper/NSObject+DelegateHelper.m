@@ -3,7 +3,7 @@
 //  Hoccer
 //
 //  Created by Robert Palmer on 07.09.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Copyright 2009 Hoccer GmbH. All rights reserved.
 //
 
 #import "NSObject+DelegateHelper.h"

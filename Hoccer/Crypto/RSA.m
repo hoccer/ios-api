@@ -32,7 +32,7 @@ static RSA *instance;
     dispatch_once(&onceToken, ^{
         instance = [[RSA alloc] init];
         if ([instance getPrivateKeyRef] == nil || [instance getPublicKeyRef] == nil) {
-            NSLog(@"There are no keys! PANIC!");
+            //NSLog(@"There are no keys! PANIC!");
             [instance generateKeyPairKeys];
         }
     }); 
@@ -79,7 +79,7 @@ static RSA *instance;
 
 - (void)generateKeyPairKeys
 {
-    NSLog(@"Generating Keys");
+    //NSLog(@"Generating Keys");
     OSStatus status = noErr;	
     NSMutableDictionary *privateKeyAttr = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *publicKeyAttr = [[NSMutableDictionary alloc] init];
@@ -103,9 +103,9 @@ static RSA *instance;
     status = SecKeyGeneratePair((CFDictionaryRef)keyPairAttr, &publicKey, &privateKey);
     
     if (status != noErr) {
-        NSLog(@"something went wrong %d", (int)status);
+        //NSLog(@"something went wrong %d", (int)status);
     }else {
-        NSLog(@"New key");
+        //NSLog(@"New key");
     }
     
     [privateKeyAttr release];
@@ -150,7 +150,7 @@ static RSA *instance;
                            &cipherBufferSize);
     
     if (status != noErr) {
-        NSLog(@"Error encypring, OSStatus: %d", (NSInteger)status);
+        //NSLog(@"Error encypring, OSStatus: %d", (NSInteger)status);
     }
         
     cipher = [NSData dataWithBytes:(const void *)cipherBuffer length:(NSUInteger)cipherBufferSize];
@@ -180,12 +180,12 @@ static RSA *instance;
                            &plainBufferSize);
     
     if (status != noErr) {
-        NSLog(@"Error decrypting, OSStatus = %d", (NSInteger)status);
+        //NSLog(@"Error decrypting, OSStatus = %d", (NSInteger)status);
         NSNotification *notification = [NSNotification notificationWithName:@"encryptionError" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
     }
     
-    NSLog(@"decoded %d bytes, status %d", (NSInteger)plainBufferSize, (NSInteger)status);
+    //NSLog(@"decoded %d bytes, status %d", (NSInteger)plainBufferSize, (NSInteger)status);
     plainData = [NSData dataWithBytes:plainBuffer length:plainBufferSize];
     
     if (plainBuffer) { free(plainBuffer); }
@@ -200,7 +200,7 @@ static RSA *instance;
     size_t plainBufferSize = strlen((char *)plainBuffer);
     size_t cipherBufferSize = CIPHER_BUFFER_SIZE;
 	SecKeyRef key = [self getPublicKeyRef];
-    NSLog(@"SecKeyGetBlockSize() public = %d", (int)SecKeyGetBlockSize(key));
+    //NSLog(@"SecKeyGetBlockSize() public = %d", (int)SecKeyGetBlockSize(key));
     
     
     
@@ -213,8 +213,8 @@ static RSA *instance;
                            &cipherBuffer[0],
                            &cipherBufferSize
                            );
-    NSLog(@"encryption result code: %d (size: %d)", (int)status, (int)cipherBufferSize);
-    NSLog(@"encrypted text: %s", cipherBuffer);
+    //NSLog(@"encryption result code: %d (size: %d)", (int)status, (int)cipherBufferSize);
+    //NSLog(@"encrypted text: %s", cipherBuffer);
 }
 
 - (void)decryptWithPrivateKey:(uint8_t *)cipherBuffer plainBuffer:(uint8_t *)plainBuffer
@@ -223,8 +223,8 @@ static RSA *instance;
 	
     size_t cipherBufferSize = strlen((char *)cipherBuffer);
 	
-    NSLog(@"decryptWithPrivateKey: length of buffer: %d", (int)BUFFER_SIZE);
-    NSLog(@"decryptWithPrivateKey: length of input: %d", (int)cipherBufferSize);
+    //NSLog(@"decryptWithPrivateKey: length of buffer: %d", (int)BUFFER_SIZE);
+    //NSLog(@"decryptWithPrivateKey: length of input: %d", (int)cipherBufferSize);
 	
     // DECRYPTION
     size_t plainBufferSize = BUFFER_SIZE;
@@ -237,8 +237,8 @@ static RSA *instance;
                            &plainBuffer[0],
                            &plainBufferSize
                            );
-    NSLog(@"decryption result code: %d (size: %d)", (int)status, (int)plainBufferSize);
-    NSLog(@"FINAL decrypted text: %s", plainBuffer);
+    //NSLog(@"decryption result code: %d (size: %d)", (int)status, (int)plainBufferSize);
+    //NSLog(@"FINAL decrypted text: %s", plainBuffer);
 	
 }
 
@@ -285,7 +285,7 @@ static RSA *instance;
 	
 	// Get the key.
     resultCode = SecItemCopyMatching((CFDictionaryRef)queryPublicKey, (CFTypeRef *)&publicKeyCeritificate);
-    NSLog(@"getCertificate: result code: %d", (int)resultCode);
+    //NSLog(@"getCertificate: result code: %d", (int)resultCode);
 	
     if(resultCode != noErr)
     {
@@ -472,7 +472,7 @@ static RSA *instance;
 }
 
 - (void)cleanKeyChain {
-    NSLog(@"Cleaning keychain");
+    //NSLog(@"Cleaning keychain");
     NSMutableDictionary *publicKey = [[NSMutableDictionary alloc] init];
     [publicKey setObject:(id) kSecClassKey forKey:(id)kSecClass];
     [publicKey setObject:(id) kSecAttrKeyTypeRSA forKey:(id)kSecAttrKeyType];

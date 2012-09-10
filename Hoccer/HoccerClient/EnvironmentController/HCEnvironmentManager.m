@@ -29,7 +29,7 @@
 //  Hoccer
 //
 //  Created by Robert Palmer on 16.03.10.
-//  Copyright 2010 Art+Com AG. All rights reserved.
+//  Copyright 2010 Hoccer GmbH AG. All rights reserved.
 //
 
 #import <CoreLocation/CoreLocation.h>
@@ -105,11 +105,12 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     
     if (error.code == kCLErrorDenied){
-        UIAlertView *locationAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Could not locate you", nil) message:NSLocalizedString(@"We could not locate you but Hoccer needs your location to know which devices are next to you. Please make shure you have location services enabled", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+        UIAlertView *locationAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Could not locate you", nil) message:NSLocalizedString(@"We need to locate you to find other HOCCER users around you. Please enable location services in the settings of your device.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
         [locationAlert show];
         [locationAlert release];
     }
 }
+
 
 
 - (void)wifiScannerDidUpdateBssids: (WifiScanner *)scanner {

@@ -187,7 +187,7 @@
 #pragma mark Callback Methods
 
 - (void)httpConnection: (HttpConnection *)connection didStoreData: (NSData *)data {
-    NSLog(@"did Store Data");
+    //NSLog(@"did Store Data");
 	NSDictionary *response = [data yajl_JSON];
 	NSString *propertyId = [[response objectForKey:@"url"] lastPathComponent];
 	
