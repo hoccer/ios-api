@@ -112,18 +112,43 @@
 }
 
 
-
 - (void)wifiScannerDidUpdateBssids: (WifiScanner *)scanner {
 	self.bssids = [WifiScanner sharedScanner].bssids;
 	[self updateHoccability];
 }
 
-- (HCEnvironment *)environment {
-	HCEnvironment *location = [[HCEnvironment alloc] 
-			 initWithLocation: locationManager.location bssids:[WifiScanner sharedScanner].bssids];
-	location.hoccability = hoccability;
-	
-	return [location autorelease];
+- (HCEnvironment *)environment
+{
+    // RALPH : channel
+//    NSString *channel = [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"];
+//    
+//    if ((channel != nil) && (channel.length > 0)) {
+//    
+//        CLLocationCoordinate2D coordinate = {.latitude =  [@"-82.408587" doubleValue], .longitude = [@"0.519737" doubleValue]};
+//        
+//        CLLocation *currentLocation = [[[CLLocation alloc] initWithCoordinate:coordinate altitude:0
+//                                                           horizontalAccuracy:kCLLocationAccuracyBest verticalAccuracy:kCLLocationAccuracyBest
+//                                                                    timestamp:[NSDate date]] autorelease];
+//        HCEnvironment *location = [[HCEnvironment alloc]
+//                                   initWithLocation:currentLocation bssids:nil];
+//        location.hoccability = hoccability;
+//        
+//        return [location autorelease];
+//    }
+//    else {
+//        HCEnvironment *location = [[HCEnvironment alloc]
+//                                   initWithLocation: locationManager.location bssids:[WifiScanner sharedScanner].bssids];
+//        
+//        location.hoccability = hoccability;
+//        return [location autorelease];
+//    }    
+    
+    HCEnvironment *location = [[HCEnvironment alloc]
+                               initWithLocation: locationManager.location bssids:[WifiScanner sharedScanner].bssids];
+    
+    location.hoccability = hoccability;
+    return [location autorelease];
+
 }
 
 - (BOOL)hasLocation {
