@@ -44,6 +44,7 @@
 @synthesize location;
 @synthesize bssids;
 @synthesize hoccability;
+@synthesize channel;
 
 - (id) initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids {
 	self = [super init];
@@ -54,7 +55,8 @@
 	return self;
 }
 
-- (id)initWithCoordinate: (CLLocationCoordinate2D)coordinate accuracy: (CLLocationAccuracy)accuracy {
+- (id)initWithCoordinate: (CLLocationCoordinate2D)coordinate accuracy: (CLLocationAccuracy)accuracy
+{
 	CLLocation *newlocation = [[[CLLocation alloc] initWithCoordinate:coordinate altitude:0 
 												 horizontalAccuracy:accuracy verticalAccuracy:accuracy 
 															timestamp:[NSDate date]] autorelease];
@@ -74,7 +76,10 @@
     @try {
         return [[self dict] yajl_JSONString];
 	}
-	@catch (NSException * e) { NSLog(@"%@", e); }
+	@catch (NSException * e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"-dict dict: %@", [self dict]); }
+        else { NSLog(@"%@", e); }
+    }
     
     return nil;
 }
@@ -85,7 +90,7 @@
 	
 	if (self.location) {
 		NSDictionary *locationDict = [self locationAsDict: self.location];
-		[dict setObject:locationDict forKey: @"gps"];
+		[dict setObject:locationDict forKey:@"gps"];
 	}
 	
 	if (self.bssids) {
@@ -95,7 +100,21 @@
 		
 		[dict setObject:wifi forKey:@"wifi"];
 	}
-		
+
+    if (self.channel) {
+		NSDictionary *channelDict = [[NSDictionary alloc] initWithObjectsAndKeys:channel, @"name", nil];
+		[dict setObject:channelDict forKey:@"channel"];
+	}
+
+    @try {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCEnvironment.dict dict: %@",dict); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCEnvironment.dict JSON: %@",[dict yajl_JSONString]); }
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCEnvironment.dict execption : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
+
 	return dict;
 }
 
@@ -107,7 +126,6 @@
 			[NSNumber numberWithDouble: [aLocation.timestamp timeIntervalSince1970]], @"timestamp",
 			[NSNumber numberWithDouble: aLocation.horizontalAccuracy], @"accuracy", nil];
 }
-
 
 
 @end

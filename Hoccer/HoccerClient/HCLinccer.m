@@ -48,8 +48,13 @@
 #import "RSA.h"
 #import "PublicKeyManager.h"
 
+//orig #define LINCCER_URI @"https://linccer-production.hoccer.com/v3"
+//orig #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
+
 #define LINCCER_URI @"https://linccer-production.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-development.hoccer.com/v3"
+
+
 //#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
@@ -116,7 +121,7 @@
 	return self;	
 }
 
-- (void)send: (NSDictionary *)data withMode: (NSString *)mode {
+- (void)send:(NSDictionary *)data withMode:(NSString *)mode {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
@@ -129,7 +134,7 @@
 				success:@selector(httpConnection:didSendData:)];
 }
 
-- (void)send: (NSDictionary *)data withMode: (NSString *)mode encrypted:(BOOL)encrypted {
+- (void)send:(NSDictionary *)data withMode:(NSString *)mode encrypted:(BOOL)encrypted {
     if (!encrypted) {
         [self send:data withMode:mode];
     }
@@ -324,10 +329,14 @@
 	
 	@try {
 		if ([delegate respondsToSelector:@selector(linccer:didUpdateEnvironment:)]) {
+            if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateEnvironment - receivedData : %@", receivedData); }
 			[delegate linccer:self didUpdateEnvironment:[receivedData yajl_JSON]];
 		}
 	}
-	@catch (NSException * e) { NSLog(@"%@", e); }
+	@catch (NSException * e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateEnvironment - error : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
 }
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
@@ -341,6 +350,7 @@
 	}
     
 	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"didSendData - data : %@", data); }
 		[delegate linccer: self didSendData: [data yajl_JSON]];
 	}
 }
@@ -355,11 +365,15 @@
 	}
 	
     @try {
-        if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {        
+        if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
+            if (USES_DEBUG_MESSAGES) { NSLog(@"didReceiveData - data : %@", data); }
             [delegate linccer: self didReceiveData: [data yajl_JSON]];
         }
     }
-    @catch (NSException * e) { NSLog(@"%@", e); }
+    @catch (NSException * e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"didReceiveData : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
 
 }
 
@@ -372,30 +386,33 @@
 - (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSData *)groupData {
     
     @try {
-	
     
-    NSDictionary *dictionary = [groupData yajl_JSON];
+        NSDictionary *dictionary = [groupData yajl_JSON];
 
-    self.groupId = [dictionary objectForKey:@"group_id"];
-    
-    if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
-        [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
-    }
-    
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] == YES){
-            [self checkGroupForPublicKeys:dictionary];
+        self.groupId = [dictionary objectForKey:@"group_id"];
+        
+        if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
+            if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateGroup - groupData : %@", groupData); }
+            [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
         }
-     
-    [self peek];
+        
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] == YES){
+                [self checkGroupForPublicKeys:dictionary];
+            }
+         
+        [self peek];
         
     
     }
-    @catch (NSException * e) { NSLog(@"%@", e); }
+    @catch (NSException * e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateGroup : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
 
 }
 
-- (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey{
-   
+- (void)httpConnection: (HttpConnection *)connection didReceivePublicKey: (NSData *)pubkey
+{
 
     //NSString *theKey = [[[NSString stringWithData: pubkey usingEncoding:NSUTF8StringEncoding]componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
     
@@ -409,14 +426,14 @@
         NSString *identifier = [uriArray objectAtIndex:6];
         [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
     }
-    @catch (NSException * e) { NSLog(@"%@", e); }
-
-    
+    @catch (NSException * e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"didReceivePublicKey : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
 }
 
-- (void)httpConnection: (HttpConnection *)connection didReceiveChangedPublicKey: (NSData *)pubkey{
-    
-    
+- (void)httpConnection: (HttpConnection *)connection didReceiveChangedPublicKey: (NSData *)pubkey
+{
     @try {
         NSDictionary *theResponse = [pubkey yajl_JSON];
         
@@ -427,7 +444,10 @@
         NSString *identifier = [uriArray objectAtIndex:6];
         [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
     }
-    @catch (NSException * e) { NSLog(@"%@", e); }
+    @catch (NSException * e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"didReceiveChangedPublicKey : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
 }
 #pragma mark -
 #pragma mark Private Methods
@@ -482,7 +502,10 @@
     }
      
     NSString *enviromentAsString = [environment yajl_JSONString];
-         
+    
+    if (USES_DEBUG_MESSAGES) { NSLog(@"updateEnvironment - [environment yajl_JSONString] : %@", [environment yajl_JSONString]); }
+
+    
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
 			   success:@selector(httpConnection:didUpdateEnvironment:)];

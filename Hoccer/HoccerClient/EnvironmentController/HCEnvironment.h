@@ -45,6 +45,7 @@
 @property (retain) NSArray *bssids;
 @property (retain) CLLocation *location;
 @property (assign) NSInteger hoccability;
+@property (retain) NSString *channel;
 
 - (id)initWithLocation: (CLLocation *)theLocation bssids: (NSArray*) theBssids;
 - (id)initWithCoordinate: (CLLocationCoordinate2D)coordinate accuracy: (CLLocationAccuracy)accuracy;
