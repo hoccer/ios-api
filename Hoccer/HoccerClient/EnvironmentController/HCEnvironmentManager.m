@@ -131,9 +131,7 @@
     else {
         location.channel = nil;
     }
-    
     return [location autorelease];
-
 }
 
 - (BOOL)hasLocation {

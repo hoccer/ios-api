@@ -155,7 +155,8 @@
     
 }
 
-- (void)pollWithMode: (NSString *)mode {
+- (void)pollWithMode: (NSString *)mode
+{
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
@@ -167,8 +168,8 @@
 }
 
 
-- (void)checkGroupForPublicKeys:(NSDictionary *)aDictionary{
-    
+- (void)checkGroupForPublicKeys:(NSDictionary *)aDictionary
+{    
     NSArray *theGroup = [aDictionary objectForKey:@"group"];
     NSMutableArray *others = [NSMutableArray arrayWithCapacity:[theGroup count]];
     for (NSDictionary *dict in theGroup) {
@@ -317,6 +318,7 @@
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {	
 	self.latency = aConnection.roundTripTime;
 	
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HttpConnection didUpdateEnvironment request   %@", aConnection.request); }
     
     if (!isRegistered) {
         if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
@@ -358,6 +360,8 @@
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
     self.linccingId = nil;
     
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HttpConnection didReceiveData   %@", connection.request); }
+    
     if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
 		[self didFailWithError:error];
@@ -386,6 +390,8 @@
 - (void)httpConnection: (HttpConnection *)connection didUpdateGroup: (NSData *)groupData {
     
     @try {
+        
+        if (USES_DEBUG_MESSAGES) { NSLog(@"  HttpConnection didUpdateGroup   %@", connection.request); }
     
         NSDictionary *dictionary = [groupData yajl_JSON];
 
@@ -504,7 +510,6 @@
     NSString *enviromentAsString = [environment yajl_JSONString];
     
     if (USES_DEBUG_MESSAGES) { NSLog(@"updateEnvironment - [environment yajl_JSONString] : %@", [environment yajl_JSONString]); }
-
     
 	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
 			   payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
