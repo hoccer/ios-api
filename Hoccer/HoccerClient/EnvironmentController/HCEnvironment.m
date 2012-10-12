@@ -71,50 +71,48 @@
 	[super dealloc];
 }
 
-- (NSString *)JSONRepresentation {
-    
+- (NSString *)JSONRepresentation
+{
     @try {
         return [[self dict] yajl_JSONString];
 	}
 	@catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"-dict dict: %@", [self dict]); }
-        else { NSLog(@"%@", e); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCEnvironment JSONRepresentation dict: %@", [self dict]); }
+        else { NSLog(@"HCEnvironment JSONRepresentation %@", e); }
     }
-    
     return nil;
 }
 
-- (NSDictionary *)dict {
+- (NSDictionary *)dict
+{
 	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 	
-	
-	if (self.location) {
-		NSDictionary *locationDict = [self locationAsDict: self.location];
-		[dict setObject:locationDict forKey:@"gps"];
-	}
-	
-	if (self.bssids) {
-		NSDictionary *wifi = [NSDictionary dictionaryWithObjectsAndKeys:
-							  self.bssids, @"bssids",
-							  [NSNumber numberWithDouble: [[NSDate date] timeIntervalSince1970]], @"timestamp", nil];
-		
-		[dict setObject:wifi forKey:@"wifi"];
-	}
-
-    if (self.channel) {
-		NSDictionary *channelDict = [[NSDictionary alloc] initWithObjectsAndKeys:channel, @"name", nil];
-		[dict setObject:channelDict forKey:@"channel"];
-	}
-
     @try {
+        if (self.location) {
+            NSDictionary *locationDict = [self locationAsDict: self.location];
+            [dict setObject:locationDict forKey:@"gps"];
+        }
+        
+        if (self.bssids) {
+            NSDictionary *wifi = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  self.bssids, @"bssids",
+                                  [NSNumber numberWithDouble: [[NSDate date] timeIntervalSince1970]], @"timestamp", nil];
+            
+            [dict setObject:wifi forKey:@"wifi"];
+        }
+
+        if (self.channel) {
+            NSDictionary *channelDict = [[NSDictionary alloc] initWithObjectsAndKeys:channel, @"name", nil];
+            [dict setObject:channelDict forKey:@"channel"];
+        }
+
         if (USES_DEBUG_MESSAGES) { NSLog(@"HCEnvironment.dict dict: %@",dict); }
         if (USES_DEBUG_MESSAGES) { NSLog(@"HCEnvironment.dict JSON: %@",[dict yajl_JSONString]); }
     }
     @catch (NSException *e) {
         if (USES_DEBUG_MESSAGES) { NSLog(@"HCEnvironment.dict execption : %@", e); }
-        else { NSLog(@"%@", e); }
+        else { NSLog(@"HCEnvironment.dict %@", e); }
     }
-
 	return dict;
 }
 
@@ -126,6 +124,5 @@
 			[NSNumber numberWithDouble: [aLocation.timestamp timeIntervalSince1970]], @"timestamp",
 			[NSNumber numberWithDouble: aLocation.horizontalAccuracy], @"accuracy", nil];
 }
-
 
 @end

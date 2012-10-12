@@ -98,18 +98,25 @@
 		withEnvironment:(HCEnvironment *)environment 
 		forTimeInterval: (NSTimeInterval)seconds 
 {
-	NSMutableDictionary *payload = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-							 [environment dict], @"environment",
-							 dictionary, @"data", nil];
-	
-	if (seconds > 0.0) {
-		[payload setObject:[NSNumber numberWithDouble:seconds] forKey:@"lifetime"];
-	}
-	
-	NSString *payloadJSON = [payload yajl_JSONString];
-	[httpClient postURI:@"/store" 
-				payload:[payloadJSON dataUsingEncoding:NSUTF8StringEncoding] 
-				success:@selector(httpConnection:didStoreData:)];
+    @try {
+        NSMutableDictionary *payload = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 [environment dict], @"environment",
+                                 dictionary, @"data", nil];
+        
+        if (seconds > 0.0) {
+            [payload setObject:[NSNumber numberWithDouble:seconds] forKey:@"lifetime"];
+        }
+        
+        NSString *payloadJSON = [payload yajl_JSONString];
+        [httpClient postURI:@"/store" 
+                    payload:[payloadJSON dataUsingEncoding:NSUTF8StringEncoding] 
+                    success:@selector(httpConnection:didStoreData:)];
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCGeoStorage storeDictionary exception : %@", e); }
+        else { NSLog(@"HCGeoStorage storeDictionary %@", e); }
+    }
+
 }
 
 
@@ -135,44 +142,58 @@
 }
 
 
-- (void)searchForEnvironment: (HCEnvironment *)environment withProperties:(NSDictionary *)properties {
-	NSMutableDictionary *query = [[[environment dict] mutableCopy] autorelease];
-	
-	if (properties != nil) {
-		[query setObject:properties forKey:@"conditions"];
-	}
-	
-	[httpClient postURI:@"/query" 
-				payload:[[query yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
-				success:@selector(httpConnection:didFindData:)];
+- (void)searchForEnvironment: (HCEnvironment *)environment withProperties:(NSDictionary *)properties
+{
+    @try {
+        NSMutableDictionary *query = [[[environment dict] mutableCopy] autorelease];
+        
+        if (properties != nil) {
+            [query setObject:properties forKey:@"conditions"];
+        }
+        
+        [httpClient postURI:@"/query" 
+                    payload:[[query yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
+                    success:@selector(httpConnection:didFindData:)];
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCGeoStorage searchForEnvironment execption : %@", e); }
+        else { NSLog(@"HCGeoStorage searchForEnvironment %@", e); }
+    }
 }
 
 - (void)searchInRegion: (MKCoordinateRegion)region {
 	[self searchInRegion:region withConditions: nil];
 }
 
-- (void)searchInRegion: (MKCoordinateRegion)region withConditions: (NSDictionary *)properties {
-	CLLocationCoordinate2D lowerLeft, upperRight;
-	lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta / 2;
-	lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta / 2;
-	
-	upperRight.latitude = region.center.latitude + region.span.latitudeDelta / 2;
-	upperRight.longitude = region.center.longitude + region.span.longitudeDelta / 2;
-	
-	NSArray *boundingBox = [NSArray arrayWithObjects:
-							[self arrayFromCLLocationCoordinate:lowerLeft],
-							[self arrayFromCLLocationCoordinate:upperRight], nil];
-	
-	NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObject:boundingBox forKey:@"bbox"];
-	
-	if (properties != nil) {
-		[query setObject:properties forKey:@"conditions"];
-	}
-	
-	[httpClient postURI:@"/query" 
-				payload:[[query yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
-				success:@selector(httpConnection:didFindData:)];
-	
+- (void)searchInRegion: (MKCoordinateRegion)region withConditions: (NSDictionary *)properties
+{
+    @try {
+        CLLocationCoordinate2D lowerLeft, upperRight;
+        lowerLeft.latitude = region.center.latitude - region.span.latitudeDelta / 2;
+        lowerLeft.longitude = region.center.longitude - region.span.longitudeDelta / 2;
+        
+        upperRight.latitude = region.center.latitude + region.span.latitudeDelta / 2;
+        upperRight.longitude = region.center.longitude + region.span.longitudeDelta / 2;
+        
+        NSArray *boundingBox = [NSArray arrayWithObjects:
+                                [self arrayFromCLLocationCoordinate:lowerLeft],
+                                [self arrayFromCLLocationCoordinate:upperRight], nil];
+        
+        NSMutableDictionary *query = [NSMutableDictionary dictionaryWithObject:boundingBox forKey:@"bbox"];
+        
+        if (properties != nil) {
+            [query setObject:properties forKey:@"conditions"];
+        }
+        
+        [httpClient postURI:@"/query" 
+                    payload:[[query yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding] 
+                    success:@selector(httpConnection:didFindData:)];
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCGeoStorage searchInRegion execption : %@", e); }
+        else { NSLog(@"HCGeoStorage searchInRegion %@", e); }
+    }
+
 }
 
 #pragma mark -
@@ -186,20 +207,34 @@
 #pragma mark -
 #pragma mark Callback Methods
 
-- (void)httpConnection: (HttpConnection *)connection didStoreData: (NSData *)data {
+- (void)httpConnection:(HttpConnection *)connection didStoreData:(NSData *)data
+{
     //NSLog(@"did Store Data");
-	NSDictionary *response = [data yajl_JSON];
-	NSString *propertyId = [[response objectForKey:@"url"] lastPathComponent];
-	
-	if ([delegate respondsToSelector:@selector(geostorage:didFinishStoringWithId:)]) {
-		[delegate geostorage: self didFinishStoringWithId:propertyId];
-	}
+    @try {
+        NSDictionary *response = [data yajl_JSON];
+        NSString *propertyId = [[response objectForKey:@"url"] lastPathComponent];
+        
+        if ([delegate respondsToSelector:@selector(geostorage:didFinishStoringWithId:)]) {
+            [delegate geostorage: self didFinishStoringWithId:propertyId];
+        }
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCGeoStorage httpConnection:connection didStoreData:data execption : %@", e); }
+        else { NSLog(@"HCGeoStorage httpConnection:didStoreData: %@", e); }
+    }
 }
 
-- (void)httpConnection: (HttpConnection *)connection didFindData: (NSData *)data {	
-	if ([delegate respondsToSelector:@selector(geostorage:didFindItems:)]) {
-		[delegate geostorage:self didFindItems:[data yajl_JSON]];
-	}
+- (void)httpConnection:(HttpConnection *)connection didFindData:(NSData *)data
+{
+    @try {
+        if ([delegate respondsToSelector:@selector(geostorage:didFindItems:)]) {
+            [delegate geostorage:self didFindItems:[data yajl_JSON]];
+        }
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCGeoStorage httpConnection:connection didFindData:data execption : %@", e); }
+        else { NSLog(@"HCGeoStorage httpConnection:didFindData: %@", e); }
+    }
 }
 
 - (void)httpConnection: (HttpConnection *)connection didFailWithError: (NSError *)error {

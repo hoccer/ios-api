@@ -125,13 +125,18 @@
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
-	
-    NSData *dataToSend = [[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding]; 
-    
-	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
-	self.linccingId = [httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
-				payload: dataToSend
-				success:@selector(httpConnection:didSendData:)];
+    @try {
+        NSData *dataToSend = [[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
+        self.linccingId = [httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
+                    payload: dataToSend
+                    success:@selector(httpConnection:didSendData:)];
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer send:%@ withMode:%@ execption : %@", data, mode, e); }
+        else { NSLog(@"%@", e); }
+    }
 }
 
 - (void)send:(NSDictionary *)data withMode:(NSString *)mode encrypted:(BOOL)encrypted {
@@ -318,7 +323,7 @@
 - (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {	
 	self.latency = aConnection.roundTripTime;
 	
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HttpConnection didUpdateEnvironment request   %@", aConnection.request); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment request   %@", aConnection.request); }
     
     if (!isRegistered) {
         if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
@@ -331,18 +336,18 @@
 	
 	@try {
 		if ([delegate respondsToSelector:@selector(linccer:didUpdateEnvironment:)]) {
-            if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateEnvironment - receivedData : %@", receivedData); }
+            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateEnvironment - receivedData : %@", receivedData); }
 			[delegate linccer:self didUpdateEnvironment:[receivedData yajl_JSON]];
 		}
 	}
 	@catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateEnvironment - error : %@", e); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateEnvironment - error : %@", e); }
         else { NSLog(@"%@", e); }
     }
 }
 
-- (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
-
+- (void)httpConnection:(HttpConnection *)connection didSendData:(NSData *)data
+{
     self.linccingId = nil;
 
 	if ([connection.response statusCode] == 204 ) {
@@ -350,17 +355,22 @@
 		[self didFailWithError:error];
 		return;
 	}
-    
-	if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"didSendData - data : %@", data); }
-		[delegate linccer: self didSendData: [data yajl_JSON]];
-	}
+    @try {
+        if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
+            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didSendData - data : %@", data); }
+            [delegate linccer: self didSendData: [data yajl_JSON]];
+        }
+    }
+    @catch (NSException * e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didSendData - error : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
 }
 
 - (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
     self.linccingId = nil;
     
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HttpConnection didReceiveData   %@", connection.request); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData   %@", connection.request); }
     
     if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
@@ -370,12 +380,12 @@
 	
     @try {
         if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
-            if (USES_DEBUG_MESSAGES) { NSLog(@"didReceiveData - data : %@", data); }
+            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didReceiveData - data : %@", data); }
             [delegate linccer: self didReceiveData: [data yajl_JSON]];
         }
     }
     @catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"didReceiveData : %@", e); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didReceiveData : %@", e); }
         else { NSLog(@"%@", e); }
     }
 
@@ -391,14 +401,14 @@
     
     @try {
         
-        if (USES_DEBUG_MESSAGES) { NSLog(@"  HttpConnection didUpdateGroup   %@", connection.request); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateGroup   %@", connection.request); }
     
         NSDictionary *dictionary = [groupData yajl_JSON];
 
         self.groupId = [dictionary objectForKey:@"group_id"];
         
         if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
-            if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateGroup - groupData : %@", groupData); }
+            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateGroup - groupData : %@", groupData); }
             [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
         }
         
@@ -411,7 +421,7 @@
     
     }
     @catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"didUpdateGroup : %@", e); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateGroup : %@", e); }
         else { NSLog(@"%@", e); }
     }
 
@@ -433,7 +443,7 @@
         [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
     }
     @catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"didReceivePublicKey : %@", e); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didReceivePublicKey : %@", e); }
         else { NSLog(@"%@", e); }
     }
 }
@@ -451,7 +461,7 @@
         [self storePublicKey:theKey forClient:[clientIDCache objectForKey:identifier] clientChanged:NO];
     }
     @catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"didReceiveChangedPublicKey : %@", e); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didReceiveChangedPublicKey : %@", e); }
         else { NSLog(@"%@", e); }
     }
 }
@@ -506,14 +516,19 @@
         [environment setObject:deviceToken forKey:@"apndevicetoken"];
         
     }
-     
-    NSString *enviromentAsString = [environment yajl_JSONString];
-    
-    if (USES_DEBUG_MESSAGES) { NSLog(@"updateEnvironment - [environment yajl_JSONString] : %@", [environment yajl_JSONString]); }
-    
-	[httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
-			   payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
-			   success:@selector(httpConnection:didUpdateEnvironment:)];
+    @try {
+        NSString *enviromentAsString = [environment yajl_JSONString];
+        
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment - [environment yajl_JSONString] : %@", [environment yajl_JSONString]); }
+        
+        [httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
+                   payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
+                   success:@selector(httpConnection:didUpdateEnvironment:)];
+    }
+    @catch (NSException *e) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment execption : %@", e); }
+        else { NSLog(@"%@", e); }
+    }
     
     [environment release];
 }
