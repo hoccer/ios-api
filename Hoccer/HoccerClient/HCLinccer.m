@@ -156,8 +156,7 @@
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	
 	self.linccingId = [httpClient getURI:[uri stringByAppendingPathComponent: actionString]
-			   success:@selector(httpConnection:didReceiveData:)];	
-    
+			   success:@selector(httpConnection:didReceiveData:)];
 }
 
 - (void)pollWithMode: (NSString *)mode
@@ -168,8 +167,7 @@
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
 	[httpClient getURI:[uri stringByAppendingPathComponent: [actionString stringByAppendingQuery:@"waiting=true"]]
-			   success:@selector(httpConnection:didReceiveData:)];	
-	
+			   success:@selector(httpConnection:didReceiveData:)];
 }
 
 
@@ -195,7 +193,6 @@
             }
         }
     }
-    
 }
 
 - (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client clientChanged:(BOOL)changed{
@@ -240,7 +237,6 @@
             }
         }
     }
-    
 }
 
 
