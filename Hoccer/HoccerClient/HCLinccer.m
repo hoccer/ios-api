@@ -163,6 +163,7 @@
 {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
+        //warum hier nicht return - wenn er nicht registered ist braucht der nachfolgende request nicht rausgehen - oder?
 	}
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
@@ -515,6 +516,8 @@
     @try {
         NSString *enviromentAsString = [environment yajl_JSONString];
         
+        //NSLog(@"HCLinccer updateEnvironment Dictionary: - %@", environment);
+
         if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment - [environment yajl_JSONString] : %@", [environment yajl_JSONString]); }
         
         [httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
