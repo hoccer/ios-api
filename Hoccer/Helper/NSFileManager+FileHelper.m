@@ -16,15 +16,19 @@
 		return theFilename;
 	};
 	
-	NSString *extension = [theFilename pathExtension];
+	NSString *ext = [theFilename pathExtension];
 	NSString *baseFilename = [theFilename stringByDeletingPathExtension];
 	
 	NSInteger i = 1;
 	NSString* newFilename = [NSString stringWithFormat:@"%@_%@", baseFilename, [[NSNumber numberWithInteger:i] stringValue]];
-	newFilename = [newFilename stringByAppendingPathExtension: extension];
-	while ([[NSFileManager defaultManager] fileExistsAtPath: [directory stringByAppendingPathComponent:newFilename]]) {
+    if ((ext == nil) || (ext.length <= 0)) {
+        ext = @"";
+        //NSLog(@"empty ext 4");
+    }
+    newFilename = [newFilename stringByAppendingPathExtension:ext];
+	while ([[NSFileManager defaultManager] fileExistsAtPath:[directory stringByAppendingPathComponent:newFilename]]) {
 		newFilename = [NSString stringWithFormat:@"%@_%@", baseFilename, [[NSNumber numberWithInteger:i] stringValue]];
-		newFilename = [newFilename stringByAppendingPathExtension: extension];
+		newFilename = [newFilename stringByAppendingPathExtension:ext];
 		
 		i++;
 	}
