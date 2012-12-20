@@ -148,7 +148,7 @@
     }
 }
 
-- (void)receiveWithMode: (NSString *)mode {
+- (void)receiveWithMode:(NSString *)mode {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
@@ -159,7 +159,7 @@
 			   success:@selector(httpConnection:didReceiveData:)];
 }
 
-- (void)pollWithMode: (NSString *)mode
+- (void)pollWithMode:(NSString *)mode
 {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
@@ -196,8 +196,8 @@
     }
 }
 
-- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client clientChanged:(BOOL)changed{
-    
+- (void)fetchPublicKeyForHash:(NSString *)theHash client:(NSDictionary *)client clientChanged:(BOOL)changed
+{
     if (!isRegistered) {
         [self didFailWithError:nil];
     }
@@ -215,7 +215,8 @@
 
 }
 
-- (void)storePublicKey:(NSString *)theKey forClient:(NSDictionary *)client clientChanged:(BOOL)changed{
+- (void)storePublicKey:(NSString *)theKey forClient:(NSDictionary *)client clientChanged:(BOOL)changed
+{
     if (changed){
         [keyManager deleteKeyForClient:[client objectForKey:@"id"]];
     }
@@ -226,7 +227,6 @@
             [errorInfo setObject:NSLocalizedString(@"Disable encryption and enable it again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
             
             NSError *error = [NSError errorWithDomain:@"PubKeyError" code:700 userInfo:errorInfo];
-            
             
             [self didFailWithError:error];
         }
@@ -271,11 +271,14 @@
 #pragma mark -
 #pragma mark Error Handling 
 
-- (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
+- (void)httpConnection:(HttpConnection *)connection didFailWithError:(NSError *)error {
 	if ([linccingId isEqual: connection.uri]) {
         self.linccingId = nil;
     }
-    
+
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - error :   %@", error); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError statuscode:  %d", connection.response.statusCode); }
+
     if ([self.peekId isEqual:connection.uri]) {
         [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
     }
@@ -300,7 +303,8 @@
 	[self didFailWithError:error];
 }
 
-- (void)didFailWithError: (NSError *)error {
+- (void)didFailWithError:(NSError *)error
+{
 	if ([delegate respondsToSelector:@selector(linccer:didFailWithError:)]) {
 		[delegate linccer: self didFailWithError:error];
 	}
@@ -317,11 +321,13 @@
 #pragma mark -
 #pragma mark HttpClient Response Methods 
 
-- (void)httpConnection: (HttpConnection *)aConnection didUpdateEnvironment: (NSData *)receivedData {	
-	self.latency = aConnection.roundTripTime;
+- (void)httpConnection:(HttpConnection *)connection didUpdateEnvironment:(NSData *)receivedData {
+	self.latency = connection.roundTripTime;
 	
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment request   %@", aConnection.request); }
-    
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment request   %@", connection.request); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment statuscode:  %d", connection.response.statusCode); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment - error :   %@", [NSString stringWithData:receivedData usingEncoding:NSUTF8StringEncoding]); }
+
     if (!isRegistered) {
         if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
             [delegate linccerDidRegister:self];
@@ -346,6 +352,7 @@
 - (void)httpConnection:(HttpConnection *)connection didSendData:(NSData *)data
 {
     self.linccingId = nil;
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }
 
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoReceiverError userInfo:[self userInfoForNoReceiver]];
@@ -364,16 +371,26 @@
     }
 }
 
-- (void)httpConnection: (HttpConnection *)connection didReceiveData: (NSData *)data {
+- (void)httpConnection:(HttpConnection *)connection didReceiveData:(NSData *)data
+{
     self.linccingId = nil;
     
     if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData   %@", connection.request); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }    
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData - error :   %@", [NSString stringWithData:data usingEncoding:NSUTF8StringEncoding]); }
     
     if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
 		[self didFailWithError:error];
 		return;
 	}
+    
+    if ([connection.response statusCode] == 504 ) {
+		NSError *error = [NSError errorWithDomain:HoccerError code:504 userInfo:nil];
+		[self didFailWithError:error];
+		return;
+	}
+
 	
     @try {
         if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
@@ -462,6 +479,7 @@
         else { NSLog(@"%@", e); }
     }
 }
+
 #pragma mark -
 #pragma mark Private Methods
 
