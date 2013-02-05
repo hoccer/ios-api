@@ -61,7 +61,7 @@
 - (NSString *)requestMethod:(NSString *)method URI:(NSString *)url payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success;
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)url payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success;
 
-- (void)cancelAllRequest;
+- (void)cancelAllRequests;
 - (void)cancelRequest: (NSString *)uri;
 - (BOOL)hasActiveRequest;
 

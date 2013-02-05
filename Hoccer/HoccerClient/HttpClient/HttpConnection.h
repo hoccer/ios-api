@@ -56,6 +56,6 @@
 @property (assign) BOOL canceled;
 @property (assign) UIBackgroundTaskIdentifier bgTask;
 
-- (BOOL)isLongpool;
+- (BOOL)isLongPoll;
 
 @end

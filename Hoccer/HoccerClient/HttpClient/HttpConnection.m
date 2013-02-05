@@ -72,7 +72,7 @@
 	return [self.endTimestamp timeIntervalSinceDate:self.startTimestamp];
 }
 
-- (BOOL) isLongpool {
+- (BOOL) isLongPoll {
 	return [self.uri hc_contains:@"waiting=true"];
 }
 

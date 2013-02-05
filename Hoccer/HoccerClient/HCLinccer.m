@@ -261,6 +261,7 @@
 	[self.updateTimer invalidate];
 	self.updateTimer = nil;
 	[environmentController deactivateLocation];
+    [httpClient cancelRequest:(self.peekId)];
 	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
 				  success:@selector(httpClientDidDelete:)];
     
@@ -283,7 +284,7 @@
         [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
     }
     
-    if ([connection isLongpool] && ([error code] == 504)) {
+    if ([connection isLongPoll] && ([error code] == 504)) {
 		NSURL *url = [NSURL URLWithString:connection.uri];
 		
 		[httpClient getURI:[[url path] stringByAppendingQuery:@"waiting=true"]
@@ -406,6 +407,7 @@
 }
 
 - (void)httpClientDidDelete: (NSData *)receivedData {
+    [self cancelAllRequestsIncludingPeek];
 	if ([delegate respondsToSelector:@selector(linccerDidUnregister:)]) {
 		[delegate linccerDidUnregister: self];
 	}
@@ -550,13 +552,18 @@
     [environment release];
 }
 
-- (void)cancelAllRequest {
-	[httpClient cancelAllRequest];
+- (void)cancelAllRequestsKeepPeek {
+	[httpClient cancelAllRequests];
     self.linccingId = nil;
     
     [self peek];
 }
 
+- (void)cancelAllRequestsIncludingPeek {
+	[httpClient cancelAllRequests];
+    self.linccingId = nil;
+    self.peekId = nil;
+}
 
 - (void)peek {
     NSString *peekUri = [uri stringByAppendingPathComponent:@"/peek"];
@@ -616,7 +623,7 @@
 }
 
 - (void)dealloc {
-	[httpClient cancelAllRequest];
+	[httpClient cancelAllRequests];
 	httpClient.target = nil;
 	[httpClient release];
 	

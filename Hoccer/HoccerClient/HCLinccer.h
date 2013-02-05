@@ -100,7 +100,8 @@ enum HoccerErrors {
 
 - (BOOL)isLinccing;
 
-- (void)cancelAllRequest;
+- (void)cancelAllRequestsKeepPeek;
+- (void)cancelAllRequestsIncludingPeek;
 - (NSString *)uuid;
 
 - (void)updateEnvironment;

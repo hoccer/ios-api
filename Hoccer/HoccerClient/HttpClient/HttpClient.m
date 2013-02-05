@@ -258,7 +258,7 @@
 	[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
 }
 
-- (void)cancelAllRequest {
+- (void)cancelAllRequests {
 	for (ConnectionContainer *container in [connections allValues]) {
 		[container.connection cancel];
 		container.httpConnection.canceled = YES;
@@ -324,7 +324,7 @@
 		
 		return httpError;
 	}
-    if ([response statusCode] >500){
+    if ([response statusCode] >= 500){
         //NSLog(@"500! NA TOLL!");
 
     }
