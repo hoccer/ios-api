@@ -268,6 +268,9 @@
 }
 
 - (void)cancelRequest:(NSString *)uri {
+    if (uri == nil)
+        return;
+    
 	ConnectionContainer *cancelableConnection = nil;
 	for (ConnectionContainer *container in [connections allValues]) {
 		if ([container.httpConnection.uri isEqualToString: uri]) {
@@ -277,13 +280,14 @@
 		}
 	}
 	
+	[connections removeObjectForKey:[cancelableConnection description]];
+
 	[cancelableConnection.connection cancel];
 	cancelableConnection.httpConnection.canceled = YES;
 
     [[UIApplication sharedApplication] endBackgroundTask:cancelableConnection.httpConnection.bgTask];
     cancelableConnection.httpConnection.bgTask = UIBackgroundTaskInvalid;
 	
-	[connections removeObjectForKey:[cancelableConnection description]];
 }
 
 - (BOOL)hasActiveRequest {
