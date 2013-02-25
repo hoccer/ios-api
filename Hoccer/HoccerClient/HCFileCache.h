@@ -43,7 +43,7 @@
 @optional
 - (void)fileCache: (HCFileCache *)fileCache didFailWithError: (NSError *)error forURI: (NSString *)uri;
 - (void)fileCache: (HCFileCache *)fileCache didDownloadFile: (NSString *)path;
-- (void)fileCache: (HCFileCache *)fileCache didUpdateProgress: (NSNumber *)progress forURI: (NSString *)uri;
+- (void)fileCache: (HCFileCache *)fileCache didUpdateTransferProgress:(TransferProgress *)progress;
 - (void)fileCache: (HCFileCache *)fileCache didReceiveResponse: (NSHTTPURLResponse *)response withDownloadedData: (NSData *)data forURI: (NSString *)uri;
 - (void)fileCache: (HCFileCache *)fileCache didUploadFileToURI: (NSString *)path;
 
@@ -63,8 +63,8 @@
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret sandboxed: (BOOL)sandbox;
 
-- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval;
-- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted;
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval withSize: (NSInteger) contentSize;
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted withSize: (NSInteger) contentSize;
 
 - (NSString *)load: (NSString *)url;
 - (void)cancelTransferWithURI: (NSString *)transferUri;

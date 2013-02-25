@@ -84,6 +84,52 @@
 
 @end
 
+@implementation TransferProgress
+
+@synthesize total;
+@synthesize done;
+@synthesize uri;
+
+- (TransferProgress*) init {
+    if ( self = [super init] ) {
+        self->total = 0;
+        self->done = 0;
+        self->uri = nil;
+    }
+    return self;
+}
+
+- (TransferProgress*) initWithTotal: (NSInteger) totalBytes done:(NSInteger) bytes uri:(NSString*) theURI {
+    if ( self = [super init] ) {
+        self->total = totalBytes;
+        self->done = bytes;
+        self->uri = theURI;
+    }
+    return self;
+}
+
+- (float) percentDone {
+    if (total > 0) {
+        return (float)done / (float)total;
+    }
+    return 0.0;
+}
+
+- (BOOL) completed {
+    return done >= total;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"total: %i done:%i uri: %@", total, done, uri];
+}
+
+-(void)dealloc {
+    [super dealloc];
+}
+
+@end
+
+
 @interface HttpClient ()
 - (NSError *)hasHttpError: (NSHTTPURLResponse *)response;
 @end
@@ -178,10 +224,17 @@
 	}
 	
 	[container.receivedData appendData:data];
-	CGFloat downloaded = (float)[container.receivedData length]/ [container.httpConnection.response expectedContentLength];
-	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
-		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
-					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: downloaded]];
+
+    TransferProgress * progress = [[TransferProgress alloc]
+            initWithTotal:[container.httpConnection.response expectedContentLength]
+            done:[container.receivedData length]
+            uri:[container.httpConnection uri]
+    ];
+
+    // NSLog(@"HttpClient didReceiveData target %@", target);
+	if ([target respondsToSelector:@selector(httpConnection:didUpdateTransferProgress:)]) {
+        // NSLog(@"HttpClient didReceiveData performSelector");
+		[target performSelector:@selector(httpConnection:didUpdateTransferProgress:) withObject:progress];
 	}
 }
 
@@ -191,15 +244,22 @@
 		return;
 	}
 	
-	CGFloat uploaded = (float)totalBytesWritten / totalBytesExpectedToWrite;
+	// CGFloat uploaded = (float)totalBytesWritten / totalBytesExpectedToWrite;
+    
+    TransferProgress * progress = [[TransferProgress alloc]
+                                   initWithTotal:totalBytesExpectedToWrite
+                                   done:totalBytesWritten
+                                   uri:[container.httpConnection uri]];
 
-	if ([target respondsToSelector:@selector(httpConnection:didUpdateDownloadPercentage:)]) {
-		[target performSelector:@selector(httpConnection:didUpdateDownloadPercentage:) 
-					 withObject:container.httpConnection withObject: [NSNumber numberWithFloat: uploaded]];
+    // NSLog(@"HttpClient didSendBodyData target %@", target);
+	if ([target respondsToSelector:@selector(httpConnection:didUpdateTransferProgress:)]) {
+        // NSLog(@"HttpClient didSendBodyData performSelector didUpdateTransferProgress %@", progress);
+		[target performSelector:@selector(httpConnection:didUpdateTransferProgress:) withObject:progress];
 	}
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
+    NSLog(@"HttpClient; aConnection didFailWithError %@, connection = %@", error, aConnection);
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	if (container == nil) {
 		return;

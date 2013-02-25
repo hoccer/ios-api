@@ -66,3 +66,21 @@
 - (BOOL)hasActiveRequest;
 
 @end
+
+@interface TransferProgress : NSObject {
+    NSString * uri;
+	NSInteger total;
+    NSInteger done;
+}
+
+@property (assign) NSInteger total;
+@property (assign) NSInteger done;
+@property (retain, nonatomic) NSString * uri;
+
+
+- (TransferProgress*) initWithTotal: (NSInteger) totalBytes done:(NSInteger) bytes uri:(NSString*) theURI;
+- (float) percentDone;
+- (BOOL) completed;
+
+
+@end

@@ -75,22 +75,34 @@
 
 #pragma mark -
 #pragma mark Metods for Sending
-- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval {
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval withSize: (NSInteger)contentSize {
 	    
     NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithDouble:interval] stringValue] forKey:@"expires_in"];
 	
 	NSString *contentDisposition = [NSString stringWithFormat:@"attachment; filename=\"%@\"", filename];
-	NSDictionary *headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"]; 
-	
+	NSDictionary *headers = nil;
+    
+    if (contentSize > 0) {
+        NSLog(@"cacheData with Content-Length %i", contentSize);
+        headers = [NSDictionary dictionaryWithObjectsAndKeys:
+                    contentDisposition, @"Content-Disposition",
+                    [NSString stringWithFormat:@"%i", contentSize], @"Content-Length",
+                    nil
+                    ];
+       
+    } else {
+        headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"];
+    }
+    
 	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
 	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];
 		
 	return [httpClient requestMethod:@"PUT" URI:uri payload:data header:headers success:@selector(httpConnection:didSendData:)];
 }
 
-- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted{
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted withSize: (NSInteger) contentSize {
     if (!encrypted) {
-        return [self cacheData:data withFilename:filename forTimeInterval:interval];
+        return [self cacheData:data withFilename:filename forTimeInterval:interval withSize: contentSize];
     }
     else {
 
@@ -99,7 +111,7 @@
         self.cryptor = [[[AESCryptor alloc] initWithKey:key] autorelease];
         
         [self.cryptor encrypt:data];
-        return [self cacheData:data withFilename:filename forTimeInterval:interval];
+        return [self cacheData:data withFilename:filename forTimeInterval:interval withSize: [data length]];
     }
 }
 
@@ -119,9 +131,11 @@
 	}
 }
 
-- (void)httpConnection:(HttpConnection *)connection didUpdateDownloadPercentage: (NSNumber *)percentage {
-	if ([delegate respondsToSelector:@selector(fileCache:didUpdateProgress:forURI:)]) {
-		[delegate fileCache:self didUpdateProgress:percentage forURI: connection.uri];
+- (void)httpConnection:(HttpConnection *)connection didUpdateTransferProgress:(TransferProgress *)progress {
+    NSLog(@"HCFileCache httpConnection didUpdateTransferProgress %@", progress);
+	if ([delegate respondsToSelector:@selector(fileCache:didUpdateTransferProgress:)]) {
+        // NSLog(@"httpConnection delegate didUpdateDownloadProgress");
+		[delegate fileCache:self didUpdateTransferProgress:progress];
 	}
 }
 
