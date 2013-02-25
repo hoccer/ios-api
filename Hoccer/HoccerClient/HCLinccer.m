@@ -391,7 +391,6 @@
 		[self didFailWithError:error];
 		return;
 	}
-
 	
     @try {
         if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {

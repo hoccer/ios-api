@@ -132,7 +132,7 @@
 }
 
 - (void)httpConnection:(HttpConnection *)connection didUpdateTransferProgress:(TransferProgress *)progress {
-    NSLog(@"HCFileCache httpConnection didUpdateTransferProgress %@", progress);
+    // NSLog(@"HCFileCache httpConnection didUpdateTransferProgress %@", progress);
 	if ([delegate respondsToSelector:@selector(fileCache:didUpdateTransferProgress:)]) {
         // NSLog(@"httpConnection delegate didUpdateDownloadProgress");
 		[delegate fileCache:self didUpdateTransferProgress:progress];
