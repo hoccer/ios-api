@@ -231,7 +231,7 @@
             uri:[container.httpConnection uri]
     ];
 
-    // NSLog(@"HttpClient didReceiveData target %@", target);
+    if (USES_DEBUG_MESSAGES) {  NSLog(@"HttpClient didReceiveData target %@", target);}
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateTransferProgress:)]) {
         // NSLog(@"HttpClient didReceiveData performSelector");
 		[target performSelector:@selector(httpConnection:didUpdateTransferProgress:) withObject:progress];
@@ -251,7 +251,7 @@
                                    done:totalBytesWritten
                                    uri:[container.httpConnection uri]];
 
-    // NSLog(@"HttpClient didSendBodyData target %@", target);
+    if (USES_DEBUG_MESSAGES) {  NSLog(@"HttpClient didSendBodyData target %@", target);}
 	if ([target respondsToSelector:@selector(httpConnection:didUpdateTransferProgress:)]) {
         // NSLog(@"HttpClient didSendBodyData performSelector didUpdateTransferProgress %@", progress);
 		[target performSelector:@selector(httpConnection:didUpdateTransferProgress:) withObject:progress];

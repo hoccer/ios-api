@@ -83,7 +83,7 @@
 	NSDictionary *headers = nil;
     
     if (contentSize > 0) {
-        NSLog(@"cacheData with Content-Length %i", contentSize);
+        if (USES_DEBUG_MESSAGES) {  NSLog(@"HCFileCache: cacheData with Content-Length %i", contentSize);}
         headers = [NSDictionary dictionaryWithObjectsAndKeys:
                     contentDisposition, @"Content-Disposition",
                     [NSString stringWithFormat:@"%i", contentSize], @"Content-Length",
@@ -132,7 +132,7 @@
 }
 
 - (void)httpConnection:(HttpConnection *)connection didUpdateTransferProgress:(TransferProgress *)progress {
-    // NSLog(@"HCFileCache httpConnection didUpdateTransferProgress %@", progress);
+    if (USES_DEBUG_MESSAGES) {  NSLog(@"HCFileCache httpConnection didUpdateTransferProgress %@", progress);}
 	if ([delegate respondsToSelector:@selector(fileCache:didUpdateTransferProgress:)]) {
         // NSLog(@"httpConnection delegate didUpdateDownloadProgress");
 		[delegate fileCache:self didUpdateTransferProgress:progress];
