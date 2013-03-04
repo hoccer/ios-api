@@ -120,7 +120,8 @@
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"total: %i done:%i uri: %@", total, done, uri];
+    // return [NSString stringWithFormat:@"total: %i done:%i uri: %@", total, done, uri];
+    return [NSString stringWithFormat:@"total: %i done:%i", total, done];
 }
 
 -(void)dealloc {
@@ -302,10 +303,35 @@
 		[self connection:aConnection didFailWithError:error];
 		return;
 	}
-	
+
 	if (!container.httpConnection.canceled && [target respondsToSelector:container.successAction]) {
+        
+        //// - do progress update
+        // NSLog(@"HttpClient connectionDidFinishLoading uri %@", [container.httpConnection uri]);
+        // NSLog(@"HttpClient connectionDidFinishLoading request.allHTTPHeaderFields %@", container.httpConnection.request.allHTTPHeaderFields);
+        NSString * myCLString = [container.httpConnection.request.allHTTPHeaderFields objectForKey:@"Content-Length"];
+        if (myCLString != nil) {
+            
+            NSInteger myContentLength = [myCLString intValue];
+            
+            // NSLog(@"HttpClient connectionDidFinishLoading myContentLength %i", myContentLength);
+            
+            TransferProgress * progress = [[TransferProgress alloc]
+                                           initWithTotal:myContentLength
+                                           done:myContentLength
+                                           uri:[container.httpConnection uri]];
+            
+            if (USES_DEBUG_MESSAGES) {  NSLog(@"HttpClient connectionDidFinishLoading target %@", aConnection);}
+            if ([target respondsToSelector:@selector(httpConnection:didUpdateTransferProgress:)]) {
+                // NSLog(@"HttpClient connectionDidFinishLoading performSelector didUpdateTransferProgress %@", progress);
+                [target performSelector:@selector(httpConnection:didUpdateTransferProgress:) withObject:progress];
+            }
+        }
+        ////
+
 		[target performSelector:container.successAction withObject:container.httpConnection withObject:container.receivedData];
 	}
+
 
 	[connections removeObjectForKey:[aConnection description]];
 }

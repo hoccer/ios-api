@@ -91,6 +91,7 @@
                     ];
        
     } else {
+        if (USES_DEBUG_MESSAGES) {  NSLog(@"HCFileCache: cacheData without content size");}
         headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"];
     }
     
@@ -125,6 +126,7 @@
 #pragma mark HttpConnection Delegate Methods
 
 - (void)httpConnection: (HttpConnection *)connection didSendData: (NSData *)data {
+    if (USES_DEBUG_MESSAGES) {  NSLog(@"HCFileCache httpConnection didSendData, len = %i", data.length);}
 	if ([delegate respondsToSelector:@selector(fileCache:didUploadFileToURI:)]) {
 		NSString *body = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 		[delegate fileCache:self didUploadFileToURI:body];
@@ -140,12 +142,14 @@
 }
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError: (NSError *)error {
+    if (USES_DEBUG_MESSAGES) {  NSLog(@"HCFileCache httpConnection didFailWithError, error = %@", error);}
 	if ([delegate respondsToSelector:@selector(fileCache:didFailWithError:forURI:)]) {
 		[delegate fileCache:self didFailWithError:error forURI:connection.uri];
 	}
 }
 
 - (void)httpConnection:(HttpConnection *)connection didReceiveData: (NSData *)data {    
+    if (USES_DEBUG_MESSAGES) {  NSLog(@"HCFileCache httpConnection didReceiveData, len = %i", data.length);}
     if ([delegate respondsToSelector:@selector(fileCache:didReceiveResponse:withDownloadedData:forURI:)]) {
 		[delegate fileCache: self didReceiveResponse:connection.response withDownloadedData: data forURI: connection.uri];
 	}
