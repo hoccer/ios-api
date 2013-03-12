@@ -128,6 +128,8 @@
     @try {
         NSData *dataToSend = [[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding];
         
+        NSLog(@"send %@", [data yajl_JSONString]);
+        
         NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
         self.linccingId = [httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
                     payload: dataToSend

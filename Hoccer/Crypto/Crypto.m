@@ -105,14 +105,17 @@ static NSData *NotSoRandomSalt() {
 
 - (NSString *)encryptString: (NSString *)string {
     NSData *data      = [string dataUsingEncoding:NSUTF8StringEncoding];
+    // NSLog(@"encryptString data=%@", data);
     NSData *encripted = [self encrypt:data];
-        
+    // NSLog(@"encryptString encripted=%@", encripted);
     return [encripted asBase64EncodedString];
 }
 
 - (NSString *)decryptString: (NSString *)string {
     NSData *data      = [NSData dataWithBase64EncodedString:string];
+    // NSLog(@"decryptString:data crypted=%@", data);
     NSData *decrypted = [self decrypt:data];
+    // NSLog(@"decryptString: decrypted=%@", decrypted);
     return [NSString stringWithData:decrypted usingEncoding:NSUTF8StringEncoding];
 }
 
