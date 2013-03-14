@@ -52,7 +52,7 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
 	
 	switch ( status )
 	{
-		case kCCSuccess:
+		case kCCSuccess: 
 			description = NSLocalizedString(@"Success", @"Error description");
 			break;
 			
