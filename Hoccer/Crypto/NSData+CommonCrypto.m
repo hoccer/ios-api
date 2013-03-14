@@ -57,37 +57,37 @@ NSString * const kCommonCryptoErrorDomain = @"CommonCryptoErrorDomain";
 			break;
 			
 		case kCCParamError:
-			description = NSLocalizedString(@"Parameter Error", @"Error description");
-			reason = NSLocalizedString(@"Illegal parameter supplied to encryption/decryption algorithm", @"Error reason");
+			description = NSLocalizedString(@"CryptoStatus_ParameterError", nil);
+			reason = NSLocalizedString(@"CryptoStatusReason_ParameterError", nil);
 			break;
 			
 		case kCCBufferTooSmall:
-			description = NSLocalizedString(@"Buffer Too Small", @"Error description");
-			reason = NSLocalizedString(@"Insufficient buffer provided for specified operation", @"Error reason");
+			description = NSLocalizedString(@"CryptoStatus_BufferTooSmall", nil);
+			reason = NSLocalizedString(@"CryptoStatusReason_BufferTooSmall", nil);
 			break;
 			
 		case kCCMemoryFailure:
-			description = NSLocalizedString(@"Memory Failure", @"Error description");
-			reason = NSLocalizedString(@"Failed to allocate memory", @"Error reason");
+			description = NSLocalizedString(@"CryptoStatus_MemoryFailure", nil);
+			reason = NSLocalizedString(@"CryptoStatusReason_MemoryFailure", nil);
 			break;
 			
 		case kCCAlignmentError:
-			description = NSLocalizedString(@"Alignment Error", @"Error description");
-			reason = NSLocalizedString(@"Input size to encryption algorithm was not aligned correctly", @"Error reason");
+			description = NSLocalizedString(@"CryptoStatus_AlignmentError", nil);
+			reason = NSLocalizedString(@"CryptoStatusReason_AlignmentError", nil);
 			break;
 			
 		case kCCDecodeError:
-			description = NSLocalizedString(@"Decode Error", @"Error description");
-			reason = NSLocalizedString(@"Input data did not decode or decrypt correctly", @"Error reason");
+			description = NSLocalizedString(@"CryptoStatus_DecodeError", nil);
+			reason = NSLocalizedString(@"CryptoStatusReason_DecodeError", nil);
 			break;
 			
 		case kCCUnimplemented:
-			description = NSLocalizedString(@"Unimplemented Function", @"Error description");
-			reason = NSLocalizedString(@"Function not implemented for the current algorithm", @"Error reason");
+			description = NSLocalizedString(@"CryptoStatus_Unimplemented", nil);
+			reason = NSLocalizedString(@"CryptoStatusReason_Unimplemented", nil);
 			break;
 			
 		default:
-			description = NSLocalizedString(@"Unknown Error", @"Error description");
+			description = NSLocalizedString(@"CryptoStatus_UnknownError", nil);
 			break;
 	}
 	

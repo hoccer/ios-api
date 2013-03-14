@@ -67,7 +67,7 @@
 		
 		locationManager = [[CLLocationManager alloc] init];
 		locationManager.delegate = self;
-        locationManager.purpose = NSLocalizedString(@"Hoccer needs you location to find out which devices are next to you. Otherwise Hoccer wont work.", nil); 
+        locationManager.purpose = NSLocalizedString(@"Message_LocationManagerPurpose", nil);
 
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 		[locationManager startUpdatingLocation];
@@ -105,7 +105,7 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     
     if (error.code == kCLErrorDenied){
-        UIAlertView *locationAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Could not locate you", nil) message:NSLocalizedString(@"We need to locate you to find other HOCCER users around you. Please enable location services in the settings of your device.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil, nil];
+        UIAlertView *locationAlert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Title_LocationDidFail", nil) message:NSLocalizedString(@"Message_LocationDidFail", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Button_OK", nil) otherButtonTitles:nil, nil];
         [locationAlert show];
         [locationAlert release];
     }
@@ -187,7 +187,7 @@
 #pragma mark private userInfo Methods
 + (NSDictionary *)userInfoForImpreciseLocation: (NSDictionary *)hoccabilityInfo {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:@"Your location accuracy is imprecise!" forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@"Message_LocationNotPrecise", nil) forKey:NSLocalizedDescriptionKey];
 	[userInfo setObject:[self impoveSuggestion: hoccabilityInfo] forKey:NSLocalizedRecoverySuggestionErrorKey];
 
 	return [userInfo autorelease];
@@ -195,7 +195,7 @@
 
 + (NSDictionary *)userInfoForBadLocation: (NSDictionary *)hoccabilityInfo {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:@"Your location accuracy is to imprecise for hoccing" forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@"Message_LocationNotPreciseEnough", nil) forKey:NSLocalizedDescriptionKey];
 	[userInfo setObject:[self impoveSuggestion: hoccabilityInfo] forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
 	return [userInfo autorelease];
@@ -203,32 +203,28 @@
 
 + (NSDictionary *)userInfoForPerfectLocation: (NSDictionary *)hoccabilityInfo {
 	NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-	[userInfo setObject:@"Your hoc location is perfect" forKey:NSLocalizedDescriptionKey];
-	[userInfo setObject:@"You suffice all requirements for reliable hoccing." forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[userInfo setObject:NSLocalizedString(@"Message_LocationPerfectPrecision", nil) forKey:NSLocalizedDescriptionKey];
+	[userInfo setObject:NSLocalizedString(@"RecoverySuggestion_LocationPerfectPrecision", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
 	return [userInfo autorelease];
 }
 
 + (NSString *)impoveSuggestion: (NSDictionary *)hoccabilityInfo {
+
 	NSDictionary *wifi = [hoccabilityInfo objectForKey:@"wifi"];
 	NSDictionary *coordinates = [hoccabilityInfo objectForKey:@"coordinates"];
+
+    NSString *suggestion = NSLocalizedString(@"RecoverySuggestion_LocationShouldBeBetter", nil);
 	
-	NSMutableArray *suggestions = [[NSMutableArray alloc] initWithCapacity:2];
-	NSMutableString *suggestion = [[NSMutableString alloc] init];
-	
-	if ([[wifi objectForKey:@"quality"] intValue] == 0) {
-		[suggestions addObject:@"turning on the phones wifi"];
+    if ([[wifi objectForKey:@"quality"] intValue] == 0) {
+        suggestion = [suggestion stringByAppendingFormat:@" %@", NSLocalizedString(@"RecoverySuggestion_LocationTryTurnOnWifi", nil)];
 	}
 	
 	if ([[coordinates objectForKey:@"quality"] intValue] == 0) {
-		[suggestions addObject:@"going outside"];
+        suggestion = [suggestion stringByAppendingFormat:@" %@", NSLocalizedString(@"RecoverySuggestion_LocationTryGoingOutside", nil)];
 	}
 	
-	[suggestion appendString:@"Hoccer needs to locate you precisely to find your exchange partner. You can improve your location by "];
-	[suggestion appendString:[suggestions componentsJoinedByString:@" or "]];
-
-	[suggestions release];
-	return [suggestion autorelease];
+    return suggestion;
 }
 
 

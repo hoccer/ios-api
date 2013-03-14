@@ -225,8 +225,8 @@
     if (theKey != nil){
         if (![keyManager storeKey:theKey forClient:client]){
             NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
-            [errorInfo setObject:[NSString stringWithFormat:NSLocalizedString(@"The public key of %@ may be invalid, if this error occurs again please contact support@hoccer.com", nil),[client objectForKey:@"name"]] forKey:NSLocalizedDescriptionKey];
-            [errorInfo setObject:NSLocalizedString(@"Disable encryption and enable it again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+            [errorInfo setObject:[NSString stringWithFormat:NSLocalizedString(@"Message_PublicKeyMaybeInvalid", nil),[client objectForKey:@"name"]] forKey:NSLocalizedDescriptionKey];
+            [errorInfo setObject:NSLocalizedString(@"RecoverySuggestion_PublicKeyMaybeInvalid", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
             
             NSError *error = [NSError errorWithDomain:@"PubKeyError" code:700 userInfo:errorInfo];
             
@@ -297,8 +297,8 @@
 	
 	if ([error code] == 409) {
 		NSMutableDictionary *errorInfo = [NSMutableDictionary dictionary];
-		[errorInfo setObject:NSLocalizedString(@"Too many files are flying around. Make sure that only one person is SENDING via HOCCER at one time", nil) forKey:NSLocalizedDescriptionKey];
-		[errorInfo setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+		[errorInfo setObject:NSLocalizedString(@"Message_TooManyFilesFlyingAround", nil) forKey:NSLocalizedDescriptionKey];
+		[errorInfo setObject:NSLocalizedString(@"RecoverySuggestion_TooManyFilesFlyingAround", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
 		error = [NSError errorWithDomain:HoccerError code:409 userInfo:errorInfo];
 	}
@@ -489,16 +489,16 @@
 - (NSDictionary *)userInfoForNoReceiver {
 
 	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-	[info setObject:NSLocalizedString(@"Apparently nobody wants your file. Please try SENDING again", nil) forKey:NSLocalizedDescriptionKey];
-	[info setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[info setObject:NSLocalizedString(@"Message_NoReceiver", nil) forKey:NSLocalizedDescriptionKey];
+	[info setObject:NSLocalizedString(@"RecoverySuggestion_NoReceiver", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 		
 	return [info autorelease];
 }
 
 - (NSDictionary *)userInfoForNoSender {
 	NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-	[info setObject:NSLocalizedString(@"Nobody seems to have SENT anything. Please tell the other users to try again.", nil) forKey:NSLocalizedDescriptionKey];
-	[info setObject:NSLocalizedString(@"Try again", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
+	[info setObject:NSLocalizedString(@"Message_NoSender", nil) forKey:NSLocalizedDescriptionKey];
+	[info setObject:NSLocalizedString(@"RecoverySuggestion_NoSender", nil) forKey:NSLocalizedRecoverySuggestionErrorKey];
 	
 	return [info autorelease];	
 }
