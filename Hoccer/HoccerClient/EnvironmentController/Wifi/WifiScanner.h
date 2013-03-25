@@ -45,6 +45,8 @@
 	
 	NSArray *scannedNetworks;
 	BOOL repeat;
+    BOOL justOwnInterface;
+    id ifInfo;
 	
 	id <WifiScannerDelegate> delegate;
 }
@@ -52,6 +54,8 @@
 @property (readonly) NSArray *bssids;
 @property (nonatomic, retain) NSArray *scannedNetworks;
 @property (nonatomic, assign) id <WifiScannerDelegate> delegate;
+@property (nonatomic, assign) BOOL justOwnInterface;
+@property (nonatomic, retain) id ifInfo;
 
 + (WifiScanner *)sharedScanner;
 - (void)scanNetwork;

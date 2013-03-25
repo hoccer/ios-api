@@ -38,7 +38,7 @@
 #import <ifaddrs.h>
 #import <arpa/inet.h>
 
-
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 static WifiScanner *wifiScannerInstance;
 
@@ -46,6 +46,9 @@ static WifiScanner *wifiScannerInstance;
 
 @synthesize scannedNetworks;
 @synthesize delegate;
+@synthesize justOwnInterface;
+@synthesize ifInfo;
+
 
 + (WifiScanner *)sharedScanner {
 	if (wifiScannerInstance == nil) {
@@ -62,6 +65,7 @@ static WifiScanner *wifiScannerInstance;
 	self = [super init];
     if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] == NSOrderedAscending){
         if (self != nil) {
+            justOwnInterface = NO;
             void* libHandle = dlopen("/System/Library/SystemConfiguration/WiFiManager.bundle/WiFiManager", RTLD_LAZY);
             open = dlsym(libHandle, "Apple80211Open");
             bind = dlsym(libHandle, "Apple80211BindToInterface");
@@ -77,7 +81,9 @@ static WifiScanner *wifiScannerInstance;
         return self;
     }
 	else {
-        return [super init];
+        justOwnInterface = YES;
+        [self scanNetwork];
+        return self;
     }
         
 #endif
@@ -109,26 +115,49 @@ static WifiScanner *wifiScannerInstance;
 
 - (NSArray *)bssids 
 {
-	if (scannedNetworks == nil) {
-		return nil;
-	}
-	
-	NSMutableArray *bssids = [[NSMutableArray alloc] init];
-	for (NSDictionary *wifiSpot in scannedNetworks) {
-		[bssids addObject: [wifiSpot valueForKey:@"BSSID"]];
-	}
-	
-	return [bssids autorelease];
+    if (!justOwnInterface) {
+        if (scannedNetworks == nil) {
+            return nil;
+        }
+        
+        NSMutableArray *bssids = [[NSMutableArray alloc] init];
+        for (NSDictionary *wifiSpot in scannedNetworks) {
+            [bssids addObject: [wifiSpot valueForKey:@"BSSID"]];
+        }
+        
+        return [bssids autorelease];
+    } else {
+        if (ifInfo == nil) {
+            return nil;
+        }
+        NSString * myBSSID = (NSString*)[self fetchBSSID];
+        if (myBSSID == nil) {
+            return nil;
+        }
+        NSMutableArray *bssids = [[NSMutableArray alloc] init];
+        [bssids addObject: myBSSID];
+        NSLog(@"bssids %@", myBSSID);
+        return [bssids autorelease];
+    }
 }
 
 - (void)scan {
-	NSDictionary *parameters = [[NSDictionary alloc] init];
-	NSArray *newScanNetworks = nil;
-	scan(wifiHandle, &newScanNetworks, parameters);
-	[parameters release];
-	
-	[self performSelectorOnMainThread:@selector(setScannedNetworks:) withObject:newScanNetworks waitUntilDone:NO];
-	[newScanNetworks release];
+    
+    if (!justOwnInterface) {
+        NSDictionary *parameters = [[NSDictionary alloc] init];
+        NSArray *newScanNetworks = nil;
+        scan(wifiHandle, &newScanNetworks, parameters);
+        [parameters release];
+        
+        [self performSelectorOnMainThread:@selector(setScannedNetworks:) withObject:newScanNetworks waitUntilDone:NO];
+        [newScanNetworks release];
+    } else {
+        ifInfo = [self fetchSSIDInfo];
+        
+        if ([delegate respondsToSelector:@selector(wifiScannerDidUpdateBssids:)]) {
+            [delegate wifiScannerDidUpdateBssids: self];
+        }
+    }
 }
 
 - (void) dealloc {
@@ -168,6 +197,32 @@ static WifiScanner *wifiScannerInstance;
 	freeifaddrs(interfaces);
 	
 	return address;
+}
+
+- (id)fetchSSIDInfo
+{
+    NSArray *ifs = (id)CNCopySupportedInterfaces();
+    NSLog(@"%s: Supported interfaces: %@", __func__, ifs);
+    id info = nil;
+    for (NSString *ifnam in ifs) {
+        info = (id)CNCopyCurrentNetworkInfo((CFStringRef)ifnam);
+        NSLog(@"%s: %@ => %@", __func__, ifnam, info);
+        if (info && [info count]) {
+            break;
+        }
+        [info release];
+    }
+    [ifs release];
+    return [info autorelease];
+}
+
+- (CFStringRef) fetchBSSID {
+    CFDictionaryRef info = (CFDictionaryRef)[self fetchSSIDInfo];
+    if (info != nil) {
+        return CFDictionaryGetValue(info,kCNNetworkInfoKeyBSSID);
+    } else {
+        return nil;
+    }
 }
 
 @end
