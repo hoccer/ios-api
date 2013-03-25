@@ -136,7 +136,7 @@ static WifiScanner *wifiScannerInstance;
         }
         NSMutableArray *bssids = [[NSMutableArray alloc] init];
         [bssids addObject: myBSSID];
-        NSLog(@"bssids %@", myBSSID);
+        // NSLog(@"bssids %@", myBSSID);
         return [bssids autorelease];
     }
 }
@@ -202,11 +202,11 @@ static WifiScanner *wifiScannerInstance;
 - (id)fetchSSIDInfo
 {
     NSArray *ifs = (id)CNCopySupportedInterfaces();
-    NSLog(@"%s: Supported interfaces: %@", __func__, ifs);
+    // NSLog(@"%s: Supported interfaces: %@", __func__, ifs);
     id info = nil;
     for (NSString *ifnam in ifs) {
         info = (id)CNCopyCurrentNetworkInfo((CFStringRef)ifnam);
-        NSLog(@"%s: %@ => %@", __func__, ifnam, info);
+        // NSLog(@"%s: %@ => %@", __func__, ifnam, info);
         if (info && [info count]) {
             break;
         }
