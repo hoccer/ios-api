@@ -48,14 +48,13 @@
 #import "RSA.h"
 #import "PublicKeyManager.h"
 
-//orig #define LINCCER_URI @"https://linccer-production.hoccer.com/v3"
-//orig #define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
-
 #define LINCCER_URI @"https://linccer-production.hoccer.com/v3"
-#define LINCCER_SANDBOX_URI @"https://linccer-development.hoccer.com/v3"
+#define LINCCER_SANDBOX_URI @"https://linccer-experimental.hoccer.com/v3"
 
-
+// #define LINCCER_URI @"https://linccer-production.hoccer.com/v3"
+// #define LINCCER_SANDBOX_URI @"https://linccer-development.hoccer.com/v3"
 //#define LINCCER_SANDBOX_URI @"https://linccer-sandbox.hoccer.com/v3"
+
 #define HOCCER_CLIENT_ID_KEY @"hoccerClientUri" 
 
 @interface HCLinccer ()
@@ -107,7 +106,7 @@
 		httpClient.target = self;
 		
 		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
-		environmentUpdateInterval = 20;	
+		environmentUpdateInterval = 30;
 		[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reactivate) userInfo:nil repeats:NO];
         
         //[[RSA sharedInstance] testEncryption];
@@ -521,7 +520,8 @@
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoKey"]){
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] &&
+        [[NSUserDefaults standardUserDefaults] boolForKey:@"autoKey"]){
         NSData *pubKey = [[RSA sharedInstance] getPublicKeyBits];
         NSString *pubKeyAsString = [pubKey asBase64EncodedString];
         if (pubKeyAsString){

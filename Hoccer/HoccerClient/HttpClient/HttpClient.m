@@ -192,7 +192,8 @@
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
 	[request setTimeoutInterval:60 * 60];
-	
+	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
 	HttpConnection *httpConnection = [[[HttpConnection alloc] init] autorelease];
