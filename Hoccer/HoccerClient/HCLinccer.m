@@ -243,11 +243,13 @@
 
 
 - (void)reactivate {
+    if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: reactivate:"); }
     isRegistered = NO;
     [environmentController activateLocation];
 
 	[self updateEnvironment];
     self.groupId = nil;
+    [self peek];
 }
 
 - (BOOL)isLinccing {
@@ -256,6 +258,8 @@
 
 
 - (void)disconnect {
+    if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: disconnect:"); }
+
 	if (!isRegistered) {
 		[self didFailWithError:nil];
 	}
