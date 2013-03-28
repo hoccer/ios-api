@@ -243,7 +243,7 @@
 
 
 - (void)reactivate {
-    if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: reactivate:"); }
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer: reactivate:"); }
     isRegistered = NO;
     [environmentController activateLocation];
 
@@ -258,7 +258,7 @@
 
 
 - (void)disconnect {
-    if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: disconnect:"); }
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer: disconnect:"); }
 
 	if (!isRegistered) {
 		[self didFailWithError:nil];
@@ -282,8 +282,8 @@
         self.linccingId = nil;
     }
 
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - error :   %@", error); }
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError statuscode:  %d", connection.response.statusCode); }
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - error :   %@", error); }
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didFailWithError statuscode:  %d", connection.response.statusCode); }
 
     if ([self.peekId isEqual:connection.uri]) {
         [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
@@ -358,7 +358,7 @@
 - (void)httpConnection:(HttpConnection *)connection didSendData:(NSData *)data
 {
     self.linccingId = nil;
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didSendData statuscode:  %d", connection.response.statusCode); }
 
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoReceiverError userInfo:[self userInfoForNoReceiver]];
@@ -367,12 +367,12 @@
 	}
     @try {
         if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
-            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didSendData - data : %@", data); }
+            if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer didSendData - data : %@", data); }
             [delegate linccer: self didSendData: [data yajl_JSON]];
         }
     }
     @catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didSendData - error : %@", e); }
+        if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer didSendData - error : %@", e); }
         else { NSLog(@"%@", e); }
     }
 }
@@ -381,9 +381,9 @@
 {
     self.linccingId = nil;
     
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData   %@", connection.request); }
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }    
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData - error :   %@", [NSString stringWithData:data usingEncoding:NSUTF8StringEncoding]); }
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didReceiveData   %@", connection.request); }
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }    
+    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didReceiveData - error :   %@", [NSString stringWithData:data usingEncoding:NSUTF8StringEncoding]); }
     
     if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
@@ -404,7 +404,7 @@
         }
     }
     @catch (NSException * e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didReceiveData : %@", e); }
+        if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer didReceiveData : %@", e); }
         else { NSLog(@"%@", e); }
     }
 
@@ -543,14 +543,18 @@
         
         //NSLog(@"HCLinccer updateEnvironment Dictionary: - %@", environment);
 
-        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment - [environment yajl_JSONString] : %@", [environment yajl_JSONString]); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment: %@", enviromentAsString); }
+        
+        if ([enviromentAsString length] <= 2) {
+            NSLog(@"HCLinccer ERROR: updateEnvironment: environment string too short '%@'", enviromentAsString);
+        }
         
         [httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
                    payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
                    success:@selector(httpConnection:didUpdateEnvironment:)];
     }
     @catch (NSException *e) {
-        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment execption : %@", e); }
+        if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer updateEnvironment execption : %@", e); }
         else { NSLog(@"%@", e); }
     }
     

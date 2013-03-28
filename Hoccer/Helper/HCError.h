@@ -1,5 +1,5 @@
 //
-//  HoccerError.h
+//  HCError.h
 //  Hoccer
 //
 //  Created by Pavel on 22.02.13.
