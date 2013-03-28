@@ -266,7 +266,10 @@
 	[self.updateTimer invalidate];
 	self.updateTimer = nil;
 	[environmentController deactivateLocation];
-    [httpClient cancelRequest:(self.peekId)];
+    if (self.peekId != nil) {
+        [httpClient cancelRequest:(self.peekId)];
+        self.peekId = nil;
+    }
 	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
 				  success:@selector(httpClientDidDelete:)];
     
@@ -286,6 +289,7 @@
     if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didFailWithError statuscode:  %d", connection.response.statusCode); }
 
     if ([self.peekId isEqual:connection.uri]) {
+        self.peekId = nil;
         [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
     }
     
@@ -358,7 +362,7 @@
 - (void)httpConnection:(HttpConnection *)connection didSendData:(NSData *)data
 {
     self.linccingId = nil;
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didSendData statuscode:  %d", connection.response.statusCode); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didSendData statuscode:  %d", connection.response.statusCode); }
 
 	if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoReceiverError userInfo:[self userInfoForNoReceiver]];
@@ -367,7 +371,10 @@
 	}
     @try {
         if ([delegate respondsToSelector:@selector(linccer:didSendData:)]) {
-            if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer didSendData - data : %@", data); }
+            if (USES_DEBUG_MESSAGES) {
+                NSLog(@"HCLinccer didSendData - data : %@",
+                       [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+            }
             [delegate linccer: self didSendData: [data yajl_JSON]];
         }
     }
@@ -422,6 +429,7 @@
     @try {
         
         if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateGroup   %@", connection.request); }
+        self.peekId = nil;
     
         NSDictionary *dictionary = [groupData yajl_JSON];
 
@@ -432,13 +440,11 @@
             [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
         }
         
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] == YES){
-                [self checkGroupForPublicKeys:dictionary];
-            }
-         
-        [self peek];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"encryption"] == YES){
+            [self checkGroupForPublicKeys:dictionary];
+        }
         
-    
+        [self peek];
     }
     @catch (NSException * e) {
         if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateGroup : %@", e); }
@@ -575,6 +581,12 @@
 }
 
 - (void)peek {
+    if (self.peekId != nil) {
+        NSLog(@"HCLinccer: peek request refused, a peek request is still open");
+        return;
+    } else {
+        NSLog(@"HCLinccer: new peek request"); 
+    }
     NSString *peekUri = [uri stringByAppendingPathComponent:@"/peek"];
     if (groupId) {
         NSDictionary *params = [NSDictionary dictionaryWithObject:groupId forKey:@"group_id"];

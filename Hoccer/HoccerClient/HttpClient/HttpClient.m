@@ -367,13 +367,15 @@
 		}
 	}
 	
-	[connections removeObjectForKey:[cancelableConnection description]];
-
-	[cancelableConnection.connection cancel];
-	cancelableConnection.httpConnection.canceled = YES;
-
-    [[UIApplication sharedApplication] endBackgroundTask:cancelableConnection.httpConnection.bgTask];
-    cancelableConnection.httpConnection.bgTask = UIBackgroundTaskInvalid;
+    if (cancelableConnection != nil) {
+        [connections removeObjectForKey:[cancelableConnection description]];
+        
+        [cancelableConnection.connection cancel];
+        cancelableConnection.httpConnection.canceled = YES;
+        
+        [[UIApplication sharedApplication] endBackgroundTask:cancelableConnection.httpConnection.bgTask];
+        cancelableConnection.httpConnection.bgTask = UIBackgroundTaskInvalid;
+    }
 	
 }
 
