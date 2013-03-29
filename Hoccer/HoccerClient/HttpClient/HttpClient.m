@@ -261,7 +261,7 @@
 }
 
 - (void)connection:(NSURLConnection *)aConnection didFailWithError:(NSError *)error {
-    NSLog(@"HttpClient; aConnection didFailWithError %@, connection = %@", error, aConnection);
+    if (USES_DEBUG_MESSAGES) {NSLog(@"HttpClient; aConnection didFailWithError %@, connection = %@", error, aConnection);}
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	if (container == nil) {
 		return;

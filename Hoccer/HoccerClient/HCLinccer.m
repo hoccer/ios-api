@@ -246,7 +246,7 @@
 
 
 - (void)reactivate {
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer: reactivate:"); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: reactivate:"); }
     isRegistered = NO;
     [environmentController activateLocation];
 
@@ -261,7 +261,7 @@
 
 
 - (void)disconnect {
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer: disconnect:"); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: disconnect:"); }
 
 	if (!isRegistered) {
 		[self didFailWithError:nil];
@@ -289,8 +289,8 @@
         self.linccingId = nil;
     }
 
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - error :   %@", error); }
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didFailWithError statuscode:  %d", connection.response.statusCode); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - error :   %@", error); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError statuscode:  %d", connection.response.statusCode); }
 
     if ([self.peekId isEqual:connection.uri]) {
         self.peekId = nil;
@@ -397,9 +397,9 @@
 {
     self.linccingId = nil;
     
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didReceiveData   %@", connection.request); }
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }    
-    if (USES_DEBUG_MESSAGES, YES) { NSLog(@"  HCLinccer HttpConnection didReceiveData - error :   %@", [NSString stringWithData:data usingEncoding:NSUTF8StringEncoding]); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData   %@", connection.request); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }    
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData - error :   %@", [NSString stringWithData:data usingEncoding:NSUTF8StringEncoding]); }
     
     if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
@@ -536,12 +536,12 @@
 	}
     
     if (self.envUpdateId != nil) {
-        NSLog(@"updateEnvironment call pending, not issuing new call");
+        if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment call pending, not issuing new call");}
         return;
     }
         
     if (self.lastEnvironmentupdate != nil && [self.lastEnvironmentupdate timeIntervalSinceNow] > -2.0 ) {
-        NSLog(@"updateEnvironment call has been issued before less than 2 sec.");
+        if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment call has been issued before less than 2 sec.");}
         return;
     }
     
@@ -561,23 +561,28 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apnToken"]){
         NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"apnToken"];
         [environment setObject:deviceToken forKey:@"apndevicetoken"];
-        
     }
+    
     @try {
         NSString *enviromentAsString = [environment yajl_JSONString];
         
         //NSLog(@"HCLinccer updateEnvironment Dictionary: - %@", environment);
 
-        if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer updateEnvironment: %@", enviromentAsString); }
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment: %@", enviromentAsString); }
         
         if ([enviromentAsString length] <= 2) {
             NSLog(@"HCLinccer ERROR: updateEnvironment: environment string too short '%@'", enviromentAsString);
         }
         
+        NSData * myPayLoad = [enviromentAsString dataUsingEncoding:NSUTF8StringEncoding];
+        // NSLog(@"myPayLoad retaincount=%d", [myPayLoad retainCount]);
+        
         self.envUpdateId = [httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
-                   payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
+                   payload: myPayLoad
                    success:@selector(httpConnection:didUpdateEnvironment:)];
-        self.lastEnvironmentupdate = [[NSDate alloc] init];    }
+        
+        self.lastEnvironmentupdate = [[NSDate alloc] init];
+    }
     @catch (NSException *e) {
         if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer updateEnvironment execption : %@", e); }
         else { NSLog(@"%@", e); }
@@ -601,10 +606,10 @@
 
 - (void)peek {
     if (self.peekId != nil) {
-        NSLog(@"HCLinccer: peek request refused, a peek request is still open");
+        if (USES_DEBUG_MESSAGES) {NSLog(@"HCLinccer: peek request refused, a peek request is still open");}
         return;
     } else {
-        NSLog(@"HCLinccer: new peek request"); 
+        if (USES_DEBUG_MESSAGES) {NSLog(@"HCLinccer: new peek request");}
     }
     NSString *peekUri = [uri stringByAppendingPathComponent:@"/peek"];
     if (groupId) {
