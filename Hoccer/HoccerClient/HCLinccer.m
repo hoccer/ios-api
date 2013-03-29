@@ -62,6 +62,7 @@
 @property (copy) NSString *linccingId;
 @property (copy) NSString *peekId;
 @property (copy) NSString *groupId;
+@property (copy) NSString *envUpdateId;
 
 - (void)updateEnvironment;
 - (void)didFailWithError: (NSError *)error;
@@ -78,10 +79,12 @@
 @synthesize isRegistered;
 @synthesize latency;
 @synthesize environmentUpdateInterval;
+@synthesize lastEnvironmentupdate;
 @synthesize linccingId;
 @synthesize peekId;
 @synthesize userInfo;
 @synthesize groupId;
+@synthesize envUpdateId;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -272,6 +275,7 @@
     }
 	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
 				  success:@selector(httpClientDidDelete:)];
+    self.envUpdateId = nil;
     
     
 }
@@ -291,6 +295,9 @@
     if ([self.peekId isEqual:connection.uri]) {
         self.peekId = nil;
         [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
+    }
+    if ([self.envUpdateId isEqual:connection.uri]) {
+        self.envUpdateId = nil;
     }
     
     if ([connection isLongPoll] && ([error code] == 504)) {
@@ -346,6 +353,8 @@
         [self peek];
     }
 	isRegistered = YES;
+    
+    self.envUpdateId = nil;
 	
 	@try {
 		if ([delegate respondsToSelector:@selector(linccer:didUpdateEnvironment:)]) {
@@ -525,7 +534,17 @@
 	if (uri == nil || ![self.environmentController hasEnvironment]) {
 		return;
 	}
-	
+    
+    if (self.envUpdateId != nil) {
+        NSLog(@"updateEnvironment call pending, not issuing new call");
+        return;
+    }
+        
+    if (self.lastEnvironmentupdate != nil && [self.lastEnvironmentupdate timeIntervalSinceNow] > -2.0 ) {
+        NSLog(@"updateEnvironment call has been issued before less than 2 sec.");
+        return;
+    }
+    
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
     [environment addEntriesFromDictionary:self.userInfo];
@@ -549,16 +568,16 @@
         
         //NSLog(@"HCLinccer updateEnvironment Dictionary: - %@", environment);
 
-        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer updateEnvironment: %@", enviromentAsString); }
+        if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer updateEnvironment: %@", enviromentAsString); }
         
         if ([enviromentAsString length] <= 2) {
             NSLog(@"HCLinccer ERROR: updateEnvironment: environment string too short '%@'", enviromentAsString);
         }
         
-        [httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
+        self.envUpdateId = [httpClient putURI:[uri stringByAppendingPathComponent:@"/environment"]
                    payload:[enviromentAsString dataUsingEncoding:NSUTF8StringEncoding] 
                    success:@selector(httpConnection:didUpdateEnvironment:)];
-    }
+        self.lastEnvironmentupdate = [[NSDate alloc] init];    }
     @catch (NSException *e) {
         if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer updateEnvironment execption : %@", e); }
         else { NSLog(@"%@", e); }

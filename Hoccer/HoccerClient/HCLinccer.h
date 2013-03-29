@@ -66,12 +66,14 @@ enum HoccerErrors {
 	NSTimer *updateTimer;
 	NSTimeInterval latency;
 	NSTimeInterval environmentUpdateInterval;
+    NSDate *lastEnvironmentupdate;
     
     BOOL isRegistered;
     NSString *groupId;
     
     NSString *linccingId;
     NSString *peekId;
+    NSString *envUpdateId;
         
     NSDictionary *userInfo;
     
@@ -86,6 +88,7 @@ enum HoccerErrors {
 @property (assign, nonatomic) NSTimeInterval environmentUpdateInterval;
 
 @property (retain, nonatomic) NSDictionary *userInfo;
+@property (retain, nonatomic) NSDate *lastEnvironmentupdate;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret;
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox;
