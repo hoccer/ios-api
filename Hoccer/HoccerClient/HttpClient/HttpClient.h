@@ -60,6 +60,7 @@
 - (NSString *)requestMethod:(NSString *)method absoluteURL:(NSString *)url payload:(NSData *)payload success:(SEL)success;
 - (NSString *)requestMethod:(NSString *)method URI:(NSString *)url payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success;
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)url payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success;
+- (NSString *)absoluteUriWithRelative:(NSString*)uri;
 
 - (void)cancelAllRequests;
 - (void)cancelRequest: (NSString *)uri;

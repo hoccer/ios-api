@@ -75,7 +75,7 @@
 
 #pragma mark -
 #pragma mark Metods for Sending
-- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval withSize: (NSInteger)contentSize {
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval withSize: (NSInteger)contentSize forURLName:(NSString *)urlName {
 	    
     NSDictionary *params = [NSDictionary dictionaryWithObject:[[NSNumber numberWithDouble:interval] stringValue] forKey:@"expires_in"];
 	
@@ -95,15 +95,21 @@
         headers = [NSDictionary dictionaryWithObject:contentDisposition forKey:@"Content-Disposition"];
     }
     
-	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
-	NSString *uri = [urlName stringByAppendingQuery:[params URLParams]];
+	NSString *fullUrlName = [@"/" stringByAppendingString:urlName];
+	NSString *uri = [fullUrlName stringByAppendingQuery:[params URLParams]];
 		
 	return [httpClient requestMethod:@"PUT" URI:uri payload:data header:headers success:@selector(httpConnection:didSendData:)];
 }
 
-- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted withSize: (NSInteger) contentSize {
+- (NSString *)getNewTransferURL {
+	NSString *urlName = [@"/" stringByAppendingString:[NSString stringWithUUID]];
+    return [httpClient absoluteUriWithRelative:urlName];
+}
+
+
+- (NSString *)cacheData: (NSData *)data withFilename: (NSString*)filename forTimeInterval: (NSTimeInterval)interval encrypted:(BOOL)encrypted withSize: (NSInteger) contentSize forURLName:(NSString *)urlName {
     if (!encrypted) {
-        return [self cacheData:data withFilename:filename forTimeInterval:interval withSize: contentSize];
+        return [self cacheData:data withFilename:filename forTimeInterval:interval withSize: contentSize forURLName:urlName];
     }
     else {
 
@@ -112,7 +118,7 @@
         self.cryptor = [[[AESCryptor alloc] initWithKey:key] autorelease];
         
         [self.cryptor encrypt:data];
-        return [self cacheData:data withFilename:filename forTimeInterval:interval withSize: [data length]];
+        return [self cacheData:data withFilename:filename forTimeInterval:interval withSize: [data length] forURLName:urlName];
     }
 }
 

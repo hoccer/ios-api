@@ -35,6 +35,8 @@
 #import <YAJLiOs/YAJL.h>
 #import "HCEnvironment.h"
 
+// #define USES_DEBUG_MESSAGES YES
+
 @interface HCEnvironment ()
 - (NSDictionary *)locationAsDict: (CLLocation *)aLocation;
 @end

@@ -37,10 +37,14 @@
 #import "WifiScanner.h"
 #import "HCEnvironment.h"
 
+#undef USES_DEBUG_MESSAGES
+#define USES_DEBUG_MESSAGES NO
+
 #define hoccerMessageErrorDomain @"HoccerErrorDomain"
 
 @interface HCEnvironmentManager ()
 @property (retain) NSDate *lastLocationUpdate;
+@property (retain) CLLocation *lastLocation;
 @property (retain) NSArray *bssids;
 
 - (void)updateHoccability;
@@ -56,6 +60,7 @@
 @implementation HCEnvironmentManager
 
 @synthesize lastLocationUpdate;
+@synthesize lastLocation;
 @synthesize hoccability;
 @synthesize delegate;
 @synthesize bssids;
@@ -64,16 +69,18 @@
 	self = [super init];
 	if (self != nil) {
 		oldHoccability = -1;
+        
+        self.lastLocationUpdate = [NSDate dateWithTimeIntervalSince1970:0];
 		
 		locationManager = [[CLLocationManager alloc] init];
 		locationManager.delegate = self;
         locationManager.purpose = NSLocalizedString(@"Message_LocationManagerPurpose", nil);
 
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-		[locationManager startUpdatingLocation];
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+		//[locationManager startUpdatingLocation];
 		
 		[WifiScanner sharedScanner].delegate = self;
-		[self updateHoccability];
+		//[self updateHoccability];
 		
 		[[WifiScanner sharedScanner] addObserver:self forKeyPath:@"bssids" options:NSKeyValueObservingOptionNew context:nil];
 	}
@@ -86,6 +93,7 @@
 	[WifiScanner sharedScanner].delegate = nil;
 	
 	[lastLocationUpdate release];
+	[lastLocation release];
 	[bssids release];
 
 	[locationManager stopUpdatingLocation];
@@ -96,10 +104,20 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
 		   fromLocation:(CLLocation *)oldLocation {
-	[self updateHoccability];
-	
-	self.lastLocationUpdate = [NSDate date];
-	[self updateHoccability];
+    if (self.lastLocation == nil) {
+        self.lastLocation = oldLocation;
+    }
+    double distance = [newLocation distanceFromLocation:self.lastLocation];
+    double lastUpdateAgo = [self.lastLocationUpdate timeIntervalSinceNow];
+    if (USES_DEBUG_MESSAGES) {NSLog(@"EnvironmentManager:didUpdateToLocation: distance change = %f, last update %f secs ago, accuracy %f, last accuracy %f", distance, lastUpdateAgo, newLocation.horizontalAccuracy, self.lastLocation.horizontalAccuracy);}
+	if (distance > 10 ||  lastUpdateAgo < -30 || newLocation.horizontalAccuracy < self.lastLocation.horizontalAccuracy) {
+        [self updateHoccability];
+        self.lastLocationUpdate = [NSDate date];
+        self.lastLocation = newLocation;
+        [self updateHoccability];
+    } else {
+        if (USES_DEBUG_MESSAGES) {NSLog(@"EnvironmentManager:didUpdateToLocation: distance change too small, last update too recent, accuracy not improved");}
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -123,7 +141,6 @@
                                initWithLocation: locationManager.location bssids:[WifiScanner sharedScanner].bssids];
     location.hoccability = hoccability;
 
-    // RALPH : channel
     NSString *channel = [[NSUserDefaults standardUserDefaults] objectForKey:@"channel"];
     if ((channel != nil) && (channel.length > 0)) {
         location.channel = channel;
@@ -151,15 +168,19 @@
 }
 
 - (void)updateHoccability {
-	if ([delegate respondsToSelector:@selector(environmentControllerDidUpdateLocation:)]) {
+	if ([delegate respondsToSelector:@selector(environmentManagerDidUpdateEnvironment:)]) {
 		[delegate environmentManagerDidUpdateEnvironment: self];
-	}
+	} else {
+        if (USES_DEBUG_MESSAGES) {NSLog(@"Environment: no delegate for environment update");}
+    }
 }
 
 - (void)deactivateLocation{
+    if (USES_DEBUG_MESSAGES) {NSLog(@"Environment: stopUpdatingLocation");}
     [locationManager stopUpdatingLocation];
 }
 - (void)activateLocation{
+    if (USES_DEBUG_MESSAGES) {NSLog(@"Environment: startUpdatingLocation");}
     [locationManager startUpdatingLocation];
 }
 

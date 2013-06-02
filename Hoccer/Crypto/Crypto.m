@@ -112,7 +112,7 @@ static NSData *NotSoRandomSalt() {
 }
 
 - (NSString *)decryptString: (NSString *)string {
-    NSData *data      = [NSData dataWithBase64EncodedString:string];
+    NSData *data      = [[NSData dataWithBase64EncodedString:string] autorelease];
     // NSLog(@"decryptString:data crypted=%@", data);
     NSData *decrypted = [self decrypt:data];
     // NSLog(@"decryptString: decrypted=%@", decrypted);

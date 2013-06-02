@@ -32,6 +32,8 @@
 //  Copyright 2010 Hoccer GmbH. All rights reserved.
 //
 
+// #define USES_DEBUG_MESSAGES YES
+
 #import "HttpClient.h"
 #import <YAJLiOs/YAJL.h>
 
@@ -178,6 +180,10 @@
 	return [self requestMethod:method absoluteURI:[NSString stringWithFormat:@"%@%@", baseURL, uri] payload:payload header: headers success:success];
 }
 
+- (NSString *)absoluteUriWithRelative:(NSString*)uri {
+    return [NSString stringWithFormat:@"%@%@", baseURL, uri];
+}
+
 - (NSString *)requestMethod:(NSString *)method absoluteURI:(NSString *)URLString payload:(NSData *)payload header: (NSDictionary *)headers success:(SEL)success {	
 	
     ////NSLog(@"request %@", URLString);
@@ -191,8 +197,18 @@
 
 	[request setHTTPMethod:method];
 	[request setHTTPBody:payload];
-	[request setTimeoutInterval:60 * 60];
+    if ([URLString rangeOfString:@"/peek"].location == NSNotFound &&
+        [URLString rangeOfString:@"waiting=true"].location == NSNotFound &&
+        [URLString rangeOfString:@"filecache"].location == NSNotFound)
+    {
+        [request setTimeoutInterval:15];
+    } else if ([URLString rangeOfString:@"filecache"].location == NSNotFound){
+        [request setTimeoutInterval:120];
+    } else {
+        [request setTimeoutInterval:20*60];
+    }
 	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    [request setHTTPShouldUsePipelining:NO];
     
     NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
 	
@@ -214,7 +230,10 @@
         httpConnection.bgTask = UIBackgroundTaskInvalid;
     }];
     
-    return URLString;	
+    if (USES_DEBUG_MESSAGES) {NSLog(@"HttpClient requestMethod %@ uri %@", request.HTTPMethod,[container.httpConnection uri]);}
+    if (USES_DEBUG_MESSAGES) {NSLog(@"HttpClient requestMethod request.allHTTPHeaderFields %@", container.httpConnection.request.allHTTPHeaderFields);}
+    
+    return URLString;
 }
 
 #pragma mark -
@@ -291,6 +310,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection {
+    if (USES_DEBUG_MESSAGES) {  NSLog(@"HttpClient connectionDidFinishLoading target %@", aConnection);}
 	ConnectionContainer *container = [connections objectForKey:[aConnection description]];
 	if (container == nil) {
 		return;
@@ -308,8 +328,9 @@
 	if (!container.httpConnection.canceled && [target respondsToSelector:container.successAction]) {
         
         //// - do progress update
-        // NSLog(@"HttpClient connectionDidFinishLoading uri %@", [container.httpConnection uri]);
-        // NSLog(@"HttpClient connectionDidFinishLoading request.allHTTPHeaderFields %@", container.httpConnection.request.allHTTPHeaderFields);
+        if (USES_DEBUG_MESSAGES) {NSLog(@"HttpClient connectionDidFinishLoading uri %@", [container.httpConnection uri]);}
+        if (USES_DEBUG_MESSAGES) {NSLog(@"HttpClient connectionDidFinishLoading request.allHTTPHeaderFields %@", container.httpConnection.request.allHTTPHeaderFields);}
+        if (USES_DEBUG_MESSAGES) {NSLog(@"HttpClient connectionDidFinishLoading response.allHeaderFields %@", container.httpConnection.response.allHeaderFields);}
         NSString * myCLString = [container.httpConnection.request.allHTTPHeaderFields objectForKey:@"Content-Length"];
         if (myCLString != nil) {
             

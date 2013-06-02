@@ -85,6 +85,7 @@
 @synthesize userInfo;
 @synthesize groupId;
 @synthesize envUpdateId;
+@synthesize active;
 
 - (id) initWithApiKey: (NSString *)key secret: (NSString *)secret {
 	return [self initWithApiKey:key secret:secret sandboxed:NO];
@@ -93,11 +94,8 @@
 - (id) initWithApiKey:(NSString *)key secret:(NSString *)secret sandboxed: (BOOL)sandbox {
 	self = [super init];
 	if (self != nil) {
-       userInfo = [[NSDictionary dictionaryWithObject:@"<unknown>" forKey:@"client_name"] retain];
-        
-		environmentController = [[HCEnvironmentManager alloc] init];
-		environmentController.delegate = self;
-		
+        userInfo = [[NSDictionary dictionaryWithObject:@"<unknown>" forKey:@"client_name"] retain];
+        		
 		if (sandbox) {
 			httpClient = [[HCAuthenticatedHttpClient alloc] initWithURLString:LINCCER_SANDBOX_URI];
 		} else {
@@ -109,15 +107,19 @@
 		httpClient.target = self;
 		
 		uri = [[@"/clients" stringByAppendingPathComponent:[self uuid]] retain];
-		environmentUpdateInterval = 30;
-		[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reactivate) userInfo:nil repeats:NO];
         
         //[[RSA sharedInstance] testEncryption];
         
         keyManager = [[PublicKeyManager alloc] init];
         
         clientIDCache = [[NSMutableDictionary alloc]init];
+        
+		environmentController = [[HCEnvironmentManager alloc] init];
+		environmentController.delegate = self;
+        self.lastEnvironmentupdate = [NSDate dateWithTimeIntervalSince1970:0];
+		environmentUpdateInterval = 30;
 
+		//[NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(reactivate) userInfo:nil repeats:NO];
 	}
 	
 	return self;	
@@ -130,7 +132,7 @@
     @try {
         NSData *dataToSend = [[data yajl_JSONString] dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSLog(@"send %@", [data yajl_JSONString]);
+        if (USES_DEBUG_MESSAGES) {NSLog(@"HCLinccer send %@", [data yajl_JSONString]);}
         
         NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
         self.linccingId = [httpClient putURI:[uri stringByAppendingPathComponent: actionString] 
@@ -167,7 +169,7 @@
 {
 	if (!isRegistered) {
 		[self didFailWithError:nil];
-        //warum hier nicht return - wenn er nicht registered ist braucht der nachfolgende request nicht rausgehen - oder?
+        return;
 	}
 	
 	NSString *actionString = [@"/action" stringByAppendingPathComponent:mode];
@@ -247,6 +249,16 @@
 
 - (void)reactivate {
     if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: reactivate:"); }
+    // NSLog(@"%@",[NSThread callStackSymbols]);
+    if (self.active) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: reactivate: already active"); }
+        return;
+    }
+    self.active = YES;
+	self.updateTimer = nil;
+    self.peekId = nil;
+    self.envUpdateId = nil;
+    
     isRegistered = NO;
     [environmentController activateLocation];
 
@@ -262,6 +274,11 @@
 
 - (void)disconnect {
     if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: disconnect:"); }
+    // NSLog(@"%@",[NSThread callStackSymbols]);
+    if (!self.active) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer: disconnect: not active"); }
+        return;
+    }
 
 	if (!isRegistered) {
 		[self didFailWithError:nil];
@@ -270,14 +287,17 @@
 	self.updateTimer = nil;
 	[environmentController deactivateLocation];
     if (self.peekId != nil) {
-        [httpClient cancelRequest:(self.peekId)];
+        [httpClient cancelRequest:self.peekId];
         self.peekId = nil;
     }
 	[httpClient deleteURI:[uri stringByAppendingPathComponent:@"/environment"]
 				  success:@selector(httpClientDidDelete:)];
-    self.envUpdateId = nil;
-    
-    
+    if (self.envUpdateId != nil) {
+        [httpClient cancelRequest:self.envUpdateId];
+        self.envUpdateId = nil;
+    }
+    self.lastEnvironmentupdate = [NSDate dateWithTimeIntervalSince1970:0];
+    self.active = NO;
 }
 
 
@@ -285,22 +305,35 @@
 #pragma mark Error Handling 
 
 - (void)httpConnection:(HttpConnection *)connection didFailWithError:(NSError *)error {
-	if ([linccingId isEqual: connection.uri]) {
-        self.linccingId = nil;
-    }
-
+    
     if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - error :   %@", error); }
     if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError statuscode:  %d", connection.response.statusCode); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError uri:  %@", connection.uri); }
 
-    if ([self.peekId isEqual:connection.uri]) {
+	if ([linccingId isEqualToString: connection.uri]) {
+        self.linccingId = nil;
+        if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - connection matches linccingId"); }
+    }
+
+    if ([self.peekId isEqualToString:connection.uri]) {
         self.peekId = nil;
         [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(peek) userInfo:nil repeats:NO];
+        if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - connection matches peekId"); }
+        return;
     }
-    if ([self.envUpdateId isEqual:connection.uri]) {
+    if ([self.envUpdateId isEqualToString:connection.uri]) {
         self.envUpdateId = nil;
+        if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - connection matches envUpdateId"); }
+        if (!isRegistered) {
+            if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - not registered, reactivating"); }
+            [self disconnect];
+            [self reactivate];
+        }
+        return;
     }
     
     if ([connection isLongPoll] && ([error code] == 504)) {
+        if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didFailWithError - connection was longpoll"); }
 		NSURL *url = [NSURL URLWithString:connection.uri];
 		
 		[httpClient getURI:[[url path] stringByAppendingQuery:@"waiting=true"]
@@ -343,7 +376,7 @@
 	
     if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment request   %@", connection.request); }
     if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment statuscode:  %d", connection.response.statusCode); }
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment - error :   %@", [NSString stringWithData:receivedData usingEncoding:NSUTF8StringEncoding]); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didUpdateEnvironment - receivedData :   %@", [NSString stringWithData:receivedData usingEncoding:NSUTF8StringEncoding]); }
 
     if (!isRegistered) {
         if ([delegate respondsToSelector:@selector(linccerDidRegister:)]) {
@@ -358,7 +391,6 @@
 	
 	@try {
 		if ([delegate respondsToSelector:@selector(linccer:didUpdateEnvironment:)]) {
-            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateEnvironment - receivedData : %@", receivedData); }
 			[delegate linccer:self didUpdateEnvironment:[receivedData yajl_JSON]];
 		}
 	}
@@ -399,7 +431,7 @@
     
     if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData   %@", connection.request); }
     if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData statuscode:  %d", connection.response.statusCode); }    
-    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData - error :   %@", [NSString stringWithData:data usingEncoding:NSUTF8StringEncoding]); }
+    if (USES_DEBUG_MESSAGES) { NSLog(@"  HCLinccer HttpConnection didReceiveData - content :   %@", [NSString stringWithData:data usingEncoding:NSUTF8StringEncoding]); }
     
     if ([connection.response statusCode] == 204 ) {
 		NSError *error = [NSError errorWithDomain:HoccerError code:HoccerNoSenderError userInfo:[self userInfoForNoSender]];
@@ -415,7 +447,6 @@
 	
     @try {
         if ([delegate respondsToSelector:@selector(linccer:didReceiveData:)]) {
-            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didReceiveData - data : %@", data); }
             [delegate linccer: self didReceiveData: [data yajl_JSON]];
         }
     }
@@ -445,7 +476,7 @@
         self.groupId = [dictionary objectForKey:@"group_id"];
         
         if ([delegate respondsToSelector:@selector(linccer:didUpdateGroup:)]) {
-            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateGroup - groupData : %@", groupData); }
+            if (USES_DEBUG_MESSAGES) { NSLog(@"HCLinccer didUpdateGroup - groupData : %@", [NSString stringWithData:groupData usingEncoding:NSUTF8StringEncoding]); }
             [delegate linccer:self didUpdateGroup:[dictionary objectForKey:@"group"]];
         }
         
@@ -523,7 +554,12 @@
 
 
 
-- (void)updateEnvironment {	
+- (void)updateEnvironment {
+    if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment");}
+    if (!active) {
+        if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment linccer not yet activated");}
+        return;
+    }
 	[updateTimer invalidate];
 	self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:self.environmentUpdateInterval
 														target:self 
@@ -534,16 +570,35 @@
 	if (uri == nil || ![self.environmentController hasEnvironment]) {
 		return;
 	}
+    double timeSinceLastUpdate = -[self.lastEnvironmentupdate timeIntervalSinceNow];
     
     if (self.envUpdateId != nil) {
-        if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment call pending, not issuing new call");}
+        if (timeSinceLastUpdate < environmentUpdateInterval) {
+            if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment call pending, not issuing new call");}
+            return;
+        } else {
+            if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment call pending overdue, cancelling");}
+            [httpClient cancelRequest:self.envUpdateId];
+            self.envUpdateId = nil;
+
+        }
+    }
+    
+    
+    const double MIN_ENVIRONMENT_UPDATE_INTERVAL = 2.0;
+    if (self.lastEnvironmentupdate != nil &&  timeSinceLastUpdate < MIN_ENVIRONMENT_UPDATE_INTERVAL ) {
+        if (USES_DEBUG_MESSAGES) {
+            NSLog(@"updateEnvironment call has been issued before less than %f sec. (%f secs. ago)", MIN_ENVIRONMENT_UPDATE_INTERVAL, timeSinceLastUpdate);
+        }
+        [updateTimer invalidate];
+        self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:MIN_ENVIRONMENT_UPDATE_INTERVAL - timeSinceLastUpdate
+                                                            target:self
+                                                          selector:@selector(updateEnvironment)
+                                                          userInfo:nil 
+                                                           repeats:NO];
         return;
     }
-        
-    if (self.lastEnvironmentupdate != nil && [self.lastEnvironmentupdate timeIntervalSinceNow] > -2.0 ) {
-        if (USES_DEBUG_MESSAGES) {NSLog(@"updateEnvironment call has been issued before less than 2 sec.");}
-        return;
-    }
+    self.lastEnvironmentupdate = [[NSDate alloc] init];
     
 	NSMutableDictionary *environment = [[environmentController.environment dict] mutableCopy];
 	[environment setObject:[NSNumber numberWithDouble:self.latency * 1000] forKey:@"latency"];
@@ -581,7 +636,6 @@
                    payload: myPayLoad
                    success:@selector(httpConnection:didUpdateEnvironment:)];
         
-        self.lastEnvironmentupdate = [[NSDate alloc] init];
     }
     @catch (NSException *e) {
         if (USES_DEBUG_MESSAGES, YES) { NSLog(@"HCLinccer updateEnvironment execption : %@", e); }
@@ -594,7 +648,8 @@
 - (void)cancelAllRequestsKeepPeek {
 	[httpClient cancelAllRequests];
     self.linccingId = nil;
-    
+    self.peekId = nil;
+    self.envUpdateId = nil;
     [self peek];
 }
 
@@ -602,6 +657,7 @@
 	[httpClient cancelAllRequests];
     self.linccingId = nil;
     self.peekId = nil;
+    self.envUpdateId = nil;
 }
 
 - (void)peek {
@@ -660,9 +716,9 @@
 
 -(void)setUserInfo:(NSDictionary *)newUserInfo {
     if (newUserInfo != userInfo) {
+        if (self.active) [self disconnect];
         [userInfo release];
         userInfo = [newUserInfo retain];
-        
         [self reactivate];
     }
 }

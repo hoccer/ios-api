@@ -84,6 +84,7 @@ enum HoccerErrors {
 @property (retain) HCEnvironmentManager* environmentController;
 @property (assign) id <HCLinccerDelegate> delegate;
 @property (assign) BOOL isRegistered;
+@property (assign) BOOL active;
 @property (assign) NSTimeInterval latency;
 @property (assign, nonatomic) NSTimeInterval environmentUpdateInterval;
 
